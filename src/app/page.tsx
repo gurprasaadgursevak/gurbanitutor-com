@@ -72,6 +72,12 @@ export default function Home() {
             className="rounded-3xl shadow-lg ring-1 ring-slate-200"
           />
         </div>
+        <div className="mt-5 flex justify-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
+            <span aria-hidden>📱</span>
+            iPhone app · Free TestFlight beta
+          </span>
+        </div>
         <p className="mt-6 text-base font-medium leading-relaxed text-amber-700 sm:text-lg">
           ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ॥ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫ਼ਤਹਿ॥
         </p>
@@ -79,16 +85,18 @@ export default function Home() {
           A learning companion for Gurbani.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-          Gurbani Tutor brings the full Sri Guru Granth Sahib Ji and Sri Guru Dasam Granth Sahib Ji
-          to your iPhone, with daily Nitnem, Simran Mala, Abhiyaas challenges, and a
-          Gurmukhi dictionary, all in one calm, focused space.
+          Gurbani Tutor is an iPhone app. It brings the full Sri Guru Granth Sahib Ji and
+          Sri Guru Dasam Granth Sahib Ji to your phone, with daily Nitnem, Simran Mala,
+          Abhiyaas challenges, and a Gurmukhi dictionary, all in one calm, focused space.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="https://testflight.apple.com/join/8HEDEXYY"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
           >
-            Join the iPhone Beta
+            Join the iPhone Beta on TestFlight
           </a>
           <Link
             href="#features"
@@ -98,7 +106,11 @@ export default function Home() {
           </Link>
         </div>
         <p className="mt-4 text-xs text-slate-500">
-          Free, no accounts, no tracking. iPhone only for now, Android coming soon.
+          Tap the link on your iPhone. If you don't have TestFlight, the App Store
+          will prompt you to install it (free). Then the beta opens automatically.
+        </p>
+        <p className="mt-2 text-xs text-slate-500">
+          Free, no accounts, no tracking. Android coming soon.
         </p>
       </section>
 
@@ -292,18 +304,54 @@ export default function Home() {
 
       {/* Download CTA */}
       <section id="download" className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+        <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
+          iPhone · Free TestFlight Beta
+        </p>
+        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
           Read Gurbani daily, wherever you are.
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-base text-slate-600">
-          The app is currently in TestFlight beta. Help shape it before the public launch.
+          Gurbani Tutor is currently in beta on Apple TestFlight. Try it free and help shape it before the
+          public App Store launch.
         </p>
+
+        {/* TestFlight 3-step guide */}
+        <ol className="mx-auto mt-8 grid max-w-3xl gap-4 text-left sm:grid-cols-3">
+          <li className="rounded-2xl border border-slate-200 bg-white p-5">
+            <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">Step 1</p>
+            <p className="mt-2 text-sm font-semibold text-slate-900">Open the link on your iPhone</p>
+            <p className="mt-1 text-sm text-slate-600">
+              Tap the button below from your iPhone (not a computer or Android phone).
+            </p>
+          </li>
+          <li className="rounded-2xl border border-slate-200 bg-white p-5">
+            <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">Step 2</p>
+            <p className="mt-2 text-sm font-semibold text-slate-900">Install TestFlight</p>
+            <p className="mt-1 text-sm text-slate-600">
+              TestFlight is Apple's free official beta app. If you don't have it, the App Store will
+              prompt you to install it.
+            </p>
+          </li>
+          <li className="rounded-2xl border border-slate-200 bg-white p-5">
+            <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">Step 3</p>
+            <p className="mt-2 text-sm font-semibold text-slate-900">Open Gurbani Tutor</p>
+            <p className="mt-1 text-sm text-slate-600">
+              TestFlight installs the beta on your home screen. Tap to open. No account needed.
+            </p>
+          </li>
+        </ol>
+
         <a
           href="https://testflight.apple.com/join/8HEDEXYY"
-          className="mt-8 inline-flex items-center justify-center rounded-full bg-amber-600 px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-amber-700"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-10 inline-flex items-center justify-center rounded-full bg-amber-600 px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-amber-700"
         >
-          Join the iPhone Beta
+          Join the iPhone Beta on TestFlight
         </a>
+        <p className="mt-3 text-xs text-slate-500">
+          Open this page on your iPhone for the smoothest install.
+        </p>
       </section>
 
       {/* Santhiya placeholder */}
