@@ -13,15 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gurbanitutor.com"),
   title: "Gurbani Tutor — A learning companion for Gurbani",
   description:
     "Read Sri Guru Granth Sahib Ji and Sri Guru Dasam Granth Sahib Ji, track daily Nitnem, count Simran on a mala, take Gurbani Abhiyaas challenges, and study the Gurmukhi dictionary. Free on iPhone.",
+  icons: {
+    icon: [{ url: "/app-icon.png", type: "image/png" }],
+    apple: [{ url: "/app-icon.png" }],
+    shortcut: ["/app-icon.png"],
+  },
   openGraph: {
     title: "Gurbani Tutor",
     description: "A learning companion for Gurbani. Free on iPhone.",
     url: "https://gurbanitutor.com",
     siteName: "Gurbani Tutor",
     type: "website",
+    images: [{ url: "/app-icon.png", width: 1024, height: 1024 }],
   },
 };
 
