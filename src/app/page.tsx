@@ -1,12 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// Placeholder Muharni video IDs — replace these with the real IDs from
-// @gurprasaadgursevak when ready. You can also add or remove rows.
+// Muharni & Painti Akhari lessons from @gurprasaadgursevak — these match the
+// first 6 entries in the iOS app's MuharniHubView so the two experiences stay
+// aligned. Edit the list freely if you want to change order or titles.
 const MUHARNI_VIDEOS: { id: string; title: string }[] = [
-  { id: "PLACEHOLDER1", title: "Painti Akhari — Letters Introduction" },
-  { id: "PLACEHOLDER2", title: "Muharni Sheet Walkthrough" },
-  { id: "PLACEHOLDER3", title: "Balupdesh — A Reading Lesson" },
+  { id: "Q9rmNdAcZ_E", title: "Sounds of Letters" },
+  { id: "Nkv8P6Jf0EE", title: "Writing Tutorial" },
+  { id: "sHlFfJXB5qo", title: "Vowels (Lagaan)" },
+  { id: "H755C5XTHW0", title: "Nasal Sounds (Lagakhar)" },
+  { id: "iCT-KqB-oSI", title: "Muharni" },
+  { id: "UiePG9DUWuY", title: "Half Letters (Sanyukt Akhar)" },
 ];
 
 const FEATURES = [
@@ -48,9 +52,9 @@ export default function Home() {
           <nav className="hidden gap-6 text-sm font-medium text-slate-600 sm:flex">
             <Link href="#features" className="hover:text-slate-900">Features</Link>
             <Link href="#search" className="hover:text-slate-900">Search</Link>
-            <Link href="#watch" className="hover:text-slate-900">Watch</Link>
+            <Link href="#santhiya101" className="hover:text-slate-900">Santhiya 101</Link>
             <Link href="#download" className="hover:text-slate-900">Download</Link>
-            <Link href="#santhiya" className="hover:text-slate-900">Santhiya</Link>
+            <Link href="#santhiya" className="hover:text-slate-900">Santhiya Classes</Link>
             <Link href="#about" className="hover:text-slate-900">About</Link>
           </nav>
         </div>
@@ -197,30 +201,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Watch & Learn (Muharni videos) */}
-      <section id="watch" className="bg-slate-50 py-20">
+      {/* Santhiya 101 (Muharni learning videos) */}
+      <section id="santhiya101" className="bg-slate-50 py-20">
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
-              Watch & Learn
+              Santhiya 101
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-              Muharni and Painti Akhari videos.
+              Learn to read Gurbani, one letter at a time.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
-              Selected lessons from the{" "}
-              <a
-                href="https://www.youtube.com/@gurprasaadgursevak"
-                className="font-medium text-amber-700 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @gurprasaadgursevak
-              </a>{" "}
-              YouTube channel, embedded so you can learn Gurmukhi without leaving the page.
+              Painti Akhari, Muharni, and beginner santhiya lessons, taught with patience and ucharan.
+              Watch along here, then practice in the app.
             </p>
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          {/* Featured channel banner */}
+          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
+              <div className="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-red-600 text-white">
+                {/* YouTube play glyph */}
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <div className="text-center sm:text-left">
+                <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                  Featured channel
+                </p>
+                <h3 className="mt-1 text-lg font-semibold text-slate-900">
+                  Gurprasaad Gursevak on YouTube
+                </h3>
+                <p className="mt-1 text-sm text-slate-600">
+                  Santhiya, Muharni, katha, and shabad kirtan, refreshed weekly.
+                </p>
+              </div>
+              <a
+                href="https://www.youtube.com/@gurprasaadgursevak?sub_confirmation=1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto inline-flex shrink-0 items-center justify-center rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700"
+              >
+                Subscribe
+              </a>
+            </div>
+          </div>
+
+          {/* Muharni video grid */}
+          <h3 className="mt-14 text-center text-lg font-semibold text-slate-800">
+            Muharni & Painti Akhari lessons
+          </h3>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {MUHARNI_VIDEOS.map((v) => (
               <div key={v.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
                 <div className="aspect-video w-full bg-slate-900">
@@ -244,14 +276,14 @@ export default function Home() {
             ))}
           </div>
           <p className="mt-8 text-center text-sm text-slate-500">
-            Want to see more?{" "}
+            Want more lessons, katha, or kirtan?{" "}
             <a
               href="https://www.youtube.com/@gurprasaadgursevak"
               className="font-medium text-amber-700 hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Visit the full channel on YouTube
+              Visit the full channel
             </a>
             .
           </p>
