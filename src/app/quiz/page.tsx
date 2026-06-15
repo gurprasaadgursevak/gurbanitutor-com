@@ -329,6 +329,128 @@ function readDailyState(): DailyState {
   }
 }
 
+// MARK: - Per-bani mastery + review queue
+//
+// We track, per bani, every word the Sangat has been quizzed on. From that we
+// compute three Apple-Health-style rings on each row:
+//   - Coverage:  unique words seen / pool size
+//   - Accuracy:  rolling % over last 50 answers in that bani
+//   - Mastery:   words answered correctly 3+ times in a row / pool size
+// Words the user got wrong also land in a per-bani Review queue so the next
+// quiz can offer to start with the missed ones.
+
+type WordStat = { seen: number; correctStreak: number };
+type BaniStats = {
+  wordStats: Record<string, WordStat>;
+  recentAnswers: boolean[]; // cap 50, FIFO
+  reviewQueue: string[];
+};
+type AllStats = Record<string, BaniStats>;
+
+const STATS_KEY = "gt_quiz_stats";
+const RECENT_WINDOW = 50;
+const MASTERY_THRESHOLD = 3;
+
+function emptyBaniStats(): BaniStats {
+  return { wordStats: {}, recentAnswers: [], reviewQueue: [] };
+}
+
+function loadAllStats(): AllStats {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(STATS_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object") return parsed as AllStats;
+    return {};
+  } catch {
+    return {};
+  }
+}
+
+function saveAllStats(stats: AllStats) {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+  } catch {
+    // localStorage may be full or disabled — accept the loss and move on.
+  }
+}
+
+function recordAnswerInStats(
+  all: AllStats,
+  baniId: string,
+  word: string,
+  correct: boolean
+): AllStats {
+  const next: AllStats = { ...all };
+  const bani = { ...(next[baniId] ?? emptyBaniStats()) };
+  // Per-word counter.
+  const w: WordStat = bani.wordStats[word]
+    ? { ...bani.wordStats[word] }
+    : { seen: 0, correctStreak: 0 };
+  w.seen += 1;
+  w.correctStreak = correct ? w.correctStreak + 1 : 0;
+  bani.wordStats = { ...bani.wordStats, [word]: w };
+  // Rolling accuracy buffer.
+  const recent = [...bani.recentAnswers, correct];
+  while (recent.length > RECENT_WINDOW) recent.shift();
+  bani.recentAnswers = recent;
+  // Review queue: add on wrong, remove on right.
+  if (correct) {
+    bani.reviewQueue = bani.reviewQueue.filter((w) => w !== word);
+  } else if (!bani.reviewQueue.includes(word)) {
+    bani.reviewQueue = [...bani.reviewQueue, word];
+  }
+  next[baniId] = bani;
+  return next;
+}
+
+type MasteryView = {
+  coverage: number; // 0..1
+  accuracy: number; // 0..1
+  mastery: number; // 0..1
+  seenCount: number;
+  masteredCount: number;
+  poolSize: number;
+  hasData: boolean;
+};
+
+function computeMastery(stats: BaniStats | undefined, pool: VocabEntry[]): MasteryView {
+  const poolSize = pool.length;
+  if (!stats || poolSize === 0) {
+    return {
+      coverage: 0,
+      accuracy: 0,
+      mastery: 0,
+      seenCount: 0,
+      masteredCount: 0,
+      poolSize,
+      hasData: false,
+    };
+  }
+  let seen = 0;
+  let mastered = 0;
+  for (const e of pool) {
+    const w = stats.wordStats[e.word];
+    if (!w) continue;
+    if (w.seen > 0) seen += 1;
+    if (w.correctStreak >= MASTERY_THRESHOLD) mastered += 1;
+  }
+  const totalRecent = stats.recentAnswers.length;
+  const correctRecent = stats.recentAnswers.filter((b) => b).length;
+  const accuracy = totalRecent > 0 ? correctRecent / totalRecent : 0;
+  return {
+    coverage: seen / poolSize,
+    accuracy,
+    mastery: mastered / poolSize,
+    seenCount: seen,
+    masteredCount: mastered,
+    poolSize,
+    hasData: totalRecent > 0 || seen > 0,
+  };
+}
+
 function recordDailyCompletion(score: number): DailyState {
   if (typeof window === "undefined") return { completedToday: true, lastScore: score, streak: 1 };
   try {
@@ -413,6 +535,8 @@ export default function QuizPage() {
     streak: 0,
   });
   const [dailyJustRecorded, setDailyJustRecorded] = useState(false);
+  const [allStats, setAllStats] = useState<AllStats>({});
+  const [reviewModeUsed, setReviewModeUsed] = useState(false);
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
 
@@ -452,6 +576,7 @@ export default function QuizPage() {
       }
     } catch {}
     setDailyState(readDailyState());
+    setAllStats(loadAllStats());
   }, []);
 
   // Build line + Ang matchers once data is loaded.
@@ -527,7 +652,8 @@ export default function QuizPage() {
     if (picked !== null) return;
     setPicked(idx);
     const q = questions[qIndex];
-    if (idx === q.correctIndex) {
+    const correct = idx === q.correctIndex;
+    if (correct) {
       setScore((s) => s + 1);
       setStreak((s) => {
         const next = s + 1;
@@ -541,6 +667,14 @@ export default function QuizPage() {
       });
     } else {
       setStreak(0);
+    }
+    // Record per-bani mastery + review-queue update.
+    if (activeBaniId) {
+      setAllStats((prev) => {
+        const next = recordAnswerInStats(prev, activeBaniId, q.entry.word, correct);
+        saveAllStats(next);
+        return next;
+      });
     }
   }
 
@@ -776,6 +910,50 @@ export default function QuizPage() {
   );
 }
 
+/// Apple-Health-style triple concentric rings. Three arcs in 36×36:
+///   outer (slate)   → coverage
+///   middle (amber)  → mastery
+///   inner (emerald) → accuracy
+function MasteryRing({
+  view,
+  size = 36,
+}: {
+  view: MasteryView;
+  size?: number;
+}) {
+  if (!view.hasData) return null;
+  const stroke = 4;
+  const cx = size / 2;
+  const cy = size / 2;
+  const ringRadii = [(size - stroke) / 2, (size - stroke) / 2 - stroke - 1, (size - stroke) / 2 - 2 * (stroke + 1)];
+  const colors = ["#94a3b8", "#d97706", "#059669"]; // slate, amber, emerald
+  const progresses = [view.coverage, view.mastery, view.accuracy];
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden>
+      {ringRadii.map((r, i) => {
+        const c = 2 * Math.PI * r;
+        const p = Math.max(0, Math.min(1, progresses[i]));
+        return (
+          <g key={i} transform={`rotate(-90 ${cx} ${cy})`}>
+            <circle cx={cx} cy={cy} r={r} fill="none" stroke={colors[i]} strokeOpacity={0.15} strokeWidth={stroke} />
+            <circle
+              cx={cx}
+              cy={cy}
+              r={r}
+              fill="none"
+              stroke={colors[i]}
+              strokeWidth={stroke}
+              strokeLinecap="round"
+              strokeDasharray={c}
+              strokeDashoffset={c * (1 - p)}
+            />
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 function DailyQuizCard({
   state,
   loading,
@@ -852,11 +1030,13 @@ function BaniRow({
   count,
   onPick,
   accent,
+  mastery,
 }: {
   bani: BaniDef;
   count: number;
   onPick: () => void;
   accent?: "emerald";
+  mastery?: MasteryView;
 }) {
   const disabled = count < 4;
   return (
@@ -885,7 +1065,25 @@ function BaniRow({
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold text-slate-900 sm:text-base">{bani.name}</p>
           <p className="mt-0.5 text-xs text-slate-600 sm:text-sm">{bani.subtitle}</p>
+          {mastery && mastery.hasData && (
+            <p className="mt-1 text-[11px] text-slate-500">
+              <span title="Coverage" className="text-slate-600">
+                Cov {Math.round(mastery.coverage * 100)}%
+              </span>
+              <span aria-hidden> · </span>
+              <span title="Mastery" className="text-amber-700">
+                Mastery {mastery.masteredCount}/{mastery.poolSize}
+              </span>
+              <span aria-hidden> · </span>
+              <span title="Accuracy" className="text-emerald-700">
+                Acc {Math.round(mastery.accuracy * 100)}%
+              </span>
+            </p>
+          )}
         </div>
+        {mastery && mastery.hasData && (
+          <MasteryRing view={mastery} />
+        )}
         <div className="text-right">
           <p className="text-sm font-semibold text-slate-800">{poolLabel(count)}</p>
           {!disabled && (
