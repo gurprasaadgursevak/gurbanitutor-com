@@ -349,10 +349,10 @@ export default function SearchPage() {
                     {r.granth === "sggs" ? "SGGS Ji" : "Dasam"}
                   </span>
                   {lang === "english" && r.arth && (
-                    <span className="ml-1 text-slate-500">ਅਰਥ: {r.arth}</span>
+                    <span className="ml-1 text-slate-700">ਅਰਥ: {r.arth}</span>
                   )}
                   {lang === "english" && r.ssk && (
-                    <span className="ml-1 text-slate-500">EN: {r.ssk}</span>
+                    <span className="ml-1 text-slate-700">EN: {r.ssk}</span>
                   )}
                 </div>
               </li>

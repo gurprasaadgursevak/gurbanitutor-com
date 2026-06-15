@@ -144,7 +144,7 @@ export default function PothiPage() {
                 <span className="text-xs font-semibold uppercase tracking-wider">PDF · {p.size}</span>
               </div>
               <h2 className="mt-3 text-lg font-semibold text-slate-900">{p.title}</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{p.subtitle}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-700">{p.subtitle}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <a
                   href={p.file}

@@ -263,7 +263,7 @@ export default function ArthsPage() {
                     )}
                   </div>
                   {r.romanized && (
-                    <p className="mt-1 text-sm italic text-slate-500">
+                    <p className="mt-1 text-sm italic text-slate-600">
                       {r.romanized}
                     </p>
                   )}

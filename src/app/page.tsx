@@ -108,8 +108,8 @@ export default function Home() {
               className="object-cover"
             />
           </div>
-          <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm italic text-slate-600">
-            In the loving tradition of Gurmukh sevadars who teach Gurbani.
+          <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm italic text-slate-700">
+            In the loving memory of ਗੁਰਮੁਖਿ ਅਪਰਸ Bhagat Jaswant Singh Ji Daudhar (Bhagat Ji), a student of Sant Gurbachan Singh Ji &lsquo;Khalsa&rsquo;.
           </figcaption>
         </figure>
       </section>
@@ -135,7 +135,7 @@ export default function Home() {
                   →
                 </span>
               </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{t.body}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-700">{t.body}</p>
             </Link>
           ))}
         </div>

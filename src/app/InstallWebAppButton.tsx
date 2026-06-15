@@ -105,7 +105,7 @@ export default function InstallWebAppButton() {
                 ✕
               </button>
             </div>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-slate-700">
               Works on any device. After install, the app opens like a real app and works
               offline.
             </p>

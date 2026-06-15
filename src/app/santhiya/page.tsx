@@ -99,7 +99,7 @@ export default function SanthiyaPage() {
                 <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white">1</span>
                 <div>
                   <p className="font-semibold text-slate-900">Open WhatsApp on your phone</p>
-                  <p className="mt-1 text-sm text-slate-600">
+                  <p className="mt-1 text-sm text-slate-700">
                     Tap the camera icon at the top right of the Chats tab. If you don't see one,
                     tap any chat and use the attachment menu to find Camera or QR scanner.
                   </p>
@@ -109,7 +109,7 @@ export default function SanthiyaPage() {
                 <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white">2</span>
                 <div>
                   <p className="font-semibold text-slate-900">Scan the QR code</p>
-                  <p className="mt-1 text-sm text-slate-600">
+                  <p className="mt-1 text-sm text-slate-700">
                     Point your camera at the QR on this page. WhatsApp will prompt you to join
                     the group. If you are reading on the same phone, save the image to your
                     Photos and use WhatsApp's "Upload from gallery" option in the QR scanner.
@@ -120,7 +120,7 @@ export default function SanthiyaPage() {
                 <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white">3</span>
                 <div>
                   <p className="font-semibold text-slate-900">Introduce yourself</p>
-                  <p className="mt-1 text-sm text-slate-600">
+                  <p className="mt-1 text-sm text-slate-700">
                     Once you're in, share a short introduction: your name, your city, and what
                     you'd like to learn. A sevadar teacher will reach out and a one-on-one
                     schedule will be set with you directly.
@@ -167,7 +167,7 @@ export default function SanthiyaPage() {
                 className="rounded-2xl border border-slate-200 bg-slate-50 p-6"
               >
                 <h3 className="text-lg font-semibold text-slate-900">{b.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{b.body}</p>
+                <p className="mt-2 text-sm leading-6 text-slate-700">{b.body}</p>
               </div>
             ))}
           </div>
