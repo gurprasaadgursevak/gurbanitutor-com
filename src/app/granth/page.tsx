@@ -347,7 +347,7 @@ export default function GranthReaderPage() {
             </Link>
             {" · "}
             <Link href="/mukhvak" className="font-medium text-amber-700 hover:underline">
-              Today&apos;s Mukhvak
+              Sri Mukhvak
             </Link>
           </p>
         </div>
