@@ -60,7 +60,7 @@ export default function Home() {
           </Link>
           <nav className="hidden gap-5 text-sm font-medium text-slate-600 sm:flex">
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
-            <Link href="/granth" className="hover:text-slate-900">Read Granth</Link>
+            <Link href="/granth" className="hover:text-slate-900">Read Gurbani</Link>
             <Link href="/search" className="hover:text-slate-900">Gurbani Search</Link>
             <Link href="/arths" className="hover:text-slate-900">Arths</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>

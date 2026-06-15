@@ -258,7 +258,7 @@ export default function MuharniPage() {
           <p className="mt-3 text-xs text-slate-600">
             Want to read alongside? Use the{" "}
             <Link href="/granth" className="font-semibold text-amber-700 hover:underline">
-              Read Granth
+              Read Gurbani
             </Link>{" "}
             page for Ang-by-Ang Gurmukhi and arth.
           </p>
