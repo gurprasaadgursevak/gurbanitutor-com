@@ -4,13 +4,14 @@
  * for pages so updates land quickly while the cached copy keeps offline alive.
  */
 
-const CACHE_VERSION = "v3";
+const CACHE_VERSION = "v4";
 const STATIC_CACHE = `gt-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `gt-pages-${CACHE_VERSION}`;
 
 // Assets that are pre-cached on install.
 const PRECACHE = [
   "/",
+  "/about",
   "/arths",
   "/pothi",
   "/search",
@@ -18,6 +19,7 @@ const PRECACHE = [
   "/santhiya",
   "/app-icon.png",
   "/santhiya-whatsapp-qr.jpeg",
+  "/about-inspiration.jpg",
   "/manifest.webmanifest",
 ];
 

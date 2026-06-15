@@ -52,6 +52,7 @@ export default function Home() {
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
             <Link href="/muharni" className="hover:text-slate-900">Santhiya 101</Link>
             <Link href="/santhiya" className="hover:text-slate-900">Santhiya Classes</Link>
+            <Link href="/about" className="hover:text-slate-900">About</Link>
           </nav>
         </div>
       </header>
@@ -146,21 +147,22 @@ export default function Home() {
         </h2>
         <p className="mt-3 text-sm leading-7 text-slate-600">
           Gurbani Tutor is a humble effort to bring Sri Guru Sahib closer to daily life.
-          Free, ad-free, and tracking-free. Questions or corrections? Email{" "}
-          <a className="font-medium text-amber-700 hover:underline" href="mailto:gurprasaadgursevak@gmail.com">
-            gurprasaadgursevak@gmail.com
-          </a>{" "}
-          or follow Instagram{" "}
-          <a
-            className="font-medium text-amber-700 hover:underline"
-            href="https://instagram.com/gurbanitutor"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            @GurbaniTutor
-          </a>
-          .
+          Free, ad-free, and tracking-free.
         </p>
+        <div className="mt-5 flex flex-wrap justify-center gap-3">
+          <Link
+            href="/about"
+            className="inline-flex items-center justify-center rounded-full bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+          >
+            Read the full About page
+          </Link>
+          <a
+            href="mailto:gurprasaadgursevak@gmail.com"
+            className="inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
+          >
+            Email us
+          </a>
+        </div>
       </section>
 
       {/* Footer */}
