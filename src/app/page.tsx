@@ -60,19 +60,24 @@ export default function Home() {
             Gurbani Tutor
           </Link>
           <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 sm:flex">
+            <Link href="/search" className="font-bold text-slate-900 hover:text-amber-700">Gurbani Search</Link>
+            <Link href="/arths" className="font-bold text-slate-900 hover:text-amber-700">Arths</Link>
+            <Link href="/granth" className="font-bold text-slate-900 hover:text-amber-700">Read Gurbani</Link>
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
-            <Link href="/granth" className="hover:text-slate-900">Read Gurbani</Link>
-            <Link href="/search" className="hover:text-slate-900">Gurbani Search</Link>
-            <Link href="/arths" className="hover:text-slate-900">Arths</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
-            <Link href="/muharni" className="hover:text-slate-900">Santhiya 101</Link>
-            <Link href="/about" className="hover:text-slate-900">About</Link>
             <Link
               href="/santhiya"
               className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
             >
               Santhiya Classes
             </Link>
+            <Link
+              href="/muharni"
+              className="inline-flex items-center gap-1.5 rounded-full bg-red-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700"
+            >
+              Santhiya 101
+            </Link>
+            <Link href="/about" className="hover:text-slate-900">About</Link>
           </nav>
         </div>
       </header>
