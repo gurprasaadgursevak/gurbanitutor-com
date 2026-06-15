@@ -28,18 +28,54 @@ const TOPICS = [
   },
 ];
 
-const FEATURED_VIDEOS: { id: string; title: string; subtitle: string }[] = [
+type FeaturedItem = {
+  videoId: string;
+  playlistId?: string;
+  title: string;
+  subtitle: string;
+  badge: string;
+};
+
+const FEATURED: FeaturedItem[] = [
   {
-    id: "Q9rmNdAcZ_E",
+    videoId: "Q9rmNdAcZ_E",
     title: "Painti Akhari · Sounds of Letters",
     subtitle: "The 35 letters of Gurmukhi with correct ucharan.",
+    badge: "Video",
   },
   {
-    id: "iCT-KqB-oSI",
-    title: "Muharni",
-    subtitle: "The classical Muharni chart, sung syllable by syllable.",
+    videoId: "Q9rmNdAcZ_E",
+    playlistId: "PLtSa45TBwsnXpmcvmfpwcLkZtsZeV-uVM",
+    title: "Painti Akhari & Muharni playlist",
+    subtitle: "Six lessons that power Santhiya 101 inside Gurbani Tutor.",
+    badge: "Playlist · 6 videos",
+  },
+  {
+    videoId: "d53tPerszMk",
+    playlistId: "PLtSa45TBwsnXnrvXN6bkpn9TRDzw3CTX4",
+    title: "Nitnem Santhiya playlist",
+    subtitle: "Recite one word behind the sevadar to settle ucharan.",
+    badge: "Playlist",
+  },
+  {
+    videoId: "c3nO78d0_Kk",
+    playlistId: "PLtSa45TBwsnWrCXbKRNjxUDv-dB0gDuXX",
+    title: "Sri Guru Granth Sahib Ji Santhiya playlist",
+    subtitle: "Ang by Ang reading and ucharan from the sevadar.",
+    badge: "Playlist",
   },
 ];
+
+function youTubeUrl({ videoId, playlistId }: FeaturedItem): string {
+  if (playlistId) {
+    return `https://www.youtube.com/watch?v=${videoId}&list=${playlistId}`;
+  }
+  return `https://www.youtube.com/watch?v=${videoId}`;
+}
+
+function thumbUrl(videoId: string): string {
+  return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+}
 
 export default function YouTubePage() {
   return (
@@ -101,37 +137,68 @@ export default function YouTubePage() {
         </div>
       </section>
 
-      <main className="mx-auto max-w-6xl px-6 py-14">
-        {/* Featured videos */}
-        <h2 className="text-center text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-          Featured videos
+      <main className="mx-auto max-w-4xl px-6 py-14">
+        {/* Featured list */}
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+          Watch on YouTube
         </h2>
-        <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-slate-600">
-          A taste of the channel, starting with the foundations.
+        <p className="mt-2 text-sm text-slate-700">
+          A curated start from{" "}
+          <a
+            href={CHANNEL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-red-700 hover:underline"
+          >
+            @gurprasaadgursevak
+          </a>
+          . Each link opens on YouTube.
         </p>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          {FEATURED_VIDEOS.map((v) => (
-            <div
-              key={v.id}
-              className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
-            >
-              <div className="aspect-video w-full bg-slate-900">
-                <iframe
-                  className="h-full w-full"
-                  src={`https://www.youtube-nocookie.com/embed/${v.id}`}
-                  title={v.title}
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-              <div className="px-4 py-3">
-                <p className="text-sm font-semibold text-slate-900">{v.title}</p>
-                <p className="mt-1 text-xs text-slate-600">{v.subtitle}</p>
-              </div>
-            </div>
+        <ul className="mt-6 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          {FEATURED.map((item, i) => (
+            <li key={`${item.videoId}-${i}`}>
+              <a
+                href={youTubeUrl(item)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-stretch gap-4 p-3 transition hover:bg-amber-50 sm:p-4"
+              >
+                {/* Thumbnail */}
+                <div className="relative aspect-video w-32 flex-none overflow-hidden rounded-xl bg-slate-900 sm:w-44">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={thumbUrl(item.videoId)}
+                    alt=""
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600/90 text-white shadow">
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+                {/* Text */}
+                <div className="flex min-w-0 flex-1 flex-col justify-center">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-red-700">
+                    {item.badge}
+                  </p>
+                  <p className="mt-0.5 text-sm font-semibold text-slate-900 sm:text-base">
+                    {item.title}
+                  </p>
+                  <p className="mt-1 line-clamp-2 text-xs text-slate-600 sm:text-sm">
+                    {item.subtitle}
+                  </p>
+                </div>
+                <span aria-hidden className="self-center text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-amber-700">
+                  →
+                </span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
 
         {/* Topics */}
         <h2 className="mt-16 text-center text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
