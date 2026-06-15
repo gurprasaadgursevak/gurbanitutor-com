@@ -46,11 +46,11 @@ function parseSGGS(text: string): Line[] {
     out.push({
       ang,
       gurmukhi: strip(cols[2] || ""),
-      steek1: (cols[3] || "").trim(),
-      steek2: (cols[4] || "").trim(),
-      ucharanTip: (cols[5] || "").trim(),
-      extendedUcharanTip: (cols[6] || "").trim(),
-      arth: (cols[7] || "").trim(),
+      steek1: strip(cols[3] || ""),
+      steek2: strip(cols[4] || ""),
+      ucharanTip: strip(cols[5] || ""),
+      extendedUcharanTip: strip(cols[6] || ""),
+      arth: strip(cols[7] || ""),
     });
   }
   return out;
