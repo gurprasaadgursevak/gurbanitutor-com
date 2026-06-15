@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 type Granth = "sggs" | "dasam";
 
@@ -60,6 +61,15 @@ function parseDasam(text: string): Line[] {
 }
 
 export default function GranthReaderPage() {
+  return (
+    <Suspense fallback={null}>
+      <GranthReader />
+    </Suspense>
+  );
+}
+
+function GranthReader() {
+  const searchParams = useSearchParams();
   const [granth, setGranth] = useState<Granth>("sggs");
   const [sggs, setSggs] = useState<Line[] | null>(null);
   const [dasam, setDasam] = useState<Line[] | null>(null);
@@ -72,6 +82,24 @@ export default function GranthReaderPage() {
   const [showArth, setShowArth] = useState(true);
   const [showSsk, setShowSsk] = useState(false);
   const [showBms, setShowBms] = useState(false);
+
+  const [highlightLine, setHighlightLine] = useState<string | null>(null);
+
+  // Read ?g=sggs|dasam, ?ang=N, ?line=… from the URL on mount and when params change.
+  useEffect(() => {
+    const g = searchParams.get("g");
+    const angStr = searchParams.get("ang");
+    const line = searchParams.get("line");
+    if (g === "sggs" || g === "dasam") setGranth(g);
+    if (angStr) {
+      const n = parseInt(angStr, 10);
+      if (!Number.isNaN(n) && n > 0) {
+        if (g === "dasam") setAngDasam(n);
+        else setAngSggs(n);
+      }
+    }
+    if (line) setHighlightLine(line);
+  }, [searchParams]);
 
   useEffect(() => {
     let cancelled = false;
@@ -273,10 +301,23 @@ export default function GranthReaderPage() {
               {lines.length} line{lines.length === 1 ? "" : "s"} on Ang {ang}
             </p>
             <ol className="mt-3 space-y-3">
-              {lines.map((l, i) => (
+              {lines.map((l, i) => {
+                const isMatch =
+                  highlightLine !== null &&
+                  l.gurmukhi.startsWith(highlightLine.slice(0, 30));
+                return (
                 <li
                   key={`${l.ang}-${i}`}
-                  className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+                  ref={(el) => {
+                    if (isMatch && el) {
+                      el.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }
+                  }}
+                  className={`rounded-2xl border p-4 shadow-sm transition ${
+                    isMatch
+                      ? "border-amber-500 bg-amber-50 ring-2 ring-amber-200"
+                      : "border-slate-200 bg-white"
+                  }`}
                 >
                   <p className="text-lg leading-9 text-slate-900">{l.gurmukhi}</p>
                   {showArth && l.arth && (
@@ -304,7 +345,8 @@ export default function GranthReaderPage() {
                     </p>
                   )}
                 </li>
-              ))}
+                );
+              })}
             </ol>
             {lines.length === 0 && (
               <p className="mt-8 text-center text-slate-500">

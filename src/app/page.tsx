@@ -25,7 +25,7 @@ const TILES: Tile[] = [
   {
     href: "/search",
     eyebrow: "Find",
-    title: "Search Gurbani",
+    title: "Gurbani Search",
     body:
       "Find any line in Sri Guru Granth Sahib Ji or Sri Guru Dasam Granth Sahib Ji. Gurmukhi or English.",
   },
@@ -61,7 +61,7 @@ export default function Home() {
           <nav className="hidden gap-5 text-sm font-medium text-slate-600 sm:flex">
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
             <Link href="/granth" className="hover:text-slate-900">Read Granth</Link>
-            <Link href="/search" className="hover:text-slate-900">Search</Link>
+            <Link href="/search" className="hover:text-slate-900">Gurbani Search</Link>
             <Link href="/arths" className="hover:text-slate-900">Arths</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
             <Link href="/muharni" className="hover:text-slate-900">Santhiya 101</Link>

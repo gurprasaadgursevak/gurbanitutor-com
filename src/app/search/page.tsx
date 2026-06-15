@@ -362,29 +362,35 @@ export default function SearchPage() {
             {results.map((r, i) => (
               <li
                 key={`${r.granth}-${r.ang}-${i}-${r.gurmukhi.slice(0, 12)}`}
-                className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
               >
-                <p className="text-lg leading-8 text-slate-900">{r.gurmukhi}</p>
-                <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
-                  <span className="rounded bg-amber-100 px-2 py-0.5 font-semibold text-amber-800">
-                    Ang {r.ang}
-                  </span>
-                  <span
-                    className={`rounded px-2 py-0.5 font-semibold ${
-                      r.granth === "sggs"
-                        ? "bg-slate-100 text-slate-700"
-                        : "bg-amber-50 text-amber-700"
-                    }`}
-                  >
-                    {r.granth === "sggs" ? "SGGS Ji" : "Dasam"}
-                  </span>
-                  {lang === "english" && r.arth && (
-                    <span className="ml-1 text-slate-700">ਅਰਥ: {r.arth}</span>
-                  )}
-                  {lang === "english" && r.ssk && (
-                    <span className="ml-1 text-slate-700">EN: {r.ssk}</span>
-                  )}
-                </div>
+                <Link
+                  href={`/granth?g=${r.granth}&ang=${r.ang}&line=${encodeURIComponent(
+                    r.gurmukhi.slice(0, 60)
+                  )}`}
+                  className="group block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-amber-300 hover:shadow"
+                >
+                  <p className="text-lg leading-8 text-slate-900">{r.gurmukhi}</p>
+                  <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                    <span className="rounded bg-amber-100 px-2 py-0.5 font-semibold text-amber-800">
+                      Read Ang {r.ang} <span aria-hidden className="ml-0.5 transition group-hover:translate-x-0.5 inline-block">→</span>
+                    </span>
+                    <span
+                      className={`rounded px-2 py-0.5 font-semibold ${
+                        r.granth === "sggs"
+                          ? "bg-slate-100 text-slate-700"
+                          : "bg-amber-50 text-amber-700"
+                      }`}
+                    >
+                      {r.granth === "sggs" ? "SGGS Ji" : "Dasam"}
+                    </span>
+                    {lang === "english" && r.arth && (
+                      <span className="ml-1 text-slate-700">ਅਰਥ: {r.arth}</span>
+                    )}
+                    {lang === "english" && r.ssk && (
+                      <span className="ml-1 text-slate-700">EN: {r.ssk}</span>
+                    )}
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
