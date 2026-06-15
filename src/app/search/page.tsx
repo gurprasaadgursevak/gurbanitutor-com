@@ -344,7 +344,7 @@ export default function SearchPage() {
                   consonants of a consecutive run of words from any position.
                 </>
               ) : (
-                <>Searches across English steek, BMS, and arth.</>
+                <>Searches across English Steek 1, English Steek 2, and ਅਰਥ.</>
               )}
             </span>
           )}

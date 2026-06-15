@@ -20,7 +20,7 @@ const TILES: Tile[] = [
     href: "/granth",
     eyebrow: "Read",
     title: "Read Sri Guru Granth Sahib Ji & Dasam Granth",
-    body: "Ang-by-Ang reading with optional ਅਰਥ, SSK, and BMS for study.",
+    body: "Ang-by-Ang reading with optional ਅਰਥ, English Steeks, and ucharan tips for study.",
   },
   {
     href: "/search",

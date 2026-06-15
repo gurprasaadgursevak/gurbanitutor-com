@@ -9,8 +9,10 @@ type Granth = "sggs" | "dasam";
 type Line = {
   ang: number;
   gurmukhi: string;
-  ssk?: string;
-  bms?: string;
+  steek1?: string; // formerly SSK
+  steek2?: string; // formerly BMS
+  ucharanTip?: string;
+  extendedUcharanTip?: string;
   arth?: string;
 };
 
@@ -44,8 +46,10 @@ function parseSGGS(text: string): Line[] {
     out.push({
       ang,
       gurmukhi: strip(cols[2] || ""),
-      ssk: (cols[3] || "").trim(),
-      bms: (cols[4] || "").trim(),
+      steek1: (cols[3] || "").trim(),
+      steek2: (cols[4] || "").trim(),
+      ucharanTip: (cols[5] || "").trim(),
+      extendedUcharanTip: (cols[6] || "").trim(),
       arth: (cols[7] || "").trim(),
     });
   }
@@ -87,8 +91,10 @@ function GranthReader() {
   const [angInput, setAngInput] = useState("1");
 
   const [showArth, setShowArth] = useState(true);
-  const [showSsk, setShowSsk] = useState(false);
-  const [showBms, setShowBms] = useState(false);
+  const [showSteek1, setShowSteek1] = useState(false);
+  const [showSteek2, setShowSteek2] = useState(false);
+  const [showUcharan, setShowUcharan] = useState(false);
+  const [showExtendedUcharan, setShowExtendedUcharan] = useState(false);
 
   const [highlightLine, setHighlightLine] = useState<string | null>(null);
 
@@ -213,7 +219,7 @@ function GranthReader() {
           </h1>
           <p className="mt-2 max-w-3xl text-slate-700">
             Choose a Granth and an Ang. The full Gurmukhi text appears below, with optional
-            ਅਰਥ, SSK transliteration, and BMS romanisation.
+            ਅਰਥ, English Steeks, and ucharan tips.
           </p>
         </div>
 
@@ -305,8 +311,26 @@ function GranthReader() {
           <ToggleChip label="ਅਰਥ" on={showArth} onToggle={() => setShowArth((v) => !v)} />
           {granth === "sggs" && (
             <>
-              <ToggleChip label="SSK" on={showSsk} onToggle={() => setShowSsk((v) => !v)} />
-              <ToggleChip label="BMS" on={showBms} onToggle={() => setShowBms((v) => !v)} />
+              <ToggleChip
+                label="Ucharan"
+                on={showUcharan}
+                onToggle={() => setShowUcharan((v) => !v)}
+              />
+              <ToggleChip
+                label="Extended Ucharan"
+                on={showExtendedUcharan}
+                onToggle={() => setShowExtendedUcharan((v) => !v)}
+              />
+              <ToggleChip
+                label="English Steek 1"
+                on={showSteek1}
+                onToggle={() => setShowSteek1((v) => !v)}
+              />
+              <ToggleChip
+                label="English Steek 2"
+                on={showSteek2}
+                onToggle={() => setShowSteek2((v) => !v)}
+              />
             </>
           )}
         </div>
@@ -353,20 +377,36 @@ function GranthReader() {
                       {l.arth}
                     </p>
                   )}
-                  {showSsk && l.ssk && (
-                    <p className="mt-1 text-sm leading-7 text-slate-600">
+                  {showUcharan && l.ucharanTip && (
+                    <p className="mt-1 text-sm leading-7 text-amber-800">
                       <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                        SSK
+                        Ucharan
                       </span>{" "}
-                      {l.ssk}
+                      {l.ucharanTip}
                     </p>
                   )}
-                  {showBms && l.bms && (
-                    <p className="mt-1 text-sm leading-7 text-slate-600">
+                  {showExtendedUcharan && l.extendedUcharanTip && (
+                    <p className="mt-1 text-sm leading-7 text-amber-800">
                       <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                        BMS
+                        Extended Ucharan
                       </span>{" "}
-                      {l.bms}
+                      {l.extendedUcharanTip}
+                    </p>
+                  )}
+                  {showSteek1 && l.steek1 && (
+                    <p className="mt-1 text-sm leading-7 text-slate-700">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                        English Steek 1
+                      </span>{" "}
+                      {l.steek1}
+                    </p>
+                  )}
+                  {showSteek2 && l.steek2 && (
+                    <p className="mt-1 text-sm leading-7 text-slate-700">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                        English Steek 2
+                      </span>{" "}
+                      {l.steek2}
                     </p>
                   )}
                 </li>
