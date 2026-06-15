@@ -72,6 +72,147 @@ function parseDasam(text: string): Line[] {
   return out;
 }
 
+// MARK: - Nitnem banis (ported from iOS BaniID.rowRanges)
+//
+// Each bani is a list of "segments" rendered in reading order. Simple banis
+// have a single SGGS or Dasam segment; Sri Rehrass Sahib is composite and
+// interleaves both Granths with literal Gurmukhi headers.
+
+type BaniSegment =
+  | { kind: "sggs"; range: [number, number] }
+  | { kind: "dasam"; range: [number, number] }
+  | { kind: "literal"; text: string };
+
+type BaniDef = {
+  id: string;
+  name: string;
+  subtitle: string;
+  segments: BaniSegment[];
+};
+
+const BANI_LIST: BaniDef[] = [
+  {
+    id: "japji",
+    name: "Sri Japji Sahib",
+    subtitle: "Morning Nitnem · M1",
+    segments: [{ kind: "sggs", range: [2, 386] }],
+  },
+  {
+    id: "jaap",
+    name: "Sri Jaap Sahib",
+    subtitle: "Morning Nitnem · Sri Dasam Guru Granth Sahib Ji",
+    segments: [{ kind: "dasam", range: [1, 791] }],
+  },
+  {
+    id: "tvaPrasaad",
+    name: "Sri Tav Prasaad Savaiye",
+    subtitle: "Morning Nitnem · from Akal Ustat",
+    segments: [{ kind: "dasam", range: [881, 921] }],
+  },
+  {
+    id: "chaupai",
+    name: "Sri Chaupai Sahib",
+    subtitle: "Evening Nitnem · M10",
+    segments: [
+      { kind: "literal", text: "ੴ ਸ੍ਰੀ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫ਼ਤਹ॥" },
+      { kind: "literal", text: "ਪਾਤਸਾਹੀ ੧੦॥" },
+      { kind: "dasam", range: [67078, 67197] },
+      { kind: "dasam", range: [13377, 13384] },
+    ],
+  },
+  {
+    id: "anand",
+    name: "Sri Anand Sahib",
+    subtitle: "Ramkali · M3",
+    segments: [{ kind: "sggs", range: [39307, 39516] }],
+  },
+  {
+    id: "rehras",
+    name: "Sri Rehrass Sahib",
+    subtitle: "Evening Nitnem · composite from SGGS and Sri Dasam",
+    segments: [
+      { kind: "sggs", range: [20473, 20476] },
+      { kind: "literal", text: "ੴ ਸਤਿਗੁਰ ਪ੍ਰਸਾਦਿ॥" },
+      { kind: "sggs", range: [21206, 21213] },
+      { kind: "sggs", range: [387, 534] },
+      { kind: "literal", text: "ੴ ਸ੍ਰੀ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫ਼ਤਹ॥" },
+      { kind: "literal", text: "ਪਾਤਸਾਹੀ ੧੦॥" },
+      { kind: "literal", text: "ਚੌਪਈ॥" },
+      { kind: "dasam", range: [67070, 67198] },
+      { kind: "dasam", range: [15391, 15422] },
+      { kind: "dasam", range: [3041, 3043] },
+      { kind: "dasam", range: [3057, 3059] },
+      { kind: "dasam", range: [2918, 2920] },
+      { kind: "dasam", range: [5874, 5875] },
+      { kind: "dasam", range: [9331, 9332] },
+      { kind: "dasam", range: [13358, 13360] },
+      { kind: "dasam", range: [13363, 13384] },
+      { kind: "sggs", range: [39307, 39334] },
+      { kind: "sggs", range: [39511, 39516] },
+      { kind: "sggs", range: [60539, 60549] },
+      { kind: "sggs", range: [41288, 41296] },
+      { kind: "sggs", range: [23125, 23138] },
+    ],
+  },
+  {
+    id: "kirtanSohila",
+    name: "Sri Kirtan Sohila Sahib",
+    subtitle: "Bedtime Nitnem",
+    segments: [{ kind: "sggs", range: [535, 590] }],
+  },
+  {
+    id: "sukhmani",
+    name: "Sri Sukhmani Sahib Ji",
+    subtitle: "Gauri · M5 · Ang 262–296",
+    segments: [{ kind: "sggs", range: [11588, 13614] }],
+  },
+];
+
+/// Builds the full Line[] for a bani from raw TSV rows, in reading order. SGGS
+/// rows carry the full row (ang/arth/steek/ucharan); Dasam rows carry only
+/// gurmukhi; literal segments synthesize a Line with ang=0.
+function buildBaniLines(
+  bani: BaniDef,
+  sggsRows: string[],
+  dasamRows: string[]
+): Line[] {
+  const out: Line[] = [];
+  for (const seg of bani.segments) {
+    if (seg.kind === "literal") {
+      out.push({ ang: 0, gurmukhi: seg.text });
+      continue;
+    }
+    const rows = seg.kind === "sggs" ? sggsRows : dasamRows;
+    for (let n = seg.range[0]; n <= seg.range[1]; n++) {
+      const raw = rows[n - 1];
+      if (!raw) continue;
+      const r = stripCR(raw);
+      if (!r) continue;
+      const cols = r.split("\t");
+      if (seg.kind === "sggs") {
+        if (cols.length < 9) continue;
+        const ang = parseInt((cols[0] || "").trim(), 10);
+        if (Number.isNaN(ang)) continue;
+        out.push({
+          ang,
+          gurmukhi: strip(cols[2] || ""),
+          steek1: strip(cols[3] || ""),
+          steek2: strip(cols[4] || ""),
+          ucharanTip: strip(cols[5] || ""),
+          extendedUcharanTip: strip(cols[6] || ""),
+          arth: strip(cols[7] || ""),
+        });
+      } else {
+        if (cols.length < 2) continue;
+        const ang = parseInt((cols[0] || "").trim(), 10);
+        if (Number.isNaN(ang)) continue;
+        out.push({ ang, gurmukhi: strip(cols[1] || "") });
+      }
+    }
+  }
+  return out;
+}
+
 export default function GranthReaderPage() {
   return (
     <Suspense fallback={null}>
@@ -98,6 +239,12 @@ function GranthReader() {
   const [showExtendedUcharan, setShowExtendedUcharan] = useState(false);
 
   const [highlightLine, setHighlightLine] = useState<string | null>(null);
+  // Bani reading mode: when set, the reader shows the full bani text instead
+  // of an Ang slice. Raw TSV rows are needed because banis are defined by
+  // (1-based) row indices, not Ang numbers.
+  const [sggsRows, setSggsRows] = useState<string[] | null>(null);
+  const [dasamRows, setDasamRows] = useState<string[] | null>(null);
+  const [selectedBaniId, setSelectedBaniId] = useState<string | null>(null);
 
   // On mount: read URL params first, fall back to localStorage. URL wins.
   useEffect(() => {
@@ -143,6 +290,8 @@ function GranthReader() {
         if (cancelled) return;
         setSggs(parseSGGS(sText));
         setDasam(parseDasam(dText));
+        setSggsRows(sText.split("\n"));
+        setDasamRows(dText.split("\n"));
       } catch (err) {
         if (cancelled) return;
         setError(err instanceof Error ? err.message : String(err));
@@ -196,10 +345,21 @@ function GranthReader() {
     } catch {}
   }, [granth]);
 
+  const selectedBani = useMemo(
+    () => (selectedBaniId ? BANI_LIST.find((b) => b.id === selectedBaniId) ?? null : null),
+    [selectedBaniId]
+  );
+
+  const baniLines = useMemo<Line[]>(() => {
+    if (!selectedBani || !sggsRows || !dasamRows) return [];
+    return buildBaniLines(selectedBani, sggsRows, dasamRows);
+  }, [selectedBani, sggsRows, dasamRows]);
+
   const lines = useMemo(() => {
+    if (selectedBani) return baniLines;
     if (!corpus) return [];
     return corpus.filter((l) => l.ang === ang);
-  }, [corpus, ang]);
+  }, [selectedBani, baniLines, corpus, ang]);
 
   const loading = sggs === null || dasam === null;
 
@@ -217,7 +377,9 @@ function GranthReader() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-6 py-10">
+      <main className="mx-auto max-w-7xl px-6 py-10">
+        <div className="lg:grid lg:grid-cols-[1fr_18rem] lg:gap-8">
+          <div>
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
             Sri Guru Granth Sahib Ji & Sri Dasam Guru Granth Sahib Ji
@@ -226,12 +388,40 @@ function GranthReader() {
             Read Gurbani, Ang by Ang.
           </h1>
           <p className="mt-2 max-w-3xl text-slate-700">
-            Choose a Granth and an Ang. The full Gurmukhi text appears below, with optional
-            ਅਰਥ, English Steeks, and ucharan tips.
+            Choose a Granth and an Ang, or jump straight into a Nitnem bani from the right.
+            Full Gurmukhi text appears below, with optional ਅਰਥ, English Steeks, and ucharan
+            tips.
           </p>
         </div>
 
+        {selectedBani && (
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-amber-800">
+                Reading
+              </p>
+              <p className="text-base font-semibold text-slate-900">{selectedBani.name}</p>
+              <p className="text-xs text-slate-600">{selectedBani.subtitle}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedBaniId(null);
+                setHighlightLine(null);
+                if (typeof window !== "undefined") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+              className="rounded-full border border-slate-300 bg-white px-4 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
+            >
+              Back to Ang reading
+            </button>
+          </div>
+        )}
+
         {/* Granth picker */}
+        {!selectedBani && (
+        <>
         <div className="mt-6 flex flex-wrap gap-2">
           <button
             type="button"
@@ -310,6 +500,8 @@ function GranthReader() {
             Next Ang →
           </button>
         </div>
+        </>
+        )}
 
         {/* Show toggles */}
         <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
@@ -421,6 +613,7 @@ function GranthReader() {
               </p>
             )}
 
+            {!selectedBani && (
             <div className="mt-10 flex justify-between gap-3">
               <button
                 type="button"
@@ -439,8 +632,73 @@ function GranthReader() {
                 Next →
               </button>
             </div>
+            )}
           </>
         )}
+          </div>
+
+          {/* Right rail: Nitnem bani picker */}
+          <aside className="mt-10 lg:mt-0 lg:sticky lg:top-24 lg:self-start">
+            <div className="rounded-3xl border border-amber-200 bg-white p-4 shadow-sm sm:p-5">
+              <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                Nitnem Banis
+              </p>
+              <p className="mt-1 text-xs text-slate-600">
+                Jump straight to a complete bani in reading order.
+              </p>
+              <ul className="mt-3 divide-y divide-slate-200">
+                {BANI_LIST.map((bani) => {
+                  const isActive = selectedBani?.id === bani.id;
+                  return (
+                    <li key={bani.id}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedBaniId(bani.id);
+                          setHighlightLine(null);
+                          if (typeof window !== "undefined") {
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }
+                        }}
+                        disabled={loading}
+                        className={`flex w-full items-center justify-between gap-2 py-2 text-left transition ${
+                          isActive
+                            ? "text-amber-900"
+                            : "text-slate-800 hover:text-amber-700"
+                        } disabled:opacity-50`}
+                      >
+                        <span>
+                          <span className="block text-sm font-semibold">{bani.name}</span>
+                          <span className="block text-xs text-slate-600">{bani.subtitle}</span>
+                        </span>
+                        <span
+                          aria-hidden
+                          className={isActive ? "text-amber-700" : "text-slate-400"}
+                        >
+                          {isActive ? "●" : "→"}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+              {selectedBani && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedBaniId(null);
+                    if (typeof window !== "undefined") {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
+                  className="mt-3 w-full rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
+                >
+                  ← Back to Ang reading
+                </button>
+              )}
+            </div>
+          </aside>
+        </div>
       </main>
 
       <footer className="border-t border-slate-200 bg-white py-8">
