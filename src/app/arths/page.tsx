@@ -166,9 +166,7 @@ export default function ArthsPage() {
             Arths · Browse Gurbani words and meanings
           </h1>
           <p className="mt-2 max-w-3xl text-slate-600">
-            {records.length > 0
-              ? `${records.length.toLocaleString()} entries.`
-              : "Loading dictionary..."}{" "}
+            {records.length > 0 ? "" : "Loading dictionary... "}
             Search by Gurmukhi or English meaning, scroll by Painti Akhari letter, or filter by Ang.
           </p>
         </div>

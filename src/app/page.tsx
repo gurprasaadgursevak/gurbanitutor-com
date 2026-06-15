@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import InstallWebAppButton from "./InstallWebAppButton";
 
 type Tile = {
   href: string;
@@ -20,7 +21,7 @@ const TILES: Tile[] = [
     href: "/arths",
     eyebrow: "Study",
     title: "Arths Dictionary",
-    body: "14,259 Gurbani words with Punjabi and English meanings, browsable by Painti Akhari or Ang.",
+    body: "Gurbani words with Punjabi and English meanings, browsable by Painti Akhari or Ang.",
   },
   {
     href: "/pothi",
@@ -76,7 +77,7 @@ export default function Home() {
         <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-slate-600">
           Read, search, study, and learn to read Gurbani, all in one calm space.
         </p>
-        <div className="mt-8 flex justify-center">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="https://testflight.apple.com/join/8HEDEXYY"
             target="_blank"
@@ -85,10 +86,11 @@ export default function Home() {
           >
             Get the iPhone app · Free beta
           </a>
+          <InstallWebAppButton />
         </div>
         <p className="mt-3 text-xs text-slate-500">
-          iPhone TestFlight beta. Coming soon to the App Store. Or use everything below right
-          here in your browser.
+          iPhone app on TestFlight, coming soon to the App Store. Or install the web app on
+          Android, desktop, or even iPhone for an offline, app-like experience.
         </p>
       </section>
 

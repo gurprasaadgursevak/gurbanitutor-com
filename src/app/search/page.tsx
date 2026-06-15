@@ -239,7 +239,7 @@ export default function SearchPage() {
           <p className="mt-2 max-w-3xl text-slate-600">
             {loading
               ? "Loading Sri Guru Granth Sahib Ji and Sri Dasam Granth Sahib Ji..."
-              : `${totalLines.toLocaleString()} lines indexed. Search by Gurmukhi (Contains, First Letters, Anywhere) or by English meaning.`}
+              : "Search by Gurmukhi (Contains, First Letters, Anywhere) or by English meaning."}
           </p>
         </div>
 
