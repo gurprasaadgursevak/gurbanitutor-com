@@ -175,6 +175,13 @@ function GranthReader() {
         localStorage.setItem("granth_dasam_ang", String(clamped));
       } catch {}
     }
+    // Drop the highlight from a previous /search jump so we don't re-scroll
+    // to that line on the new Ang.
+    setHighlightLine(null);
+    // Take the reader back to the top of the new Ang.
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     setAngInput(String(clamped));
   };
 
@@ -370,18 +377,12 @@ function GranthReader() {
                 >
                   {showUcharan && l.ucharanTip && (
                     <p className="mb-2 text-sm leading-7 text-amber-800">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                        Ucharan
-                      </span>{" "}
                       {l.ucharanTip}
                     </p>
                   )}
                   <p className="text-lg leading-9 text-slate-900">{l.gurmukhi}</p>
                   {showExtendedUcharan && l.extendedUcharanTip && (
                     <p className="mt-2 text-sm leading-7 text-amber-800">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                        Extended Ucharan
-                      </span>{" "}
                       {l.extendedUcharanTip}
                     </p>
                   )}
