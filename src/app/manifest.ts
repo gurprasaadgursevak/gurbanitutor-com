@@ -41,10 +41,22 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
     shortcuts: [
       {
+        name: "Gurbani Search",
+        short_name: "Search",
+        description: "Search Sri Guru Granth Sahib Ji and Sri Dasam Granth Sahib Ji",
+        url: "/search",
+      },
+      {
         name: "Arths Dictionary",
         short_name: "Arths",
         description: "Browse Gurbani words and meanings",
         url: "/arths",
+      },
+      {
+        name: "Sri Pothi Sahib",
+        short_name: "Pothi",
+        description: "Read free Pothis",
+        url: "/pothi",
       },
       {
         name: "Santhiya Classes",

@@ -4,7 +4,7 @@
  * for pages so updates land quickly while the cached copy keeps offline alive.
  */
 
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const STATIC_CACHE = `gt-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `gt-pages-${CACHE_VERSION}`;
 
@@ -12,6 +12,8 @@ const PAGE_CACHE = `gt-pages-${CACHE_VERSION}`;
 const PRECACHE = [
   "/",
   "/arths",
+  "/pothi",
+  "/search",
   "/santhiya",
   "/app-icon.png",
   "/santhiya-whatsapp-qr.jpeg",
@@ -62,8 +64,12 @@ self.addEventListener("fetch", (event) => {
   // Skip Next.js HMR / RSC requests in dev — they should always be live.
   if (url.pathname.startsWith("/_next/")) return;
 
-  // The dictionary TSV: cache-first (rarely changes, big download).
-  if (url.pathname === "/arths.tsv") {
+  // Big TSV datasets: cache-first (rarely change, big download).
+  if (
+    url.pathname === "/arths.tsv" ||
+    url.pathname === "/sggs.tsv" ||
+    url.pathname === "/dasam.tsv"
+  ) {
     event.respondWith(
       caches.match(request).then(
         (cached) =>

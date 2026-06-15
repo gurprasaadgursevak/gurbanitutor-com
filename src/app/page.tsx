@@ -49,11 +49,11 @@ export default function Home() {
           <Link href="/" className="font-semibold tracking-tight text-amber-700">
             Gurbani Tutor
           </Link>
-          <nav className="hidden gap-6 text-sm font-medium text-slate-600 sm:flex">
+          <nav className="hidden gap-5 text-sm font-medium text-slate-600 sm:flex">
+            <Link href="/search" className="hover:text-slate-900">Search</Link>
             <Link href="/arths" className="hover:text-slate-900">Arths</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
             <Link href="#santhiya101" className="hover:text-slate-900">Santhiya 101</Link>
-            <Link href="#download" className="hover:text-slate-900">Download</Link>
             <Link href="#santhiya" className="hover:text-slate-900">Santhiya Classes</Link>
             <Link href="#about" className="hover:text-slate-900">About</Link>
           </nav>
