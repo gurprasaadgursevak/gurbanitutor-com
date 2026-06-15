@@ -136,6 +136,36 @@ export default function AboutPage() {
 
         <hr className="my-12 border-slate-200" />
 
+        {/* Vocabulary + Quiz */}
+        <section>
+          <SectionTitle>Gurbani Vocabulary, on every device</SectionTitle>
+          <p className="mt-3 leading-7 text-slate-700">
+            The{" "}
+            <Link href="/arths" className="font-semibold text-amber-700 hover:underline">
+              Gurbani Vocabulary builder
+            </Link>{" "}
+            is the shared backbone of Gurbani Tutor across iPhone and web. The same curated
+            word list, the same arth, the same Ang references. From it we build the{" "}
+            <Link href="/quiz" className="font-semibold text-amber-700 hover:underline">
+              Gurbani Quiz
+            </Link>{" "}
+            in both places, with bani-by-bani pools (Sri Japji Sahib, Sri Jaap Sahib, Sri Tav
+            Prasaad Savaiye, Sri Chaupai Sahib, Sri Anand Sahib, Sri Rehrass Sahib, Sri Kirtan
+            Sohila Sahib, plus Sri Sukhmani Sahib Ji) drawn from the verified lines of each
+            bani.
+          </p>
+          <p className="mt-4 leading-7 text-slate-700">
+            On <span className="font-semibold">iPhone</span>, the same Vocabulary lets you{" "}
+            <span className="font-semibold">star words</span>,{" "}
+            <span className="font-semibold">pin Gurbani lines</span> for review,{" "}
+            <span className="font-semibold">scribe notes</span> on any verse, and watch your
+            daily Nitnem, Simran, and Abhiyas progress in three concentric rings. The Quiz
+            tracks your best streak across sessions.
+          </p>
+        </section>
+
+        <hr className="my-12 border-slate-200" />
+
         {/* Also Recommended */}
         <section>
           <SectionTitle>Also Recommended</SectionTitle>

@@ -37,6 +37,12 @@ const TILES: Tile[] = [
     body: "A curated Gurbani vocabulary builder. Hand-picked words with Punjabi and English meanings, browsable by Painti Akhari or Ang.",
   },
   {
+    href: "/quiz",
+    eyebrow: "Practice",
+    title: "Gurbani Quiz",
+    body: "Bani-by-bani quizzes drawn from the Vocabulary. Nitnem, Sukhmani Sahib, or a combined Nitnem pool.",
+  },
+  {
     href: "/pothi",
     eyebrow: "Read",
     title: "Sri Pothi Sahib",
@@ -67,6 +73,7 @@ export default function Home() {
             >
               Arths · Vocab
             </Link>
+            <Link href="/quiz" className="hover:text-slate-900">Quiz</Link>
             <Link href="/granth" className="font-bold text-slate-900 hover:text-amber-700">Read Gurbani</Link>
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
@@ -123,6 +130,45 @@ export default function Home() {
           iPhone app on TestFlight, coming soon to the App Store. Or install the web app on
           Android, desktop, or even iPhone for an offline, app-like experience.
         </p>
+      </section>
+
+      {/* iPhone-only features */}
+      <section className="mx-auto max-w-5xl px-6 pb-14">
+        <div className="rounded-3xl border border-amber-200 bg-amber-50/60 p-6 shadow-sm sm:p-8">
+          <p className="text-center text-xs font-semibold uppercase tracking-wider text-amber-800">
+            Why install the iPhone app?
+          </p>
+          <h2 className="mt-2 text-center text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+            Everything on the web, plus four daily-practice features.
+          </h2>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <FeatureCard
+              icon="📌"
+              title="Pin Favourite Lines"
+              body="Swipe left on any Gurbani line in the readers to pin it. Build your own personal Sangat scrapbook for review."
+            />
+            <FeatureCard
+              icon="✎"
+              title="Notes on Any Line"
+              body="Long-press a line to scribe a quick note. Notes live alongside the verse forever, sorted by Ang."
+            />
+            <FeatureCard
+              icon="◷"
+              title="Today's Progress Rings"
+              body="Apple-Health-style rings for Nitnem, Simran, and Abhiyas, with daily streaks. Vaheguru's seva, visualized."
+            />
+            <FeatureCard
+              icon="✓"
+              title="Bani Quizzes with Streaks"
+              body="Same Vocabulary, same Nitnem quizzes you see here, plus Favourites and persistent best-streak tracking."
+            />
+          </div>
+          <p className="mt-8 text-center text-sm text-slate-700">
+            The <Link href="/arths" className="font-semibold text-amber-700 hover:underline">Gurbani Vocabulary</Link>{" "}
+            and the <Link href="/quiz" className="font-semibold text-amber-700 hover:underline">Quiz</Link> are the
+            same on iPhone and web. The iPhone app adds personal tracking on top.
+          </p>
+        </div>
       </section>
 
       {/* Inspiration photo */}
@@ -223,6 +269,26 @@ export default function Home() {
           <p className="mt-3 text-xs">© {new Date().getFullYear()} Gurbani Tutor</p>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function FeatureCard({
+  icon,
+  title,
+  body,
+}: {
+  icon: string;
+  title: string;
+  body: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <p className="text-2xl" aria-hidden>
+        {icon}
+      </p>
+      <h3 className="mt-2 text-base font-semibold text-slate-900">{title}</h3>
+      <p className="mt-1 text-sm leading-6 text-slate-700">{body}</p>
     </div>
   );
 }
