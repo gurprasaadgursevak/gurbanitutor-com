@@ -17,8 +17,14 @@ const TILES: Tile[] = [
     body: "Today's Hukamnama from Sri Darbar Sahib, in Gurmukhi with Punjabi and English arth.",
   },
   {
-    href: "/search",
+    href: "/granth",
     eyebrow: "Read",
+    title: "Read Sri Guru Granth Sahib Ji & Dasam Granth",
+    body: "Ang-by-Ang reading with optional ਅਰਥ, SSK, and BMS for study.",
+  },
+  {
+    href: "/search",
+    eyebrow: "Find",
     title: "Search Gurbani",
     body:
       "Find any line in Sri Guru Granth Sahib Ji or Sri Guru Dasam Granth Sahib Ji. Gurmukhi or English.",
@@ -39,7 +45,7 @@ const TILES: Tile[] = [
     href: "/muharni",
     eyebrow: "Learn",
     title: "Santhiya 101",
-    body: "Six Muharni and Painti Akhari videos to learn the basics of reading Gurmukhi.",
+    body: "A step-by-step journey: Painti Akhari, Muharni, Nitnem Santhiya, and SGGS Santhiya.",
   },
 ];
 
@@ -53,7 +59,8 @@ export default function Home() {
             Gurbani Tutor
           </Link>
           <nav className="hidden gap-5 text-sm font-medium text-slate-600 sm:flex">
-            <Link href="/mukhvak" className="hover:text-slate-900">Mukhvak</Link>
+            <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
+            <Link href="/granth" className="hover:text-slate-900">Read Granth</Link>
             <Link href="/search" className="hover:text-slate-900">Search</Link>
             <Link href="/arths" className="hover:text-slate-900">Arths</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>

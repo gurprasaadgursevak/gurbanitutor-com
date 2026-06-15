@@ -178,6 +178,11 @@ export default function ArthsPage() {
               not the full vocabulary of Sri Guru Granth Sahib Ji. For full Gurbani reading, head
               to <Link href="/search" className="font-semibold underline">Search</Link>.
             </p>
+            <p className="mt-2">
+              English meanings are in <span className="font-semibold">beta</span> and still being
+              verified. If something looks off, tap the <span aria-hidden>🚩</span> flag on any
+              card to send us a correction.
+            </p>
           </div>
         </div>
 
@@ -322,6 +327,20 @@ export default function ArthsPage() {
                       {r.meaningEn}
                     </p>
                   )}
+                  <div className="mt-3 flex justify-end">
+                    <a
+                      href={`mailto:gurprasaadgursevak@gmail.com?subject=${encodeURIComponent(
+                        `Arths correction: ${r.word}`
+                      )}&body=${encodeURIComponent(
+                        `Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh!\n\nWord: ${r.word}\nAng: ${r.ang}\nਅਰਥ: ${r.meaningPa}\nEN: ${r.meaningEn}\n\nSuggested correction:\n`
+                      )}`}
+                      aria-label={`Flag ${r.word} for correction`}
+                      title="Flag for correction"
+                      className="rounded-full px-2 py-1 text-xs text-slate-500 transition hover:bg-amber-100 hover:text-amber-800"
+                    >
+                      🚩 Flag
+                    </a>
+                  </div>
                 </li>
               ))}
             </ul>
