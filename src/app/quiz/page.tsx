@@ -478,7 +478,8 @@ function buildQuestions(
   pool: VocabEntry[],
   distractorSource: VocabEntry[],
   language: Language,
-  count: number
+  count: number,
+  opts?: { keepOrder?: boolean }
 ): QuizQuestion[] {
   const meaningOf = (e: VocabEntry) =>
     language === "english" ? e.meaningEn : e.meaningPa;
@@ -486,7 +487,8 @@ function buildQuestions(
   const validDistractors = distractorSource.filter(
     (e) => meaningOf(e).trim().length > 0
   );
-  const picked = shuffle(validPool).slice(0, count);
+  const ordered = opts?.keepOrder ? validPool : shuffle(validPool);
+  const picked = ordered.slice(0, count);
   return picked.map((entry) => {
     const correct = meaningOf(entry);
     const distractors: string[] = [];
@@ -622,10 +624,22 @@ export default function QuizPage() {
       : ALL_BANIS.find((b) => b.id === activeBaniId) || null;
   const activePool = activeBani ? poolByBani[activeBani.id] || [] : [];
 
-  function startQuiz() {
+  function startQuiz(opts?: { reviewFirst?: boolean }) {
     if (!vocab || !activeBani) return;
     const total = length === 0 ? activePool.length : Math.min(length, activePool.length);
-    const qs = buildQuestions(activePool, vocab, language, total);
+    let orderedPool = activePool;
+    setReviewModeUsed(false);
+    if (opts?.reviewFirst) {
+      const queue = allStats[activeBani.id]?.reviewQueue ?? [];
+      const queued = new Set(queue);
+      const inReview = activePool.filter((e) => queued.has(e.word));
+      const rest = shuffle(activePool.filter((e) => !queued.has(e.word)));
+      orderedPool = [...inReview, ...rest];
+      setReviewModeUsed(true);
+    }
+    const qs = buildQuestions(orderedPool, vocab, language, total, {
+      keepOrder: !!opts?.reviewFirst,
+    });
     setQuestions(qs);
     setQIndex(0);
     setPicked(null);
@@ -782,6 +796,10 @@ export default function QuizPage() {
                               setActiveBaniId(bani.id);
                               setView("setup");
                             }}
+                            mastery={computeMastery(
+                              allStats[bani.id],
+                              poolByBani[bani.id] ?? []
+                            )}
                           />
                         ))}
                         {allNitnemReady && (
@@ -794,6 +812,10 @@ export default function QuizPage() {
                               setView("setup");
                             }}
                             accent="emerald"
+                            mastery={computeMastery(
+                              allStats[ALL_NITNEM.id],
+                              poolByBani[ALL_NITNEM.id] ?? []
+                            )}
                           />
                         )}
                       </ul>
@@ -814,6 +836,10 @@ export default function QuizPage() {
                             setActiveBaniId(SUKHMANI.id);
                             setView("setup");
                           }}
+                          mastery={computeMastery(
+                            allStats[SUKHMANI.id],
+                            poolByBani[SUKHMANI.id] ?? []
+                          )}
                         />
                       </ul>
                     </>
@@ -856,7 +882,13 @@ export default function QuizPage() {
             setLanguage={setLanguage}
             length={length}
             setLength={setLength}
-            onStart={startQuiz}
+            onStart={() => startQuiz()}
+            onStartReview={() => startQuiz({ reviewFirst: true })}
+            reviewCount={
+              (allStats[activeBani.id]?.reviewQueue ?? []).filter((w) =>
+                activePool.some((e) => e.word === w)
+              ).length
+            }
             onBack={() => {
               setActiveBaniId(null);
               setView("hub");
@@ -1115,6 +1147,8 @@ function SetupView({
   length,
   setLength,
   onStart,
+  onStartReview,
+  reviewCount,
   onBack,
 }: {
   bani: BaniDef;
@@ -1124,6 +1158,8 @@ function SetupView({
   length: number;
   setLength: (n: number) => void;
   onStart: () => void;
+  onStartReview: () => void;
+  reviewCount: number;
   onBack: () => void;
 }) {
   const canStart = poolCount >= 4;
@@ -1198,17 +1234,35 @@ function SetupView({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={onStart}
-        disabled={!canStart}
-        className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        ▶ Start quiz
-      </button>
+      <div className="mt-8 flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={onStart}
+          disabled={!canStart}
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          ▶ Start quiz
+        </button>
+        {reviewCount >= 4 && (
+          <button
+            type="button"
+            onClick={onStartReview}
+            disabled={!canStart}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-400 bg-amber-50 px-5 py-2.5 text-sm font-semibold text-amber-900 shadow-sm transition hover:border-amber-500 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            ↺ Review {reviewCount} missed first
+          </button>
+        )}
+      </div>
       {!canStart && (
         <p className="mt-3 text-sm text-slate-600">
           Pool is too small to build a 4-option quiz yet.
+        </p>
+      )}
+      {reviewCount > 0 && reviewCount < 4 && (
+        <p className="mt-3 text-xs text-slate-500">
+          You have {reviewCount} word{reviewCount === 1 ? "" : "s"} to review. Need at least 4
+          to start a focused review session.
         </p>
       )}
     </div>
@@ -1238,6 +1292,13 @@ function PlayView({
   onNext: () => void;
   onQuit: () => void;
 }) {
+  // Reset the hint visibility for each new question. The qIndex change is what
+  // resets it; on the same question the hint stays open.
+  const [showHint, setShowHint] = useState(false);
+  useEffect(() => {
+    setShowHint(false);
+  }, [qIndex]);
+  const showResult = picked !== null;
   return (
     <div>
       <div className="flex items-center justify-between text-sm text-slate-600">
@@ -1271,13 +1332,35 @@ function PlayView({
         <p className="mt-3 text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl">
           {question.entry.word}
         </p>
+        {/* Hint: reveal the Gurbani source line on demand, like the iOS app. */}
+        {question.entry.line && (
+          <div className="mt-5">
+            {showHint || showResult ? (
+              <div className="mx-auto max-w-xl rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+                  Source line
+                </p>
+                <p className="mt-1 text-base leading-7 text-slate-800">
+                  {question.entry.line}
+                </p>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowHint(true)}
+                className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800 transition hover:border-amber-300"
+              >
+                💡 Show source line (hint)
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       <ul className="mt-5 grid gap-3 sm:grid-cols-2">
         {question.options.map((opt, i) => {
           const isCorrect = i === question.correctIndex;
           const isPicked = picked === i;
-          const showResult = picked !== null;
           let cls =
             "rounded-2xl border border-slate-200 bg-white p-4 text-left text-sm leading-6 text-slate-800 shadow-sm transition hover:border-amber-300";
           if (showResult && isCorrect) {
@@ -1307,15 +1390,6 @@ function PlayView({
 
       {picked !== null && (
         <div className="mt-6 flex flex-col items-center gap-3">
-          {question.entry.line && (
-            <p className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-sm text-slate-700">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Source line
-              </span>
-              <br />
-              {question.entry.line}
-            </p>
-          )}
           <button
             type="button"
             onClick={onNext}
