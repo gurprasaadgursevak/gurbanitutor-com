@@ -380,17 +380,47 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Santhiya placeholder */}
+      {/* Santhiya classes — WhatsApp join */}
       <section id="santhiya" className="bg-slate-900 py-20 text-white">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Santhiya Classes
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-slate-300">
-            We are building a worldwide directory of Santhiya teachers and a simple way for
-            students to be matched with a teacher in their area. Coming soon, with a sign up
-            form so we can introduce you as teachers become available.
-          </p>
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid items-center gap-10 lg:grid-cols-[auto_1fr]">
+            <div className="flex justify-center">
+              <div className="rounded-2xl bg-white p-3 shadow-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/santhiya-whatsapp-qr.jpeg"
+                  alt="Scan with WhatsApp to join the Gursevak Braham Vidya Sri Shubh Gurbani Santhiya group"
+                  width={260}
+                  height={260}
+                  className="h-64 w-64 rounded-xl object-cover"
+                />
+              </div>
+            </div>
+            <div className="text-center lg:text-left">
+              <p className="text-sm font-semibold uppercase tracking-wider text-emerald-300">
+                Santhiya Classes
+              </p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+                Join the Gursevak Braham Vidya Sri Shubh Gurbani Santhiya group.
+              </h2>
+              <p className="mt-4 text-base leading-7 text-slate-300">
+                A worldwide Sangat-led WhatsApp group where students are matched with sevadar
+                teachers who guide one-on-one Santhiya. Free, online, and self-paced. Open the
+                WhatsApp camera and scan the QR code, or tap below.
+              </p>
+              <div className="mt-6 flex flex-col items-center gap-3 lg:items-start">
+                <Link
+                  href="/santhiya"
+                  className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-emerald-400"
+                >
+                  How to join + class details
+                </Link>
+                <p className="text-xs text-slate-400">
+                  Scan the QR with your phone's WhatsApp camera to be added instantly.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -413,13 +443,35 @@ export default function Home() {
             gurprasaadgursevak@gmail.com
           </a>
         </p>
+        <p className="mt-3 text-sm text-slate-500">
+          Follow on Instagram{" "}
+          <a
+            className="font-medium text-amber-700 hover:underline"
+            href="https://instagram.com/gurbanitutor"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @GurbaniTutor
+          </a>{" "}
+          for new lessons and updates.
+        </p>
       </section>
 
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-slate-500 sm:flex-row">
           <p>ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ॥ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫ਼ਤਹਿ॥</p>
-          <p>© {new Date().getFullYear()} Gurbani Tutor</p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://instagram.com/gurbanitutor"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-amber-700 hover:underline"
+            >
+              Instagram @GurbaniTutor
+            </a>
+            <span>© {new Date().getFullYear()} Gurbani Tutor</span>
+          </div>
         </div>
       </footer>
     </div>

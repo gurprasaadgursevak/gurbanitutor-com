@@ -322,6 +322,15 @@ export default function ArthsPage() {
             <Link href="/" className="font-medium text-amber-700 hover:underline">
               Back to home
             </Link>
+            {" · "}
+            <a
+              href="https://instagram.com/gurbanitutor"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-amber-700 hover:underline"
+            >
+              Instagram @GurbaniTutor
+            </a>
           </p>
         </div>
       </footer>
