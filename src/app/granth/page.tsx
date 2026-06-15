@@ -85,20 +85,38 @@ function GranthReader() {
 
   const [highlightLine, setHighlightLine] = useState<string | null>(null);
 
-  // Read ?g=sggs|dasam, ?ang=N, ?line=… from the URL on mount and when params change.
+  // On mount: read URL params first, fall back to localStorage. URL wins.
   useEffect(() => {
     const g = searchParams.get("g");
     const angStr = searchParams.get("ang");
     const line = searchParams.get("line");
-    if (g === "sggs" || g === "dasam") setGranth(g);
-    if (angStr) {
-      const n = parseInt(angStr, 10);
-      if (!Number.isNaN(n) && n > 0) {
-        if (g === "dasam") setAngDasam(n);
-        else setAngSggs(n);
-      }
+
+    const urlGranth: Granth | null = g === "sggs" || g === "dasam" ? g : null;
+    const urlAng = angStr ? parseInt(angStr, 10) : NaN;
+
+    if (urlGranth) {
+      setGranth(urlGranth);
+    } else {
+      try {
+        const savedG = localStorage.getItem("granth_active") as Granth | null;
+        if (savedG === "sggs" || savedG === "dasam") setGranth(savedG);
+      } catch {}
     }
+
+    if (!Number.isNaN(urlAng) && urlAng > 0) {
+      if (urlGranth === "dasam") setAngDasam(urlAng);
+      else setAngSggs(urlAng);
+    } else {
+      try {
+        const sa = localStorage.getItem("granth_sggs_ang");
+        const da = localStorage.getItem("granth_dasam_ang");
+        if (sa) setAngSggs(Math.max(1, parseInt(sa, 10) || 1));
+        if (da) setAngDasam(Math.max(1, parseInt(da, 10) || 1));
+      } catch {}
+    }
+
     if (line) setHighlightLine(line);
+    else setHighlightLine(null);
   }, [searchParams]);
 
   useEffect(() => {
@@ -121,18 +139,6 @@ function GranthReader() {
     };
   }, []);
 
-  useEffect(() => {
-    try {
-      const sa = localStorage.getItem("granth_sggs_ang");
-      const da = localStorage.getItem("granth_dasam_ang");
-      const g = localStorage.getItem("granth_active") as Granth | null;
-      if (sa) setAngSggs(Math.max(1, parseInt(sa, 10) || 1));
-      if (da) setAngDasam(Math.max(1, parseInt(da, 10) || 1));
-      if (g === "sggs" || g === "dasam") setGranth(g);
-    } catch {
-      // ignore
-    }
-  }, []);
 
   const corpus = granth === "sggs" ? sggs : dasam;
   const maxAng = useMemo(() => {
@@ -255,11 +261,23 @@ function GranthReader() {
               <input
                 value={angInput}
                 onChange={(e) => setAngInput(e.target.value)}
+                onBlur={() => {
+                  const n = parseInt(angInput, 10);
+                  if (!Number.isNaN(n)) setAng(n);
+                  else setAngInput(String(ang));
+                }}
                 inputMode="numeric"
                 disabled={loading}
                 className="w-24 rounded-xl border border-slate-300 bg-white px-3 py-2 text-base shadow-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
               />
               <span className="text-sm text-slate-500">of {loading ? "…" : maxAng}</span>
+              <button
+                type="submit"
+                disabled={loading}
+                className="rounded-xl bg-amber-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700 disabled:opacity-40"
+              >
+                Go
+              </button>
             </form>
           </div>
           <button
