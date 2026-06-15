@@ -24,11 +24,18 @@ function strip(s: string): string {
     .trim();
 }
 
+// IMPORTANT: do not use String.prototype.trim() on the row — \t is whitespace,
+// and trim() would silently strip trailing tab-separated empty columns, dropping
+// rows below the 9-column threshold. Only strip the trailing \r from CRLF lines.
+function stripCR(s: string): string {
+  return s.endsWith("\r") ? s.slice(0, -1) : s;
+}
+
 function parseSGGS(text: string): Line[] {
   const rows = text.split("\n");
   const out: Line[] = [];
   for (let i = 1; i < rows.length; i++) {
-    const r = rows[i].trim();
+    const r = stripCR(rows[i]);
     if (!r) continue;
     const cols = r.split("\t");
     if (cols.length < 9) continue;
@@ -49,7 +56,7 @@ function parseDasam(text: string): Line[] {
   const rows = text.split("\n");
   const out: Line[] = [];
   for (let i = 1; i < rows.length; i++) {
-    const r = rows[i].trim();
+    const r = stripCR(rows[i]);
     if (!r) continue;
     const cols = r.split("\t");
     if (cols.length < 2) continue;
