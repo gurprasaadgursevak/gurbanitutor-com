@@ -33,7 +33,7 @@ const TILES: Tile[] = [
     href: "/muharni",
     eyebrow: "Learn",
     title: "Santhiya 101",
-    body: "Six Muharni and Painti Akhari videos from @gurprasaadgursevak, taught with patience and ucharan.",
+    body: "Six Muharni and Painti Akhari videos to learn the basics of reading Gurmukhi.",
   },
 ];
 
@@ -52,6 +52,7 @@ export default function Home() {
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
             <Link href="/muharni" className="hover:text-slate-900">Santhiya 101</Link>
             <Link href="/santhiya" className="hover:text-slate-900">Santhiya Classes</Link>
+            <Link href="/youtube" className="hover:text-slate-900">YouTube</Link>
             <Link href="/about" className="hover:text-slate-900">About</Link>
           </nav>
         </div>

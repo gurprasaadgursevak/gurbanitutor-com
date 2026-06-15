@@ -4,7 +4,7 @@
  * for pages so updates land quickly while the cached copy keeps offline alive.
  */
 
-const CACHE_VERSION = "v4";
+const CACHE_VERSION = "v5";
 const STATIC_CACHE = `gt-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `gt-pages-${CACHE_VERSION}`;
 
@@ -17,6 +17,7 @@ const PRECACHE = [
   "/search",
   "/muharni",
   "/santhiya",
+  "/youtube",
   "/app-icon.png",
   "/santhiya-whatsapp-qr.jpeg",
   "/about-inspiration.jpg",
