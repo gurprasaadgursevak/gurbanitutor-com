@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -95,18 +96,37 @@ export default function PothiPage() {
       </header>
 
       <section className="bg-gradient-to-b from-amber-50 via-white to-white">
-        <div className="mx-auto max-w-5xl px-6 py-14 text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
-            Free Sangat Library
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-            Sri Pothi Sahib
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
-            The same pothis bundled inside the Gurbani Tutor iPhone app, also available here
-            to read in your browser or download for offline study. Tilt your phone to landscape
-            for a wider page.
-          </p>
+        <div className="mx-auto max-w-6xl px-6 py-14">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+            <div className="text-center lg:text-left">
+              <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
+                Free Sangat Library
+              </p>
+              <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+                Sri Pothi Sahib
+              </h1>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">
+                The same pothis bundled inside the Gurbani Tutor iPhone app, also available
+                here to read in your browser or download for offline study. Tilt your phone to
+                landscape for a wider page.
+              </p>
+            </div>
+            <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+                <Image
+                  src="/pothi/pothi-hero.jpg"
+                  alt="A respected sevadar reading and revering Sangat pothis"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 480px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <figcaption className="border-t border-slate-200 bg-slate-50 px-4 py-3 text-center text-sm italic text-slate-600">
+                Pothis revered and read by the Sangat for generations.
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 

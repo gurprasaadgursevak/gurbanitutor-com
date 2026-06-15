@@ -95,6 +95,24 @@ export default function Home() {
         </p>
       </section>
 
+      {/* Inspiration photo */}
+      <section className="mx-auto max-w-2xl px-6 pb-14">
+        <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+            <Image
+              src="/home-teacher.jpg"
+              alt="A respected Gurmukh sevadar teaching Gurbani from a chalkboard, in white bana and blue dastaar"
+              fill
+              sizes="(max-width: 768px) 100vw, 672px"
+              className="object-cover"
+            />
+          </div>
+          <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm italic text-slate-600">
+            In the loving tradition of Gurmukh sevadars who teach Gurbani.
+          </figcaption>
+        </figure>
+      </section>
+
       {/* Quick links */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="grid gap-4 sm:grid-cols-2">

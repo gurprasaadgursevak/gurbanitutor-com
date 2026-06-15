@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -40,6 +41,24 @@ export default function SanthiyaPage() {
             entirely free, as a labour of love by the Sangat.
           </p>
         </div>
+      </section>
+
+      {/* Inspiration photo */}
+      <section className="mx-auto max-w-4xl px-6 pt-2 pb-6">
+        <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
+            <Image
+              src="/santhiya-teacher.jpg"
+              alt="An elder sevadar teaching one-on-one Santhiya outdoors, with a chalkboard and pothis"
+              fill
+              sizes="(max-width: 768px) 100vw, 896px"
+              className="object-cover"
+            />
+          </div>
+          <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm italic text-slate-600">
+            One-on-one Santhiya, taught in the loving tradition of Gurmukh sevadars.
+          </figcaption>
+        </figure>
       </section>
 
       {/* QR + How to join */}
