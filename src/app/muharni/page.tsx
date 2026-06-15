@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import PaintiViewer from "../PaintiViewer";
 
 export const metadata: Metadata = {
   title: "Santhiya 101 · Muharni — Gurbani Tutor",
@@ -47,8 +48,19 @@ export default function MuharniPage() {
       </section>
 
       <main className="mx-auto max-w-6xl px-6 pb-16 pt-10">
-        {/* Video grid */}
+        {/* Painti Akhari viewer */}
         <h3 className="text-center text-lg font-semibold text-slate-800">
+          Painti Akhari · the 35 letters
+        </h3>
+        <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-slate-600">
+          Tap or swipe through each letter. Use the arrows or your keyboard&apos;s ← → keys.
+        </p>
+        <div className="mx-auto mt-6 max-w-2xl">
+          <PaintiViewer />
+        </div>
+
+        {/* Video grid */}
+        <h3 className="mt-16 text-center text-lg font-semibold text-slate-800">
           Painti Akhari & Muharni lessons
         </h3>
         <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-slate-600">
@@ -75,27 +87,14 @@ export default function MuharniPage() {
           ))}
         </div>
 
-        {/* Reference PDFs */}
+        {/* Muharni PDF */}
         <h3 className="mt-16 text-center text-lg font-semibold text-slate-800">
-          Painti & Muharni PDFs
+          Muharni Primer PDF
         </h3>
         <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-slate-600">
-          Print or download these primers to practice alongside the videos.
+          Print or download this primer to practice alongside the videos.
         </p>
-        <div className="mx-auto mt-6 grid max-w-3xl gap-5 sm:grid-cols-2">
-          <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-3 text-amber-700">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6" aria-hidden="true">
-                <path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm9 1.5V8h4.5L15 3.5z" />
-              </svg>
-              <span className="text-xs font-semibold uppercase tracking-wider">PDF</span>
-            </div>
-            <h4 className="mt-3 text-lg font-semibold text-slate-900">Painti Akhari Primer</h4>
-            <p className="mt-2 text-sm leading-6 text-slate-700">
-              The 35 letters of Gurmukhi, with shapes and ucharan, for new readers.
-            </p>
-            <p className="mt-3 text-xs italic text-slate-500">Coming soon.</p>
-          </div>
+        <div className="mx-auto mt-6 max-w-md">
           <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-3 text-amber-700">
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6" aria-hidden="true">
