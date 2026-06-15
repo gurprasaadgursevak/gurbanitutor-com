@@ -215,6 +215,143 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+// MARK: - Daily Quiz (deterministic by date)
+//
+// Same 10 questions for everyone on Earth on a given UTC date, picked from the
+// full Vocabulary. No server, no leaderboard — the "vs everyone" feeling comes
+// from knowing the Sangat is solving the same set.
+
+const DAILY_BANI_ID = "daily";
+const DAILY_LAST_DATE_KEY = "gt_daily_last_completed_date";
+const DAILY_LAST_SCORE_KEY = "gt_daily_last_score";
+const DAILY_STREAK_KEY = "gt_daily_streak";
+
+function todayKey(): string {
+  // UTC YYYY-MM-DD so the daily roll is consistent regardless of timezone.
+  const d = new Date();
+  const yyyy = d.getUTCFullYear();
+  const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(d.getUTCDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function yesterdayKey(): string {
+  const d = new Date();
+  d.setUTCDate(d.getUTCDate() - 1);
+  const yyyy = d.getUTCFullYear();
+  const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(d.getUTCDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+// xfnv1a hash → mulberry32 PRNG. Deterministic, tiny, good enough.
+function hashSeed(str: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+function mulberry32(seed: number): () => number {
+  let a = seed;
+  return function () {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function seededShuffle<T>(arr: T[], rand: () => number): T[] {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildDailyQuestions(vocab: VocabEntry[], dateKey: string): QuizQuestion[] {
+  const rand = mulberry32(hashSeed(dateKey));
+  const valid = vocab.filter((e) => e.meaningEn.trim().length > 0);
+  const picked = seededShuffle(valid, rand).slice(0, 10);
+  return picked.map((entry) => {
+    const correct = entry.meaningEn;
+    const distractors: string[] = [];
+    const used = new Set<string>([correct]);
+    const pool = seededShuffle(valid, rand);
+    for (const d of pool) {
+      if (distractors.length === 3) break;
+      const m = d.meaningEn;
+      if (used.has(m)) continue;
+      used.add(m);
+      distractors.push(m);
+    }
+    while (distractors.length < 3) distractors.push("—");
+    const options = seededShuffle([correct, ...distractors], rand);
+    return { entry, options, correctIndex: options.indexOf(correct) };
+  });
+}
+
+type DailyState = {
+  completedToday: boolean;
+  lastScore: number | null;
+  streak: number;
+};
+
+function readDailyState(): DailyState {
+  if (typeof window === "undefined") {
+    return { completedToday: false, lastScore: null, streak: 0 };
+  }
+  try {
+    const lastDate = localStorage.getItem(DAILY_LAST_DATE_KEY);
+    const lastScoreRaw = localStorage.getItem(DAILY_LAST_SCORE_KEY);
+    const streakRaw = localStorage.getItem(DAILY_STREAK_KEY);
+    const completedToday = lastDate === todayKey();
+    const lastScore = lastScoreRaw ? parseInt(lastScoreRaw, 10) : null;
+    let streak = streakRaw ? parseInt(streakRaw, 10) : 0;
+    if (Number.isNaN(streak)) streak = 0;
+    // If the last completion is older than yesterday, the streak has lapsed.
+    if (lastDate && lastDate !== todayKey() && lastDate !== yesterdayKey()) {
+      streak = 0;
+    }
+    return {
+      completedToday,
+      lastScore: lastScore !== null && !Number.isNaN(lastScore) ? lastScore : null,
+      streak,
+    };
+  } catch {
+    return { completedToday: false, lastScore: null, streak: 0 };
+  }
+}
+
+function recordDailyCompletion(score: number): DailyState {
+  if (typeof window === "undefined") return { completedToday: true, lastScore: score, streak: 1 };
+  try {
+    const prev = readDailyState();
+    const lastDate = localStorage.getItem(DAILY_LAST_DATE_KEY);
+    let nextStreak: number;
+    if (lastDate === todayKey()) {
+      // Already counted today; replays do not change streak.
+      nextStreak = prev.streak;
+    } else if (lastDate === yesterdayKey()) {
+      nextStreak = prev.streak + 1;
+    } else {
+      nextStreak = 1;
+    }
+    localStorage.setItem(DAILY_LAST_DATE_KEY, todayKey());
+    localStorage.setItem(DAILY_LAST_SCORE_KEY, String(score));
+    localStorage.setItem(DAILY_STREAK_KEY, String(nextStreak));
+    return { completedToday: true, lastScore: score, streak: nextStreak };
+  } catch {
+    return { completedToday: true, lastScore: score, streak: 1 };
+  }
+}
+
 function buildQuestions(
   pool: VocabEntry[],
   distractorSource: VocabEntry[],
@@ -270,6 +407,12 @@ export default function QuizPage() {
   const [qIndex, setQIndex] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [score, setScore] = useState(0);
+  const [dailyState, setDailyState] = useState<DailyState>({
+    completedToday: false,
+    lastScore: null,
+    streak: 0,
+  });
+  const [dailyJustRecorded, setDailyJustRecorded] = useState(false);
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
 
@@ -299,7 +442,7 @@ export default function QuizPage() {
     };
   }, []);
 
-  // Read best streak from localStorage.
+  // Read best streak + daily state from localStorage.
   useEffect(() => {
     try {
       const raw = localStorage.getItem(BEST_STREAK_KEY);
@@ -308,6 +451,7 @@ export default function QuizPage() {
         if (!Number.isNaN(n) && n > 0) setBestStreak(n);
       }
     } catch {}
+    setDailyState(readDailyState());
   }, []);
 
   // Build line + Ang matchers once data is loaded.
@@ -342,7 +486,15 @@ export default function QuizPage() {
   }, [vocab, matcherByBani]);
 
   const loading = !vocab || !sggsRows || !dasamRows;
-  const activeBani = ALL_BANIS.find((b) => b.id === activeBaniId) || null;
+  const DAILY_BANI: BaniDef = {
+    id: DAILY_BANI_ID,
+    name: "Daily Gurbani Quiz",
+    subtitle: "10 curated words from across the Gurbani Vocabulary.",
+  };
+  const activeBani =
+    activeBaniId === DAILY_BANI_ID
+      ? DAILY_BANI
+      : ALL_BANIS.find((b) => b.id === activeBaniId) || null;
   const activePool = activeBani ? poolByBani[activeBani.id] || [] : [];
 
   function startQuiz() {
@@ -354,6 +506,20 @@ export default function QuizPage() {
     setPicked(null);
     setScore(0);
     setStreak(0);
+    setDailyJustRecorded(false);
+    setView("play");
+  }
+
+  function startDailyQuiz() {
+    if (!vocab) return;
+    const qs = buildDailyQuestions(vocab, todayKey());
+    setActiveBaniId(DAILY_BANI_ID);
+    setQuestions(qs);
+    setQIndex(0);
+    setPicked(null);
+    setScore(0);
+    setStreak(0);
+    setDailyJustRecorded(false);
     setView("play");
   }
 
@@ -380,6 +546,12 @@ export default function QuizPage() {
 
   function nextQuestion() {
     if (qIndex + 1 >= questions.length) {
+      // Daily quiz: record completion the first time we finish today.
+      if (activeBaniId === DAILY_BANI_ID && !dailyJustRecorded) {
+        const next = recordDailyCompletion(score);
+        setDailyState(next);
+        setDailyJustRecorded(true);
+      }
       setView("done");
     } else {
       setQIndex((i) => i + 1);
@@ -421,7 +593,7 @@ export default function QuizPage() {
         )}
 
         {view === "hub" && (
-          <>
+          <div className="grid gap-8 lg:grid-cols-[1fr_19rem]">
             <div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-600 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow-sm">
                 Gurbani Vocabulary Quiz
@@ -443,7 +615,6 @@ export default function QuizPage() {
                   <span aria-hidden>🔥</span> Your best streak so far: {bestStreak}
                 </p>
               )}
-            </div>
 
             {loading && (
               <p className="mt-8 text-center text-slate-600">
@@ -530,7 +701,17 @@ export default function QuizPage() {
                 </>
               );
             })()}
-          </>
+            </div>
+
+            {/* Right rail: Daily Quiz */}
+            <aside className="lg:sticky lg:top-6 lg:self-start">
+              <DailyQuizCard
+                state={dailyState}
+                loading={loading}
+                onStart={startDailyQuiz}
+              />
+            </aside>
+          </div>
         )}
 
         {view === "setup" && activeBani && (
@@ -591,6 +772,77 @@ export default function QuizPage() {
           <SocialLinks />
         </div>
       </footer>
+    </div>
+  );
+}
+
+function DailyQuizCard({
+  state,
+  loading,
+  onStart,
+}: {
+  state: DailyState;
+  loading: boolean;
+  onStart: () => void;
+}) {
+  const todayLabel = new Date().toLocaleDateString(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+  return (
+    <div className="rounded-3xl border border-amber-200 bg-gradient-to-b from-amber-50 to-white p-5 shadow-sm">
+      <div className="flex items-center justify-between">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-600 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+          Daily Quiz
+        </span>
+        {state.streak > 0 && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-900">
+            🔥 {state.streak}-day
+          </span>
+        )}
+      </div>
+      <p className="mt-3 text-xs uppercase tracking-wider text-slate-500">{todayLabel}</p>
+      <h2 className="mt-1 text-lg font-semibold text-slate-900">
+        10 questions, same for everyone.
+      </h2>
+      <p className="mt-2 text-sm leading-6 text-slate-700">
+        One curated quiz a day from across the Gurbani Vocabulary. Take it once to keep the
+        streak alive.
+      </p>
+
+      {state.completedToday ? (
+        <>
+          <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            <span className="font-semibold">✓ Done for today.</span>
+            {typeof state.lastScore === "number" && (
+              <> Score: {state.lastScore}/10.</>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={onStart}
+            disabled={loading}
+            className="mt-3 inline-flex w-full items-center justify-center rounded-full border border-amber-300 bg-white px-4 py-2 text-sm font-semibold text-amber-800 transition hover:border-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Replay (won&apos;t change streak)
+          </button>
+        </>
+      ) : (
+        <button
+          type="button"
+          onClick={onStart}
+          disabled={loading}
+          className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-amber-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {loading ? "Loading…" : "Take today's quiz →"}
+        </button>
+      )}
+
+      <p className="mt-4 text-[11px] leading-5 text-slate-500">
+        Deterministic by UTC date, so Sangat worldwide solve the same 10 today. Streak is
+        tracked locally in your browser. No account, no submission.
+      </p>
     </div>
   );
 }

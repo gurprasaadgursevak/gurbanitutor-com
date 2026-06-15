@@ -65,31 +65,27 @@ export default function Home() {
           <Link href="/" className="font-semibold tracking-tight text-amber-700">
             Gurbani Tutor
           </Link>
-          <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 sm:flex">
-            <Link href="/search" className="font-bold text-slate-900 hover:text-amber-700">Gurbani Search</Link>
-            <Link
-              href="/arths"
-              className="inline-flex items-center gap-1.5 rounded-full bg-amber-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
-            >
-              Arths · Vocab
-            </Link>
+          <nav className="hidden items-center gap-4 text-sm font-medium text-slate-600 sm:flex">
+            <Link href="/search" className="font-semibold text-slate-900 hover:text-amber-700">Gurbani Search</Link>
+            <Link href="/arths" className="font-semibold text-amber-700 hover:text-amber-900">Arths · Vocab</Link>
             <Link href="/quiz" className="hover:text-slate-900">Gurbani Quiz</Link>
-            <Link href="/granth" className="font-bold text-slate-900 hover:text-amber-700">Read Gurbani</Link>
+            <Link href="/granth" className="font-semibold text-slate-900 hover:text-amber-700">Read Gurbani</Link>
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
+            <Link href="/about" className="hover:text-slate-900">About</Link>
+            <span className="mx-1 h-5 w-px bg-slate-200" aria-hidden />
             <Link
               href="/santhiya"
-              className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+              className="inline-flex h-7 items-center rounded-full bg-emerald-600 px-3 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-700"
             >
               Santhiya Classes
             </Link>
             <Link
               href="/muharni"
-              className="inline-flex items-center gap-1.5 rounded-full bg-red-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700"
+              className="inline-flex h-7 items-center rounded-full bg-red-600 px-3 text-xs font-semibold text-white shadow-sm transition hover:bg-red-700"
             >
               Santhiya 101
             </Link>
-            <Link href="/about" className="hover:text-slate-900">About</Link>
           </nav>
         </div>
       </header>
