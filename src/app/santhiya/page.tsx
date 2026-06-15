@@ -31,10 +31,10 @@ Gurprasaad,`
 
 const SIGNUP_MAILTO = `mailto:gurprasaadgursevak@gmail.com?subject=${SIGNUP_MAILTO_SUBJECT}&body=${SIGNUP_MAILTO_BODY}`;
 
-// Google Form for Santhiya signups. Public viewform URL (NOT the /edit URL).
-const GOOGLE_FORM_URL_PUBLIC =
-  "https://docs.google.com/forms/d/e/1FAIpQLSdljjoc9CimMytX84eaSx5iMe5IwyW0cyq8RTExjF44BeqLZA/viewform";
-const GOOGLE_FORM_EMBED_URL = `${GOOGLE_FORM_URL_PUBLIC}?embedded=true`;
+const WA_SIGNUP_MESSAGE = encodeURIComponent(
+  `Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh!\n\nI would like to sign up for Santhiya. My details:\n\n  Name:\n  City and timezone:\n  Preferred class (Class 1 / Class 2 / 1:1):\n  Gurmukhi reading level:\n\nGurprasaad,`
+);
+const WA_SIGNUP_URL = `https://wa.me/17052747027?text=${WA_SIGNUP_MESSAGE}`;
 
 const GOOGLE_MEET_URL = "https://meet.google.com/dmj-pyvq-qeg";
 const BABA_PHONE_DISPLAY = "+1 (705) 274-7027";
@@ -207,39 +207,38 @@ export default function SanthiyaPage() {
             Request a class
           </h2>
           <p className="mt-2 text-sm leading-7 text-slate-700">
-            Share your name, timezone, and which slot suits you. Baba Ji will confirm with
-            you on WhatsApp.
+            Send a short note with your name, timezone, and the slot you&apos;d like. Baba
+            Ji or a sevadar will confirm your spot.
           </p>
-
-          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
-            <iframe
-              src={GOOGLE_FORM_EMBED_URL}
-              title="Santhiya class signup form"
-              className="h-[1400px] w-full"
-              loading="lazy"
-            />
-          </div>
-
-          <p className="mt-4 text-xs text-slate-600">
-            Trouble loading the form?{" "}
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <a
-              href={GOOGLE_FORM_URL_PUBLIC}
+              href={WA_SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-emerald-700 hover:underline"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
             >
-              Open the form on Google Forms
-            </a>{" "}
-            or{" "}
-            <a href={SIGNUP_MAILTO} className="font-semibold text-emerald-700 hover:underline">
-              email us
-            </a>{" "}
-            instead.
-          </p>
-
+              <span aria-hidden>💬</span>
+              Message on WhatsApp
+            </a>
+            <a
+              href={SIGNUP_MAILTO}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-200 bg-white px-5 py-3 text-sm font-semibold text-emerald-800 transition hover:border-emerald-400"
+            >
+              <span aria-hidden>✉️</span>
+              Send an email
+            </a>
+            <a
+              href={`tel:${BABA_PHONE_TEL}`}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-200 bg-white px-5 py-3 text-sm font-semibold text-emerald-800 transition hover:border-emerald-400"
+            >
+              <span aria-hidden>📞</span>
+              Call Baba Ji
+            </a>
+          </div>
           <p className="mt-4 text-xs text-slate-500">
-            We will only use your details to confirm your spot and share class updates. No
-            account is created on this website.
+            WhatsApp and call both reach Baba Ji on{" "}
+            <span className="font-semibold">{BABA_PHONE_DISPLAY}</span>. Email reaches the
+            Sangat sevadars.
           </p>
         </div>
       </section>
