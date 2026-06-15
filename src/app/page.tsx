@@ -32,7 +32,7 @@ const FEATURES = [
   },
   {
     title: "Arths Dictionary",
-    body: "Look up Gurbani words with Punjabi and English meanings. Star words and quiz yourself anytime.",
+    body: "Look up Gurbani words with Punjabi and English meanings. Star words and quiz yourself anytime. Available live on this site at /arths.",
   },
   {
     title: "Sri Pothi Sahib",
@@ -50,8 +50,8 @@ export default function Home() {
             Gurbani Tutor
           </Link>
           <nav className="hidden gap-6 text-sm font-medium text-slate-600 sm:flex">
+            <Link href="/arths" className="hover:text-slate-900">Arths</Link>
             <Link href="#features" className="hover:text-slate-900">Features</Link>
-            <Link href="#search" className="hover:text-slate-900">Search</Link>
             <Link href="#santhiya101" className="hover:text-slate-900">Santhiya 101</Link>
             <Link href="#download" className="hover:text-slate-900">Download</Link>
             <Link href="#santhiya" className="hover:text-slate-900">Santhiya Classes</Link>
@@ -72,10 +72,14 @@ export default function Home() {
             className="rounded-3xl shadow-lg ring-1 ring-slate-200"
           />
         </div>
-        <div className="mt-5 flex justify-center">
+        <div className="mt-5 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-3">
           <span className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
             <span aria-hidden>📱</span>
-            iPhone app · Free TestFlight beta
+            iPhone app · Coming soon to the App Store
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800">
+            <span aria-hidden>✦</span>
+            Free TestFlight beta open now
           </span>
         </div>
         <p className="mt-6 text-base font-medium leading-relaxed text-amber-700 sm:text-lg">
@@ -89,7 +93,7 @@ export default function Home() {
           Sri Guru Dasam Granth Sahib Ji to your phone, with daily Nitnem, Simran Mala,
           Abhiyaas challenges, and a Gurmukhi dictionary, all in one calm, focused space.
         </p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
           <a
             href="https://testflight.apple.com/join/8HEDEXYY"
             target="_blank"
@@ -98,6 +102,18 @@ export default function Home() {
           >
             Join the iPhone Beta on TestFlight
           </a>
+          <Link
+            href="/arths"
+            className="inline-flex items-center justify-center rounded-full bg-amber-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+          >
+            Browse Arths Dictionary
+          </Link>
+          <Link
+            href="#santhiya101"
+            className="inline-flex items-center justify-center rounded-full border border-amber-600 px-6 py-3 text-sm font-semibold text-amber-700 transition hover:bg-amber-50"
+          >
+            Learn to Read Gurbani
+          </Link>
           <Link
             href="#features"
             className="inline-flex items-center justify-center rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
@@ -262,8 +278,12 @@ export default function Home() {
 
           {/* Muharni video grid */}
           <h3 className="mt-14 text-center text-lg font-semibold text-slate-800">
-            Muharni & Painti Akhari lessons
+            Painti Akhari & Muharni lessons — the same six lessons used in the app
           </h3>
+          <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-slate-600">
+            These six videos open inside the Gurbani Tutor iPhone app under the Muharni tile. They
+            also stream right here so anyone can begin learning Gurmukhi today.
+          </p>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {MUHARNI_VIDEOS.map((v) => (
               <div key={v.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -287,18 +307,24 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="mt-8 text-center text-sm text-slate-500">
-            Want more lessons, katha, or kirtan?{" "}
+
+          {/* Full playlist link (mirrors the iOS app's link) */}
+          <div className="mt-10 flex flex-col items-center gap-3">
             <a
-              href="https://www.youtube.com/@gurprasaadgursevak"
-              className="font-medium text-amber-700 hover:underline"
+              href="https://www.youtube.com/playlist?list=PLtSa45TBwsnXpmcvmfpwcLkZtsZeV-uVM"
               target="_blank"
               rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700"
             >
-              Visit the full channel
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              View the full Muharni playlist on YouTube
             </a>
-            .
-          </p>
+            <p className="text-xs text-slate-500">
+              The same playlist linked from inside the Gurbani Tutor app.
+            </p>
+          </div>
         </div>
       </section>
 
