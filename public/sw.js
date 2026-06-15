@@ -4,7 +4,7 @@
  * for pages so updates land quickly while the cached copy keeps offline alive.
  */
 
-const CACHE_VERSION = "v8";
+const CACHE_VERSION = "v9";
 const STATIC_CACHE = `gt-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `gt-pages-${CACHE_VERSION}`;
 

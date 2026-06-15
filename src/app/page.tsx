@@ -166,7 +166,7 @@ export default function Home() {
               Practice with a teacher
             </p>
             <h3 className="mt-1 text-base font-semibold text-slate-900">
-              Free one-on-one Santhiya classes on WhatsApp
+              Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji
             </h3>
           </div>
           <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white">

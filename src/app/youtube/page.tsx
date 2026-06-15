@@ -245,7 +245,7 @@ export default function YouTubePage() {
               <span aria-hidden className="ml-2 inline-block text-emerald-600 transition group-hover:translate-x-0.5">→</span>
             </h3>
             <p className="mt-2 text-sm leading-6 text-slate-700">
-              Get matched with a sevadar teacher in the WhatsApp Santhiya group, free and worldwide.
+              Join Baba Jawahar Singh Ji&apos;s weekly group classes on Google Meet, or arrange one-on-one Santhiya.
             </p>
           </Link>
         </div>

@@ -92,13 +92,54 @@ export default function MuharniPage() {
           </div>
         </section>
 
-        {/* Step 2 — Balupdesh + Muharni */}
+        {/* Step 2 — Muharni + Balupdesh */}
         <section className="mt-8 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
-          <StepHeader n={2} kicker="Prerequisite · Reading practice" title="Read Balupdesh and learn Muharni" />
+          <StepHeader n={2} kicker="Prerequisite · Reading practice" title="Master Muharni, then read Balupdesh" />
           <p className="mt-3 text-sm leading-7 text-slate-700">
-            Read <span className="font-semibold">Balupdesh</span> alongside the Muharni and
-            Painti Akhari video lessons. These build the foundation for Santhiya.
+            Start with the Muharni primer and the Muharni video lesson. Once you&apos;re
+            comfortable, read <span className="font-semibold">Balupdesh</span> alongside the
+            full set of video lessons. These build the foundation for Santhiya.
           </p>
+
+          {/* Muharni PDF + Video */}
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+              Reference
+            </p>
+            <h3 className="mt-1 text-lg font-semibold text-slate-900">Muharni Primer</h3>
+            <p className="mt-1 text-sm text-slate-700">
+              The full Muharni chart of consonants with each vowel, with a video walk-through
+              from Gurprasaad Gursevak.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <a
+                href="/santhiya101/muharni.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+              >
+                Read Muharni PDF
+              </a>
+              <a
+                href="/santhiya101/muharni.pdf"
+                download
+                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
+              >
+                Download
+              </a>
+              <a
+                href="https://youtu.be/iCT-KqB-oSI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-red-300 bg-white px-4 py-2 text-sm font-semibold text-red-700 transition hover:border-red-400"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                Video
+              </a>
+            </div>
+          </div>
 
           {/* Balupdesh */}
           <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5">
@@ -127,7 +168,7 @@ export default function MuharniPage() {
             </div>
           </div>
 
-          {/* Muharni videos */}
+          {/* All Muharni & Painti Akhari videos */}
           <h3 className="mt-8 text-base font-semibold text-slate-900">
             Painti Akhari & Muharni video lessons
           </h3>
@@ -153,34 +194,6 @@ export default function MuharniPage() {
                 <p className="px-3 py-2 text-sm font-medium text-slate-700">{v.title}</p>
               </div>
             ))}
-          </div>
-
-          {/* Muharni PDF */}
-          <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-            <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-              Reference
-            </p>
-            <h3 className="mt-1 text-lg font-semibold text-slate-900">Muharni Primer PDF</h3>
-            <p className="mt-1 text-sm text-slate-700">
-              The full Muharni chart of consonants with each vowel.
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <a
-                href="/santhiya101/muharni.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
-              >
-                Read Muharni PDF
-              </a>
-              <a
-                href="/santhiya101/muharni.pdf"
-                download
-                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
-              >
-                Download
-              </a>
-            </div>
           </div>
         </section>
 
@@ -325,14 +338,14 @@ export default function MuharniPage() {
                 One-on-one
               </p>
               <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
-                Join free Santhiya classes with a sevadar teacher
+                Join Santhiya classes with Baba Jawahar Singh Ji
               </h2>
             </div>
           </div>
           <p className="mt-3 text-sm leading-7 text-slate-700">
-            When you are ready, join the Gursevak Braham Vidya Sri Shubh Gurbani Santhiya
-            WhatsApp group to be matched with a Sangat sevadar for one-on-one Santhiya.
-            Worldwide, free, online.
+            When you are ready, sign up for one of Baba Ji&apos;s weekly group classes on
+            Google Meet, or arrange one-on-one Santhiya around your schedule. Offered as
+            Gurprasaad, open to Sangat worldwide.
           </p>
           <Link
             href="/santhiya"

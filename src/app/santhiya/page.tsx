@@ -5,8 +5,39 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Santhiya Classes — Gurbani Tutor",
   description:
-    "Join the Gursevak Braham Vidya Sri Shubh Gurbani Santhiya WhatsApp group to be matched with a sevadar teacher and begin one-on-one Santhiya. Worldwide, free, online.",
+    "Learn Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji. Two weekly group classes online, plus one-on-one Santhiya. Open to Sangat worldwide.",
 };
+
+const SIGNUP_MAILTO_SUBJECT = encodeURIComponent(
+  "Santhiya class signup"
+);
+
+const SIGNUP_MAILTO_BODY = encodeURIComponent(
+  `Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh!
+
+Please add me to a Santhiya class. My details:
+
+  Name:
+  City and timezone:
+  WhatsApp number (with country code):
+  Preferred class:  Class 1 / Class 2 / One-on-one
+  If one-on-one, my best available time windows:
+  Current Gurmukhi reading level (Beginner / Some letters / Comfortable reading):
+  Anything else you'd like to share:
+
+Gurprasaad,`
+);
+
+const SIGNUP_MAILTO = `mailto:gurprasaadgursevak@gmail.com?subject=${SIGNUP_MAILTO_SUBJECT}&body=${SIGNUP_MAILTO_BODY}`;
+
+// NOTE for the future: when the Google Form is created, paste its URL here and
+// the page will render an embedded form instead of (or alongside) the mailto.
+const GOOGLE_FORM_EMBED_URL: string | null = null;
+
+const GOOGLE_MEET_URL = "https://meet.google.com/dmj-pyvq-qeg";
+const BABA_PHONE_DISPLAY = "+1 (705) 274-7027";
+const BABA_PHONE_TEL = "+17052747027";
+const MUHARNI_VIDEO_URL = "https://youtu.be/iCT-KqB-oSI";
 
 export default function SanthiyaPage() {
   return (
@@ -30,15 +61,15 @@ export default function SanthiyaPage() {
       <section className="bg-gradient-to-b from-emerald-50 via-white to-white">
         <div className="mx-auto max-w-5xl px-6 py-14 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-emerald-700">
-            Worldwide · Free · Online
+            Worldwide · Online · Open to all
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-            Learn Gurbani Santhiya with a sevadar teacher.
+            Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji.
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
-            Join the Gursevak Braham Vidya Sri Shubh Gurbani Santhiya WhatsApp group to be
-            introduced to a teacher in your area. Lessons are one-on-one, self-paced, and
-            entirely free, as a labour of love by the Sangat.
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-700">
+            Two weekly group classes on Google Meet, plus one-on-one Santhiya arranged
+            directly with Baba Ji. Offered as Gurprasaad, in the loving tradition of Gurmukh
+            sevadars.
           </p>
         </div>
       </section>
@@ -55,20 +86,172 @@ export default function SanthiyaPage() {
               className="object-cover"
             />
           </div>
-          <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm italic text-slate-600">
+          <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm italic text-slate-700">
             One-on-one Santhiya, taught in the loving tradition of Gurmukh sevadars.
           </figcaption>
         </figure>
       </section>
 
-      {/* QR + How to join */}
+      {/* Class times */}
+      <section className="mx-auto max-w-5xl px-6 py-10">
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+          Weekly group classes
+        </h2>
+        <p className="mt-2 text-sm leading-7 text-slate-700">
+          Pick the slot that fits your schedule. Both classes meet on the same Google Meet
+          link below.
+        </p>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          <div className="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
+              Class 1
+            </p>
+            <p className="mt-2 text-lg font-semibold text-slate-900">
+              7:00 PM – 8:00 PM
+            </p>
+            <p className="text-sm text-slate-700">Toronto (EDT)</p>
+            <p className="mt-3 text-base font-semibold text-slate-900">
+              4:30 AM – 5:30 AM
+            </p>
+            <p className="text-sm text-slate-700">India (IST)</p>
+          </div>
+          <div className="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
+              Class 2
+            </p>
+            <p className="mt-2 text-lg font-semibold text-slate-900">
+              9:00 AM – 10:00 AM
+            </p>
+            <p className="text-sm text-slate-700">Toronto (EDT)</p>
+            <p className="mt-3 text-base font-semibold text-slate-900">
+              6:30 PM – 7:30 PM
+            </p>
+            <p className="text-sm text-slate-700">India (IST)</p>
+          </div>
+        </div>
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Google Meet link
+          </p>
+          <a
+            href={GOOGLE_MEET_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 inline-flex items-baseline gap-2 font-mono text-sm text-emerald-700 hover:underline sm:text-base"
+          >
+            meet.google.com/dmj-pyvq-qeg
+            <span aria-hidden>↗</span>
+          </a>
+          <p className="mt-2 text-sm text-slate-700">
+            Bookmark this link. It opens directly into the class at the scheduled time.
+          </p>
+        </div>
+      </section>
+
+      {/* Prem Benti */}
+      <section className="mx-auto max-w-5xl px-6 pb-10">
+        <div className="rounded-3xl border border-amber-200 bg-amber-50 p-6 shadow-sm sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-wider text-amber-800">
+            Prem Benti · Before class
+          </p>
+          <h2 className="mt-1 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
+            Please practice Muharni at least 25 times.
+          </h2>
+          <p className="mt-3 text-sm leading-7 text-amber-900">
+            Pay close attention to each Akhar (letter) so your pronunciation is Shudh. The
+            more time you give to Muharni, the more your Gurbani Ucharan will settle and
+            strengthen.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a
+              href={MUHARNI_VIDEO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Watch the Muharni video
+            </a>
+            <Link
+              href="/muharni"
+              className="inline-flex items-center justify-center rounded-full border border-amber-300 bg-white px-5 py-2.5 text-sm font-semibold text-amber-900 transition hover:border-amber-400"
+            >
+              Open Santhiya 101 →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Sign up */}
+      <section className="mx-auto max-w-5xl px-6 pb-10">
+        <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm sm:p-8">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+            Request a class
+          </h2>
+          <p className="mt-2 text-sm leading-7 text-slate-700">
+            Send a short note with your name, timezone, and the slot you&apos;d like. Baba
+            Ji will confirm with you on WhatsApp.
+          </p>
+
+          {GOOGLE_FORM_EMBED_URL ? (
+            <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
+              <iframe
+                src={GOOGLE_FORM_EMBED_URL}
+                title="Santhiya class signup form"
+                className="h-[1200px] w-full"
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <a
+              href={SIGNUP_MAILTO}
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+            >
+              <span aria-hidden>✉️</span>
+              Sign up by email
+            </a>
+          )}
+
+          <p className="mt-4 text-xs text-slate-500">
+            We will only use your details to confirm your spot and share class updates. No
+            account is created on this website.
+          </p>
+        </div>
+      </section>
+
+      {/* 1:1 Santhiya */}
+      <section className="mx-auto max-w-5xl px-6 pb-10">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
+            One-on-one Santhiya
+          </p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+            If group timings don&apos;t suit you, arrange 1:1 with Baba Ji.
+          </h2>
+          <p className="mt-3 text-sm leading-7 text-slate-700">
+            Baba Jawahar Singh Ji is happy to work around your schedule to help you progress
+            in your Gurbani learning journey. Please contact Baba Ji directly to arrange
+            individual Santhiya.
+          </p>
+          <a
+            href={`tel:${BABA_PHONE_TEL}`}
+            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-emerald-300 bg-emerald-50 px-5 py-2.5 text-sm font-semibold text-emerald-900 transition hover:border-emerald-400"
+          >
+            <span aria-hidden>📞</span>
+            {BABA_PHONE_DISPLAY}
+          </a>
+        </div>
+      </section>
+
+      {/* WhatsApp QR */}
       <section className="mx-auto max-w-6xl px-6 py-12">
         <div className="grid items-center gap-10 lg:grid-cols-2">
-          {/* QR card */}
           <div className="flex flex-col items-center">
             <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-xl">
               <p className="text-center text-xs font-semibold uppercase tracking-wider text-emerald-700">
-                WhatsApp group
+                WhatsApp community
               </p>
               <p className="mt-1 text-center text-sm font-semibold text-slate-900">
                 Gursevak Braham Vidya Sri Shubh Gurbani Santhiya
@@ -89,19 +272,24 @@ export default function SanthiyaPage() {
             </div>
           </div>
 
-          {/* Steps */}
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-              How to join
+              Join the WhatsApp community
             </h2>
+            <p className="mt-3 text-sm leading-7 text-slate-700">
+              Class updates, Sangat resources, and reminders are shared here. Joining the
+              group is the easiest way to stay connected and to hear about new sessions
+              and Sangat events.
+            </p>
             <ol className="mt-6 space-y-5">
               <li className="flex gap-4">
                 <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white">1</span>
                 <div>
                   <p className="font-semibold text-slate-900">Open WhatsApp on your phone</p>
                   <p className="mt-1 text-sm text-slate-700">
-                    Tap the camera icon at the top right of the Chats tab. If you don't see one,
-                    tap any chat and use the attachment menu to find Camera or QR scanner.
+                    Tap the camera icon at the top right of the Chats tab. If you don&apos;t
+                    see one, tap any chat and use the attachment menu to find Camera or QR
+                    scanner.
                   </p>
                 </div>
               </li>
@@ -110,9 +298,9 @@ export default function SanthiyaPage() {
                 <div>
                   <p className="font-semibold text-slate-900">Scan the QR code</p>
                   <p className="mt-1 text-sm text-slate-700">
-                    Point your camera at the QR on this page. WhatsApp will prompt you to join
-                    the group. If you are reading on the same phone, save the image to your
-                    Photos and use WhatsApp's "Upload from gallery" option in the QR scanner.
+                    Point your camera at the QR on this page. WhatsApp will prompt you to
+                    join the group. On the same phone, save the image and use WhatsApp&apos;s
+                    &ldquo;Upload from gallery&rdquo; option in the QR scanner.
                   </p>
                 </div>
               </li>
@@ -121,22 +309,12 @@ export default function SanthiyaPage() {
                 <div>
                   <p className="font-semibold text-slate-900">Introduce yourself</p>
                   <p className="mt-1 text-sm text-slate-700">
-                    Once you're in, share a short introduction: your name, your city, and what
-                    you'd like to learn. A sevadar teacher will reach out and a one-on-one
-                    schedule will be set with you directly.
+                    Once you&apos;re in, share a short hello with your name and city. Sangat
+                    sevadars will welcome you and answer any questions.
                   </p>
                 </div>
               </li>
             </ol>
-
-            <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900">
-              <p className="font-semibold">A note from the Sangat</p>
-              <p className="mt-2 leading-6">
-                Classes are taught entirely as seva. Please be patient as you are matched —
-                teachers join as their schedules allow, and we want every student paired with
-                someone who fits well.
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -158,8 +336,8 @@ export default function SanthiyaPage() {
                 body: "Correct ucharan with attention to nasal sounds, half letters, and special letters of Gurmukhi.",
               },
               {
-                title: "Daily Nitnem Santhiya",
-                body: "Practice Japji Sahib, Jaap Sahib, Rehrass and other Nitnem banis with a teacher's guidance.",
+                title: "Sri Guru Granth Sahib Ji Santhiya",
+                body: "Read Ang by Ang with Baba Ji, settling each line until your ucharan flows.",
               },
             ].map((b) => (
               <div
@@ -171,12 +349,12 @@ export default function SanthiyaPage() {
               </div>
             ))}
           </div>
-          <p className="mt-10 text-center text-sm text-slate-500">
-            Want to start learning today, before you're matched? Try the{" "}
-            <Link href="/#santhiya101" className="font-medium text-amber-700 hover:underline">
-              Santhiya 101 lessons
-            </Link>{" "}
-            on the home page.
+          <p className="mt-10 text-center text-sm text-slate-600">
+            Want to start practising today, before your first class? Begin with the{" "}
+            <Link href="/muharni" className="font-medium text-amber-700 hover:underline">
+              Santhiya 101 journey
+            </Link>
+            .
           </p>
         </div>
       </section>
