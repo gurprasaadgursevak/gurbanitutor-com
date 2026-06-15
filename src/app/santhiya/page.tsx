@@ -6,7 +6,7 @@ import SocialLinks from "../SocialLinks";
 export const metadata: Metadata = {
   title: "Santhiya Classes — Gurbani Tutor",
   description:
-    "Learn Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji. Two weekly group classes online, plus one-on-one Santhiya. Open to Sangat worldwide.",
+    "Learn Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji. Two daily group classes online, plus one-on-one Santhiya. Open to Sangat worldwide.",
 };
 
 const SIGNUP_MAILTO_SUBJECT = encodeURIComponent(
@@ -67,7 +67,7 @@ export default function SanthiyaPage() {
             Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-700">
-            Two weekly group classes on Google Meet, plus one-on-one Santhiya arranged
+            Two daily group classes on Google Meet, plus one-on-one Santhiya arranged
             directly with Baba Ji. Offered as Gurprasaad, in the loving tradition of Gurmukh
             sevadars.
           </p>
@@ -109,7 +109,7 @@ export default function SanthiyaPage() {
       {/* Class times */}
       <section className="mx-auto max-w-5xl px-6 py-10">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-          Weekly group classes
+          Daily group classes
         </h2>
         <p className="mt-2 text-sm leading-7 text-slate-700">
           Pick the slot that fits your schedule. Both classes meet on the same Google Meet

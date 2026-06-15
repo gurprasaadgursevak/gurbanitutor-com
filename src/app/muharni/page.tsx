@@ -344,7 +344,7 @@ export default function MuharniPage() {
             </div>
           </div>
           <p className="mt-3 text-sm leading-7 text-slate-700">
-            When you are ready, sign up for one of Baba Ji&apos;s weekly group classes on
+            When you are ready, sign up for one of Baba Ji&apos;s daily group classes on
             Google Meet, or arrange one-on-one Santhiya around your schedule. Offered as
             Gurprasaad, open to Sangat worldwide.
           </p>
