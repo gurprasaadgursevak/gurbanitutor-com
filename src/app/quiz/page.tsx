@@ -110,6 +110,7 @@ type VocabEntry = {
   meaningPa: string;
   meaningEn: string;
   line: string;
+  ang: number;
 };
 
 const QUOTES = new Set(['"', "“", "”", "‘", "’", "'", "`"]);
@@ -140,26 +141,37 @@ function parseVocab(text: string): VocabEntry[] {
     if (cols.length < 10) continue;
     const word = (cols[6] || "").trim();
     if (!word) continue;
+    const angNum = parseInt((cols[0] || "").trim(), 10);
     out.push({
       word,
       meaningPa: stripQuotes(cols[8] || ""),
       meaningEn: stripQuotes(cols[9] || ""),
       line: (cols[1] || "").trim(),
+      ang: Number.isNaN(angNum) ? 0 : angNum,
     });
   }
   return out;
 }
 
-function buildBaniLineSet(
+type BaniMatcher = {
+  /** Normalized Gurmukhi lines that appear in this bani. */
+  lines: Set<string>;
+  /** SGGS Angs that this bani spans (used for line-exact mismatches). */
+  sggsAngs: Set<number>;
+};
+
+function buildBaniMatcher(
   bani: BaniDef,
   sggsRows: string[],
   dasamRows: string[]
-): Set<string> {
+): BaniMatcher {
   const lines = new Set<string>();
+  const sggsAngs = new Set<number>();
   function addFrom(
     rows: string[],
     ranges: [number, number][] | undefined,
-    gurmukhiCol: number
+    gurmukhiCol: number,
+    isSGGS: boolean
   ) {
     if (!ranges) return;
     for (const [lo, hi] of ranges) {
@@ -172,12 +184,16 @@ function buildBaniLineSet(
         if (cols.length <= gurmukhiCol) continue;
         const gurmukhi = normalizeLine(cols[gurmukhiCol] || "");
         if (gurmukhi) lines.add(gurmukhi);
+        if (isSGGS) {
+          const ang = parseInt((cols[0] || "").trim(), 10);
+          if (!Number.isNaN(ang)) sggsAngs.add(ang);
+        }
       }
     }
   }
-  addFrom(sggsRows, bani.sggsRanges, 2);
-  addFrom(dasamRows, bani.dasamRanges, 1);
-  return lines;
+  addFrom(sggsRows, bani.sggsRanges, 2, true);
+  addFrom(dasamRows, bani.dasamRanges, 1, false);
+  return { lines, sggsAngs };
 }
 
 // MARK: - Quiz session
@@ -294,30 +310,36 @@ export default function QuizPage() {
     } catch {}
   }, []);
 
-  // Build line sets once data is loaded.
-  const lineSetByBani = useMemo<Record<string, Set<string>>>(() => {
+  // Build line + Ang matchers once data is loaded.
+  const matcherByBani = useMemo<Record<string, BaniMatcher>>(() => {
     if (!sggsRows || !dasamRows) return {};
-    const map: Record<string, Set<string>> = {};
+    const map: Record<string, BaniMatcher> = {};
     for (const bani of ALL_BANIS) {
-      map[bani.id] = buildBaniLineSet(bani, sggsRows, dasamRows);
+      map[bani.id] = buildBaniMatcher(bani, sggsRows, dasamRows);
     }
     return map;
   }, [sggsRows, dasamRows]);
 
-  // Build vocab pools per bani.
+  // Build vocab pools per bani. A vocab entry counts if its source line
+  // matches, OR if its Ang is in the bani's SGGS Ang set. The Ang fallback
+  // catches words whose lines differ only by punctuation between TSVs.
   const poolByBani = useMemo<Record<string, VocabEntry[]>>(() => {
     if (!vocab) return {};
     const map: Record<string, VocabEntry[]> = {};
     for (const bani of ALL_BANIS) {
-      const set = lineSetByBani[bani.id];
-      if (!set) {
+      const matcher = matcherByBani[bani.id];
+      if (!matcher) {
         map[bani.id] = [];
         continue;
       }
-      map[bani.id] = vocab.filter((e) => set.has(normalizeLine(e.line)));
+      map[bani.id] = vocab.filter(
+        (e) =>
+          matcher.lines.has(normalizeLine(e.line)) ||
+          (e.ang > 0 && matcher.sggsAngs.has(e.ang))
+      );
     }
     return map;
-  }, [vocab, lineSetByBani]);
+  }, [vocab, matcherByBani]);
 
   const loading = !vocab || !sggsRows || !dasamRows;
   const activeBani = ALL_BANIS.find((b) => b.id === activeBaniId) || null;
@@ -429,58 +451,85 @@ export default function QuizPage() {
               </p>
             )}
 
-            {!loading && (
-              <>
-                <h2 className="mt-10 text-sm font-semibold uppercase tracking-wider text-amber-700">
-                  Nitnem Bani Quizzes
-                </h2>
-                <ul className="mt-3 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                  {NITNEM_BANIS.map((bani) => (
-                    <BaniRow
-                      key={bani.id}
-                      bani={bani}
-                      count={poolByBani[bani.id]?.length ?? 0}
-                      onPick={() => {
-                        setActiveBaniId(bani.id);
-                        setView("setup");
-                      }}
-                    />
-                  ))}
-                  <BaniRow
-                    key={ALL_NITNEM.id}
-                    bani={ALL_NITNEM}
-                    count={poolByBani[ALL_NITNEM.id]?.length ?? 0}
-                    onPick={() => {
-                      setActiveBaniId(ALL_NITNEM.id);
-                      setView("setup");
-                    }}
-                    accent="emerald"
-                  />
-                </ul>
+            {!loading && (() => {
+              const nitnemReady = NITNEM_BANIS.filter(
+                (b) => (poolByBani[b.id]?.length ?? 0) >= 4
+              );
+              const allNitnemCount = poolByBani[ALL_NITNEM.id]?.length ?? 0;
+              const sukhmaniCount = poolByBani[SUKHMANI.id]?.length ?? 0;
+              const sukhmaniReady = sukhmaniCount >= 4;
+              const allNitnemReady = allNitnemCount >= 4;
+              const anyNitnemSection = nitnemReady.length > 0 || allNitnemReady;
+              return (
+                <>
+                  {anyNitnemSection && (
+                    <>
+                      <h2 className="mt-10 text-sm font-semibold uppercase tracking-wider text-amber-700">
+                        Nitnem Bani Quizzes
+                      </h2>
+                      <ul className="mt-3 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                        {nitnemReady.map((bani) => (
+                          <BaniRow
+                            key={bani.id}
+                            bani={bani}
+                            count={poolByBani[bani.id]?.length ?? 0}
+                            onPick={() => {
+                              setActiveBaniId(bani.id);
+                              setView("setup");
+                            }}
+                          />
+                        ))}
+                        {allNitnemReady && (
+                          <BaniRow
+                            key={ALL_NITNEM.id}
+                            bani={ALL_NITNEM}
+                            count={allNitnemCount}
+                            onPick={() => {
+                              setActiveBaniId(ALL_NITNEM.id);
+                              setView("setup");
+                            }}
+                            accent="emerald"
+                          />
+                        )}
+                      </ul>
+                    </>
+                  )}
 
-                <h2 className="mt-10 text-sm font-semibold uppercase tracking-wider text-amber-700">
-                  Bani Spotlight
-                </h2>
-                <ul className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                  <BaniRow
-                    key={SUKHMANI.id}
-                    bani={SUKHMANI}
-                    count={poolByBani[SUKHMANI.id]?.length ?? 0}
-                    onPick={() => {
-                      setActiveBaniId(SUKHMANI.id);
-                      setView("setup");
-                    }}
-                  />
-                </ul>
+                  {sukhmaniReady && (
+                    <>
+                      <h2 className="mt-10 text-sm font-semibold uppercase tracking-wider text-amber-700">
+                        Bani Spotlight
+                      </h2>
+                      <ul className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                        <BaniRow
+                          key={SUKHMANI.id}
+                          bani={SUKHMANI}
+                          count={sukhmaniCount}
+                          onPick={() => {
+                            setActiveBaniId(SUKHMANI.id);
+                            setView("setup");
+                          }}
+                        />
+                      </ul>
+                    </>
+                  )}
 
-                <p className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
-                  <span className="font-semibold">Want more from the same Vocabulary?</span>{" "}
-                  Install the Gurbani Tutor iPhone app to{" "}
-                  <span className="font-semibold">star words</span>, build a Favourites pool,
-                  and track streaks across sessions.
-                </p>
-              </>
-            )}
+                  {!anyNitnemSection && !sukhmaniReady && (
+                    <p className="mt-10 rounded-2xl border border-slate-200 bg-white p-5 text-center text-sm text-slate-600">
+                      No bani quizzes have enough vocabulary yet. Check back as the Vocabulary
+                      grows.
+                    </p>
+                  )}
+
+                  <p className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
+                    <span className="font-semibold">Want more from the same Vocabulary?</span>{" "}
+                    Install the Gurbani Tutor iPhone app to{" "}
+                    <span className="font-semibold">star words</span>, build a Favourites
+                    pool, and track streaks across sessions.
+                  </p>
+                </>
+              );
+            })()}
           </>
         )}
 

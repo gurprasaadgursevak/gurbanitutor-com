@@ -73,7 +73,7 @@ export default function Home() {
             >
               Arths · Vocab
             </Link>
-            <Link href="/quiz" className="hover:text-slate-900">Quiz</Link>
+            <Link href="/quiz" className="hover:text-slate-900">Gurbani Quiz</Link>
             <Link href="/granth" className="font-bold text-slate-900 hover:text-amber-700">Read Gurbani</Link>
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
