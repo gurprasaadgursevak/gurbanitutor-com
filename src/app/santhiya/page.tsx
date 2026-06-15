@@ -31,16 +31,10 @@ Gurprasaad,`
 
 const SIGNUP_MAILTO = `mailto:gurprasaadgursevak@gmail.com?subject=${SIGNUP_MAILTO_SUBJECT}&body=${SIGNUP_MAILTO_BODY}`;
 
-// Google Form for Santhiya signups.
-// IMPORTANT: this must be the public "embed" URL (Send → < > tab → src),
-// NOT the /edit URL. The public URL has /d/e/<long_id>/viewform format.
-// Until that public URL is captured, GOOGLE_FORM_URL_PUBLIC stays null and
-// the page falls back to the mailto button.
-const GOOGLE_FORM_URL_PUBLIC: string | null = null;
-// The "open in new tab" version for users who'd rather fill it on docs.google.com.
-const GOOGLE_FORM_EDIT_URL =
-  "https://docs.google.com/forms/d/1YFyEaO1gPz-OfbyvxBg3acTQRtCeHU7btzcQMbaFXgw/edit";
-const GOOGLE_FORM_EMBED_URL: string | null = GOOGLE_FORM_URL_PUBLIC;
+// Google Form for Santhiya signups. Public viewform URL (NOT the /edit URL).
+const GOOGLE_FORM_URL_PUBLIC =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdljjoc9CimMytX84eaSx5iMe5IwyW0cyq8RTExjF44BeqLZA/viewform";
+const GOOGLE_FORM_EMBED_URL = `${GOOGLE_FORM_URL_PUBLIC}?embedded=true`;
 
 const GOOGLE_MEET_URL = "https://meet.google.com/dmj-pyvq-qeg";
 const BABA_PHONE_DISPLAY = "+1 (705) 274-7027";
@@ -213,28 +207,35 @@ export default function SanthiyaPage() {
             Request a class
           </h2>
           <p className="mt-2 text-sm leading-7 text-slate-700">
-            Send a short note with your name, timezone, and the slot you&apos;d like. Baba
-            Ji will confirm with you on WhatsApp.
+            Share your name, timezone, and which slot suits you. Baba Ji will confirm with
+            you on WhatsApp.
           </p>
 
-          {GOOGLE_FORM_EMBED_URL ? (
-            <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
-              <iframe
-                src={GOOGLE_FORM_EMBED_URL}
-                title="Santhiya class signup form"
-                className="h-[1200px] w-full"
-                loading="lazy"
-              />
-            </div>
-          ) : (
+          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
+            <iframe
+              src={GOOGLE_FORM_EMBED_URL}
+              title="Santhiya class signup form"
+              className="h-[1400px] w-full"
+              loading="lazy"
+            />
+          </div>
+
+          <p className="mt-4 text-xs text-slate-600">
+            Trouble loading the form?{" "}
             <a
-              href={SIGNUP_MAILTO}
-              className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+              href={GOOGLE_FORM_URL_PUBLIC}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-emerald-700 hover:underline"
             >
-              <span aria-hidden>✉️</span>
-              Sign up by email
-            </a>
-          )}
+              Open the form on Google Forms
+            </a>{" "}
+            or{" "}
+            <a href={SIGNUP_MAILTO} className="font-semibold text-emerald-700 hover:underline">
+              email us
+            </a>{" "}
+            instead.
+          </p>
 
           <p className="mt-4 text-xs text-slate-500">
             We will only use your details to confirm your spot and share class updates. No
