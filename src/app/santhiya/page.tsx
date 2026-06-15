@@ -31,10 +31,8 @@ Gurprasaad,`
 
 const SIGNUP_MAILTO = `mailto:gurprasaadgursevak@gmail.com?subject=${SIGNUP_MAILTO_SUBJECT}&body=${SIGNUP_MAILTO_BODY}`;
 
-const WA_SIGNUP_MESSAGE = encodeURIComponent(
-  `Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh!\n\nI would like to sign up for Santhiya. My details:\n\n  Name:\n  City and timezone:\n  Preferred class (Class 1 / Class 2 / 1:1):\n  Gurmukhi reading level:\n\nGurprasaad,`
-);
-const WA_SIGNUP_URL = `https://wa.me/17052747027?text=${WA_SIGNUP_MESSAGE}`;
+// In-page anchor to the WhatsApp community QR section further down.
+const WA_GROUP_ANCHOR = "#whatsapp";
 
 const GOOGLE_MEET_URL = "https://meet.google.com/dmj-pyvq-qeg";
 const BABA_PHONE_DISPLAY = "+1 (705) 274-7027";
@@ -212,13 +210,11 @@ export default function SanthiyaPage() {
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <a
-              href={WA_SIGNUP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={WA_GROUP_ANCHOR}
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
             >
               <span aria-hidden>💬</span>
-              Message on WhatsApp
+              Join WhatsApp group
             </a>
             <a
               href={SIGNUP_MAILTO}
@@ -236,9 +232,9 @@ export default function SanthiyaPage() {
             </a>
           </div>
           <p className="mt-4 text-xs text-slate-500">
-            WhatsApp and call both reach Baba Ji on{" "}
-            <span className="font-semibold">{BABA_PHONE_DISPLAY}</span>. Email reaches the
-            Sangat sevadars.
+            The WhatsApp group is the easiest way to introduce yourself, ask about timings,
+            and get class updates. For one-on-one, Baba Ji can be reached directly on{" "}
+            <span className="font-semibold">{BABA_PHONE_DISPLAY}</span>.
           </p>
         </div>
       </section>
@@ -268,7 +264,7 @@ export default function SanthiyaPage() {
       </section>
 
       {/* WhatsApp QR */}
-      <section className="mx-auto max-w-6xl px-6 py-12">
+      <section id="whatsapp" className="scroll-mt-20 mx-auto max-w-6xl px-6 py-12">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="flex flex-col items-center">
             <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-xl">

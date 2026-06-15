@@ -302,8 +302,13 @@ export default function ArthsPage() {
                       </button>
                     )}
                   </div>
+                  {r.line && (
+                    <p className="mt-2 text-base leading-7 text-slate-800">
+                      {r.line}
+                    </p>
+                  )}
                   {r.romanized && (
-                    <p className="mt-1 text-sm italic text-slate-600">
+                    <p className="mt-1 text-sm italic text-slate-500">
                       {r.romanized}
                     </p>
                   )}
