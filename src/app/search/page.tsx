@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import GurmukhiKeyboard from "../GurmukhiKeyboard";
 
 type Granth = "sggs" | "dasam";
 type Lang = "gurmukhi" | "english";
@@ -144,6 +145,7 @@ export default function SearchPage() {
   const [lang, setLang] = useState<Lang>("gurmukhi");
   const [scope, setScope] = useState<Scope>("all");
   const [mode, setMode] = useState<Mode>("contains");
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -245,17 +247,45 @@ export default function SearchPage() {
 
         {/* Search input */}
         <div className="mt-6">
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={
-              lang === "gurmukhi"
-                ? "Type in ਗੁਰਮੁਖੀ — try ਸਹਸ ਸਿਆਣਪਾ"
-                : "Type an English word — try mercy"
-            }
-            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base shadow-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
-          />
+          <div className="flex gap-2">
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={
+                lang === "gurmukhi"
+                  ? "Type in ਗੁਰਮੁਖੀ — try ਸਹਸ ਸਿਆਣਪਾ"
+                  : "Type an English word — try mercy"
+              }
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base shadow-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
+            />
+            {lang === "gurmukhi" && (
+              <button
+                type="button"
+                onClick={() => setKeyboardOpen((v) => !v)}
+                aria-label={keyboardOpen ? "Hide Gurmukhi keyboard" : "Show Gurmukhi keyboard"}
+                aria-pressed={keyboardOpen}
+                className={`shrink-0 rounded-xl border px-3 py-3 text-base font-semibold shadow-sm transition ${
+                  keyboardOpen
+                    ? "border-amber-600 bg-amber-100 text-amber-900"
+                    : "border-slate-300 bg-white text-slate-700 hover:border-amber-400"
+                }`}
+              >
+                ੳ ਅ ੲ
+              </button>
+            )}
+          </div>
+          {lang === "gurmukhi" && keyboardOpen && (
+            <div className="mt-3">
+              <GurmukhiKeyboard
+                onInsert={(ch) => setQuery((q) => q + ch)}
+                onBackspace={() =>
+                  setQuery((q) => (q.length > 0 ? Array.from(q).slice(0, -1).join("") : q))
+                }
+                onClose={() => setKeyboardOpen(false)}
+              />
+            </div>
+          )}
         </div>
 
         {/* Mode pickers */}

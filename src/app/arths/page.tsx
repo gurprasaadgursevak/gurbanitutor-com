@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import GurmukhiKeyboard from "../GurmukhiKeyboard";
 
 // Painti Akhari order, mirroring the iOS app's VocabStore.quickSearchAlphabets.
 const ALPHABETS: string[] = [
@@ -64,6 +65,7 @@ export default function ArthsPage() {
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const [angFilter, setAngFilter] = useState("");
   const [shownCount, setShownCount] = useState(PAGE_SIZE);
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -165,14 +167,22 @@ export default function ArthsPage() {
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             Arths · Browse Gurbani words and meanings
           </h1>
-          <p className="mt-2 max-w-3xl text-slate-600">
+          <p className="mt-2 max-w-3xl text-slate-700">
             {records.length > 0 ? "" : "Loading dictionary... "}
             Search by Gurmukhi or English meaning, scroll by Painti Akhari letter, or filter by Ang.
           </p>
+          <div className="mt-4 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
+            <p className="font-semibold">Sangat Ji, a small note</p>
+            <p className="mt-1">
+              These words are hand-picked for vocabulary building and Gurmukhi practice. This is
+              not the full vocabulary of Sri Guru Granth Sahib Ji. For full Gurbani reading, head
+              to <Link href="/search" className="font-semibold underline">Search</Link>.
+            </p>
+          </div>
         </div>
 
         {/* Filters */}
-        <div className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto_auto]">
+        <div className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto_auto_auto]">
           <input
             type="search"
             value={query}
@@ -180,6 +190,19 @@ export default function ArthsPage() {
             placeholder="Search in Gurmukhi or English..."
             className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-base shadow-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
           />
+          <button
+            type="button"
+            onClick={() => setKeyboardOpen((v) => !v)}
+            aria-label={keyboardOpen ? "Hide Gurmukhi keyboard" : "Show Gurmukhi keyboard"}
+            aria-pressed={keyboardOpen}
+            className={`rounded-xl border px-4 py-3 text-base font-semibold shadow-sm transition ${
+              keyboardOpen
+                ? "border-amber-600 bg-amber-100 text-amber-900"
+                : "border-slate-300 bg-white text-slate-700 hover:border-amber-400"
+            }`}
+          >
+            ੳ ਅ ੲ
+          </button>
           <input
             value={angFilter}
             onChange={(e) => setAngFilter(e.target.value)}
@@ -200,6 +223,17 @@ export default function ArthsPage() {
             </button>
           )}
         </div>
+        {keyboardOpen && (
+          <div className="mt-3">
+            <GurmukhiKeyboard
+              onInsert={(ch) => setQuery((q) => q + ch)}
+              onBackspace={() =>
+                setQuery((q) => (q.length > 0 ? Array.from(q).slice(0, -1).join("") : q))
+              }
+              onClose={() => setKeyboardOpen(false)}
+            />
+          </div>
+        )}
 
         {/* Painti Akhari pills */}
         <div className="mt-4 flex flex-wrap gap-1.5">

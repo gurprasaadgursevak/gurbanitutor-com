@@ -11,6 +11,12 @@ type Tile = {
 
 const TILES: Tile[] = [
   {
+    href: "/mukhvak",
+    eyebrow: "Read daily",
+    title: "Sri Mukhvak",
+    body: "Today's Hukamnama from Sri Darbar Sahib, in Gurmukhi with Punjabi and English arth.",
+  },
+  {
     href: "/search",
     eyebrow: "Read",
     title: "Search Gurbani",
@@ -27,7 +33,7 @@ const TILES: Tile[] = [
     href: "/pothi",
     eyebrow: "Read",
     title: "Sri Pothi Sahib",
-    body: "Ten free Pothis to read online or download — Sri Sukhmani Sahib Ji, SGGS History, and more.",
+    body: "Ten free Pothis to read online or download. Sri Sukhmani Sahib Ji, SGGS History, and more.",
   },
   {
     href: "/muharni",
@@ -47,6 +53,7 @@ export default function Home() {
             Gurbani Tutor
           </Link>
           <nav className="hidden gap-5 text-sm font-medium text-slate-600 sm:flex">
+            <Link href="/mukhvak" className="hover:text-slate-900">Mukhvak</Link>
             <Link href="/search" className="hover:text-slate-900">Search</Link>
             <Link href="/arths" className="hover:text-slate-900">Arths</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
@@ -117,11 +124,13 @@ export default function Home() {
       {/* Quick links */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="grid gap-4 sm:grid-cols-2">
-          {TILES.map((t) => (
+          {TILES.map((t, i) => (
             <Link
               key={t.href}
               href={t.href}
-              className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md"
+              className={`group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md ${
+                i === 0 ? "sm:col-span-2 border-amber-200 bg-amber-50/40" : ""
+              }`}
             >
               <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
                 {t.eyebrow}

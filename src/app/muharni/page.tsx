@@ -75,7 +75,59 @@ export default function MuharniPage() {
           ))}
         </div>
 
-        <p className="mt-10 text-center text-xs text-slate-500">
+        {/* Reference PDFs */}
+        <h3 className="mt-16 text-center text-lg font-semibold text-slate-800">
+          Painti & Muharni PDFs
+        </h3>
+        <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-slate-600">
+          Print or download these primers to practice alongside the videos.
+        </p>
+        <div className="mx-auto mt-6 grid max-w-3xl gap-5 sm:grid-cols-2">
+          <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="flex items-center gap-3 text-amber-700">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6" aria-hidden="true">
+                <path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm9 1.5V8h4.5L15 3.5z" />
+              </svg>
+              <span className="text-xs font-semibold uppercase tracking-wider">PDF</span>
+            </div>
+            <h4 className="mt-3 text-lg font-semibold text-slate-900">Painti Akhari Primer</h4>
+            <p className="mt-2 text-sm leading-6 text-slate-700">
+              The 35 letters of Gurmukhi, with shapes and ucharan, for new readers.
+            </p>
+            <p className="mt-3 text-xs italic text-slate-500">Coming soon.</p>
+          </div>
+          <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="flex items-center gap-3 text-amber-700">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6" aria-hidden="true">
+                <path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm9 1.5V8h4.5L15 3.5z" />
+              </svg>
+              <span className="text-xs font-semibold uppercase tracking-wider">PDF · 0.4 MB</span>
+            </div>
+            <h4 className="mt-3 text-lg font-semibold text-slate-900">Muharni Primer</h4>
+            <p className="mt-2 text-sm leading-6 text-slate-700">
+              The full Muharni chart of consonants with each vowel, used in classical Santhiya.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <a
+                href="/santhiya101/muharni.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+              >
+                Read online
+              </a>
+              <a
+                href="/santhiya101/muharni.pdf"
+                download
+                className="inline-flex items-center justify-center rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+              >
+                Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <p className="mt-12 text-center text-xs text-slate-500">
           Looking for one-on-one teaching? Join{" "}
           <Link href="/santhiya" className="font-medium text-amber-700 hover:underline">
             Santhiya Classes

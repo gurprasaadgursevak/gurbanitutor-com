@@ -94,9 +94,9 @@ export default function AboutPage() {
                 priority={false}
               />
             </div>
-            <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm text-slate-600">
-              Sachkhandwasi ਗੁਰਮੁਖਿ ਅਪਰਸ Bhagat Jaswant Singh Ji (Daudhar) and Baba Jawahar
-              Singh Ji (Chaminda).
+            <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm text-slate-700">
+              Baba Jawahar Singh Ji (Chaminda) and Sachkhandwasi ਗੁਰਮੁਖਿ ਅਪਰਸ Bhagat Jaswant
+              Singh Ji (Daudhar).
             </figcaption>
           </figure>
 

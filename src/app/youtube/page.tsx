@@ -28,6 +28,19 @@ const TOPICS = [
   },
 ];
 
+const FEATURED_VIDEOS: { id: string; title: string; subtitle: string }[] = [
+  {
+    id: "Q9rmNdAcZ_E",
+    title: "Painti Akhari · Sounds of Letters",
+    subtitle: "The 35 letters of Gurmukhi with correct ucharan.",
+  },
+  {
+    id: "iCT-KqB-oSI",
+    title: "Muharni",
+    subtitle: "The classical Muharni chart, sung syllable by syllable.",
+  },
+];
+
 export default function YouTubePage() {
   return (
     <div className="min-h-screen bg-slate-50">
@@ -89,8 +102,39 @@ export default function YouTubePage() {
       </section>
 
       <main className="mx-auto max-w-6xl px-6 py-14">
-        {/* Topics */}
+        {/* Featured videos */}
         <h2 className="text-center text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+          Featured videos
+        </h2>
+        <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-slate-600">
+          A taste of the channel, starting with the foundations.
+        </p>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          {FEATURED_VIDEOS.map((v) => (
+            <div
+              key={v.id}
+              className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+            >
+              <div className="aspect-video w-full bg-slate-900">
+                <iframe
+                  className="h-full w-full"
+                  src={`https://www.youtube-nocookie.com/embed/${v.id}`}
+                  title={v.title}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <div className="px-4 py-3">
+                <p className="text-sm font-semibold text-slate-900">{v.title}</p>
+                <p className="mt-1 text-xs text-slate-600">{v.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Topics */}
+        <h2 className="mt-16 text-center text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
           What you&apos;ll find on the channel
         </h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-3">
