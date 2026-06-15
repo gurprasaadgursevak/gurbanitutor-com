@@ -255,7 +255,7 @@ export default function MukhvakPage() {
             </h3>
             <p className="mt-2 text-sm leading-6 text-slate-700">
               Look up any line by Gurmukhi or English meaning, across Sri Guru Granth Sahib Ji
-              and Sri Dasam Granth Sahib Ji.
+              and Sri Dasam Guru Granth Sahib Ji.
             </p>
           </Link>
           <Link

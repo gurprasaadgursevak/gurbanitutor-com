@@ -220,7 +220,7 @@ function GranthReader() {
       <main className="mx-auto max-w-5xl px-6 py-10">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
-            Sri Guru Granth Sahib Ji & Sri Dasam Granth Sahib Ji
+            Sri Guru Granth Sahib Ji & Sri Dasam Guru Granth Sahib Ji
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             Read Gurbani, Ang by Ang.
@@ -253,7 +253,7 @@ function GranthReader() {
                 : "border-slate-200 bg-white text-slate-700 hover:border-amber-300"
             }`}
           >
-            Sri Dasam Granth Sahib Ji
+            Sri Dasam Guru Granth Sahib Ji
           </button>
         </div>
 

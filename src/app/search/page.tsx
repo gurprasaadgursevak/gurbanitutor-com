@@ -234,14 +234,14 @@ export default function SearchPage() {
       <main className="mx-auto max-w-7xl px-6 py-10">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
-            Sri Guru Granth Sahib Ji + Sri Dasam Granth Sahib Ji
+            Sri Guru Granth Sahib Ji + Sri Dasam Guru Granth Sahib Ji
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             Find any line, in Gurmukhi or English.
           </h1>
           <p className="mt-2 max-w-3xl text-slate-600">
             {loading
-              ? "Loading Sri Guru Granth Sahib Ji and Sri Dasam Granth Sahib Ji..."
+              ? "Loading Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji..."
               : "Search by Gurmukhi (Contains, First Letters, Anywhere) or by English meaning."}
           </p>
         </div>
@@ -320,7 +320,7 @@ export default function SearchPage() {
               options={[
                 { value: "all", label: "All" },
                 { value: "sggs", label: "SGGS Ji" },
-                { value: "dasam", label: "Dasam" },
+                { value: "dasam", label: "Sri Dasam" },
               ]}
             />
           )}
@@ -382,7 +382,7 @@ export default function SearchPage() {
                           : "bg-amber-50 text-amber-700"
                       }`}
                     >
-                      {r.granth === "sggs" ? "SGGS Ji" : "Dasam"}
+                      {r.granth === "sggs" ? "SGGS Ji" : "Sri Dasam"}
                     </span>
                     {lang === "english" && r.arth && (
                       <span className="ml-1 text-slate-700">ਅਰਥ: {r.arth}</span>

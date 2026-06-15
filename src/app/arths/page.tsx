@@ -162,15 +162,16 @@ export default function ArthsPage() {
 
       <main className="mx-auto max-w-7xl px-6 py-10">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
-            Sri Guru Granth Sahib Ji
-          </p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            Arths · Browse Gurbani words and meanings
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-600 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow-sm">
+            Gurbani Vocabulary Builder
+          </span>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            Arths · Build your Gurbani vocabulary
           </h1>
           <p className="mt-2 max-w-3xl text-slate-700">
             {records.length > 0 ? "" : "Loading dictionary... "}
-            Search by Gurmukhi or English meaning, scroll by Painti Akhari letter, or filter by Ang.
+            A curated set of Gurbani words from Sri Guru Granth Sahib Ji with Punjabi and English
+            meanings. Search by Gurmukhi or English, scroll by Painti Akhari letter, or filter by Ang.
           </p>
           <div className="mt-4 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
             <p className="font-semibold">Sangat Ji, a small note</p>

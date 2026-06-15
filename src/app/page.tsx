@@ -20,7 +20,7 @@ const TILES: Tile[] = [
   {
     href: "/granth",
     eyebrow: "Read",
-    title: "Read Sri Guru Granth Sahib Ji & Dasam Granth",
+    title: "Read Sri Guru Granth Sahib Ji & Sri Dasam Guru Granth Sahib Ji",
     body: "Ang-by-Ang reading with optional ਅਰਥ, English Steeks, and ucharan tips for study.",
   },
   {
@@ -28,13 +28,13 @@ const TILES: Tile[] = [
     eyebrow: "Find",
     title: "Gurbani Search",
     body:
-      "Find any line in Sri Guru Granth Sahib Ji or Sri Guru Dasam Granth Sahib Ji. Gurmukhi or English.",
+      "Find any line in Sri Guru Granth Sahib Ji or Sri Dasam Guru Granth Sahib Ji. Gurmukhi or English.",
   },
   {
     href: "/arths",
-    eyebrow: "Study",
+    eyebrow: "Study · Gurbani vocabulary builder",
     title: "Arths Dictionary",
-    body: "Gurbani words with Punjabi and English meanings, browsable by Painti Akhari or Ang.",
+    body: "A curated Gurbani vocabulary builder. Hand-picked words with Punjabi and English meanings, browsable by Painti Akhari or Ang.",
   },
   {
     href: "/pothi",
@@ -61,7 +61,12 @@ export default function Home() {
           </Link>
           <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 sm:flex">
             <Link href="/search" className="font-bold text-slate-900 hover:text-amber-700">Gurbani Search</Link>
-            <Link href="/arths" className="font-bold text-slate-900 hover:text-amber-700">Arths</Link>
+            <Link
+              href="/arths"
+              className="inline-flex items-center gap-1.5 rounded-full bg-amber-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+            >
+              Arths · Vocab
+            </Link>
             <Link href="/granth" className="font-bold text-slate-900 hover:text-amber-700">Read Gurbani</Link>
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>

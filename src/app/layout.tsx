@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://gurbanitutor.com"),
   title: "Gurbani Tutor — A learning companion for Gurbani",
   description:
-    "Read Sri Guru Granth Sahib Ji and Sri Guru Dasam Granth Sahib Ji, track daily Nitnem, count Simran on a mala, take Gurbani Abhiyaas challenges, and study the Gurmukhi dictionary. Free on iPhone.",
+    "Read Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji, track daily Nitnem, count Simran on a mala, take Gurbani Abhiyaas challenges, and study the Gurmukhi dictionary. Free on iPhone.",
   icons: {
     icon: [{ url: "/app-icon.png", type: "image/png" }],
     apple: [{ url: "/app-icon.png" }],

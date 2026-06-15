@@ -11,7 +11,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Gurbani Tutor",
     short_name: "Gurbani Tutor",
     description:
-      "A learning companion for Gurbani. Read Sri Guru Granth Sahib Ji and Sri Guru Dasam Granth Sahib Ji, study Arths, track daily Nitnem and Simran, and learn Santhiya.",
+      "A learning companion for Gurbani. Read Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji, study Arths, track daily Nitnem and Simran, and learn Santhiya.",
     start_url: "/",
     scope: "/",
     display: "standalone",
@@ -43,7 +43,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Gurbani Search",
         short_name: "Search",
-        description: "Search Sri Guru Granth Sahib Ji and Sri Dasam Granth Sahib Ji",
+        description: "Search Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji",
         url: "/search",
       },
       {
