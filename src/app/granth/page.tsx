@@ -368,29 +368,29 @@ function GranthReader() {
                       : "border-slate-200 bg-white"
                   }`}
                 >
-                  <p className="text-lg leading-9 text-slate-900">{l.gurmukhi}</p>
-                  {showArth && l.arth && (
-                    <p className="mt-2 text-sm leading-7 text-slate-800">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                        ਅਰਥ
-                      </span>{" "}
-                      {l.arth}
-                    </p>
-                  )}
                   {showUcharan && l.ucharanTip && (
-                    <p className="mt-1 text-sm leading-7 text-amber-800">
+                    <p className="mb-2 text-sm leading-7 text-amber-800">
                       <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
                         Ucharan
                       </span>{" "}
                       {l.ucharanTip}
                     </p>
                   )}
+                  <p className="text-lg leading-9 text-slate-900">{l.gurmukhi}</p>
                   {showExtendedUcharan && l.extendedUcharanTip && (
-                    <p className="mt-1 text-sm leading-7 text-amber-800">
+                    <p className="mt-2 text-sm leading-7 text-amber-800">
                       <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
                         Extended Ucharan
                       </span>{" "}
                       {l.extendedUcharanTip}
+                    </p>
+                  )}
+                  {showArth && l.arth && (
+                    <p className="mt-2 text-sm leading-7 text-slate-800">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                        ਅਰਥ
+                      </span>{" "}
+                      {l.arth}
                     </p>
                   )}
                   {showSteek1 && l.steek1 && (
