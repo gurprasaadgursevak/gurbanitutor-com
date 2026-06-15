@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import GurmukhiKeyboard from "../GurmukhiKeyboard";
+import SocialLinks from "../SocialLinks";
 
 type Granth = "sggs" | "dasam";
 type Lang = "gurmukhi" | "english";
@@ -411,16 +412,8 @@ export default function SearchPage() {
             <Link href="/" className="font-medium text-amber-700 hover:underline">
               Back to home
             </Link>
-            {" · "}
-            <a
-              href="https://instagram.com/gurbanitutor"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-amber-700 hover:underline"
-            >
-              Instagram @GurbaniTutor
-            </a>
           </p>
+          <SocialLinks />
         </div>
       </footer>
     </div>

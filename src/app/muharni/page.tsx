@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import PaintiViewer from "../PaintiViewer";
+import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
   title: "Santhiya 101 · Your journey — Gurbani Tutor",
@@ -378,11 +379,8 @@ export default function MuharniPage() {
             <Link href="/santhiya" className="font-medium text-amber-700 hover:underline">
               Santhiya classes
             </Link>
-            {" · "}
-            <Link href="/youtube" className="font-medium text-amber-700 hover:underline">
-              YouTube channel
-            </Link>
           </p>
+          <SocialLinks />
         </div>
       </footer>
     </div>

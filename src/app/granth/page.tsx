@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import SocialLinks from "../SocialLinks";
 
 type Granth = "sggs" | "dasam";
 
@@ -451,13 +452,14 @@ function GranthReader() {
             </Link>
             {" · "}
             <Link href="/search" className="font-medium text-amber-700 hover:underline">
-              Search Gurbani
+              Gurbani Search
             </Link>
             {" · "}
             <Link href="/mukhvak" className="font-medium text-amber-700 hover:underline">
               Sri Mukhvak
             </Link>
           </p>
+          <SocialLinks />
         </div>
       </footer>
     </div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import InstallWebAppButton from "./InstallWebAppButton";
+import SocialLinks from "./SocialLinks";
 
 type Tile = {
   href: string;
@@ -58,16 +59,20 @@ export default function Home() {
           <Link href="/" className="font-semibold tracking-tight text-amber-700">
             Gurbani Tutor
           </Link>
-          <nav className="hidden gap-5 text-sm font-medium text-slate-600 sm:flex">
+          <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 sm:flex">
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
             <Link href="/granth" className="hover:text-slate-900">Read Gurbani</Link>
             <Link href="/search" className="hover:text-slate-900">Gurbani Search</Link>
             <Link href="/arths" className="hover:text-slate-900">Arths</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
             <Link href="/muharni" className="hover:text-slate-900">Santhiya 101</Link>
-            <Link href="/santhiya" className="hover:text-slate-900">Santhiya Classes</Link>
-            <Link href="/youtube" className="hover:text-slate-900">YouTube</Link>
             <Link href="/about" className="hover:text-slate-900">About</Link>
+            <Link
+              href="/santhiya"
+              className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+            >
+              Santhiya Classes
+            </Link>
           </nav>
         </div>
       </header>
@@ -202,19 +207,10 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 text-sm text-slate-500 sm:flex-row">
+        <div className="mx-auto max-w-6xl px-6 text-center text-sm text-slate-500">
           <p>ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ॥ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫ਼ਤਹਿ॥</p>
-          <div className="flex items-center gap-4">
-            <a
-              href="https://instagram.com/gurbanitutor"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-amber-700 hover:underline"
-            >
-              @GurbaniTutor
-            </a>
-            <span>© {new Date().getFullYear()} Gurbani Tutor</span>
-          </div>
+          <SocialLinks />
+          <p className="mt-3 text-xs">© {new Date().getFullYear()} Gurbani Tutor</p>
         </div>
       </footer>
     </div>

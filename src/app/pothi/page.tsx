@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
   title: "Sri Pothi Sahib — Gurbani Tutor",
@@ -214,16 +215,8 @@ export default function PothiPage() {
             <Link href="/arths" className="font-medium text-amber-700 hover:underline">
               Browse Arths
             </Link>
-            {" · "}
-            <a
-              href="https://instagram.com/gurbanitutor"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-amber-700 hover:underline"
-            >
-              Instagram @GurbaniTutor
-            </a>
           </p>
+          <SocialLinks />
         </div>
       </footer>
     </div>

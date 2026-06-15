@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import SocialLinks from "../SocialLinks";
 
 type Verse = {
   verseId: number;
@@ -290,18 +291,10 @@ export default function MukhvakPage() {
             </Link>
             {" · "}
             <Link href="/search" className="font-medium text-amber-700 hover:underline">
-              Search Gurbani
+              Gurbani Search
             </Link>
-            {" · "}
-            <a
-              href="https://instagram.com/gurbanitutor"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-amber-700 hover:underline"
-            >
-              Instagram @GurbaniTutor
-            </a>
           </p>
+          <SocialLinks />
         </div>
       </footer>
     </div>

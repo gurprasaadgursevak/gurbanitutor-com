@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
   title: "About Us — Gurbani Tutor",
@@ -216,16 +217,8 @@ export default function AboutPage() {
             <Link href="/" className="font-medium text-amber-700 hover:underline">
               Back to home
             </Link>
-            {" · "}
-            <a
-              href="https://instagram.com/gurbanitutor"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-amber-700 hover:underline"
-            >
-              Instagram @GurbaniTutor
-            </a>
           </p>
+          <SocialLinks />
         </div>
       </footer>
     </div>

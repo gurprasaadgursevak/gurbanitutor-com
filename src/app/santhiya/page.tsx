@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
   title: "Santhiya Classes — Gurbani Tutor",
@@ -30,9 +31,16 @@ Gurprasaad,`
 
 const SIGNUP_MAILTO = `mailto:gurprasaadgursevak@gmail.com?subject=${SIGNUP_MAILTO_SUBJECT}&body=${SIGNUP_MAILTO_BODY}`;
 
-// NOTE for the future: when the Google Form is created, paste its URL here and
-// the page will render an embedded form instead of (or alongside) the mailto.
-const GOOGLE_FORM_EMBED_URL: string | null = null;
+// Google Form for Santhiya signups.
+// IMPORTANT: this must be the public "embed" URL (Send → < > tab → src),
+// NOT the /edit URL. The public URL has /d/e/<long_id>/viewform format.
+// Until that public URL is captured, GOOGLE_FORM_URL_PUBLIC stays null and
+// the page falls back to the mailto button.
+const GOOGLE_FORM_URL_PUBLIC: string | null = null;
+// The "open in new tab" version for users who'd rather fill it on docs.google.com.
+const GOOGLE_FORM_EDIT_URL =
+  "https://docs.google.com/forms/d/1YFyEaO1gPz-OfbyvxBg3acTQRtCeHU7btzcQMbaFXgw/edit";
+const GOOGLE_FORM_EMBED_URL: string | null = GOOGLE_FORM_URL_PUBLIC;
 
 const GOOGLE_MEET_URL = "https://meet.google.com/dmj-pyvq-qeg";
 const BABA_PHONE_DISPLAY = "+1 (705) 274-7027";
@@ -74,22 +82,36 @@ export default function SanthiyaPage() {
         </div>
       </section>
 
-      {/* Inspiration photo */}
-      <section className="mx-auto max-w-4xl px-6 pt-2 pb-6">
-        <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
-            <Image
-              src="/santhiya-teacher.jpg"
-              alt="An elder sevadar teaching one-on-one Santhiya outdoors, with a chalkboard and pothis"
-              fill
-              sizes="(max-width: 768px) 100vw, 896px"
-              className="object-cover"
-            />
-          </div>
-          <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm italic text-slate-700">
-            One-on-one Santhiya, taught in the loving tradition of Gurmukh sevadars.
-          </figcaption>
-        </figure>
+      {/* Poster + inspiration photo */}
+      <section className="mx-auto max-w-6xl px-6 pt-2 pb-6">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+              <Image
+                src="/santhiya-poster.jpg"
+                alt="Baba Jawahar Singh Ji Santhiya Classes poster · Our aim is to make Shudh Gurbani Santhiya accessible for everyone."
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+          </figure>
+          <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+              <Image
+                src="/santhiya-teacher.jpg"
+                alt="An elder sevadar teaching one-on-one Santhiya outdoors, with a chalkboard and pothis"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm italic text-slate-700">
+              One-on-one Santhiya, taught in the loving tradition of Gurmukh sevadars.
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       {/* Class times */}
@@ -370,16 +392,8 @@ export default function SanthiyaPage() {
             <Link href="/arths" className="font-medium text-amber-700 hover:underline">
               Browse Arths
             </Link>
-            {" · "}
-            <a
-              href="https://instagram.com/gurbanitutor"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-amber-700 hover:underline"
-            >
-              Instagram @GurbaniTutor
-            </a>
           </p>
+          <SocialLinks />
         </div>
       </footer>
     </div>
