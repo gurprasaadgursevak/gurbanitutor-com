@@ -413,6 +413,68 @@ function GranthReader() {
           </p>
         </div>
 
+        {/* Mobile-only Nitnem picker (the desktop one lives in the right rail) */}
+        <details className="mt-6 rounded-2xl border border-amber-200 bg-white p-4 shadow-sm lg:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-2">
+            <span>
+              <span className="block text-xs font-semibold uppercase tracking-wider text-amber-700">
+                Nitnem Banis
+              </span>
+              <span className="block text-xs text-slate-600">
+                {selectedBani ? `Reading: ${selectedBani.name}` : "Jump to a complete bani."}
+              </span>
+            </span>
+            <span aria-hidden className="text-slate-400">
+              ▾
+            </span>
+          </summary>
+          <ul className="mt-3 divide-y divide-slate-200">
+            {BANI_LIST.map((bani) => {
+              const isActive = selectedBani?.id === bani.id;
+              return (
+                <li key={`m-${bani.id}`}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedBaniId(bani.id);
+                      setHighlightLine(null);
+                      if (typeof window !== "undefined") {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
+                    disabled={loading}
+                    className={`flex min-h-[44px] w-full items-center justify-between gap-2 py-2 text-left transition ${
+                      isActive ? "text-amber-900" : "text-slate-800"
+                    } disabled:opacity-50`}
+                  >
+                    <span>
+                      <span className="block text-sm font-semibold">{bani.name}</span>
+                      <span className="block text-xs text-slate-600">{bani.subtitle}</span>
+                    </span>
+                    <span aria-hidden className={isActive ? "text-amber-700" : "text-slate-400"}>
+                      {isActive ? "●" : "→"}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+          {selectedBani && (
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedBaniId(null);
+                if (typeof window !== "undefined") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+              className="mt-3 w-full rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
+            >
+              ← Back to Ang reading
+            </button>
+          )}
+        </details>
+
         {selectedBani && (
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3">
             <div>
@@ -431,7 +493,7 @@ function GranthReader() {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }
               }}
-              className="rounded-full border border-slate-300 bg-white px-4 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
+              className="min-h-[40px] rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
             >
               Back to Ang reading
             </button>
@@ -552,6 +614,28 @@ function GranthReader() {
               />
             </>
           )}
+          <span className="mx-1 h-5 w-px bg-slate-200" aria-hidden />
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Size
+          </span>
+          <button
+            type="button"
+            onClick={() => setFontScaleIdx((i) => Math.max(0, i - 1))}
+            disabled={fontScaleIdx === 0}
+            aria-label="Decrease text size"
+            className="inline-flex h-9 min-w-[36px] items-center justify-center rounded-full border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-700 transition hover:border-amber-300 disabled:opacity-40"
+          >
+            A−
+          </button>
+          <button
+            type="button"
+            onClick={() => setFontScaleIdx((i) => Math.min(4, i + 1))}
+            disabled={fontScaleIdx === 4}
+            aria-label="Increase text size"
+            className="inline-flex h-9 min-w-[36px] items-center justify-center rounded-full border border-slate-200 bg-white px-3 text-sm font-semibold text-slate-700 transition hover:border-amber-300 disabled:opacity-40"
+          >
+            A+
+          </button>
         </div>
 
         {/* Lines */}
@@ -588,18 +672,32 @@ function GranthReader() {
                   }`}
                 >
                   {showUcharan && l.ucharanTip && (
-                    <p className="mb-2 text-sm leading-7 text-amber-800">
+                    <p
+                      className="mb-2 text-amber-800"
+                      style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
+                    >
                       {l.ucharanTip}
                     </p>
                   )}
-                  <p className="text-lg leading-9 text-slate-900">{l.gurmukhi}</p>
+                  <p
+                    className="text-slate-900"
+                    style={{ fontSize: `${18 * fontScale}px`, lineHeight: 1.8 }}
+                  >
+                    {l.gurmukhi}
+                  </p>
                   {showExtendedUcharan && l.extendedUcharanTip && (
-                    <p className="mt-2 text-sm leading-7 text-amber-800">
+                    <p
+                      className="mt-2 text-amber-800"
+                      style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
+                    >
                       {l.extendedUcharanTip}
                     </p>
                   )}
                   {showArth && l.arth && (
-                    <p className="mt-2 text-sm leading-7 text-slate-800">
+                    <p
+                      className="mt-2 text-slate-800"
+                      style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
+                    >
                       <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
                         ਅਰਥ
                       </span>{" "}
@@ -607,7 +705,10 @@ function GranthReader() {
                     </p>
                   )}
                   {showSteek1 && l.steek1 && (
-                    <p className="mt-1 text-sm leading-7 text-slate-700">
+                    <p
+                      className="mt-1 text-slate-700"
+                      style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
+                    >
                       <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
                         English Steek 1
                       </span>{" "}
@@ -615,7 +716,10 @@ function GranthReader() {
                     </p>
                   )}
                   {showSteek2 && l.steek2 && (
-                    <p className="mt-1 text-sm leading-7 text-slate-700">
+                    <p
+                      className="mt-1 text-slate-700"
+                      style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
+                    >
                       <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
                         English Steek 2
                       </span>{" "}
@@ -710,7 +814,7 @@ function GranthReader() {
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }
                   }}
-                  className="mt-3 w-full rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
+                  className="mt-3 w-full min-h-[40px] rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
                 >
                   ← Back to Ang reading
                 </button>
@@ -757,7 +861,7 @@ function ToggleChip({
       type="button"
       onClick={onToggle}
       aria-pressed={on}
-      className={`rounded-full border px-3 py-1 text-xs font-semibold transition ${
+      className={`inline-flex min-h-[36px] items-center rounded-full border px-3 py-2 text-xs font-semibold transition ${
         on
           ? "border-amber-600 bg-amber-100 text-amber-900"
           : "border-slate-200 bg-white text-slate-600 hover:border-amber-300"

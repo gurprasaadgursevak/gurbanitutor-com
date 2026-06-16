@@ -246,7 +246,7 @@ export default function ArthsPage() {
         <div className="mt-4 flex flex-wrap gap-1.5">
           <button
             onClick={() => setSelectedLetter(null)}
-            className={`rounded-full border px-3 py-1.5 text-sm transition ${
+            className={`inline-flex min-h-[40px] items-center rounded-full border px-3 py-2 text-sm transition ${
               selectedLetter === null
                 ? "border-amber-600 bg-amber-100 font-semibold text-amber-900"
                 : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
@@ -260,7 +260,7 @@ export default function ArthsPage() {
               onClick={() =>
                 setSelectedLetter(selectedLetter === letter ? null : letter)
               }
-              className={`rounded-full border px-3 py-1.5 text-lg leading-none transition ${
+              className={`inline-flex min-h-[40px] min-w-[40px] items-center justify-center rounded-full border px-3 py-2 text-lg leading-none transition ${
                 selectedLetter === letter
                   ? "border-amber-600 bg-amber-100 font-semibold text-amber-900"
                   : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
