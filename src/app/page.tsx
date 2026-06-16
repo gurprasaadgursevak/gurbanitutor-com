@@ -3,58 +3,121 @@ import Link from "next/link";
 import InstallWebAppButton from "./InstallWebAppButton";
 import SocialLinks from "./SocialLinks";
 
+type TileBadge = "unique" | "learning";
+
 type Tile = {
   href: string;
   eyebrow: string;
   title: string;
   body: string;
+  icon: keyof typeof TILE_ICONS;
+  badge?: TileBadge;
 };
 
 const TILES: Tile[] = [
+  {
+    href: "/arths",
+    eyebrow: "Gurbani Vocabulary Builder",
+    title: "Arths Dictionary",
+    body: "A unique, hand-picked vocabulary of Gurbani words with Punjabi and English meanings. Browsable by Painti Akhari or Ang. The backbone of every quiz on this site.",
+    icon: "vocab",
+    badge: "unique",
+  },
+  {
+    href: "/quiz",
+    eyebrow: "Learn Gurmat by doing",
+    title: "Gurbani Quiz",
+    body: "Bani-by-bani quizzes drawn from the Vocabulary. Sri Japji, Sri Jaap, Sri Sukhmani Sahib, and more. Daily quiz + streak tracking — Sangat worldwide on the same set.",
+    icon: "quiz",
+    badge: "learning",
+  },
   {
     href: "/mukhvak",
     eyebrow: "Read daily",
     title: "Sri Mukhvak",
     body: "Today's Hukamnama from Sri Darbar Sahib, in Gurmukhi with Punjabi and English arth.",
+    icon: "sun",
   },
   {
     href: "/granth",
-    eyebrow: "Read",
+    eyebrow: "Read Ang by Ang",
     title: "Read Sri Guru Granth Sahib Ji & Sri Dasam Guru Granth Sahib Ji",
-    body: "Ang-by-Ang reading with optional ਅਰਥ, English Steeks, and ucharan tips for study.",
+    body: "Full Gurbani text with optional ਅਰਥ, English Steeks, and ucharan tips. Pick any Nitnem bani from the side rail.",
+    icon: "book",
   },
   {
     href: "/search",
-    eyebrow: "Find",
+    eyebrow: "Find any line",
     title: "Gurbani Search",
     body:
-      "Find any line in Sri Guru Granth Sahib Ji or Sri Dasam Guru Granth Sahib Ji. Gurmukhi or English.",
-  },
-  {
-    href: "/arths",
-    eyebrow: "Study · Gurbani vocabulary builder",
-    title: "Arths Dictionary",
-    body: "A curated Gurbani vocabulary builder. Hand-picked words with Punjabi and English meanings, browsable by Painti Akhari or Ang.",
-  },
-  {
-    href: "/quiz",
-    eyebrow: "Practice",
-    title: "Gurbani Quiz",
-    body: "Bani-by-bani quizzes drawn from the Vocabulary. Nitnem, Sukhmani Sahib, or a combined Nitnem pool.",
+      "Find any line in Sri Guru Granth Sahib Ji or Sri Dasam Guru Granth Sahib Ji. Gurmukhi or English, with first-letter and consonant-skeleton matching.",
+    icon: "search",
   },
   {
     href: "/pothi",
-    eyebrow: "Read",
-    title: "Sri Pothi Sahib",
-    body: "Ten free Pothis to read online or download. Sri Sukhmani Sahib Ji, SGGS History, and more.",
+    eyebrow: "Read online or download",
+    title: "Sri Pothi Sahib library",
+    body: "Ten Pothis for offline study. Sri Sukhmani Sahib Ji, SGGS History, Balupdesh, Bhagat Kabir Ji's Sloaks, and more.",
+    icon: "library",
   },
   {
     href: "/muharni",
-    eyebrow: "Learn",
+    eyebrow: "Learn from scratch",
     title: "Santhiya 101",
-    body: "A step-by-step journey: Painti Akhari, Muharni, Nitnem Santhiya, and SGGS Santhiya.",
+    body: "A step-by-step journey: Painti Akhari, Muharni, Nitnem Santhiya, then Sri Guru Granth Sahib Ji Santhiya — taught by sevadars on YouTube.",
+    icon: "letters",
   },
 ];
+
+// MARK: - Tile icons (inline SVG so they tint with currentColor)
+
+const TILE_ICONS = {
+  vocab: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M4 19.5V5a2 2 0 0 1 2-2h13v17H6a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h13" />
+      <path d="M8 7h7M8 11h7M8 15h4" />
+      <path d="M17.5 7.5l1 2 2.2.3-1.6 1.5.4 2.2-1.9-1-2 1 .4-2.2L14.3 9.8l2.2-.3z" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  quiz: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9 12l2.2 2.2L15.5 9.5" />
+      <circle cx="17.5" cy="6.5" r="1.4" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  sun: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8" />
+    </svg>
+  ),
+  book: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M12 5.5C9.5 4 5 4 3.5 4.5v14C5 18 9.5 18 12 19.5c2.5-1.5 7-1.5 8.5-1v-14c-1.5-.5-6-.5-8.5 1z" />
+      <path d="M12 5.5v14" />
+    </svg>
+  ),
+  search: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="M15.5 15.5L20 20" />
+    </svg>
+  ),
+  library: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect x="3.5" y="4" width="3.5" height="16" rx="0.5" />
+      <rect x="9" y="4" width="3.5" height="16" rx="0.5" />
+      <path d="M16 5l4 .8-3 15-4-.8z" />
+    </svg>
+  ),
+  letters: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M4 19l4-12 4 12M5.6 15h4.8" />
+      <path d="M15 7v12M15 7c2.5 0 4 1.3 4 3s-1.5 3-4 3M15 13c3 0 4.5 1.4 4.5 3s-1.5 3-4.5 3" />
+    </svg>
+  ),
+} as const;
 
 export default function Home() {
   return (
@@ -109,9 +172,60 @@ export default function Home() {
           A learning companion for Gurbani.
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-slate-600">
-          Read, search, study, and learn to read Gurbani, all in one calm space.
+          Read Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji, build your
+          Gurbani vocabulary, quiz yourself bani by bani, and learn Santhiya — all in one
+          calm Sangat space.
         </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      </section>
+
+      {/* Tools — front and centre, right under the hero so Sangat see immediately what's on offer */}
+      <section className="mx-auto max-w-6xl px-6 pb-12">
+        {/* Featured pair: Vocabulary Builder + Quiz */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {TILES.filter((t) => t.badge).map((t) => (
+            <TileCard key={t.href} tile={t} featured />
+          ))}
+        </div>
+
+        {/* Standard tools */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {TILES.filter((t) => !t.badge).map((t) => (
+            <TileCard key={t.href} tile={t} />
+          ))}
+        </div>
+
+        {/* Subtle Santhiya callout */}
+        <Link
+          href="/santhiya"
+          className="mt-4 flex flex-col items-start justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 transition hover:border-emerald-300 sm:flex-row sm:items-center"
+        >
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
+              Practice with a teacher
+            </p>
+            <h3 className="mt-1 text-base font-semibold text-slate-900">
+              Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji
+            </h3>
+          </div>
+          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white">
+            How to join <span aria-hidden>→</span>
+          </span>
+        </Link>
+      </section>
+
+      {/* Install / iPhone app CTA (moved below tools — Sangat see what we offer before the install pitch) */}
+      <section className="mx-auto max-w-3xl px-6 pb-14 text-center">
+        <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
+          Take it with you
+        </p>
+        <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+          Install Gurbani Tutor on your device.
+        </h2>
+        <p className="mt-3 text-sm leading-7 text-slate-600">
+          Use it offline on Android, desktop, or iPhone as an installable web app, or get
+          the native iPhone beta.
+        </p>
+        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="https://testflight.apple.com/join/8HEDEXYY"
             target="_blank"
@@ -122,13 +236,9 @@ export default function Home() {
           </a>
           <InstallWebAppButton />
         </div>
-        <p className="mt-3 text-xs text-slate-500">
-          iPhone app on TestFlight, coming soon to the App Store. Or install the web app on
-          Android, desktop, or even iPhone for an offline, app-like experience.
-        </p>
       </section>
 
-      {/* iPhone-only features */}
+      {/* iPhone-only features (deeper pitch for the curious) */}
       <section className="mx-auto max-w-5xl px-6 pb-14">
         <div className="rounded-3xl border border-amber-200 bg-amber-50/60 p-6 shadow-sm sm:p-8">
           <p className="text-center text-xs font-semibold uppercase tracking-wider text-amber-800">
@@ -185,53 +295,6 @@ export default function Home() {
         </figure>
       </section>
 
-      {/* Quick links */}
-      <section className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {TILES.map((t, i) => (
-            <Link
-              key={t.href}
-              href={t.href}
-              className={`group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md ${
-                i === 0 ? "sm:col-span-2 border-amber-200 bg-amber-50/40" : ""
-              }`}
-            >
-              <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                {t.eyebrow}
-              </p>
-              <h2 className="mt-2 text-xl font-semibold text-slate-900">
-                {t.title}
-                <span
-                  aria-hidden
-                  className="ml-2 inline-block text-amber-600 transition group-hover:translate-x-0.5"
-                >
-                  →
-                </span>
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-700">{t.body}</p>
-            </Link>
-          ))}
-        </div>
-
-        {/* Subtle Santhiya callout */}
-        <Link
-          href="/santhiya"
-          className="mt-4 flex flex-col items-start justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 transition hover:border-emerald-300 sm:flex-row sm:items-center"
-        >
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
-              Practice with a teacher
-            </p>
-            <h3 className="mt-1 text-base font-semibold text-slate-900">
-              Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji
-            </h3>
-          </div>
-          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white">
-            How to join <span aria-hidden>→</span>
-          </span>
-        </Link>
-      </section>
-
       {/* About */}
       <section id="about" className="mx-auto max-w-3xl px-6 pb-16 text-center">
         <h2 className="text-xl font-semibold tracking-tight text-slate-900">
@@ -286,5 +349,67 @@ function FeatureCard({
       <h3 className="mt-2 text-base font-semibold text-slate-900">{title}</h3>
       <p className="mt-1 text-sm leading-6 text-slate-700">{body}</p>
     </div>
+  );
+}
+
+function TileCard({ tile, featured = false }: { tile: Tile; featured?: boolean }) {
+  const Icon = TILE_ICONS[tile.icon];
+  // Featured tiles (Vocab Builder + Quiz) get heavier visual treatment — amber tint
+  // for "unique", emerald for "learning" — to anchor them as the site's marquee tools.
+  const accent = tile.badge === "unique"
+    ? "border-amber-300 bg-amber-50/60 hover:border-amber-400"
+    : tile.badge === "learning"
+      ? "border-emerald-300 bg-emerald-50/60 hover:border-emerald-400"
+      : "border-slate-200 bg-white hover:border-amber-300";
+  const iconBg = tile.badge === "unique"
+    ? "bg-amber-100 text-amber-700"
+    : tile.badge === "learning"
+      ? "bg-emerald-100 text-emerald-700"
+      : "bg-slate-100 text-amber-700";
+  const badgeLabel = tile.badge === "unique"
+    ? "Unique to Gurbani Tutor"
+    : tile.badge === "learning"
+      ? "Learning platform"
+      : null;
+  const badgeColor = tile.badge === "unique"
+    ? "bg-amber-600 text-white"
+    : "bg-emerald-600 text-white";
+  return (
+    <Link
+      href={tile.href}
+      className={`group flex flex-col rounded-2xl border p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-6 ${accent}`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <span
+          className={`flex h-12 w-12 flex-none items-center justify-center rounded-xl ${iconBg}`}
+        >
+          <span className="block h-6 w-6">{Icon}</span>
+        </span>
+        {badgeLabel && (
+          <span
+            className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${badgeColor}`}
+          >
+            {badgeLabel}
+          </span>
+        )}
+      </div>
+      <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-amber-700">
+        {tile.eyebrow}
+      </p>
+      <h3
+        className={`mt-1 font-semibold text-slate-900 ${
+          featured ? "text-xl sm:text-2xl" : "text-lg"
+        }`}
+      >
+        {tile.title}
+        <span
+          aria-hidden
+          className="ml-2 inline-block text-amber-600 transition group-hover:translate-x-0.5"
+        >
+          →
+        </span>
+      </h3>
+      <p className="mt-2 text-sm leading-6 text-slate-700">{tile.body}</p>
+    </Link>
   );
 }
