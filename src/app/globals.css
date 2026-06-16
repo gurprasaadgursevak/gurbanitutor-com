@@ -18,6 +18,16 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* When installed as a PWA, respect the iOS notch / Dynamic Island and the
+   home-indicator zone so headers and footers don't sit awkwardly under the
+   status bar or above the bottom edge. */
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 /* Keep inputs readable regardless of OS theme or Tailwind defaults. */
 input,
 textarea,
