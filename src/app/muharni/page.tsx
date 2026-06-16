@@ -112,6 +112,14 @@ export default function MuharniPage() {
               The full Muharni chart of consonants with each vowel, with a video walk-through
               from Gurprasaad Gursevak.
             </p>
+            <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
+              <iframe
+                src="/santhiya101/muharni.pdf#view=FitH&toolbar=0&navpanes=0"
+                title="Muharni Primer preview"
+                loading="lazy"
+                className="h-[60vh] w-full sm:h-[70vh]"
+              />
+            </div>
             <div className="mt-3 flex flex-wrap gap-2">
               <a
                 href="/santhiya101/muharni.pdf"
@@ -150,6 +158,14 @@ export default function MuharniPage() {
             <h3 className="mt-1 text-lg font-semibold text-slate-900">
               Balupdesh · Reading lessons for new students
             </h3>
+            <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
+              <iframe
+                src="/pothi/balupdesh.pdf#view=FitH&toolbar=0&navpanes=0"
+                title="Balupdesh preview"
+                loading="lazy"
+                className="h-[60vh] w-full sm:h-[70vh]"
+              />
+            </div>
             <div className="mt-3 flex flex-wrap gap-2">
               <a
                 href="/pothi/balupdesh.pdf"
