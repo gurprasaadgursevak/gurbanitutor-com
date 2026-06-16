@@ -155,11 +155,11 @@ export default function AboutPage() {
             bani.
           </p>
           <p className="mt-4 leading-7 text-slate-700">
-            On <span className="font-semibold">iPhone</span>, the same Vocabulary lets you{" "}
+            On <span className="font-semibold">iPhone</span>, the same vocabulary lets you{" "}
             <span className="font-semibold">star words</span>,{" "}
             <span className="font-semibold">pin Gurbani lines</span> for review,{" "}
             <span className="font-semibold">scribe notes</span> on any verse, and watch your
-            daily Nitnem, Simran, and Abhiyas progress in three concentric rings. The Quiz
+            daily Nitnem, Simran, and Abhiyas progress in three concentric rings. The quiz
             tracks your best streak across sessions.
           </p>
         </section>

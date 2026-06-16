@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import InstallWebAppButton from "./InstallWebAppButton";
+import MobileNav from "./MobileNav";
 import SocialLinks from "./SocialLinks";
 
 type TileBadge = "unique" | "learning";
@@ -27,7 +28,7 @@ const TILES: Tile[] = [
     href: "/quiz",
     eyebrow: "Learn Gurmat by doing",
     title: "Gurbani Quiz",
-    body: "Bani-by-bani quizzes drawn from the Vocabulary. Sri Japji, Sri Jaap, Sri Sukhmani Sahib, and more. Daily quiz + streak tracking — Sangat worldwide on the same set.",
+    body: "Bani-by-bani quizzes drawn from the vocabulary. Sri Japji, Sri Jaap, Sri Sukhmani Sahib, and more. Daily quiz plus streak tracking, Sangat worldwide on the same set.",
     icon: "quiz",
     badge: "learning",
   },
@@ -128,6 +129,7 @@ export default function Home() {
           <Link href="/" className="font-semibold tracking-tight text-amber-700">
             Gurbani Tutor
           </Link>
+          <MobileNav />
           <nav className="hidden items-center gap-4 text-sm font-medium text-slate-600 sm:flex">
             <Link href="/search" className="font-semibold text-slate-900 hover:text-amber-700">Gurbani Search</Link>
             <Link href="/arths" className="font-semibold text-amber-700 hover:text-amber-900">Arths · Vocab</Link>
@@ -266,7 +268,7 @@ export default function Home() {
             <FeatureCard
               icon="✓"
               title="Bani Quizzes with Streaks"
-              body="Same Vocabulary, same Nitnem quizzes you see here, plus Favourites and persistent best-streak tracking."
+              body="Same vocabulary, same Nitnem quizzes you see here, plus favourites and persistent best-streak tracking."
             />
           </div>
           <p className="mt-8 text-center text-sm text-slate-700">

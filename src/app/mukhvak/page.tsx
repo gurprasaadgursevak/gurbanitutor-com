@@ -275,7 +275,7 @@ export default function MukhvakPage() {
               </span>
             </h3>
             <p className="mt-2 text-sm leading-6 text-slate-700">
-              Sri Sukhmani Sahib Ji, Bhagat Kabir Sahib Ji&apos;s Sloaks, and more, to read or
+              Sri Sukhmani Sahib Ji, Bhagat Kabir Sahib Ji&apos;s sloaks, and more, to read or
               download.
             </p>
           </Link>

@@ -616,7 +616,7 @@ export default function QuizPage() {
   const DAILY_BANI: BaniDef = {
     id: DAILY_BANI_ID,
     name: "Daily Gurbani Quiz",
-    subtitle: "10 curated words from across the Gurbani Vocabulary.",
+    subtitle: "10 curated words from across the Gurbani vocabulary.",
   };
   const activeBani =
     activeBaniId === DAILY_BANI_ID
@@ -766,7 +766,7 @@ export default function QuizPage() {
 
             {loading && (
               <p className="mt-8 text-center text-slate-600">
-                Aligning the Vocabulary with each bani&apos;s lines…
+                Aligning the vocabulary with each bani&apos;s lines…
               </p>
             )}
 
@@ -847,15 +847,15 @@ export default function QuizPage() {
 
                   {!anyNitnemSection && !sukhmaniReady && (
                     <p className="mt-10 rounded-2xl border border-slate-200 bg-white p-5 text-center text-sm text-slate-600">
-                      No bani quizzes have enough vocabulary yet. Check back as the Vocabulary
+                      No bani quizzes have enough vocabulary yet. Check back as the vocabulary
                       grows.
                     </p>
                   )}
 
                   <p className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
-                    <span className="font-semibold">Want more from the same Vocabulary?</span>{" "}
+                    <span className="font-semibold">Want more from the same vocabulary?</span>{" "}
                     Install the Gurbani Tutor iPhone app to{" "}
-                    <span className="font-semibold">star words</span>, build a Favourites
+                    <span className="font-semibold">star words</span>, build a favourites
                     pool, and track streaks across sessions.
                   </p>
                 </>
@@ -1017,7 +1017,7 @@ function DailyQuizCard({
         10 questions, same for everyone.
       </h2>
       <p className="mt-2 text-sm leading-6 text-slate-700">
-        One curated quiz a day from across the Gurbani Vocabulary. Take it once to keep the
+        One curated quiz a day from across the Gurbani vocabulary. Take it once to keep the
         streak alive.
       </p>
 

@@ -239,6 +239,9 @@ function GranthReader() {
   const [showExtendedUcharan, setShowExtendedUcharan] = useState(false);
 
   const [highlightLine, setHighlightLine] = useState<string | null>(null);
+  // Reader font scale (5 steps). 0 = smallest, 2 = default, 4 = largest.
+  const [fontScaleIdx, setFontScaleIdx] = useState(2);
+  const fontScale = [0.875, 1.0, 1.125, 1.25, 1.4][fontScaleIdx] ?? 1.0;
   // Bani reading mode: when set, the reader shows the full bani text instead
   // of an Ang slice. Raw TSV rows are needed because banis are defined by
   // (1-based) row indices, not Ang numbers.
@@ -345,6 +348,22 @@ function GranthReader() {
     } catch {}
   }, [granth]);
 
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("granth_font_scale_idx");
+      if (saved !== null) {
+        const n = parseInt(saved, 10);
+        if (!Number.isNaN(n) && n >= 0 && n <= 4) setFontScaleIdx(n);
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("granth_font_scale_idx", String(fontScaleIdx));
+    } catch {}
+  }, [fontScaleIdx]);
+
   const selectedBani = useMemo(
     () => (selectedBaniId ? BANI_LIST.find((b) => b.id === selectedBaniId) ?? null : null),
     [selectedBaniId]
@@ -389,7 +408,7 @@ function GranthReader() {
           </h1>
           <p className="mt-2 max-w-3xl text-slate-700">
             Choose a Granth and an Ang, or jump straight into a Nitnem bani from the right.
-            Full Gurmukhi text appears below, with optional ਅਰਥ, English Steeks, and ucharan
+            Full Gurmukhi text appears below, with optional ਅਰਥ, English steeks, and ucharan
             tips.
           </p>
         </div>
