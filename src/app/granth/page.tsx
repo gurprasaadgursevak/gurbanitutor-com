@@ -233,8 +233,8 @@ function GranthReader() {
   const [angInput, setAngInput] = useState("1");
 
   const [showArth, setShowArth] = useState(true);
-  const [showSteek1, setShowSteek1] = useState(false);
-  const [showSteek2, setShowSteek2] = useState(false);
+  const [showSteek1, setShowSteek1] = useState(true);
+  const [showSteek2, setShowSteek2] = useState(true);
   const [showUcharan, setShowUcharan] = useState(false);
   const [showExtendedUcharan, setShowExtendedUcharan] = useState(false);
 
