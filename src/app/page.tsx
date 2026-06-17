@@ -3,6 +3,7 @@ import Link from "next/link";
 import InstallWebAppButton from "./InstallWebAppButton";
 import MobileNav from "./MobileNav";
 import SocialLinks from "./SocialLinks";
+import TodayShabad from "./TodayShabad";
 
 type TileBadge = "unique" | "learning";
 
@@ -198,10 +199,13 @@ export default function Home() {
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-slate-600">
           Read Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji, build your
-          Gurbani vocabulary, quiz yourself bani by bani, and learn Santhiya — all in one
+          Gurbani vocabulary, quiz yourself bani by bani, and learn Santhiya, all in one
           calm Sangat space.
         </p>
       </section>
+
+      {/* Today's Shabad — featured at the top so daily visitors see it first */}
+      <TodayShabad />
 
       {/* Tools — front and centre, right under the hero so Sangat see immediately what's on offer */}
       <section className="mx-auto max-w-6xl px-6 pb-12">
