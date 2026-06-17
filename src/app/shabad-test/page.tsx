@@ -7,38 +7,41 @@ import SocialLinks from "../SocialLinks";
 
 type Shabad = {
   id: string;
-  title: string;
-  subtitle?: string;
+  marker: string;
   gurmukhi: string;
 };
 
-// Placeholder list. Replace with the full shabad set when ready.
-const SHABADS: Shabad[] = [
-  {
-    id: "mool-mantar",
-    title: "Mool Mantar",
-    subtitle: "Sri Guru Granth Sahib Ji, Ang 1",
-    gurmukhi:
-      "ੴ ਸਤਿ ਨਾਮੁ ਕਰਤਾ ਪੁਰਖੁ ਨਿਰਭਉ ਨਿਰਵੈਰੁ ਅਕਾਲ ਮੂਰਤਿ ਅਜੂਨੀ ਸੈਭੰ ਗੁਰ ਪ੍ਰਸਾਦਿ ॥",
-  },
-];
-
 type Phase = "select" | "study" | "test" | "result";
 
-// Normalize internal whitespace runs to a single space and trim ends so a
-// learner isn't penalized for an extra space between words, but every other
-// character (matras, half-letters, dandis, nuktas) must match exactly.
-function normalize(s: string): string {
+// Default-mode normalization: strip everything except Gurmukhi letters,
+// matras, and digits. Spaces and punctuation (including ॥, ;, :, , .)
+// are forgiven by default, so learners aren't penalized for typing rhythm.
+function normalizeLoose(s: string): string {
+  return s
+    .normalize("NFC")
+    .replace(/[^਀-੿ੴ]/g, "");
+}
+
+// Strict-mode normalization: collapse whitespace runs to a single space and
+// trim, but every printable character including punctuation must match.
+function normalizeStrict(s: string): string {
   return s.replace(/\s+/g, " ").trim();
 }
 
-type CharStatus = "ok" | "wrong" | "missing" | "extra";
+function normalize(s: string, strict: boolean): string {
+  return strict ? normalizeStrict(s) : normalizeLoose(s);
+}
 
+type CharStatus = "ok" | "wrong" | "missing" | "extra";
 type DiffChar = { ch: string; status: CharStatus };
 
-function diff(reference: string, attempt: string): { chars: DiffChar[]; allCorrect: boolean } {
-  const ref = normalize(reference);
-  const usr = normalize(attempt);
+function diff(
+  reference: string,
+  attempt: string,
+  strict: boolean
+): { chars: DiffChar[]; allCorrect: boolean } {
+  const ref = normalize(reference, strict);
+  const usr = normalize(attempt, strict);
   const max = Math.max(ref.length, usr.length);
   const chars: DiffChar[] = [];
   let allCorrect = ref.length === usr.length;
@@ -61,24 +64,78 @@ function diff(reference: string, attempt: string): { chars: DiffChar[]; allCorre
   return { chars, allCorrect };
 }
 
+function parseTSV(text: string): Shabad[] {
+  const lines = text.split("\n");
+  const out: Shabad[] = [];
+  // Header row at index 0; skip it.
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim()) continue;
+    const cols = line.split("\t");
+    if (cols.length < 2) continue;
+    const marker = (cols[0] || "").trim();
+    const gurmukhi = (cols[1] || "").trim();
+    if (!gurmukhi) continue;
+    out.push({ id: `gareebi-${i}`, marker, gurmukhi });
+  }
+  return out;
+}
+
 export default function ShabadTestPage() {
+  const [shabads, setShabads] = useState<Shabad[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
   const [phase, setPhase] = useState<Phase>("select");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [attempt, setAttempt] = useState("");
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const [strictPunct, setStrictPunct] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
+  // Load the Gareebi Pothi shabad bank at mount.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/gareebi-pothi-shabads.tsv");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        if (cancelled) return;
+        setShabads(parseTSV(text));
+        setLoading(false);
+      } catch (err) {
+        if (cancelled) return;
+        setLoadError(err instanceof Error ? err.message : String(err));
+        setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const selected = useMemo(
-    () => SHABADS.find((s) => s.id === selectedId) ?? null,
-    [selectedId]
+    () => shabads.find((s) => s.id === selectedId) ?? null,
+    [shabads, selectedId]
   );
+
+  const filteredShabads = useMemo(() => {
+    const q = searchQuery.trim();
+    if (!q) return shabads;
+    return shabads.filter(
+      (s) => s.gurmukhi.includes(q) || s.marker.includes(q)
+    );
+  }, [shabads, searchQuery]);
+
+  const endsWithDandi = useMemo(() => /॥\s*$/.test(attempt.trim()), [attempt]);
 
   const diffResult = useMemo(() => {
     if (!selected || phase !== "result") return null;
-    return diff(selected.gurmukhi, attempt);
-  }, [selected, attempt, phase]);
+    return diff(selected.gurmukhi, attempt, strictPunct);
+  }, [selected, attempt, phase, strictPunct]);
 
-  // When the user lands on the "test" phase, focus the textarea.
   useEffect(() => {
     if (phase === "test") {
       const t = setTimeout(() => textareaRef.current?.focus(), 50);
@@ -182,31 +239,70 @@ export default function ShabadTestPage() {
               Pick a shabad to memorize.
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-7 text-slate-700">
-              Read the shabad until you have it by heart, then type it out
-              exactly, matras and all. Pass only when every character matches.
+              {shabads.length > 0 ? `${shabads.length} ` : ""}shabads from Gareebi Pothi.
+              Read one, then type it from memory. Pass at 100% accuracy on the letters
+              and matras. Spaces and punctuation are forgiven by default, but every
+              shabad must end with ॥.
             </p>
 
-            <ul className="mt-8 space-y-3">
-              {SHABADS.map((s) => (
-                <li key={s.id}>
-                  <button
-                    type="button"
-                    onClick={() => pickShabad(s.id)}
-                    className="flex w-full items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-white px-5 py-4 text-left shadow-sm transition hover:border-amber-400"
-                  >
-                    <span>
-                      <span className="block text-base font-semibold text-slate-900">
-                        {s.title}
-                      </span>
-                      {s.subtitle && (
-                        <span className="block text-xs text-slate-600">{s.subtitle}</span>
-                      )}
-                    </span>
-                    <span className="text-amber-700" aria-hidden>→</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
+            {loading && (
+              <p className="mt-8 text-center text-slate-600">Loading shabads...</p>
+            )}
+            {loadError && (
+              <p className="mt-8 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+                Could not load shabad bank: {loadError}
+              </p>
+            )}
+
+            {!loading && !loadError && (
+              <>
+                <div className="mt-6">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search by Gurmukhi text or marker..."
+                    lang="pa"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-100"
+                  />
+                  <p className="mt-2 text-xs text-slate-500">
+                    Showing {filteredShabads.length} of {shabads.length}
+                  </p>
+                </div>
+
+                <ul className="mt-4 max-h-[60vh] space-y-2 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
+                  {filteredShabads.map((s) => (
+                    <li key={s.id}>
+                      <button
+                        type="button"
+                        onClick={() => pickShabad(s.id)}
+                        className="flex w-full items-center justify-between gap-3 rounded-xl px-4 py-3 text-left transition hover:bg-amber-50"
+                      >
+                        <span className="flex-1">
+                          <span className="block text-xs font-semibold uppercase tracking-wider text-amber-700">
+                            #{s.marker}
+                          </span>
+                          <span
+                            lang="pa"
+                            className="mt-1 block truncate text-base text-slate-900"
+                          >
+                            {s.gurmukhi}
+                          </span>
+                        </span>
+                        <span className="text-amber-700" aria-hidden>
+                          →
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                  {filteredShabads.length === 0 && (
+                    <li className="px-4 py-6 text-center text-sm text-slate-500">
+                      No shabads match your search.
+                    </li>
+                  )}
+                </ul>
+              </>
+            )}
           </section>
         )}
 
@@ -220,15 +316,9 @@ export default function ShabadTestPage() {
               ← All shabads
             </button>
             <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-amber-700">
-              Study
+              Study · #{selected.marker}
             </p>
-            <h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-              {selected.title}
-            </h1>
-            {selected.subtitle && (
-              <p className="mt-1 text-sm text-slate-600">{selected.subtitle}</p>
-            )}
-            <div className="mt-6 rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
+            <div className="mt-3 rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
               <p
                 lang="pa"
                 className="whitespace-pre-wrap text-2xl leading-relaxed text-slate-900 sm:text-3xl"
@@ -238,8 +328,27 @@ export default function ShabadTestPage() {
             </div>
             <p className="mt-4 text-sm text-slate-700">
               When you can recite it from memory, begin the test. The shabad
-              will disappear — type it out and submit. Pass only at 100%.
+              will disappear. Type it out and submit. Every shabad must end with{" "}
+              <span lang="pa" className="font-semibold">
+                ॥
+              </span>
+              .
             </p>
+
+            <label className="mt-4 flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700">
+              <input
+                type="checkbox"
+                checked={strictPunct}
+                onChange={(e) => setStrictPunct(e.target.checked)}
+                className="h-4 w-4"
+              />
+              <span>
+                <span className="font-semibold">Strict punctuation</span> (bonus): include
+                every <span lang="pa">॥</span>, <span lang="pa">;</span>, <span lang="pa">.</span>{" "}
+                exactly. Off by default.
+              </span>
+            </label>
+
             <div className="mt-5 flex flex-wrap gap-3">
               <button
                 type="button"
@@ -262,13 +371,18 @@ export default function ShabadTestPage() {
         {phase === "test" && selected && (
           <section>
             <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-              Test
+              Test · #{selected.marker}
             </p>
-            <h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-              {selected.title}
-            </h1>
             <p className="mt-1 text-sm text-slate-600">
-              Type the shabad exactly. Every matra, nukta, and dandi counts.
+              Type the shabad from memory. Spaces and punctuation are forgiven{" "}
+              {strictPunct
+                ? "but you have Strict punctuation enabled, so every mark must match."
+                : "by default — focus on the letters and matras."}{" "}
+              End with{" "}
+              <span lang="pa" className="font-semibold">
+                ॥
+              </span>
+              .
             </p>
 
             <textarea
@@ -280,6 +394,16 @@ export default function ShabadTestPage() {
               rows={6}
               className="mt-5 w-full rounded-2xl border border-amber-200 bg-white p-4 text-xl leading-relaxed text-slate-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-100 sm:text-2xl"
             />
+
+            {attempt.trim().length > 0 && !endsWithDandi && (
+              <p className="mt-2 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+                Reminder: a shabad must end with{" "}
+                <span lang="pa" className="font-semibold">
+                  ॥
+                </span>
+                . Add it before you submit.
+              </p>
+            )}
 
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <button
@@ -321,16 +445,13 @@ export default function ShabadTestPage() {
         {phase === "result" && selected && diffResult && (
           <section>
             <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-              Result
+              Result · #{selected.marker}
             </p>
-            <h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-              {selected.title}
-            </h1>
 
             {diffResult.allCorrect ? (
               <div className="mt-5 rounded-2xl border border-emerald-300 bg-emerald-50 p-5">
                 <p className="text-base font-semibold text-emerald-900">
-                  Pass · every character matched.
+                  Pass · every {strictPunct ? "character" : "letter"} matched.
                 </p>
                 <p className="mt-1 text-sm text-emerald-800">
                   Dhan Guru, dhan Sangat. You have this shabad by heart.
@@ -340,6 +461,9 @@ export default function ShabadTestPage() {
               <div className="mt-5 rounded-2xl border border-red-300 bg-red-50 p-5">
                 <p className="text-base font-semibold text-red-900">
                   Not quite. Check the mistakes below and try again.
+                </p>
+                <p className="mt-1 text-xs text-red-700">
+                  Mode: {strictPunct ? "Strict punctuation" : "Letters only"}
                 </p>
               </div>
             )}
@@ -360,7 +484,7 @@ export default function ShabadTestPage() {
                           : "bg-red-100 text-red-800 line-through decoration-red-500";
                   return (
                     <span key={i} className={cls}>
-                      {c.ch === " " ? " " : c.ch}
+                      {c.ch === " " ? " " : c.ch}
                     </span>
                   );
                 })}

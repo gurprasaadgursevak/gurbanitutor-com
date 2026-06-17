@@ -63,6 +63,13 @@ const TILES: Tile[] = [
     icon: "search",
   },
   {
+    href: "/gareebi-pothi",
+    eyebrow: "Read with arth",
+    title: "Gareebi Pothi",
+    body: "313 hand-picked Gurbani entries on Gareebi, the cornerstone of Sikh humility, with the full Punjabi vyakhya from Sri Damdami Taksal.",
+    icon: "book",
+  },
+  {
     href: "/pothi",
     eyebrow: "Read online or download",
     title: "Sri Pothi Sahib library",

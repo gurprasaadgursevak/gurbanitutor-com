@@ -16,6 +16,7 @@ const LINKS: NavLink[] = [
   { href: "/shabad-test", label: "Shabad Test" },
   { href: "/granth", label: "Read Gurbani" },
   { href: "/mukhvak", label: "Sri Mukhvak" },
+  { href: "/gareebi-pothi", label: "Gareebi Pothi" },
   { href: "/pothi", label: "Pothi Sahib" },
   { href: "/about", label: "About" },
   { href: "/santhiya", label: "Santhiya Classes", accent: "emerald" },

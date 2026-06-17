@@ -15,7 +15,18 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Latin glyphs render in Arial/Helvetica; Gurmukhi glyphs fall through to
+     Noto Sans Gurmukhi automatically (same font the iOS app bundles). */
+  font-family: Arial, Helvetica, var(--font-noto-gurmukhi), "Noto Sans Gurmukhi",
+    sans-serif;
+}
+
+/* Explicit Gurmukhi font for any element marked with lang="pa" — forces the
+   font even if a parent has overridden it. */
+[lang="pa"],
+[lang="pa"] * {
+  font-family: var(--font-noto-gurmukhi), "Noto Sans Gurmukhi", "Gurbani Akhar",
+    Arial, sans-serif;
 }
 
 /* When installed as a PWA, respect the iOS notch / Dynamic Island and the
