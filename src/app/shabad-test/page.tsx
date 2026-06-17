@@ -169,7 +169,9 @@ export default function ShabadTestPage() {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch("/gareebi-pothi-shabads.tsv");
+        const res = await fetch("/gareebi-pothi-shabads.tsv?v=3", {
+          cache: "no-cache",
+        });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const text = await res.text();
         if (cancelled) return;
