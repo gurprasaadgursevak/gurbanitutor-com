@@ -493,12 +493,16 @@ export default function ShabadTestPage() {
               Type the shabad from memory. Spaces and punctuation are forgiven{" "}
               {strictPunct
                 ? "but you have Strict punctuation enabled, so every mark must match."
-                : "by default — focus on the letters and matras."}{" "}
+                : "by default, focus on the letters and matras."}{" "}
               End with{" "}
               <span lang="pa" className="font-semibold">
                 ॥
               </span>
               .
+            </p>
+            <p className="mt-1 text-xs text-slate-500">
+              Use the on-screen Gurmukhi keyboard below, or tap the box to type
+              with your device's own keyboard, your choice.
             </p>
 
             <textarea
