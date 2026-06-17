@@ -66,7 +66,7 @@ const TILES: Tile[] = [
     href: "/gareebi-pothi",
     eyebrow: "Read with arth",
     title: "Gareebi Pothi",
-    body: "313 hand-picked Gurbani entries on Gareebi, the cornerstone of Sikh humility, with the full Punjabi vyakhya from Sri Damdami Taksal.",
+    body: "313 hand-picked Gurbani entries on Gareebi, the cornerstone of Sikh humility, with the full Punjabi vyakhya.",
     icon: "book",
   },
   {

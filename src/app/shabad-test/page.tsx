@@ -32,36 +32,106 @@ function normalize(s: string, strict: boolean): string {
   return strict ? normalizeStrict(s) : normalizeLoose(s);
 }
 
+type WordStatus = "ok" | "wrong" | "missing" | "extra";
 type CharStatus = "ok" | "wrong" | "missing" | "extra";
 type DiffChar = { ch: string; status: CharStatus };
+type DiffWord = {
+  expected: string; // original Gurmukhi word from the shabad
+  actual: string;   // what the user typed at this position (may be "")
+  status: WordStatus;
+  chars: DiffChar[]; // character-level (matra-level) diff inside the word
+};
+
+// Split a shabad/attempt into "words" — runs of non-whitespace, non-dandi
+// characters. Whitespace and dandis (॥) are separators only; punctuation
+// like ; , . stays attached to its word so the strict mode can compare it.
+function tokenize(s: string): string[] {
+  return s.split(/[\s॥]+/u).filter((w) => w.length > 0);
+}
 
 function diff(
   reference: string,
   attempt: string,
   strict: boolean
-): { chars: DiffChar[]; allCorrect: boolean } {
+): { words: DiffWord[]; allCorrect: boolean; charsAlongside: DiffChar[] } {
+  const refWords = tokenize(reference);
+  const usrWords = tokenize(attempt);
+  const max = Math.max(refWords.length, usrWords.length);
+  const words: DiffWord[] = [];
+  let allCorrect = refWords.length === usrWords.length;
+
+  for (let i = 0; i < max; i++) {
+    const r = refWords[i];
+    const u = usrWords[i];
+    if (r === undefined) {
+      words.push({
+        expected: "",
+        actual: u ?? "",
+        status: "extra",
+        chars: (u ?? "").split("").map((ch) => ({ ch, status: "extra" as CharStatus })),
+      });
+      allCorrect = false;
+      continue;
+    }
+    if (u === undefined) {
+      words.push({
+        expected: r,
+        actual: "",
+        status: "missing",
+        chars: r.split("").map((ch) => ({ ch, status: "missing" as CharStatus })),
+      });
+      allCorrect = false;
+      continue;
+    }
+    const rNorm = normalize(r, strict);
+    const uNorm = normalize(u, strict);
+    const ok = rNorm === uNorm;
+    if (!ok) allCorrect = false;
+    // Build matra-level char diff between the original-cased r and u so the
+    // user can see which lag is wrong.
+    const charsLen = Math.max(r.length, u.length);
+    const chars: DiffChar[] = [];
+    for (let j = 0; j < charsLen; j++) {
+      const cr = r[j];
+      const cu = u[j];
+      if (cr === undefined) chars.push({ ch: cu, status: "extra" });
+      else if (cu === undefined) chars.push({ ch: cr, status: "missing" });
+      else if (cr === cu) chars.push({ ch: cr, status: "ok" });
+      else chars.push({ ch: cr, status: "wrong" });
+    }
+    words.push({ expected: r, actual: u, status: ok ? "ok" : "wrong", chars });
+  }
+
+  // Also build a flat char-diff over the normalized reference so the
+  // legend/overview can show overall char accuracy if we ever want it.
   const ref = normalize(reference, strict);
   const usr = normalize(attempt, strict);
-  const max = Math.max(ref.length, usr.length);
-  const chars: DiffChar[] = [];
-  let allCorrect = ref.length === usr.length;
-  for (let i = 0; i < max; i++) {
+  const charsAlongside: DiffChar[] = [];
+  const cmax = Math.max(ref.length, usr.length);
+  for (let i = 0; i < cmax; i++) {
     const r = ref[i];
     const u = usr[i];
-    if (r === undefined) {
-      chars.push({ ch: u, status: "extra" });
-      allCorrect = false;
-    } else if (u === undefined) {
-      chars.push({ ch: r, status: "missing" });
-      allCorrect = false;
-    } else if (r === u) {
-      chars.push({ ch: r, status: "ok" });
-    } else {
-      chars.push({ ch: r, status: "wrong" });
-      allCorrect = false;
-    }
+    if (r === undefined) charsAlongside.push({ ch: u, status: "extra" });
+    else if (u === undefined) charsAlongside.push({ ch: r, status: "missing" });
+    else if (r === u) charsAlongside.push({ ch: r, status: "ok" });
+    else charsAlongside.push({ ch: r, status: "wrong" });
   }
-  return { chars, allCorrect };
+
+  return { words, allCorrect, charsAlongside };
+}
+
+// Pick a "Shabad of the Day" deterministically from a list, rotating once
+// per local-calendar day. Same shabad for everyone on the same date.
+function dailyIndex(total: number): number {
+  if (total <= 0) return 0;
+  const now = new Date();
+  const dayStamp = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
+  let h = 2166136261;
+  for (let i = 0; i < dayStamp.length; i++) {
+    h ^= dayStamp.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return Math.abs(h) % total;
 }
 
 function parseTSV(text: string): Shabad[] {
@@ -128,6 +198,11 @@ export default function ShabadTestPage() {
       (s) => s.gurmukhi.includes(q) || s.marker.includes(q)
     );
   }, [shabads, searchQuery]);
+
+  const dailyShabad = useMemo(() => {
+    if (shabads.length === 0) return null;
+    return shabads[dailyIndex(shabads.length)] ?? null;
+  }, [shabads]);
 
   const endsWithDandi = useMemo(() => /॥\s*$/.test(attempt.trim()), [attempt]);
 
@@ -256,6 +331,27 @@ export default function ShabadTestPage() {
 
             {!loading && !loadError && (
               <>
+                {dailyShabad && (
+                  <div className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 p-5 shadow-sm">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-amber-800">
+                      Today's Shabad · #{dailyShabad.marker}
+                    </p>
+                    <p
+                      lang="pa"
+                      className="mt-2 text-lg leading-relaxed text-slate-900"
+                    >
+                      {dailyShabad.gurmukhi}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => pickShabad(dailyShabad.id)}
+                      className="mt-3 inline-flex items-center justify-center rounded-full bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+                    >
+                      Memorize today's shabad
+                    </button>
+                  </div>
+                )}
+
                 <div className="mt-6">
                   <input
                     type="text"
@@ -458,33 +554,99 @@ export default function ShabadTestPage() {
                 </p>
               </div>
             ) : (
-              <div className="mt-5 rounded-2xl border border-red-300 bg-red-50 p-5">
-                <p className="text-base font-semibold text-red-900">
-                  Not quite. Check the mistakes below and try again.
+              <div className="mt-5 rounded-2xl border border-amber-300 bg-amber-50 p-5">
+                <p className="text-base font-semibold text-amber-900">
+                  Close, but not yet. Look at the words below and try once more.
                 </p>
-                <p className="mt-1 text-xs text-red-700">
+                <p className="mt-1 text-sm text-amber-800">
+                  Bhul-chuk maaf — every gursikh stumbles before the words settle in
+                  the heart. Studying daily and retrying is how it sticks. Take a
+                  breath, re-read the shabad, and try again.
+                </p>
+                <p className="mt-2 text-xs text-amber-700">
                   Mode: {strictPunct ? "Strict punctuation" : "Letters only"}
                 </p>
               </div>
             )}
 
+            {(() => {
+              const wrongWords = diffResult.words.filter((w) => w.status !== "ok");
+              if (wrongWords.length === 0) return null;
+              return (
+                <>
+                  <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Words you missed
+                  </p>
+                  <ul className="mt-2 space-y-2">
+                    {wrongWords.map((w, i) => (
+                      <li
+                        key={i}
+                        className="rounded-xl border border-amber-200 bg-white p-4 shadow-sm"
+                      >
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+                          <span className="text-slate-500">Expected:</span>
+                          <span
+                            lang="pa"
+                            className="text-lg font-semibold text-emerald-800"
+                          >
+                            {w.expected || "(nothing — extra word typed)"}
+                          </span>
+                        </div>
+                        <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+                          <span className="text-slate-500">You typed:</span>
+                          <span
+                            lang="pa"
+                            className="text-lg font-semibold text-red-700"
+                          >
+                            {w.actual || "(nothing — word missing)"}
+                          </span>
+                        </div>
+                        {w.expected && w.actual && (
+                          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+                            <span className="text-slate-500">Which lag was off:</span>
+                            <span lang="pa" className="text-xl">
+                              {w.chars.map((c, j) => {
+                                const cls =
+                                  c.status === "ok"
+                                    ? "text-slate-900"
+                                    : c.status === "wrong"
+                                      ? "bg-red-100 text-red-800 underline decoration-red-500 decoration-2 underline-offset-4"
+                                      : c.status === "missing"
+                                        ? "bg-amber-100 text-amber-800 underline decoration-amber-500 decoration-2 underline-offset-4"
+                                        : "bg-red-100 text-red-800 line-through decoration-red-500";
+                                return (
+                                  <span key={j} className={cls}>
+                                    {c.ch}
+                                  </span>
+                                );
+                              })}
+                            </span>
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              );
+            })()}
+
             <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-slate-500">
-              Reference, with your mistakes marked
+              Full shabad, word by word
             </p>
             <div className="mt-2 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p lang="pa" className="text-2xl leading-relaxed sm:text-3xl">
-                {diffResult.chars.map((c, i) => {
+              <p lang="pa" className="text-xl leading-relaxed sm:text-2xl">
+                {diffResult.words.map((w, i) => {
                   const cls =
-                    c.status === "ok"
+                    w.status === "ok"
                       ? "text-slate-900"
-                      : c.status === "wrong"
-                        ? "bg-red-100 text-red-800 underline decoration-red-500 decoration-2 underline-offset-4"
-                        : c.status === "missing"
-                          ? "bg-amber-100 text-amber-800 underline decoration-amber-500 decoration-2 underline-offset-4"
-                          : "bg-red-100 text-red-800 line-through decoration-red-500";
+                      : w.status === "wrong"
+                        ? "bg-red-100 text-red-800 px-1 rounded"
+                        : w.status === "missing"
+                          ? "bg-amber-100 text-amber-800 px-1 rounded"
+                          : "bg-red-100 text-red-800 line-through px-1 rounded";
                   return (
-                    <span key={i} className={cls}>
-                      {c.ch === " " ? " " : c.ch}
+                    <span key={i}>
+                      <span className={cls}>{w.expected || w.actual}</span>{" "}
                     </span>
                   );
                 })}
@@ -498,15 +660,15 @@ export default function ShabadTestPage() {
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="inline-block h-3 w-3 rounded-sm bg-red-200" />
-                Wrong character
+                Wrong word/lag
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="inline-block h-3 w-3 rounded-sm bg-amber-200" />
-                Missing character
+                Missing
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="inline-block h-3 w-3 rounded-sm bg-red-200 line-through" />
-                Extra character
+                Extra
               </span>
             </div>
 

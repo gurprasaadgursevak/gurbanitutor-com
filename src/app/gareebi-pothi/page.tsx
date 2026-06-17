@@ -88,15 +88,14 @@ export default function GareebiPothiPage() {
         {!selected && (
           <section>
             <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
-              Sri Dmdmi Taksal · Gareebi Pothi
+              Gareebi Pothi
             </p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
               Hand-picked Gurbani on Gareebi, with full vyakhya.
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-700">
-              {entries.length > 0 ? `${entries.length} ` : ""}entries from the Pothi, each
-              with shabad text in Gurmukhi and the original Punjabi exegesis. Tap a shabad to
-              read the full arth.
+              {entries.length > 0 ? `${entries.length} ` : ""}shabads, each with the full
+              Punjabi arth. Tap a shabad to read the full exegesis.
             </p>
 
             {loading && (
