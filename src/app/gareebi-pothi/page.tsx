@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import SocialLinks from "../SocialLinks";
+import { shabadHash } from "../lib/shabadHash";
 
 type Entry = {
   id: string;
@@ -29,6 +31,16 @@ function parseTSV(text: string): Entry[] {
 }
 
 export default function GareebiPothiPage() {
+  return (
+    <Suspense fallback={null}>
+      <GareebiPothiReader />
+    </Suspense>
+  );
+}
+
+function GareebiPothiReader() {
+  const searchParams = useSearchParams();
+  const linkedHash = searchParams.get("s");
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -58,6 +70,14 @@ export default function GareebiPothiPage() {
       cancelled = true;
     };
   }, []);
+
+  // Deep-link support: if `?s=<hash>` was passed, find the entry whose hashed
+  // shabad matches and auto-open it.
+  useEffect(() => {
+    if (!linkedHash || entries.length === 0 || selectedId) return;
+    const match = entries.find((e) => shabadHash(e.shabad) === linkedHash);
+    if (match) setSelectedId(match.id);
+  }, [linkedHash, entries, selectedId]);
 
   const filtered = useMemo(() => {
     const q = search.trim();
