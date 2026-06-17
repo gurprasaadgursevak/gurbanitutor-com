@@ -52,7 +52,7 @@ function GareebiPothiReader() {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch("/gareebi-pothi.tsv?v=4", {
+        const res = await fetch("/gareebi-pothi.tsv?v=5", {
           cache: "no-cache",
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

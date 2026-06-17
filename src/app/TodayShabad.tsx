@@ -43,7 +43,7 @@ export default function TodayShabad() {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch("/gareebi-pothi-shabads.tsv?v=4", {
+        const res = await fetch("/gareebi-pothi-shabads.tsv?v=5", {
           cache: "no-cache",
         });
         if (!res.ok) return;
