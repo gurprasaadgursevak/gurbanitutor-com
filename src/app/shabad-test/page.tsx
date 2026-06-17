@@ -159,7 +159,7 @@ export default function ShabadTestPage() {
   const [phase, setPhase] = useState<Phase>("select");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [attempt, setAttempt] = useState("");
-  const [showKeyboard, setShowKeyboard] = useState(false);
+  const [showKeyboard, setShowKeyboard] = useState(true);
   const [strictPunct, setStrictPunct] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -226,7 +226,7 @@ export default function ShabadTestPage() {
 
   function startTest() {
     setAttempt("");
-    setShowKeyboard(false);
+    setShowKeyboard(true);
     setPhase("test");
   }
 
@@ -236,7 +236,7 @@ export default function ShabadTestPage() {
 
   function retry() {
     setAttempt("");
-    setShowKeyboard(false);
+    setShowKeyboard(true);
     setPhase("test");
   }
 
@@ -313,11 +313,29 @@ export default function ShabadTestPage() {
             <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
               Pick a shabad to memorize.
             </h1>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-700">
-              {shabads.length > 0 ? `${shabads.length} ` : ""}shabads from Gareebi Pothi.
-              Read one, then type it from memory. Pass at 100% accuracy on the letters
-              and matras. Spaces and punctuation are forgiven by default, but every
-              shabad must end with ॥.
+            <div className="mt-4 max-w-2xl rounded-2xl border border-amber-200 bg-amber-50/60 p-5 text-base leading-7 text-slate-800">
+              <p className="font-semibold text-amber-900">
+                The easiest way to memorize a shabad
+              </p>
+              <ol className="mt-3 list-decimal space-y-1.5 pl-5">
+                <li>
+                  Sing the shabad with the sangat in Shudh Ucharan at least 101
+                  times — let your tongue learn the line before your mind does.
+                </li>
+                <li>
+                  As you sing, pay attention to every lag, sihari, and bihari so
+                  each matra settles where it belongs.
+                </li>
+                <li>
+                  When the shabad feels steady in your heart, come back here for
+                  the written test to confirm every letter and matra is right.
+                </li>
+              </ol>
+            </div>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
+              {shabads.length > 0 ? `${shabads.length} ` : ""}shabads to choose from,
+              selected from Gareebi Pothi Sahib. Spaces and punctuation are forgiven by
+              default; every shabad must end with ॥.
             </p>
 
             {loading && (
