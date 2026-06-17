@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import DesktopNav from "./DesktopNav";
 import InstallWebAppButton from "./InstallWebAppButton";
 import MobileNav from "./MobileNav";
 import SocialLinks from "./SocialLinks";
@@ -146,36 +147,18 @@ const TILE_ICONS = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-white text-slate-900">
-      {/* Header */}
-      <header className="border-b border-amber-100 bg-white/70 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="font-semibold tracking-tight text-amber-700">
+      {/* Header — folder tabs sit flush with the bottom border so the active
+          tab visually merges with the page below. */}
+      <header className="border-b border-amber-200 bg-white/70 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-end justify-between gap-4 px-6 pb-0 pt-4">
+          <Link
+            href="/"
+            className="mb-3 font-semibold tracking-tight text-amber-700"
+          >
             Gurbani Tutor
           </Link>
           <MobileNav />
-          <nav className="hidden items-center gap-4 text-sm font-medium text-slate-600 sm:flex">
-            <Link href="/search" className="font-semibold text-slate-900 hover:text-amber-700">Gurbani Search</Link>
-            <Link href="/arths" className="font-semibold text-amber-700 hover:text-amber-900">Arths · Vocab</Link>
-            <Link href="/quiz" className="hover:text-slate-900">Gurbani Quiz</Link>
-            <Link href="/shabad-test" className="hover:text-slate-900">Shabad Test</Link>
-            <Link href="/granth" className="font-semibold text-slate-900 hover:text-amber-700">Read Gurbani</Link>
-            <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
-            <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
-            <Link href="/about" className="hover:text-slate-900">About</Link>
-            <span className="mx-1 h-5 w-px bg-slate-200" aria-hidden />
-            <Link
-              href="/santhiya"
-              className="inline-flex h-7 items-center rounded-full bg-emerald-600 px-3 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-700"
-            >
-              Santhiya Classes
-            </Link>
-            <Link
-              href="/muharni"
-              className="inline-flex h-7 items-center rounded-full bg-red-600 px-3 text-xs font-semibold text-white shadow-sm transition hover:bg-red-700"
-            >
-              Santhiya 101
-            </Link>
-          </nav>
+          <DesktopNav />
         </div>
       </header>
 
