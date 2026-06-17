@@ -13,6 +13,7 @@ const LINKS: NavLink[] = [
   { href: "/search", label: "Gurbani Search" },
   { href: "/arths", label: "Arths · Vocab", accent: "amber" },
   { href: "/quiz", label: "Gurbani Quiz" },
+  { href: "/shabad-test", label: "Shabad Test" },
   { href: "/granth", label: "Read Gurbani" },
   { href: "/mukhvak", label: "Sri Mukhvak" },
   { href: "/pothi", label: "Pothi Sahib" },

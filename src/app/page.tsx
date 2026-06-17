@@ -33,6 +33,14 @@ const TILES: Tile[] = [
     badge: "learning",
   },
   {
+    href: "/shabad-test",
+    eyebrow: "Memorize, then test",
+    title: "Shabad Test",
+    body: "Pick a shabad, study it, then type it from memory. Strict, character-exact grading shows every missed matra and nukta. The discipline that turns reading into recall.",
+    icon: "pencil",
+    badge: "learning",
+  },
+  {
     href: "/mukhvak",
     eyebrow: "Read daily",
     title: "Sri Mukhvak",
@@ -118,6 +126,13 @@ const TILE_ICONS = {
       <path d="M15 7v12M15 7c2.5 0 4 1.3 4 3s-1.5 3-4 3M15 13c3 0 4.5 1.4 4.5 3s-1.5 3-4.5 3" />
     </svg>
   ),
+  pencil: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M4 20h4l10-10-4-4L4 16v4z" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M3 22h18" />
+    </svg>
+  ),
 } as const;
 
 export default function Home() {
@@ -134,6 +149,7 @@ export default function Home() {
             <Link href="/search" className="font-semibold text-slate-900 hover:text-amber-700">Gurbani Search</Link>
             <Link href="/arths" className="font-semibold text-amber-700 hover:text-amber-900">Arths · Vocab</Link>
             <Link href="/quiz" className="hover:text-slate-900">Gurbani Quiz</Link>
+            <Link href="/shabad-test" className="hover:text-slate-900">Shabad Test</Link>
             <Link href="/granth" className="font-semibold text-slate-900 hover:text-amber-700">Read Gurbani</Link>
             <Link href="/mukhvak" className="hover:text-slate-900">Sri Mukhvak</Link>
             <Link href="/pothi" className="hover:text-slate-900">Pothi Sahib</Link>
