@@ -16,6 +16,9 @@ export function shabadHash(gurmukhi: string): string {
     prev = stripped;
     stripped = stripped.replace(/^[੦-੯]+/, "");
     stripped = stripped.replace(/^ਵਾਹਿਗੁਰੂ/, "");
+    // The full TSV often has a trailing (੩੭) Ang reference where the closing
+    // paren is missing, leaving stray digits at the end. Strip them.
+    stripped = stripped.replace(/[੦-੯]+$/, "");
   }
   let h = 2166136261;
   for (let i = 0; i < stripped.length; i++) {
