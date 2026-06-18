@@ -40,6 +40,9 @@ cp "$SRC/svaiye_deenan.tsv"    "$DEST/svaiye_deenan.tsv"
 cp "$SRC/mool_mantar.tsv"      "$DEST/mool_mantar.tsv"
 cp "$SRC/rakhia_de_shabad.tsv" "$DEST/rakhia_de_shabad.tsv"
 
+# Gareebi Pothi shabad index (used by /gareebi-pothi page).
+cp "$SRC/gareebi_pothi_shabads.tsv" "$DEST/gareebi-pothi-shabads.tsv"
+
 # Bani manifest (precomputed segments for all 124 additional Amrit Banis
 # across 10 categories: Beant Bani, Bhagat Bani, Baee Vara, Beant Dasam
 # Bani, Panj Granthi, Das Granthi, Ardas, Astotar, Kavach, Gurbani Pothi).
