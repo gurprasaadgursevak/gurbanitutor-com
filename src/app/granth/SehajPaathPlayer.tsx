@@ -6,13 +6,11 @@ type Props = {
   ang: number;
   maxAng: number;
   onChangeAng: (n: number) => void;
-  enabled: boolean; // only show for SGGS granth selection
+  enabled: boolean;
 };
 
-// gursevak.com Sehaj Paath audio bank — 16kbps mono, one MP3 per Ang.
 function urlForAng(n: number): string {
-  const padded = String(n).padStart(4, "0");
-  return `https://media.gursevak.com/media/Sehaj_Paath_Pagewise/Sehaj_Paath_16kbps/${padded}.mp3`;
+  return `https://media.gursevak.com/media/Sehaj_Paath_Pagewise/Sehaj_Paath_16kbps/${String(n).padStart(4, "0")}.mp3`;
 }
 
 const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5];
@@ -28,48 +26,39 @@ export default function SehajPaathPlayer({
   const [speed, setSpeed] = useState(1);
   const [autoAdvance, setAutoAdvance] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  // Restore persistent prefs on mount.
   useEffect(() => {
     try {
       const s = parseFloat(localStorage.getItem("sehaj_speed") || "1");
       if (!Number.isNaN(s) && SPEEDS.includes(s)) setSpeed(s);
-      const a = localStorage.getItem("sehaj_autoadvance");
-      if (a === "false") setAutoAdvance(false);
+      if (localStorage.getItem("sehaj_autoadvance") === "false") setAutoAdvance(false);
     } catch {}
   }, []);
 
   useEffect(() => {
-    try {
-      localStorage.setItem("sehaj_speed", String(speed));
-    } catch {}
+    try { localStorage.setItem("sehaj_speed", String(speed)); } catch {}
     if (audioRef.current) audioRef.current.playbackRate = speed;
   }, [speed]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem("sehaj_autoadvance", String(autoAdvance));
-    } catch {}
+    try { localStorage.setItem("sehaj_autoadvance", String(autoAdvance)); } catch {}
   }, [autoAdvance]);
 
-  // When the Ang changes from above, load the new src. Continue playing if the
-  // user was already in a paath flow.
   useEffect(() => {
     if (!audioRef.current || !enabled) return;
     const el = audioRef.current;
     const wasPlaying = !el.paused;
+    // Pause the previous track immediately so we don't get overlapping
+    // audio between Angs while the new file loads.
+    el.pause();
     el.src = urlForAng(ang);
     el.playbackRate = speed;
     el.load();
-    setError(null);
-    if (wasPlaying) {
-      el.play().catch((err) => {
-        setError(err instanceof Error ? err.message : String(err));
-        setPlaying(false);
-      });
-    }
-  }, [ang, enabled, speed]);
+    if (wasPlaying) el.play().catch(() => setPlaying(false));
+    // Intentionally exclude `speed` from deps — we don't want to reload the
+    // file when the user just changes playback rate.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ang, enabled]);
 
   if (!enabled) return null;
 
@@ -77,12 +66,7 @@ export default function SehajPaathPlayer({
     const el = audioRef.current;
     if (!el) return;
     if (el.paused) {
-      el.play()
-        .then(() => setPlaying(true))
-        .catch((err) => {
-          setError(err instanceof Error ? err.message : String(err));
-          setPlaying(false);
-        });
+      el.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
     } else {
       el.pause();
       setPlaying(false);
@@ -90,11 +74,15 @@ export default function SehajPaathPlayer({
   }
 
   function onEnded() {
-    if (autoAdvance && ang < maxAng) {
-      onChangeAng(ang + 1);
-    } else {
-      setPlaying(false);
-    }
+    if (autoAdvance && ang < maxAng) onChangeAng(ang + 1);
+    else setPlaying(false);
+  }
+
+  function jumpAng() {
+    const v = window.prompt(`Jump to Ang (1 to ${maxAng}):`, String(ang));
+    if (v == null) return;
+    const n = parseInt(v, 10);
+    if (!Number.isNaN(n) && n >= 1 && n <= maxAng) onChangeAng(n);
   }
 
   return (
@@ -107,66 +95,38 @@ export default function SehajPaathPlayer({
         onWaiting={() => setLoading(true)}
         onCanPlay={() => setLoading(false)}
         onEnded={onEnded}
-        onError={() => setError("Could not load audio for this Ang.")}
       />
       <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-2 sm:px-6">
         <button
           type="button"
-          onClick={() => ang > 1 && onChangeAng(ang - 1)}
-          disabled={ang <= 1}
-          aria-label="Previous Ang"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-amber-400 disabled:opacity-40"
+          onClick={jumpAng}
+          className="inline-flex items-center rounded-full bg-amber-50 px-3 py-1.5 text-sm font-semibold text-amber-800 transition hover:bg-amber-100"
+          aria-label="Jump to Ang"
         >
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
+          Ang {ang}
         </button>
 
         <button
           type="button"
           onClick={togglePlay}
           aria-label={playing ? "Pause" : "Play"}
-          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-amber-600 text-white shadow-sm transition hover:bg-amber-700"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-amber-600 text-white shadow-sm transition hover:bg-amber-700"
         >
           {loading ? (
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" className="animate-spin" aria-hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" className="animate-spin" aria-hidden>
               <path d="M21 12a9 9 0 1 1-6.219-8.56" />
             </svg>
           ) : playing ? (
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden>
               <rect x="6" y="5" width="4" height="14" rx="1" />
               <rect x="14" y="5" width="4" height="14" rx="1" />
             </svg>
           ) : (
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden>
               <polygon points="6,4 20,12 6,20" />
             </svg>
           )}
         </button>
-
-        <button
-          type="button"
-          onClick={() => ang < maxAng && onChangeAng(ang + 1)}
-          disabled={ang >= maxAng}
-          aria-label="Next Ang"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-amber-400 disabled:opacity-40"
-        >
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
-
-        <div className="flex-1 truncate">
-          <div className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-            Sehaj Paath
-          </div>
-          <div className="text-sm font-semibold text-slate-900">
-            Ang {ang}
-            {error && (
-              <span className="ml-2 text-xs font-normal text-red-700">{error}</span>
-            )}
-          </div>
-        </div>
 
         <select
           value={speed}
@@ -175,21 +135,20 @@ export default function SehajPaathPlayer({
           className="rounded-full border border-slate-300 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 transition hover:border-amber-400"
         >
           {SPEEDS.map((s) => (
-            <option key={s} value={s}>
-              {s}x
-            </option>
+            <option key={s} value={s}>{s}x</option>
           ))}
         </select>
 
-        <label className="hidden items-center gap-1.5 text-xs text-slate-700 sm:flex">
+        <div className="ml-auto flex items-center gap-1.5 text-xs text-slate-700">
           <input
+            id="sehaj-autoadvance"
             type="checkbox"
             checked={autoAdvance}
             onChange={(e) => setAutoAdvance(e.target.checked)}
             className="h-3.5 w-3.5"
           />
-          Auto-advance
-        </label>
+          <label htmlFor="sehaj-autoadvance">Auto</label>
+        </div>
       </div>
     </div>
   );

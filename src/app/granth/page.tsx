@@ -529,7 +529,9 @@ function GranthReader() {
           </button>
         </div>
 
-        {/* Ang controls */}
+        {/* Ang controls — hidden for SGGS since the fixed Sehaj Paath bar at
+            the bottom is the source of truth for Ang navigation there. */}
+        {granth !== "sggs" && (
         <div className="mt-4 flex flex-wrap items-end gap-3">
           <button
             type="button"
@@ -582,6 +584,7 @@ function GranthReader() {
             Next Ang →
           </button>
         </div>
+        )}
         </>
         )}
 
@@ -737,7 +740,9 @@ function GranthReader() {
               </p>
             )}
 
-            {!selectedBani && (
+            {/* Bottom Prev/Next shortcut hidden when reading SGGS — the
+                fixed Sehaj Paath bar handles Ang navigation there. */}
+            {!selectedBani && granth !== "sggs" && (
             <div className="mt-10 flex justify-between gap-3">
               <button
                 type="button"
