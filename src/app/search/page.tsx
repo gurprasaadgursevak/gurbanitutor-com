@@ -5,10 +5,17 @@ import Link from "next/link";
 import GurmukhiKeyboard from "../GurmukhiKeyboard";
 import SocialLinks from "../SocialLinks";
 
-type Granth = "sggs" | "dasam";
+type Granth = "sggs" | "dasam" | "bhaiGurdas" | "bhaiNandlal";
 type Lang = "gurmukhi" | "english";
 type Mode = "contains" | "firstLetters" | "anywhere";
-type Scope = "all" | "sggs" | "dasam";
+type Scope = "all" | "sggs" | "dasam" | "bhaiGurdas" | "bhaiNandlal";
+
+const GRANTH_LABEL: Record<Granth, string> = {
+  sggs: "SGGS Ji",
+  dasam: "Sri Dasam",
+  bhaiGurdas: "Bhai Gurdas",
+  bhaiNandlal: "Bhai Nand Lal",
+};
 
 type Line = {
   granth: Granth;
@@ -83,19 +90,35 @@ function parseSGGS(text: string): Line[] {
   return out;
 }
 
-function parseDasam(text: string): Line[] {
+// Parses our 9-column auxiliary-granth schema (col 1 gurmukhi, col 2 ucharan,
+// col 3 ext_tip, col 4 ssk_english, col 5 bms_english, col 7 arth, col 8 ext_arth).
+// Used for Sri Dasam (post-merge with gursevakdb steeks), Bhai Gurdas, and
+// Bhai Nand Lal. The TSVs have no header row, so start at i = 0.
+function parseAuxiliary(text: string, granth: Granth, startRow = 0): Line[] {
   const out: Line[] = [];
   const rows = text.split("\n");
-  for (let i = 1; i < rows.length; i++) {
+  for (let i = startRow; i < rows.length; i++) {
     const cols = rows[i].split("\t");
     if (cols.length < 2) continue;
     const ang = parseInt(cols[0], 10);
     if (Number.isNaN(ang)) continue;
     const gurmukhi = strip(cols[1] || "");
     if (!gurmukhi) continue;
-    out.push({ granth: "dasam", ang, gurmukhi });
+    out.push({
+      granth,
+      ang,
+      gurmukhi,
+      ssk: (cols[4] || "").trim(),
+      bms: (cols[5] || "").trim(),
+      arth: (cols[7] || "").trim(),
+      extendedArth: (cols[8] || "").trim(),
+    });
   }
   return out;
+}
+
+function parseDasam(text: string): Line[] {
+  return parseAuxiliary(text, "dasam", 0);
 }
 
 function matchGurmukhi(line: string, query: string, mode: Mode): boolean {
@@ -140,6 +163,8 @@ const RESULT_CAP = 200;
 export default function SearchPage() {
   const [sggs, setSggs] = useState<Line[] | null>(null);
   const [dasam, setDasam] = useState<Line[] | null>(null);
+  const [bhaiGurdas, setBhaiGurdas] = useState<Line[] | null>(null);
+  const [bhaiNandlal, setBhaiNandlal] = useState<Line[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const [query, setQuery] = useState("");
@@ -152,16 +177,20 @@ export default function SearchPage() {
     let cancelled = false;
     (async () => {
       try {
-        const [sggsRes, dasamRes] = await Promise.all([
+        const [sggsRes, dasamRes, bgRes, bnRes] = await Promise.all([
           fetch("/sggs.tsv"),
           fetch("/dasam.tsv"),
+          fetch("/bhai_gurdas.tsv"),
+          fetch("/bhai_nandlal.tsv"),
         ]);
         if (!sggsRes.ok || !dasamRes.ok) {
           throw new Error("Failed to load Granth Sahib data.");
         }
-        const [sggsText, dasamText] = await Promise.all([
+        const [sggsText, dasamText, bgText, bnText] = await Promise.all([
           sggsRes.text(),
           dasamRes.text(),
+          bgRes.ok ? bgRes.text() : Promise.resolve(""),
+          bnRes.ok ? bnRes.text() : Promise.resolve(""),
         ]);
         if (cancelled) return;
         // Defer to next tick so the loading UI renders.
@@ -169,6 +198,8 @@ export default function SearchPage() {
           if (cancelled) return;
           setSggs(parseSGGS(sggsText));
           setDasam(parseDasam(dasamText));
+          setBhaiGurdas(bgText ? parseAuxiliary(bgText, "bhaiGurdas", 0) : []);
+          setBhaiNandlal(bnText ? parseAuxiliary(bnText, "bhaiNandlal", 0) : []);
         }, 0);
       } catch (err) {
         if (cancelled) return;
@@ -180,8 +211,13 @@ export default function SearchPage() {
     };
   }, []);
 
-  const loading = sggs === null || dasam === null;
-  const totalLines = (sggs?.length ?? 0) + (dasam?.length ?? 0);
+  const loading =
+    sggs === null || dasam === null || bhaiGurdas === null || bhaiNandlal === null;
+  const totalLines =
+    (sggs?.length ?? 0) +
+    (dasam?.length ?? 0) +
+    (bhaiGurdas?.length ?? 0) +
+    (bhaiNandlal?.length ?? 0);
 
   const results = useMemo<Line[]>(() => {
     if (loading) return [];
@@ -189,12 +225,19 @@ export default function SearchPage() {
     if (!q) return [];
 
     const corpus: Line[] = [];
+    // English now exists across SGGS (full), Sri Dasam (post-merge, ~50%),
+    // Bhai Gurdas (~98%), and Bhai Nand Lal (~99%) — search all of them.
     if (lang === "english") {
-      // English only exists for SGGS.
       if (sggs) corpus.push(...sggs);
+      if (dasam) corpus.push(...dasam);
+      if (bhaiGurdas) corpus.push(...bhaiGurdas);
+      if (bhaiNandlal) corpus.push(...bhaiNandlal);
     } else {
-      if (scope !== "dasam" && sggs) corpus.push(...sggs);
-      if (scope !== "sggs" && dasam) corpus.push(...dasam);
+      const include = (g: Granth) => scope === "all" || scope === g;
+      if (include("sggs") && sggs) corpus.push(...sggs);
+      if (include("dasam") && dasam) corpus.push(...dasam);
+      if (include("bhaiGurdas") && bhaiGurdas) corpus.push(...bhaiGurdas);
+      if (include("bhaiNandlal") && bhaiNandlal) corpus.push(...bhaiNandlal);
     }
 
     const out: Line[] = [];
@@ -215,7 +258,7 @@ export default function SearchPage() {
       }
     }
     return out;
-  }, [loading, sggs, dasam, query, lang, scope, mode]);
+  }, [loading, sggs, dasam, bhaiGurdas, bhaiNandlal, query, lang, scope, mode]);
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -234,15 +277,16 @@ export default function SearchPage() {
       <main className="mx-auto max-w-7xl px-6 py-10">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
-            Sri Guru Granth Sahib Ji + Sri Dasam Guru Granth Sahib Ji
+            Sri Guru Granth Sahib Ji · Sri Dasam Guru Granth Sahib Ji · Bhai
+            Gurdas Sahib Ji Vaaran · Bhai Nand Lal Sahib Ji
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             Find any line, in Gurmukhi or English.
           </h1>
           <p className="mt-2 max-w-3xl text-slate-600">
             {loading
-              ? "Loading Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji..."
-              : "Search by Gurmukhi (Contains, First Letters, Anywhere) or by English meaning."}
+              ? "Loading the four Granths..."
+              : "Search by Gurmukhi (Contains, First Letters, Anywhere) or by English meaning across all four Granths."}
           </p>
         </div>
 
@@ -321,13 +365,10 @@ export default function SearchPage() {
                 { value: "all", label: "All" },
                 { value: "sggs", label: "SGGS Ji" },
                 { value: "dasam", label: "Sri Dasam" },
+                { value: "bhaiGurdas", label: "Bhai Gurdas" },
+                { value: "bhaiNandlal", label: "Bhai Nand Lal" },
               ]}
             />
-          )}
-          {lang === "english" && (
-            <div className="sm:col-span-2 self-end text-sm text-slate-500">
-              English meanings are available for Sri Guru Granth Sahib Ji only.
-            </div>
           )}
         </div>
 
@@ -373,16 +414,18 @@ export default function SearchPage() {
                   <p className="text-lg leading-8 text-slate-900">{r.gurmukhi}</p>
                   <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
                     <span className="rounded bg-amber-100 px-2 py-0.5 font-semibold text-amber-800">
-                      Read Ang {r.ang} <span aria-hidden className="ml-0.5 transition group-hover:translate-x-0.5 inline-block">→</span>
+                      Read {r.granth === "bhaiGurdas" ? "Pauri" : r.granth === "bhaiNandlal" ? "Section" : "Ang"} {r.ang} <span aria-hidden className="ml-0.5 transition group-hover:translate-x-0.5 inline-block">→</span>
                     </span>
                     <span
                       className={`rounded px-2 py-0.5 font-semibold ${
                         r.granth === "sggs"
                           ? "bg-slate-100 text-slate-700"
-                          : "bg-amber-50 text-amber-700"
+                          : r.granth === "dasam"
+                          ? "bg-amber-50 text-amber-700"
+                          : "bg-amber-100 text-amber-900"
                       }`}
                     >
-                      {r.granth === "sggs" ? "SGGS Ji" : "Sri Dasam"}
+                      {GRANTH_LABEL[r.granth]}
                     </span>
                     {lang === "english" && r.arth && (
                       <span className="ml-1 text-slate-700">ਅਰਥ: {r.arth}</span>
