@@ -4,6 +4,7 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import SocialLinks from "../SocialLinks";
+import SehajPaathPlayer from "./SehajPaathPlayer";
 
 type Granth = "sggs" | "dasam";
 
@@ -396,7 +397,7 @@ function GranthReader() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-6 py-10">
+      <main className="mx-auto max-w-7xl px-6 pb-32 pt-10 sm:pb-28">
         <div className="lg:grid lg:grid-cols-[1fr_18rem] lg:gap-8">
           <div>
         <div>
@@ -843,6 +844,15 @@ function GranthReader() {
           <SocialLinks />
         </div>
       </footer>
+
+      {/* Sehaj Paath audio bar — appears only when viewing SGGS, never in
+          bani-reading mode. Persistent at the bottom while reading. */}
+      <SehajPaathPlayer
+        ang={ang}
+        maxAng={maxAng}
+        onChangeAng={setAng}
+        enabled={granth === "sggs" && !selectedBani}
+      />
     </div>
   );
 }
