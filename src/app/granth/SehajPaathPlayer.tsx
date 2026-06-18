@@ -47,16 +47,18 @@ export default function SehajPaathPlayer({
   useEffect(() => {
     if (!audioRef.current || !enabled) return;
     const el = audioRef.current;
-    const wasPlaying = !el.paused;
-    // Pause the previous track immediately so we don't get overlapping
-    // audio between Angs while the new file loads.
+    // Use either the actual <audio> paused state or our own `playing` state.
+    // When auto-advance fires from `onEnded`, the audio element has already
+    // ended (paused = true), but `playing` stays true so the next track
+    // resumes automatically.
+    const intentPlaying = !el.paused || playing;
     el.pause();
     el.src = urlForAng(ang);
     el.playbackRate = speed;
     el.load();
-    if (wasPlaying) el.play().catch(() => setPlaying(false));
-    // Intentionally exclude `speed` from deps — we don't want to reload the
-    // file when the user just changes playback rate.
+    if (intentPlaying) el.play().catch(() => setPlaying(false));
+    // Intentionally exclude `speed` and `playing` from deps — we don't want to
+    // reload the file when the user just changes playback rate or pauses.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ang, enabled]);
 
@@ -74,8 +76,15 @@ export default function SehajPaathPlayer({
   }
 
   function onEnded() {
-    if (autoAdvance && ang < maxAng) onChangeAng(ang + 1);
-    else setPlaying(false);
+    if (autoAdvance && ang < maxAng) {
+      // Keep `playing` true so the next-Ang load effect resumes audio.
+      // Without this, the audio is "paused" (ended), `playing` would flip to
+      // false, and the next track would load silent.
+      setPlaying(true);
+      onChangeAng(ang + 1);
+    } else {
+      setPlaying(false);
+    }
   }
 
   function jumpAng() {
@@ -139,16 +148,32 @@ export default function SehajPaathPlayer({
           ))}
         </select>
 
-        <div className="ml-auto flex items-center gap-1.5 text-xs text-slate-700">
-          <input
-            id="sehaj-autoadvance"
-            type="checkbox"
-            checked={autoAdvance}
-            onChange={(e) => setAutoAdvance(e.target.checked)}
-            className="h-3.5 w-3.5"
-          />
-          <label htmlFor="sehaj-autoadvance">Auto</label>
-        </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={autoAdvance}
+          onClick={() => setAutoAdvance((v) => !v)}
+          aria-label={autoAdvance ? "Auto-advance is on" : "Auto-advance is off"}
+          className={`ml-auto inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+            autoAdvance
+              ? "border-amber-500 bg-amber-600 text-white shadow-sm"
+              : "border-slate-300 bg-white text-slate-700 hover:border-amber-400"
+          }`}
+        >
+          <span
+            aria-hidden
+            className={`flex h-3.5 w-6 items-center rounded-full p-0.5 transition ${
+              autoAdvance ? "bg-white/40" : "bg-slate-300"
+            }`}
+          >
+            <span
+              className={`block h-2.5 w-2.5 rounded-full bg-white transition ${
+                autoAdvance ? "translate-x-2.5" : "translate-x-0"
+              }`}
+            />
+          </span>
+          Auto
+        </button>
       </div>
     </div>
   );

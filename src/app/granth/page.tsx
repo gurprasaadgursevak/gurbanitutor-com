@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import SocialLinks from "../SocialLinks";
 import SehajPaathPlayer from "./SehajPaathPlayer";
+import GurmukhiFontToggle from "./GurmukhiFontToggle";
 
 type Granth = "sggs" | "dasam";
 
@@ -448,10 +449,7 @@ function GranthReader() {
                       isActive ? "text-amber-900" : "text-slate-800"
                     } disabled:opacity-50`}
                   >
-                    <span>
-                      <span className="block text-sm font-semibold">{bani.name}</span>
-                      <span className="block text-xs text-slate-600">{bani.subtitle}</span>
-                    </span>
+                    <span className="block text-sm font-semibold">{bani.name}</span>
                     <span aria-hidden className={isActive ? "text-amber-700" : "text-slate-400"}>
                       {isActive ? "●" : "→"}
                     </span>
@@ -529,9 +527,9 @@ function GranthReader() {
           </button>
         </div>
 
-        {/* Ang controls — hidden for SGGS since the fixed Sehaj Paath bar at
-            the bottom is the source of truth for Ang navigation there. */}
-        {granth !== "sggs" && (
+        {/* Ang controls — shown for both SGGS and Dasam at the top.
+            (SGGS additionally has the fixed Sehaj Paath audio bar at the
+            bottom of the page, which also exposes Ang navigation.) */}
         <div className="mt-4 flex flex-wrap items-end gap-3">
           <button
             type="button"
@@ -584,7 +582,6 @@ function GranthReader() {
             Next Ang →
           </button>
         </div>
-        )}
         </>
         )}
 
@@ -640,6 +637,8 @@ function GranthReader() {
           >
             A+
           </button>
+          <span className="mx-1 h-5 w-px bg-slate-200" aria-hidden />
+          <GurmukhiFontToggle />
         </div>
 
         {/* Lines */}
@@ -740,9 +739,10 @@ function GranthReader() {
               </p>
             )}
 
-            {/* Bottom Prev/Next shortcut hidden when reading SGGS — the
-                fixed Sehaj Paath bar handles Ang navigation there. */}
-            {!selectedBani && granth !== "sggs" && (
+            {/* Bottom Prev/Next shortcut. Shown for both SGGS and Dasam
+                so Sangat have an Ang mover at the foot of the page in
+                addition to the controls at the top. */}
+            {!selectedBani && (
             <div className="mt-10 flex justify-between gap-3">
               <button
                 type="button"
@@ -750,7 +750,7 @@ function GranthReader() {
                 disabled={ang <= 1}
                 className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-amber-400 disabled:opacity-40"
               >
-                ← Prev
+                ← Prev Ang
               </button>
               <button
                 type="button"
@@ -758,7 +758,7 @@ function GranthReader() {
                 disabled={ang >= maxAng}
                 className="rounded-full bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700 disabled:opacity-40"
               >
-                Next →
+                Next Ang →
               </button>
             </div>
             )}
@@ -770,10 +770,7 @@ function GranthReader() {
           <aside className="mt-10 lg:mt-0 lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-3xl border border-amber-200 bg-white p-4 shadow-sm sm:p-5">
               <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                Nitnem Banis
-              </p>
-              <p className="mt-1 text-xs text-slate-600">
-                Jump straight to a complete bani in reading order.
+                Banis
               </p>
               <ul className="mt-3 divide-y divide-slate-200">
                 {BANI_LIST.map((bani) => {
@@ -796,10 +793,7 @@ function GranthReader() {
                             : "text-slate-800 hover:text-amber-700"
                         } disabled:opacity-50`}
                       >
-                        <span>
-                          <span className="block text-sm font-semibold">{bani.name}</span>
-                          <span className="block text-xs text-slate-600">{bani.subtitle}</span>
-                        </span>
+                        <span className="block text-sm font-semibold">{bani.name}</span>
                         <span
                           aria-hidden
                           className={isActive ? "text-amber-700" : "text-slate-400"}

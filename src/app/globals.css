@@ -12,6 +12,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@font-face {
+  font-family: "GuruGranthUni";
+  src: url("/fonts/GuruGranthUni.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -21,12 +29,21 @@ body {
     sans-serif;
 }
 
-/* Explicit Gurmukhi font for any element marked with lang="pa" — forces the
-   font even if a parent has overridden it. */
+/* Explicit Gurmukhi font for any element marked with lang="pa". The default
+   stack uses Noto Sans Gurmukhi; when the user opts into GuruGranthUni via
+   the in-app font toggle, the <html data-gurmukhi-font="guruGranthUni">
+   attribute swaps the primary face (Noto remains as the cascade fallback so
+   any glyph GuruGranthUni doesn't cover still renders). */
 [lang="pa"],
 [lang="pa"] * {
   font-family: var(--font-noto-gurmukhi), "Noto Sans Gurmukhi", "Gurbani Akhar",
     Arial, sans-serif;
+}
+
+html[data-gurmukhi-font="guruGranthUni"] [lang="pa"],
+html[data-gurmukhi-font="guruGranthUni"] [lang="pa"] * {
+  font-family: "GuruGranthUni", var(--font-noto-gurmukhi), "Noto Sans Gurmukhi",
+    "Gurbani Akhar", Arial, sans-serif;
 }
 
 /* When installed as a PWA, respect the iOS notch / Dynamic Island and the
