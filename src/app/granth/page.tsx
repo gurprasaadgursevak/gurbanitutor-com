@@ -346,7 +346,8 @@ function GranthReader() {
     const angStr = searchParams.get("ang");
     const line = searchParams.get("line");
 
-    const urlGranth: Granth | null = g === "sggs" || g === "dasam" ? g : null;
+    const validGranths: Granth[] = ["sggs", "dasam", "bhaiGurdas", "bhaiNandlal"];
+    const urlGranth: Granth | null = validGranths.includes(g as Granth) ? (g as Granth) : null;
     const urlAng = angStr ? parseInt(angStr, 10) : NaN;
 
     if (urlGranth) {
@@ -354,19 +355,25 @@ function GranthReader() {
     } else {
       try {
         const savedG = localStorage.getItem("granth_active") as Granth | null;
-        if (savedG === "sggs" || savedG === "dasam") setGranth(savedG);
+        if (savedG && validGranths.includes(savedG)) setGranth(savedG);
       } catch {}
     }
 
     if (!Number.isNaN(urlAng) && urlAng > 0) {
       if (urlGranth === "dasam") setAngDasam(urlAng);
+      else if (urlGranth === "bhaiGurdas") setAngBhaiGurdas(urlAng);
+      else if (urlGranth === "bhaiNandlal") setAngBhaiNandlal(urlAng);
       else setAngSggs(urlAng);
     } else {
       try {
         const sa = localStorage.getItem("granth_sggs_ang");
         const da = localStorage.getItem("granth_dasam_ang");
+        const ga = localStorage.getItem("granth_bhai_gurdas_ang");
+        const na = localStorage.getItem("granth_bhai_nandlal_ang");
         if (sa) setAngSggs(Math.max(1, parseInt(sa, 10) || 1));
         if (da) setAngDasam(Math.max(1, parseInt(da, 10) || 1));
+        if (ga) setAngBhaiGurdas(Math.max(1, parseInt(ga, 10) || 1));
+        if (na) setAngBhaiNandlal(Math.max(1, parseInt(na, 10) || 1));
       } catch {}
     }
 
@@ -378,14 +385,26 @@ function GranthReader() {
     let cancelled = false;
     (async () => {
       try {
-        const [sRes, dRes] = await Promise.all([fetch("/sggs.tsv"), fetch("/dasam.tsv")]);
+        const [sRes, dRes, bgRes, bnRes] = await Promise.all([
+          fetch("/sggs.tsv"),
+          fetch("/dasam.tsv"),
+          fetch("/bhai_gurdas.tsv"),
+          fetch("/bhai_nandlal.tsv"),
+        ]);
         if (!sRes.ok || !dRes.ok) throw new Error("Failed to load Granth data.");
-        const [sText, dText] = await Promise.all([sRes.text(), dRes.text()]);
+        const [sText, dText, bgText, bnText] = await Promise.all([
+          sRes.text(),
+          dRes.text(),
+          bgRes.ok ? bgRes.text() : Promise.resolve(""),
+          bnRes.ok ? bnRes.text() : Promise.resolve(""),
+        ]);
         if (cancelled) return;
         setSggs(parseSGGS(sText));
         setDasam(parseDasam(dText));
         setSggsRows(sText.split("\n"));
         setDasamRows(dText.split("\n"));
+        if (bgText) setBhaiGurdas(parseAuxiliary(bgText, 0));
+        if (bnText) setBhaiNandlal(parseAuxiliary(bnText, 0));
       } catch (err) {
         if (cancelled) return;
         setError(err instanceof Error ? err.message : String(err));
@@ -397,7 +416,11 @@ function GranthReader() {
   }, []);
 
 
-  const corpus = granth === "sggs" ? sggs : dasam;
+  const corpus =
+    granth === "sggs" ? sggs :
+    granth === "dasam" ? dasam :
+    granth === "bhaiGurdas" ? bhaiGurdas :
+    bhaiNandlal;
   const maxAng = useMemo(() => {
     if (!corpus) return 1;
     let m = 1;
@@ -405,20 +428,23 @@ function GranthReader() {
     return m;
   }, [corpus]);
 
-  const ang = granth === "sggs" ? angSggs : angDasam;
+  const ang =
+    granth === "sggs" ? angSggs :
+    granth === "dasam" ? angDasam :
+    granth === "bhaiGurdas" ? angBhaiGurdas :
+    angBhaiNandlal;
   const setAng = (n: number) => {
     const clamped = Math.max(1, Math.min(maxAng, n));
-    if (granth === "sggs") {
-      setAngSggs(clamped);
-      try {
-        localStorage.setItem("granth_sggs_ang", String(clamped));
-      } catch {}
-    } else {
-      setAngDasam(clamped);
-      try {
-        localStorage.setItem("granth_dasam_ang", String(clamped));
-      } catch {}
-    }
+    const setters: Record<Granth, (n: number) => void> = {
+      sggs: setAngSggs,
+      dasam: setAngDasam,
+      bhaiGurdas: setAngBhaiGurdas,
+      bhaiNandlal: setAngBhaiNandlal,
+    };
+    setters[granth](clamped);
+    try {
+      localStorage.setItem(GRANTH_META[granth].angKey, String(clamped));
+    } catch {}
     // Drop the highlight from a previous /search jump so we don't re-scroll
     // to that line on the new Ang.
     setHighlightLine(null);
@@ -592,28 +618,20 @@ function GranthReader() {
         {!selectedBani && (
         <>
         <div className="mt-6 flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => setGranth("sggs")}
-            className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-              granth === "sggs"
-                ? "border-amber-600 bg-amber-100 text-amber-900"
-                : "border-slate-200 bg-white text-slate-700 hover:border-amber-300"
-            }`}
-          >
-            Sri Guru Granth Sahib Ji
-          </button>
-          <button
-            type="button"
-            onClick={() => setGranth("dasam")}
-            className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-              granth === "dasam"
-                ? "border-amber-600 bg-amber-100 text-amber-900"
-                : "border-slate-200 bg-white text-slate-700 hover:border-amber-300"
-            }`}
-          >
-            Sri Dasam Guru Granth Sahib Ji
-          </button>
+          {(Object.keys(GRANTH_META) as Granth[]).map((g) => (
+            <button
+              key={g}
+              type="button"
+              onClick={() => setGranth(g)}
+              className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                granth === g
+                  ? "border-amber-600 bg-amber-100 text-amber-900"
+                  : "border-slate-200 bg-white text-slate-700 hover:border-amber-300"
+              }`}
+            >
+              {GRANTH_META[g].title}
+            </button>
+          ))}
         </div>
 
         {/* Ang controls — shown for both SGGS and Dasam at the top.
@@ -626,11 +644,11 @@ function GranthReader() {
             disabled={loading || ang <= 1}
             className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-amber-400 disabled:opacity-40"
           >
-            ← Prev Ang
+            ← Prev {GRANTH_META[granth].unit}
           </button>
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
-              Ang
+              {GRANTH_META[granth].unit}
             </label>
             <form
               onSubmit={(e) => {
@@ -668,7 +686,7 @@ function GranthReader() {
             disabled={loading || ang >= maxAng}
             className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-amber-400 disabled:opacity-40"
           >
-            Next Ang →
+            Next {GRANTH_META[granth].unit} →
           </button>
         </div>
         </>
@@ -839,7 +857,7 @@ function GranthReader() {
                 disabled={ang <= 1}
                 className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-amber-400 disabled:opacity-40"
               >
-                ← Prev Ang
+                ← Prev {GRANTH_META[granth].unit}
               </button>
               <button
                 type="button"
@@ -847,7 +865,7 @@ function GranthReader() {
                 disabled={ang >= maxAng}
                 className="rounded-full bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700 disabled:opacity-40"
               >
-                Next Ang →
+                Next {GRANTH_META[granth].unit} →
               </button>
             </div>
             )}
