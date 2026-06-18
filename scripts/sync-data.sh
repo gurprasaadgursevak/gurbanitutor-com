@@ -3,7 +3,10 @@
 # `gurbani-data` repo into `public/` so Next.js + Vercel can serve them.
 #
 # Single source of truth: ~/Documents/Code/gurbani-data/data/
-#   sggs.tsv, dasam.tsv, arths.tsv
+#   Core:        sggs.tsv, dasam.tsv, arths.tsv
+#   Aux granth:  bhai_gurdas.tsv, bhai_nandlal.tsv
+#   Compiled:    aarti.tsv, svaiye_deenan.tsv, mool_mantar.tsv,
+#                rakhia_de_shabad.tsv
 #
 # Run this after editing any TSV in the shared repo, then commit the
 # updated public/ TSVs in this repo and push. Vercel rebuilds with the
@@ -27,5 +30,15 @@ cp "$SRC/sggs.tsv"  "$DEST/sggs.tsv"
 cp "$SRC/dasam.tsv" "$DEST/dasam.tsv"
 cp "$SRC/arths.tsv" "$DEST/arths.tsv"
 
+# Auxiliary granths.
+cp "$SRC/bhai_gurdas.tsv"  "$DEST/bhai_gurdas.tsv"
+cp "$SRC/bhai_nandlal.tsv" "$DEST/bhai_nandlal.tsv"
+
+# Compiled banis (verses pre-selected across Granths, in reading order).
+cp "$SRC/aarti.tsv"            "$DEST/aarti.tsv"
+cp "$SRC/svaiye_deenan.tsv"    "$DEST/svaiye_deenan.tsv"
+cp "$SRC/mool_mantar.tsv"      "$DEST/mool_mantar.tsv"
+cp "$SRC/rakhia_de_shabad.tsv" "$DEST/rakhia_de_shabad.tsv"
+
 echo "Synced TSVs into $DEST"
-ls -lh "$DEST"/sggs.tsv "$DEST"/dasam.tsv "$DEST"/arths.tsv
+ls -lh "$DEST"/{sggs,dasam,arths,bhai_gurdas,bhai_nandlal,aarti,svaiye_deenan,mool_mantar,rakhia_de_shabad}.tsv

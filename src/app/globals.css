@@ -40,6 +40,16 @@ body {
     Arial, sans-serif;
 }
 
+/* When GuruGranthUni is the chosen typeface, override the body font-family
+   chain so every Gurmukhi glyph on the page falls into GuruGranthUni first,
+   then Noto. The browser uses per-glyph fallback, so Latin text in Arial /
+   Helvetica is unaffected. This catches reader text that isn't explicitly
+   tagged lang="pa". */
+html[data-gurmukhi-font="guruGranthUni"] body {
+  font-family: Arial, Helvetica, "GuruGranthUni", var(--font-noto-gurmukhi),
+    "Noto Sans Gurmukhi", sans-serif;
+}
+
 html[data-gurmukhi-font="guruGranthUni"] [lang="pa"],
 html[data-gurmukhi-font="guruGranthUni"] [lang="pa"] * {
   font-family: "GuruGranthUni", var(--font-noto-gurmukhi), "Noto Sans Gurmukhi",

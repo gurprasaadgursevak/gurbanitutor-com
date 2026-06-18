@@ -26,6 +26,16 @@ export default function SehajPaathPlayer({
   const [speed, setSpeed] = useState(1);
   const [autoAdvance, setAutoAdvance] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  function formatTime(t: number): string {
+    if (!Number.isFinite(t) || t < 0) return "0:00";
+    const total = Math.floor(t);
+    const m = Math.floor(total / 60);
+    const s = total % 60;
+    return `${m}:${s < 10 ? "0" + s : s}`;
+  }
 
   useEffect(() => {
     try {
@@ -56,11 +66,23 @@ export default function SehajPaathPlayer({
     el.src = urlForAng(ang);
     el.playbackRate = speed;
     el.load();
+    // Reset the scrubber while the new file is loading — the real metadata
+    // arrives via `onLoadedMetadata` on the <audio> element below.
+    setCurrentTime(0);
+    setDuration(0);
     if (intentPlaying) el.play().catch(() => setPlaying(false));
     // Intentionally exclude `speed` and `playing` from deps — we don't want to
     // reload the file when the user just changes playback rate or pauses.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ang, enabled]);
+
+  function seekTo(seconds: number) {
+    const el = audioRef.current;
+    if (!el) return;
+    const clamped = Math.max(0, Math.min(duration || 0, seconds));
+    el.currentTime = clamped;
+    setCurrentTime(clamped);
+  }
 
   if (!enabled) return null;
 
@@ -104,7 +126,42 @@ export default function SehajPaathPlayer({
         onWaiting={() => setLoading(true)}
         onCanPlay={() => setLoading(false)}
         onEnded={onEnded}
+        onLoadedMetadata={(e) => {
+          const d = (e.target as HTMLAudioElement).duration;
+          if (Number.isFinite(d) && d > 0) setDuration(d);
+        }}
+        onTimeUpdate={(e) => {
+          const t = (e.target as HTMLAudioElement).currentTime;
+          if (Number.isFinite(t)) setCurrentTime(t);
+        }}
       />
+      <div className="mx-auto flex max-w-5xl items-center gap-2 px-4 pt-2 sm:px-6">
+        <span className="w-10 text-right font-mono text-[11px] tabular-nums text-slate-600">
+          {formatTime(currentTime)}
+        </span>
+        <input
+          type="range"
+          min={0}
+          max={duration > 0 ? duration : 1}
+          step={0.5}
+          value={currentTime}
+          disabled={duration <= 0}
+          onChange={(e) => seekTo(parseFloat(e.target.value))}
+          aria-label="Audio progress"
+          className="audio-scrubber h-1.5 flex-1 cursor-pointer appearance-none rounded-full bg-amber-100 accent-amber-600 disabled:opacity-50"
+          style={{
+            background:
+              duration > 0
+                ? `linear-gradient(to right, #d97706 0%, #d97706 ${
+                    (currentTime / duration) * 100
+                  }%, #fde68a ${(currentTime / duration) * 100}%, #fde68a 100%)`
+                : undefined,
+          }}
+        />
+        <span className="w-10 font-mono text-[11px] tabular-nums text-slate-600">
+          {formatTime(duration)}
+        </span>
+      </div>
       <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-2 sm:px-6">
         <button
           type="button"

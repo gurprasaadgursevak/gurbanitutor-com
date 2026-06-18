@@ -7,7 +7,14 @@ import SocialLinks from "../SocialLinks";
 import SehajPaathPlayer from "./SehajPaathPlayer";
 import GurmukhiFontToggle from "./GurmukhiFontToggle";
 
-type Granth = "sggs" | "dasam";
+type Granth = "sggs" | "dasam" | "bhaiGurdas" | "bhaiNandlal";
+
+const GRANTH_META: Record<Granth, { title: string; unit: string; angKey: string; tsv: string }> = {
+  sggs:        { title: "Sri Guru Granth Sahib Ji",       unit: "Ang",     angKey: "granth_sggs_ang",        tsv: "/sggs.tsv" },
+  dasam:       { title: "Sri Dasam Guru Granth Sahib Ji", unit: "Ang",     angKey: "granth_dasam_ang",       tsv: "/dasam.tsv" },
+  bhaiGurdas:  { title: "Bhai Gurdas Sahib Ji Vaaran",    unit: "Pauri",   angKey: "granth_bhai_gurdas_ang", tsv: "/bhai_gurdas.tsv" },
+  bhaiNandlal: { title: "Bhai Nandlal Sahib Ji",          unit: "Section", angKey: "granth_bhai_nandlal_ang", tsv: "/bhai_nandlal.tsv" },
+};
 
 type Line = {
   ang: number;
@@ -59,19 +66,40 @@ function parseSGGS(text: string): Line[] {
   return out;
 }
 
-function parseDasam(text: string): Line[] {
+// Parses our 9-column auxiliary-granth TSV schema:
+//   0 ang | 1 gurmukhi | 2 ucharan_tip | 3 extended_tip | 4 ssk_english
+//   5 bms_english | 6 romanized | 7 arth | 8 extended_arth
+//
+// Used for Sri Dasam Granth (since the recent merge gave it SSK English
+// steeks for ~50% of verses), Bhai Gurdas Sahib Ji Vaaran, and Bhai
+// Nandlal Sahib Ji. The TSVs have no header row, so we start at i = 0.
+function parseAuxiliary(text: string, startRow = 0): Line[] {
   const rows = text.split("\n");
   const out: Line[] = [];
-  for (let i = 1; i < rows.length; i++) {
+  for (let i = startRow; i < rows.length; i++) {
     const r = stripCR(rows[i]);
     if (!r) continue;
     const cols = r.split("\t");
     if (cols.length < 2) continue;
     const ang = parseInt((cols[0] || "").trim(), 10);
     if (Number.isNaN(ang)) continue;
-    out.push({ ang, gurmukhi: strip(cols[1] || "") });
+    out.push({
+      ang,
+      gurmukhi: strip(cols[1] || ""),
+      ucharanTip: strip(cols[2] || ""),
+      extendedUcharanTip: strip(cols[3] || ""),
+      steek1: strip(cols[4] || ""),
+      steek2: strip(cols[5] || ""),
+      arth: strip(cols[7] || ""),
+    });
   }
   return out;
+}
+
+// Kept as a thin alias so existing call sites still work — the canonical
+// dasam.tsv is now the merged 9-col file, same schema as Bhai Gurdas.
+function parseDasam(text: string): Line[] {
+  return parseAuxiliary(text, 0);
 }
 
 // MARK: - Nitnem banis (ported from iOS BaniID.rowRanges)
@@ -93,6 +121,12 @@ type BaniDef = {
 };
 
 const BANI_LIST: BaniDef[] = [
+  {
+    id: "moolMantar",
+    name: "Mool Mantar",
+    subtitle: "Beginning of Sri Guru Granth Sahib Ji",
+    segments: [{ kind: "sggs", range: [1, 4] }],
+  },
   {
     id: "japji",
     name: "Sri Japji Sahib",
@@ -157,6 +191,17 @@ const BANI_LIST: BaniDef[] = [
     ],
   },
   {
+    id: "rakhiaDeShabad",
+    name: "Rakhia Day Shabad",
+    subtitle: "Read after Sri Rehrass Sahib",
+    segments: [
+      { kind: "sggs", range: [27244, 27254] },
+      { kind: "sggs", range: [34983, 34989] },
+      { kind: "sggs", range: [11272, 11274] },
+      { kind: "sggs", range: [23209, 23211] },
+    ],
+  },
+  {
     id: "kirtanSohila",
     name: "Sri Kirtan Sohila Sahib",
     subtitle: "Bedtime Nitnem",
@@ -167,6 +212,46 @@ const BANI_LIST: BaniDef[] = [
     name: "Sri Sukhmani Sahib Ji",
     subtitle: "Gauri · M5 · Ang 262–296",
     segments: [{ kind: "sggs", range: [11588, 13614] }],
+  },
+  {
+    id: "aarti",
+    name: "Aarti",
+    subtitle: "Compiled · selected verses",
+    segments: [
+      { kind: "sggs", range: [28818, 28831] },
+      { kind: "sggs", range: [30034, 30043] },
+      { kind: "sggs", range: [30061, 30071] },
+      { kind: "sggs", range: [57712, 57720] },
+      { kind: "sggs", range: [30079, 30089] },
+    ],
+  },
+  {
+    id: "ramkaliKiVaar",
+    name: "Ramkali Ki Vaar",
+    subtitle: "Rai Balvand & Satta · Ang 966-968",
+    segments: [{ kind: "sggs", range: [41522, 41611] }],
+  },
+  {
+    id: "basantKiVaar",
+    name: "Basant Ki Vaar",
+    subtitle: "M5 · Ang 1193",
+    segments: [{ kind: "sggs", range: [51518, 51534] }],
+  },
+  {
+    id: "shabadHazareP10",
+    name: "Shabad Hazaray Patshahi 10",
+    subtitle: "Sri Dasam · Patshahi 10",
+    segments: [{ kind: "dasam", range: [32756, 32842] }],
+  },
+  {
+    id: "svaiyeDeenan",
+    name: "Svaiye Deenan",
+    subtitle: "Compiled · Patshahi 10",
+    segments: [
+      { kind: "dasam", range: [1, 1] },
+      { kind: "dasam", range: [5880, 5880] },
+      { kind: "dasam", range: [1770, 1810] },
+    ],
   },
 ];
 
@@ -232,6 +317,10 @@ function GranthReader() {
 
   const [angSggs, setAngSggs] = useState(1);
   const [angDasam, setAngDasam] = useState(1);
+  const [angBhaiGurdas, setAngBhaiGurdas] = useState(1);
+  const [angBhaiNandlal, setAngBhaiNandlal] = useState(1);
+  const [bhaiGurdas, setBhaiGurdas] = useState<Line[] | null>(null);
+  const [bhaiNandlal, setBhaiNandlal] = useState<Line[] | null>(null);
   const [angInput, setAngInput] = useState("1");
 
   const [showArth, setShowArth] = useState(true);
