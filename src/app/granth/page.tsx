@@ -561,6 +561,17 @@ function GranthReader() {
     return corpus.filter((l) => l.ang === ang);
   }, [selectedBani, baniLines, corpus, ang]);
 
+  // Per-field availability of the currently-rendered lines. The toggle row
+  // only surfaces a chip if at least one rendered line actually carries data
+  // for that field — so users never click a switch that does nothing.
+  const linesHave = useMemo(() => ({
+    arth: lines.some((l) => (l.arth || "").length > 0),
+    ucharan: lines.some((l) => (l.ucharanTip || "").length > 0),
+    extendedUcharan: lines.some((l) => (l.extendedUcharanTip || "").length > 0),
+    steek1: lines.some((l) => (l.steek1 || "").length > 0),
+    steek2: lines.some((l) => (l.steek2 || "").length > 0),
+  }), [lines]);
+
   const loading = sggs === null || dasam === null;
 
   return (
@@ -761,30 +772,36 @@ function GranthReader() {
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
             Show
           </span>
-          <ToggleChip label="ਅਰਥ" on={showArth} onToggle={() => setShowArth((v) => !v)} />
-          {granth === "sggs" && (
-            <>
-              <ToggleChip
-                label="Ucharan"
-                on={showUcharan}
-                onToggle={() => setShowUcharan((v) => !v)}
-              />
-              <ToggleChip
-                label="Extended Ucharan"
-                on={showExtendedUcharan}
-                onToggle={() => setShowExtendedUcharan((v) => !v)}
-              />
-              <ToggleChip
-                label="English Steek 1"
-                on={showSteek1}
-                onToggle={() => setShowSteek1((v) => !v)}
-              />
-              <ToggleChip
-                label="English Steek 2"
-                on={showSteek2}
-                onToggle={() => setShowSteek2((v) => !v)}
-              />
-            </>
+          {linesHave.arth && (
+            <ToggleChip label="ਅਰਥ" on={showArth} onToggle={() => setShowArth((v) => !v)} />
+          )}
+          {linesHave.ucharan && (
+            <ToggleChip
+              label="Ucharan"
+              on={showUcharan}
+              onToggle={() => setShowUcharan((v) => !v)}
+            />
+          )}
+          {linesHave.extendedUcharan && (
+            <ToggleChip
+              label="Extended Ucharan"
+              on={showExtendedUcharan}
+              onToggle={() => setShowExtendedUcharan((v) => !v)}
+            />
+          )}
+          {linesHave.steek1 && (
+            <ToggleChip
+              label="English Steek 1"
+              on={showSteek1}
+              onToggle={() => setShowSteek1((v) => !v)}
+            />
+          )}
+          {linesHave.steek2 && (
+            <ToggleChip
+              label="English Steek 2"
+              on={showSteek2}
+              onToggle={() => setShowSteek2((v) => !v)}
+            />
           )}
           <span className="mx-1 h-5 w-px bg-slate-200" aria-hidden />
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
