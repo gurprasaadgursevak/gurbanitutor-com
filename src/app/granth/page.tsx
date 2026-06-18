@@ -61,6 +61,7 @@ function parseSGGS(text: string): Line[] {
       steek2: strip(cols[4] || ""),
       ucharanTip: strip(cols[5] || ""),
       extendedUcharanTip: strip(cols[6] || ""),
+      romanized: strip(cols[9] || ""),
       arth: strip(cols[7] || ""),
     });
   }

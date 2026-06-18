@@ -25,6 +25,7 @@ type Line = {
   bms?: string;
   arth?: string;
   extendedArth?: string;
+  romanized?: string;
 };
 
 const MATRAS = new Set([
@@ -85,6 +86,7 @@ function parseSGGS(text: string): Line[] {
       bms: (cols[4] || "").trim(),
       arth: (cols[7] || "").trim(),
       extendedArth: (cols[8] || "").trim(),
+      romanized: (cols[9] || "").trim().replace(/\r$/, ""),
     });
   }
   return out;
@@ -110,6 +112,7 @@ function parseAuxiliary(text: string, granth: Granth, startRow = 0): Line[] {
       gurmukhi,
       ssk: (cols[4] || "").trim(),
       bms: (cols[5] || "").trim(),
+      romanized: (cols[6] || "").trim(),
       arth: (cols[7] || "").trim(),
       extendedArth: (cols[8] || "").trim(),
     });
