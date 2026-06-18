@@ -4,7 +4,7 @@
  * for pages so updates land quickly while the cached copy keeps offline alive.
  */
 
-const CACHE_VERSION = "v11";
+const CACHE_VERSION = "v12";
 const STATIC_CACHE = `gt-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `gt-pages-${CACHE_VERSION}`;
 
@@ -92,21 +92,27 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // HTML pages: stale-while-revalidate.
+  // HTML pages: network-first with cache fallback.
+  // We used to stale-while-revalidate, but that handed back yesterday's HTML
+  // on every visit while the fresh page populated cache for next time. Users
+  // hit the homepage, saw an old shell that referenced stale chunks, and only
+  // got the new page after refreshing. Network-first guarantees the live page
+  // when online; the cache still backs offline visits.
   const accept = request.headers.get("accept") || "";
   const isPage = accept.includes("text/html");
   if (isPage) {
     event.respondWith(
-      caches.open(PAGE_CACHE).then(async (cache) => {
-        const cached = await cache.match(request);
-        const fetchPromise = fetch(request)
-          .then((response) => {
-            if (response && response.ok) cache.put(request, response.clone());
-            return response;
-          })
-          .catch(() => cached || cache.match("/"));
-        return cached || fetchPromise;
-      })
+      (async () => {
+        const cache = await caches.open(PAGE_CACHE);
+        try {
+          const response = await fetch(request);
+          if (response && response.ok) cache.put(request, response.clone());
+          return response;
+        } catch {
+          const cached = await cache.match(request);
+          return cached || (await cache.match("/")) || Response.error();
+        }
+      })()
     );
     return;
   }
