@@ -141,11 +141,13 @@ function parseVocab(text: string): VocabEntry[] {
     if (cols.length < 10) continue;
     const word = (cols[6] || "").trim();
     if (!word) continue;
+    const meaningEn = stripQuotes(cols[9] || "");
+    if (!meaningEn.trim()) continue;
     const angNum = parseInt((cols[0] || "").trim(), 10);
     out.push({
       word,
       meaningPa: stripQuotes(cols[8] || ""),
-      meaningEn: stripQuotes(cols[9] || ""),
+      meaningEn,
       line: (cols[1] || "").trim(),
       ang: Number.isNaN(angNum) ? 0 : angNum,
     });

@@ -86,12 +86,14 @@ export default function ArthsPage() {
           if (cols.length < 10) continue;
           const word = (cols[6] || "").trim();
           if (!word) continue;
+          const meaningEn = (cols[9] || "").trim();
+          if (!meaningEn) continue;
           recs.push({
             rank: i,
             word,
             ang: (cols[0] || "").trim(),
             meaningPa: (cols[8] || "").trim(),
-            meaningEn: (cols[9] || "").trim(),
+            meaningEn,
             romanized: cols.length > 12 ? (cols[12] || "").trim() : "",
             line: (cols[1] || "").trim(),
             ucharanTip: (cols[4] || "").trim(),
