@@ -62,8 +62,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-gurmukhi-font="guruGranthUni"
       className={`${geistSans.variable} ${geistMono.variable} ${notoGurmukhi.variable} h-full antialiased`}
     >
+      <head>
+        {/* Apply the Sangat's stored Gurmukhi-font choice before first paint
+            so users who explicitly picked Noto don't see a flash of
+            GuruGranthUni (the new site default). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var f=localStorage.getItem('gurmukhi_font');if(f==='notoSans'||f==='guruGranthUni'){document.documentElement.dataset.gurmukhiFont=f;}}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         {children}
         <ServiceWorkerRegistration />

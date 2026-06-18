@@ -16,7 +16,9 @@ const LS_KEY = "gurmukhi_font";
  * GuruGranthUni doesn't cover still renders.
  */
 export default function GurmukhiFontToggle() {
-  const [family, setFamily] = useState<FontFamily>("notoSans");
+  // Default to GuruGranthUni site-wide; flip back to Noto Sans Gurmukhi only
+  // if the Sangat has explicitly chosen it in a prior session.
+  const [family, setFamily] = useState<FontFamily>("guruGranthUni");
 
   useEffect(() => {
     try {
