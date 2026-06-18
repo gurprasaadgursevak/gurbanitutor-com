@@ -13,7 +13,7 @@ const GRANTH_META: Record<Granth, { title: string; unit: string; angKey: string;
   sggs:        { title: "Sri Guru Granth Sahib Ji",       unit: "Ang",     angKey: "granth_sggs_ang",        tsv: "/sggs.tsv" },
   dasam:       { title: "Sri Dasam Guru Granth Sahib Ji", unit: "Ang",     angKey: "granth_dasam_ang",       tsv: "/dasam.tsv" },
   bhaiGurdas:  { title: "Bhai Gurdas Sahib Ji Vaaran",    unit: "Pauri",   angKey: "granth_bhai_gurdas_ang", tsv: "/bhai_gurdas.tsv" },
-  bhaiNandlal: { title: "Bhai Nandlal Sahib Ji",          unit: "Section", angKey: "granth_bhai_nandlal_ang", tsv: "/bhai_nandlal.tsv" },
+  bhaiNandlal: { title: "Bhai Nand Lal Sahib Ji",         unit: "Section", angKey: "granth_bhai_nandlal_ang", tsv: "/bhai_nandlal.tsv" },
 };
 
 type Line = {

@@ -164,7 +164,7 @@ export default function AboutPage() {
             </GoldDotItem>
             <GoldDotItem>
               <span className="font-semibold">Bhai Gurdas Sahib Ji Vaaran &amp; Bhai
-              Nandlal Sahib Ji.</span> Both auxiliary granths are bundled with the app
+              Nand Lal Sahib Ji.</span> Both auxiliary granths are bundled with the app
               and live in the Read Gurbani granth picker on the website. Together
               that's 13,525 more verses with English steeks.
             </GoldDotItem>
@@ -176,7 +176,7 @@ export default function AboutPage() {
             <GoldDotItem>
               <span className="font-semibold">Cross-Granth search.</span> The iPhone
               search tab now indexes Sri Guru Granth Sahib Ji, Sri Guru Dasam Granth
-              Sahib Ji, Bhai Gurdas, and Bhai Nandlal in one place.
+              Sahib Ji, Bhai Gurdas, and Bhai Nand Lal in one place.
             </GoldDotItem>
             <GoldDotItem>
               <span className="font-semibold">Sehaj Paath audio improvements.</span>{" "}
