@@ -176,7 +176,7 @@ export default function AboutPage() {
             <GoldDotItem>
               <span className="font-semibold">Cross-Granth search.</span> The iPhone
               search tab now indexes Sri Guru Granth Sahib Ji, Sri Guru Dasam Granth
-              Sahib Ji, Bhai Gurdas, and Bhai Nand Lal in one place.
+              Sahib Ji, Bhai Gurdas Sahib Ji, and Bhai Nand Lal Sahib Ji in one place.
             </GoldDotItem>
             <GoldDotItem>
               <span className="font-semibold">Sehaj Paath audio improvements.</span>{" "}

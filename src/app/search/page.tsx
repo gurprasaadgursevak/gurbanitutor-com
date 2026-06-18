@@ -13,8 +13,8 @@ type Scope = "all" | "sggs" | "dasam" | "bhaiGurdas" | "bhaiNandlal";
 const GRANTH_LABEL: Record<Granth, string> = {
   sggs: "SGGS Ji",
   dasam: "Sri Dasam",
-  bhaiGurdas: "Bhai Gurdas",
-  bhaiNandlal: "Bhai Nand Lal",
+  bhaiGurdas: "Bhai Gurdas Sahib Ji",
+  bhaiNandlal: "Bhai Nand Lal Sahib Ji",
 };
 
 type Line = {
@@ -365,8 +365,8 @@ export default function SearchPage() {
                 { value: "all", label: "All" },
                 { value: "sggs", label: "SGGS Ji" },
                 { value: "dasam", label: "Sri Dasam" },
-                { value: "bhaiGurdas", label: "Bhai Gurdas" },
-                { value: "bhaiNandlal", label: "Bhai Nand Lal" },
+                { value: "bhaiGurdas", label: "Bhai Gurdas Sahib Ji" },
+                { value: "bhaiNandlal", label: "Bhai Nand Lal Sahib Ji" },
               ]}
             />
           )}
