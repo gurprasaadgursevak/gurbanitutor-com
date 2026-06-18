@@ -367,10 +367,16 @@ function GranthReader() {
     const g = searchParams.get("g");
     const angStr = searchParams.get("ang");
     const line = searchParams.get("line");
+    const baniParam = searchParams.get("bani");
 
     const validGranths: Granth[] = ["sggs", "dasam", "bhaiGurdas", "bhaiNandlal"];
     const urlGranth: Granth | null = validGranths.includes(g as Granth) ? (g as Granth) : null;
     const urlAng = angStr ? parseInt(angStr, 10) : NaN;
+
+    // `?bani=<id>` deep-links from /banis open the reader in bani mode. The
+    // selected id is resolved once the manifest + curated list have loaded.
+    if (baniParam) setSelectedBaniId(baniParam);
+    else setSelectedBaniId(null);
 
     if (urlGranth) {
       setGranth(urlGranth);
@@ -603,9 +609,7 @@ function GranthReader() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-6 pb-32 pt-10 sm:pb-28">
-        <div className="lg:grid lg:grid-cols-[1fr_18rem] lg:gap-8">
-          <div>
+      <main className="mx-auto max-w-5xl px-6 pb-32 pt-10 sm:pb-28">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
             Sri Guru Granth Sahib Ji & Sri Dasam Guru Granth Sahib Ji
@@ -614,70 +618,15 @@ function GranthReader() {
             Read Gurbani, Ang by Ang.
           </h1>
           <p className="mt-2 max-w-3xl text-slate-700">
-            Choose a Granth and an Ang, or jump straight into a Nitnem bani from the right.
-            Full Gurmukhi text appears below, with optional ਅਰਥ, English steeks, and ucharan
-            tips.
+            Choose a Granth and an Ang. Full Gurmukhi text appears below, with
+            optional ਅਰਥ, English steeks, and ucharan tips. For complete banis,
+            visit the{" "}
+            <Link href="/banis" className="font-semibold text-amber-700 hover:underline">
+              Banis directory
+            </Link>
+            .
           </p>
         </div>
-
-        {/* Mobile-only Nitnem picker (the desktop one lives in the right rail) */}
-        <details className="mt-6 rounded-2xl border border-amber-200 bg-white p-4 shadow-sm lg:hidden">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-2">
-            <span>
-              <span className="block text-xs font-semibold uppercase tracking-wider text-amber-700">
-                Nitnem Banis
-              </span>
-              <span className="block text-xs text-slate-600">
-                {selectedBani ? `Reading: ${selectedBani.name}` : "Jump to a complete bani."}
-              </span>
-            </span>
-            <span aria-hidden className="text-slate-400">
-              ▾
-            </span>
-          </summary>
-          <ul className="mt-3 divide-y divide-slate-200">
-            {BANI_LIST.map((bani) => {
-              const isActive = selectedBani?.id === bani.id;
-              return (
-                <li key={`m-${bani.id}`}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedBaniId(bani.id);
-                      setHighlightLine(null);
-                      if (typeof window !== "undefined") {
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }
-                    }}
-                    disabled={loading}
-                    className={`flex min-h-[44px] w-full items-center justify-between gap-2 py-2 text-left transition ${
-                      isActive ? "text-amber-900" : "text-slate-800"
-                    } disabled:opacity-50`}
-                  >
-                    <span className="block text-sm font-semibold">{bani.name}</span>
-                    <span aria-hidden className={isActive ? "text-amber-700" : "text-slate-400"}>
-                      {isActive ? "●" : "→"}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-          {selectedBani && (
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedBaniId(null);
-                if (typeof window !== "undefined") {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-              }}
-              className="mt-3 w-full rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
-            >
-              ← Back to Ang reading
-            </button>
-          )}
-        </details>
 
         {selectedBani && (
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3">
@@ -688,19 +637,12 @@ function GranthReader() {
               <p className="text-base font-semibold text-slate-900">{selectedBani.name}</p>
               <p className="text-xs text-slate-600">{selectedBani.subtitle}</p>
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedBaniId(null);
-                setHighlightLine(null);
-                if (typeof window !== "undefined") {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-              }}
-              className="min-h-[40px] rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
+            <Link
+              href="/banis"
+              className="inline-flex min-h-[40px] items-center rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
             >
-              Back to Ang reading
-            </button>
+              ← All banis
+            </Link>
           </div>
         )}
 
@@ -985,119 +927,6 @@ function GranthReader() {
             )}
           </>
         )}
-          </div>
-
-          {/* Right rail: Nitnem bani picker */}
-          <aside className="mt-10 lg:mt-0 lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-3xl border border-amber-200 bg-white p-4 shadow-sm sm:p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                Banis
-              </p>
-              <ul className="mt-3 divide-y divide-slate-200">
-                {BANI_LIST.map((bani) => {
-                  const isActive = selectedBani?.id === bani.id;
-                  return (
-                    <li key={bani.id}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSelectedBaniId(bani.id);
-                          setHighlightLine(null);
-                          if (typeof window !== "undefined") {
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                          }
-                        }}
-                        disabled={loading}
-                        className={`flex w-full items-center justify-between gap-2 py-2 text-left transition ${
-                          isActive
-                            ? "text-amber-900"
-                            : "text-slate-800 hover:text-amber-700"
-                        } disabled:opacity-50`}
-                      >
-                        <span className="block text-sm font-semibold">{bani.name}</span>
-                        <span
-                          aria-hidden
-                          className={isActive ? "text-amber-700" : "text-slate-400"}
-                        >
-                          {isActive ? "●" : "→"}
-                        </span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-              {extraBaniCategories.length > 0 && (
-                <div className="mt-4 border-t border-amber-200 pt-3">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                    More Amrit Banis
-                  </p>
-                  <p className="mt-1 text-[11px] text-slate-500">
-                    Beant Bani, Bhagat Bani, Baee Vara, and more.
-                  </p>
-                  {extraBaniCategories.map((cat) => (
-                    <details key={cat.id} className="mt-2 rounded-lg border border-slate-200 bg-slate-50 px-2 py-1.5">
-                      <summary className="cursor-pointer list-none text-xs font-semibold text-slate-800 marker:hidden">
-                        <span className="inline-flex items-center justify-between gap-2 w-full">
-                          <span>{cat.name}</span>
-                          <span className="text-[10px] font-medium text-slate-500">
-                            {cat.banis.length} banis
-                          </span>
-                        </span>
-                      </summary>
-                      <ul className="mt-2 divide-y divide-slate-200">
-                        {cat.banis.map((bani) => {
-                          const isActive = selectedBani?.id === bani.id;
-                          return (
-                            <li key={bani.id}>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  setSelectedBaniId(bani.id);
-                                  setHighlightLine(null);
-                                  if (typeof window !== "undefined") {
-                                    window.scrollTo({ top: 0, behavior: "smooth" });
-                                  }
-                                }}
-                                disabled={loading}
-                                className={`flex w-full items-center justify-between gap-2 py-1.5 text-left transition ${
-                                  isActive
-                                    ? "text-amber-900"
-                                    : "text-slate-700 hover:text-amber-700"
-                                } disabled:opacity-50`}
-                              >
-                                <span className="block text-xs font-medium">{bani.name}</span>
-                                <span
-                                  aria-hidden
-                                  className={isActive ? "text-amber-700" : "text-slate-400"}
-                                >
-                                  {isActive ? "●" : "→"}
-                                </span>
-                              </button>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </details>
-                  ))}
-                </div>
-              )}
-              {selectedBani && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedBaniId(null);
-                    if (typeof window !== "undefined") {
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }
-                  }}
-                  className="mt-3 w-full min-h-[40px] rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
-                >
-                  ← Back to Ang reading
-                </button>
-              )}
-            </div>
-          </aside>
-        </div>
       </main>
 
       <footer className="border-t border-slate-200 bg-white py-8">
