@@ -298,12 +298,22 @@ function buildBaniLines(
           ucharanTip: strip(cols[5] || ""),
           extendedUcharanTip: strip(cols[6] || ""),
           arth: strip(cols[7] || ""),
+          romanized: strip(cols[9] || ""),
         });
       } else {
         if (cols.length < 2) continue;
         const ang = parseInt((cols[0] || "").trim(), 10);
         if (Number.isNaN(ang)) continue;
-        out.push({ ang, gurmukhi: strip(cols[1] || "") });
+        out.push({
+          ang,
+          gurmukhi: strip(cols[1] || ""),
+          ucharanTip: strip(cols[2] || ""),
+          extendedUcharanTip: strip(cols[3] || ""),
+          steek1: strip(cols[4] || ""),
+          steek2: strip(cols[5] || ""),
+          romanized: strip(cols[6] || ""),
+          arth: strip(cols[7] || ""),
+        });
       }
     }
   }
