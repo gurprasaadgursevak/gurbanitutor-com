@@ -40,5 +40,10 @@ cp "$SRC/svaiye_deenan.tsv"    "$DEST/svaiye_deenan.tsv"
 cp "$SRC/mool_mantar.tsv"      "$DEST/mool_mantar.tsv"
 cp "$SRC/rakhia_de_shabad.tsv" "$DEST/rakhia_de_shabad.tsv"
 
+# Bani manifest (precomputed segments for all 124 additional Amrit Banis
+# across 10 categories: Beant Bani, Bhagat Bani, Baee Vara, Beant Dasam
+# Bani, Panj Granthi, Das Granthi, Ardas, Astotar, Kavach, Gurbani Pothi).
+cp "$SRC/banis_manifest.json" "$DEST/banis_manifest.json"
+
 echo "Synced TSVs into $DEST"
 ls -lh "$DEST"/{sggs,dasam,arths,bhai_gurdas,bhai_nandlal,aarti,svaiye_deenan,mool_mantar,rakhia_de_shabad}.tsv

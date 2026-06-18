@@ -1,0 +1,4749 @@
+{
+  "categories": [
+    {
+      "id": 3,
+      "name": "Beant Bani",
+      "nameGurmukhi": "ਬੇਅੰਤ ਬਾਣੀ",
+      "slug": "beant_bani",
+      "banis": [
+        {
+          "sectionId": 27,
+          "name": "Vanjara",
+          "nameGurmukhi": "ਵਣਜਾਰਾ",
+          "tsv": "beant_bani_vanjara_27.tsv",
+          "verseCount": 44,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                3256,
+                3299
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 28,
+          "name": "Pahray",
+          "nameGurmukhi": "ਪਹਰੇ",
+          "tsv": "beant_bani_pahray_28.tsv",
+          "verseCount": 144,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                3027,
+                3139
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47627,
+                47657
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 29,
+          "name": "Dukh Bhanjani Sahib",
+          "nameGurmukhi": "ਦੁਖ ਭੰਜਨੀ ਸਾਹਿਬ",
+          "tsv": "beant_bani_dukh_bhanjani_sahib_29.tsv",
+          "verseCount": 473,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                9403,
+                9413
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3656,
+                3661
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                8176,
+                8197
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                8220,
+                8230
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                8420,
+                8430
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                8660,
+                8677
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                8714,
+                8724
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                8906,
+                8916
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                22413,
+                22419
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26612,
+                26622
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26769,
+                26779
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26888,
+                26894
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26902,
+                26915
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26923,
+                26966
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27057,
+                27075
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27245,
+                27255
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27344,
+                27354
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27401,
+                27411
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27467,
+                27477
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27496,
+                27502
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34215,
+                34229
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34438,
+                34451
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34459,
+                34465
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34480,
+                34486
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34491,
+                34497
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34757,
+                34767
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34856,
+                34866
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34878,
+                34892
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34970,
+                34976
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34984,
+                34997
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35010,
+                35016
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35038,
+                35044
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35185,
+                35191
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35316,
+                35322
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36473,
+                36479
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36784,
+                36802
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47077,
+                47085
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                48692,
+                48702
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                49015,
+                49033
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                52412,
+                52418
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 30,
+          "name": "Karhalay",
+          "nameGurmukhi": "ਕਰਹਲੇ",
+          "tsv": "beant_bani_karhalay_30.tsv",
+          "verseCount": 45,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                10214,
+                10258
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 31,
+          "name": "Tithi Mahalla 1",
+          "nameGurmukhi": "ਥਿਤੀ ਮਹਲਾ ੧",
+          "tsv": "beant_bani_tithi_mahalla_1_31.tsv",
+          "verseCount": 124,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                35713,
+                35836
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 32,
+          "name": "Tithi Mahalla 5",
+          "nameGurmukhi": "ਥਿਤੀ ਮਹਲਾ ੫",
+          "tsv": "beant_bani_tithi_mahalla_5_32.tsv",
+          "verseCount": 210,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                13615,
+                13824
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 33,
+          "name": "Bavan Akhri Kabir Jio Ki",
+          "nameGurmukhi": "ਬਾਵਨ ਅਖਰੀ ਕਬੀਰ ਜੀਉ ਕੀ",
+          "tsv": "beant_bani_bavan_akhri_kabir_jio_ki_33.tsv",
+          "verseCount": 168,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                15543,
+                15710
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 34,
+          "name": "Tithi Kabir Jio Ki",
+          "nameGurmukhi": "ਥਿਤੰੀ ਕਬੀਰ ਜੀ ਕੰੀ",
+          "tsv": "beant_bani_tithi_kabir_jio_ki_34.tsv",
+          "verseCount": 74,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                15711,
+                15784
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 35,
+          "name": "Vaar Mahalla 3",
+          "nameGurmukhi": "ਵਾਰ ਮਹਲਾ ੩",
+          "tsv": "beant_bani_vaar_mahalla_3_35.tsv",
+          "verseCount": 64,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                35837,
+                35900
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 36,
+          "name": "Vaar Kabir Ji",
+          "nameGurmukhi": "ਵਾਰ ਕਬੀਰ ਜੀ",
+          "tsv": "beant_bani_vaar_kabir_ji_36.tsv",
+          "verseCount": 36,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                15785,
+                15820
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 37,
+          "name": "Birharay",
+          "nameGurmukhi": "ਬਿਰਹੜੇ",
+          "tsv": "beant_bani_birharay_37.tsv",
+          "verseCount": 26,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                19817,
+                19842
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 38,
+          "name": "Pati Mahalla 1",
+          "nameGurmukhi": "ਪਟੀ ਮਹਲਾ ੧",
+          "tsv": "beant_bani_pati_mahalla_1_38.tsv",
+          "verseCount": 74,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                19843,
+                19916
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 39,
+          "name": "Pati Mahalla 3",
+          "nameGurmukhi": "ਪਟੀ ਮਹਲਾ ੩",
+          "tsv": "beant_bani_pati_mahalla_3_39.tsv",
+          "verseCount": 40,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                19917,
+                19956
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 40,
+          "name": "Ghoria",
+          "nameGurmukhi": "ਘੋੜੀਆ",
+          "tsv": "beant_bani_ghoria_40.tsv",
+          "verseCount": 51,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                25290,
+                25340
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 41,
+          "name": "Alahnia",
+          "nameGurmukhi": "ਅਲਾਹਣੀਆ",
+          "tsv": "beant_bani_alahnia_41.tsv",
+          "verseCount": 135,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                25432,
+                25566
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 42,
+          "name": "Jaatsri Ki Vaar",
+          "nameGurmukhi": "ਜੈਤਸਰੀ ਕੀ ਵਾਰ",
+          "tsv": "beant_bani_jaatsri_ki_vaar_42.tsv",
+          "verseCount": 223,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                30442,
+                30664
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 43,
+          "name": "Kuchaji",
+          "nameGurmukhi": "ਕੁਚਜੀ",
+          "tsv": "beant_bani_kuchaji_43.tsv",
+          "verseCount": 18,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                32688,
+                32705
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 44,
+          "name": "Suchaji",
+          "nameGurmukhi": "ਸੁਚਜੀ",
+          "tsv": "beant_bani_suchaji_44.tsv",
+          "verseCount": 11,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                32706,
+                32716
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 45,
+          "name": "Gunvanti",
+          "nameGurmukhi": "ਗੁਣਵੰਤੀ",
+          "tsv": "beant_bani_gunvanti_45.tsv",
+          "verseCount": 14,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                32717,
+                32730
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 46,
+          "name": "Sukhmana Sahib",
+          "nameGurmukhi": "ਸੁਖਮਨਾ ਸਾਹਿਬ",
+          "tsv": "beant_bani_sukhmana_sahib_46.tsv",
+          "verseCount": 460,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                35497,
+                35611
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42027,
+                42141
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                56066,
+                56180
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                56591,
+                56705
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 47,
+          "name": "Ramkali Sadh",
+          "nameGurmukhi": "ਰਾਮਕਲੀ ਸਦ",
+          "tsv": "beant_bani_ramkali_sadh_47.tsv",
+          "verseCount": 38,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                39517,
+                39554
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 48,
+          "name": "Mahalla 5 Ruti",
+          "nameGurmukhi": "ਮਹਲਾ ੫ ਰੁਤੀ",
+          "tsv": "beant_bani_mahalla_5_ruti_48.tsv",
+          "verseCount": 97,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                39675,
+                39771
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 49,
+          "name": "Sahansar Nama",
+          "nameGurmukhi": "ਸਹੰਸਰ ਨਾਮਾ",
+          "tsv": "beant_bani_sahansar_nama_49.tsv",
+          "verseCount": 64,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                46407,
+                46470
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 50,
+          "name": "Salok Sahaskriti",
+          "nameGurmukhi": "ਸਲੋਕ ਸਹਸਕ੍ਰਿਤੀ",
+          "tsv": "beant_bani_salok_sahaskriti_50.tsv",
+          "verseCount": 261,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                57811,
+                58071
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 51,
+          "name": "Gatha",
+          "nameGurmukhi": "ਗਾਥਾ",
+          "tsv": "beant_bani_gatha_51.tsv",
+          "verseCount": 61,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                58072,
+                58132
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 52,
+          "name": "Phunhay",
+          "nameGurmukhi": "ਫੁਨਹੇ",
+          "tsv": "beant_bani_phunhay_52.tsv",
+          "verseCount": 94,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                58133,
+                58226
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 53,
+          "name": "Chaubolay",
+          "nameGurmukhi": "ਚਉਬੋਲੇ",
+          "tsv": "beant_bani_chaubolay_53.tsv",
+          "verseCount": 24,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                58227,
+                58250
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 54,
+          "name": "Salok Bhagat Kabir",
+          "nameGurmukhi": "ਸਲੋਕ ਭਗਤ ਕਬੀਰ",
+          "tsv": "beant_bani_salok_bhagat_kabir_54.tsv",
+          "verseCount": 494,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                58251,
+                58744
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 55,
+          "name": "Salok Bhagat Farid",
+          "nameGurmukhi": "ਸਲੋਕ ਭਗਤ ਫਰੀਦ",
+          "tsv": "beant_bani_salok_bhagat_farid_55.tsv",
+          "verseCount": 297,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                58745,
+                59041
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 56,
+          "name": "Svaiye Sri Mukhbakia",
+          "nameGurmukhi": "ਸਵਯੇ ਸ੍ਰੀ ਮੁਖਬਾਕੵ",
+          "tsv": "beant_bani_svaiye_sri_mukhbakia_56.tsv",
+          "verseCount": 55,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59042,
+                59096
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 57,
+          "name": "Svaiye Sri Mukhbakia",
+          "nameGurmukhi": "ਸਵਯੇ ਸ੍ਰੀ ਮੁਖਬਾਕੵ",
+          "tsv": "beant_bani_svaiye_sri_mukhbakia_57.tsv",
+          "verseCount": 70,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59097,
+                59166
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 58,
+          "name": "Svaiye Mahalay Pahilay Kay",
+          "nameGurmukhi": "ਸਵਈਏ ਮਹਲੇ ਪਹਿਲੇ ਕੇ",
+          "tsv": "beant_bani_svaiye_mahalay_pahilay_kay_58.tsv",
+          "verseCount": 52,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59167,
+                59218
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 59,
+          "name": "Svaiye Mahalay Doojay Kay",
+          "nameGurmukhi": "ਸਵਈਏ ਮਹਲੇ ਦੂਜੇ ਕੇ",
+          "tsv": "beant_bani_svaiye_mahalay_doojay_kay_59.tsv",
+          "verseCount": 52,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59219,
+                59270
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 60,
+          "name": "Svaiye Mahalay Teejay Kay",
+          "nameGurmukhi": "ਸਵਈਏ ਮਹਲੇ ਤੀਜੇ ਕੇ",
+          "tsv": "beant_bani_svaiye_mahalay_teejay_kay_60.tsv",
+          "verseCount": 124,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59271,
+                59394
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 61,
+          "name": "Svaiye Mahalay Chauthay Kay",
+          "nameGurmukhi": "ਸਵਈਏ ਮਹਲੇ ਚਉਥੇ ਕੇ",
+          "tsv": "beant_bani_svaiye_mahalay_chauthay_kay_61.tsv",
+          "verseCount": 321,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59395,
+                59715
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 62,
+          "name": "Svaiye Mahalay Panjvay Kay",
+          "nameGurmukhi": "ਸਵਈਏ ਮਹਲੇ ਪੰਜਵੇ ਕੇ",
+          "tsv": "beant_bani_svaiye_mahalay_panjvay_kay_62.tsv",
+          "verseCount": 105,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59716,
+                59820
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 63,
+          "name": "Varaa Tay Vadhik Mahalla Pahila",
+          "nameGurmukhi": "ਵਾਰਾਂ ਤੇ ਵਧੀਕ ਮਹਲਾ ੧",
+          "tsv": "beant_bani_varaa_tay_vadhik_mahalla_pahila_63.tsv",
+          "verseCount": 118,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59821,
+                59938
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 64,
+          "name": "Varaa Tay Vadhik Mahalla Teeja",
+          "nameGurmukhi": "ਵਾਰਾਂ ਤੇ ਵਧੀਕ ਮਹਲਾ ੩",
+          "tsv": "beant_bani_varaa_tay_vadhik_mahalla_teeja_64.tsv",
+          "verseCount": 304,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                59939,
+                60242
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 65,
+          "name": "Varaa Tay Vadhik Mahalla Chautha",
+          "nameGurmukhi": "ਵਾਰਾਂ ਤੇ ਵਧੀਕ ਮਹਲਾ ੪",
+          "tsv": "beant_bani_varaa_tay_vadhik_mahalla_chautha_65.tsv",
+          "verseCount": 125,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                60243,
+                60367
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 66,
+          "name": "Varaa Tay Vadhik Mahalla Panjva",
+          "nameGurmukhi": "ਵਾਰਾਂ ਤੇ ਵਧੀਕ ਮਹਲਾ ੫",
+          "tsv": "beant_bani_varaa_tay_vadhik_mahalla_panjva_66.tsv",
+          "verseCount": 54,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                60368,
+                60421
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 67,
+          "name": "Varaa Tay Vadhik Mahalla Naavaa",
+          "nameGurmukhi": "ਵਾਰਾਂ ਤੇ ਵਧੀਕ ਮਹਲਾ ੯",
+          "tsv": "beant_bani_varaa_tay_vadhik_mahalla_naavaa_67.tsv",
+          "verseCount": 117,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                60422,
+                60538
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Panj Granthi",
+      "nameGurmukhi": "ਪੰਜ ਗ੍ਰੰਥੀ",
+      "slug": "panj_granthi",
+      "banis": [
+        {
+          "sectionId": 68,
+          "name": "Jap Ji Sahib",
+          "nameGurmukhi": "ਜਪੁ ਜੀ ਸਾਹਿਬ",
+          "tsv": "panj_granthi_jap_ji_sahib_68.tsv",
+          "verseCount": 385,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                2,
+                386
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 69,
+          "name": "Anand Sahib",
+          "nameGurmukhi": "ਅਨੰਦੁ ਸਾਹਿਬ",
+          "tsv": "panj_granthi_anand_sahib_69.tsv",
+          "verseCount": 210,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                39307,
+                39516
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 70,
+          "name": "Shabad Hazaray",
+          "nameGurmukhi": "ਸ਼ਬਦ ਹਜ਼ਾਰੇ",
+          "tsv": "panj_granthi_shabad_hazaray_70.tsv",
+          "verseCount": 103,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                3846,
+                3862
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                28676,
+                28692
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31040,
+                31073
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31392,
+                31402
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                33945,
+                33968
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 71,
+          "name": "Rehraas Sahib",
+          "nameGurmukhi": "ਰਹਰਾਸਿ ਸਾਹਿਬ",
+          "tsv": "panj_granthi_rehraas_sahib_71.tsv",
+          "verseCount": 229,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                20473,
+                20476
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                388,
+                388
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21206,
+                21213
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                387,
+                534
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                39307,
+                39334
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                39511,
+                39516
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                60539,
+                60549
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                41288,
+                41296
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                23125,
+                23138
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 72,
+          "name": "Kirtan Sohila",
+          "nameGurmukhi": "ਕੀਰਤਨ ਸੋਹਿਲਾ",
+          "tsv": "panj_granthi_kirtan_sohila_72.tsv",
+          "verseCount": 56,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                535,
+                590
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 73,
+          "name": "Bavan Akhri",
+          "nameGurmukhi": "ਬਾਵਨ ਅਖਰੀ",
+          "tsv": "panj_granthi_bavan_akhri_73.tsv",
+          "verseCount": 689,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                10899,
+                11587
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 74,
+          "name": "Sukhmani Sahib",
+          "nameGurmukhi": "ਸੁਖਮਨੀ ਸਾਹਿਬ",
+          "tsv": "panj_granthi_sukhmani_sahib_74.tsv",
+          "verseCount": 2027,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                11588,
+                13614
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 75,
+          "name": "Asa Di Vaar",
+          "nameGurmukhi": "ਆਸਾ ਦੀ ਵਾਰ",
+          "tsv": "panj_granthi_asa_di_vaar_75.tsv",
+          "verseCount": 734,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                20374,
+                20379
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20878,
+                20897
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20380,
+                20383
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20898,
+                20932
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20384,
+                20387
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20933,
+                20965
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20388,
+                20391
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20966,
+                20996
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20392,
+                20396
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20997,
+                21034
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20397,
+                20400
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21035,
+                21060
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20401,
+                20404
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21061,
+                21093
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20405,
+                20408
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21094,
+                21116
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20409,
+                20413
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21117,
+                21147
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20414,
+                20417
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21148,
+                21176
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20418,
+                20421
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21177,
+                21205
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20422,
+                20425
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21206,
+                21231
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20426,
+                20430
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21232,
+                21259
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20431,
+                20434
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21260,
+                21285
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20435,
+                20438
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21286,
+                21320
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20439,
+                20442
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21321,
+                21355
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20443,
+                20447
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21356,
+                21371
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20448,
+                20451
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21372,
+                21394
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20452,
+                20455
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21395,
+                21419
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20456,
+                20459
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21420,
+                21440
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20460,
+                20464
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21441,
+                21454
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20465,
+                20468
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21455,
+                21481
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20469,
+                20472
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21482,
+                21493
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                20473,
+                20476
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21494,
+                21508
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 76,
+          "name": "Dakhni Onkar",
+          "nameGurmukhi": "ਦਖਣੀ ਓਅੰਕਾਰ",
+          "tsv": "panj_granthi_dakhni_onkar_76.tsv",
+          "verseCount": 399,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                39772,
+                40170
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 77,
+          "name": "Sidh Gosht",
+          "nameGurmukhi": "ਸਿਧ ਗੋਸਟਿ",
+          "tsv": "panj_granthi_sidh_gosht_77.tsv",
+          "verseCount": 406,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                40171,
+                40576
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Das Granthi",
+      "nameGurmukhi": "ਦਸ ਗ੍ਰੰਥੀ",
+      "slug": "das_granthi",
+      "banis": [
+        {
+          "sectionId": 78,
+          "name": "Jaap Sahib",
+          "nameGurmukhi": "ਜਾਪੁ ਸਾਹਿਬ",
+          "tsv": "das_granthi_jaap_sahib_78.tsv",
+          "verseCount": 791,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                1,
+                791
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 79,
+          "name": "Akal Ustat",
+          "nameGurmukhi": "ਅਕਾਲ ਉਸਤਤਿ",
+          "tsv": "das_granthi_akal_ustat_79.tsv",
+          "verseCount": 1100,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                792,
+                1891
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 80,
+          "name": "Bachitar Natak",
+          "nameGurmukhi": "ਬਚਿਤ੍ਰ ਨਾਟਕ",
+          "tsv": "das_granthi_bachitar_natak_80.tsv",
+          "verseCount": 1959,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                1892,
+                3850
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 81,
+          "name": "Chandi Charitar 1",
+          "nameGurmukhi": "ਚੰਡੀ ਚਰਿਤ੍ਰ ੧",
+          "tsv": "das_granthi_chandi_charitar_1_81.tsv",
+          "verseCount": 924,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                3851,
+                4774
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 82,
+          "name": "Chandi Charitar 2",
+          "nameGurmukhi": "ਚੰਡੀ ਚਰਿਤ੍ਰ ੨",
+          "tsv": "das_granthi_chandi_charitar_2_82.tsv",
+          "verseCount": 1102,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                4775,
+                5876
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 83,
+          "name": "Chandi Di Vaar",
+          "nameGurmukhi": "ਚੰਡੀ ਦੀ ਵਾਰ",
+          "tsv": "das_granthi_chandi_di_vaar_83.tsv",
+          "verseCount": 390,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                5877,
+                6266
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 84,
+          "name": "Gian Prabodh",
+          "nameGurmukhi": "ਗਿਆਨ ਪ੍ਰਬੋਧ",
+          "tsv": "das_granthi_gian_prabodh_84.tsv",
+          "verseCount": 1427,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                6267,
+                7693
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Beant Dasam Bani",
+      "nameGurmukhi": "ਬੇਅੰਤ ਦਸਮ ਬਾਣੀ",
+      "slug": "beant_dasam_bani",
+      "banis": [
+        {
+          "sectionId": 85,
+          "name": "Akal Ustat Chaupai",
+          "nameGurmukhi": "ਅਕਾਲ ਉਸਤਤਿ ਚੌਪਈ",
+          "tsv": "beant_dasam_bani_akal_ustat_chaupai_85.tsv",
+          "verseCount": 48,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                792,
+                839
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 86,
+          "name": "Chandi Charitar Ustat",
+          "nameGurmukhi": "ਚੰਡੀ ਚਰਿਤ੍ਰ ਉਸਤਤ",
+          "tsv": "beant_dasam_bani_chandi_charitar_ustat_86.tsv",
+          "verseCount": 25,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                5851,
+                5875
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 87,
+          "name": "Bara Maha (Phagan)",
+          "nameGurmukhi": "ਬਾਰਾ ਮਾਹਾ (ਫਾਗਨ)",
+          "tsv": "beant_dasam_bani_bara_maha_phagan_87.tsv",
+          "verseCount": 60,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                17431,
+                17490
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 88,
+          "name": "Bara Maha (Prem Chhaki)",
+          "nameGurmukhi": "ਬਾਰਾ ਮਾਹਾ (ਪ੍ਰੇਮ ਛਕੀ)",
+          "tsv": "beant_dasam_bani_bara_maha_prem_chhaki_88.tsv",
+          "verseCount": 74,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                17649,
+                17722
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 89,
+          "name": "33 Svaiye",
+          "nameGurmukhi": "੩੩ ਸ੍ਵੈਯੇ",
+          "tsv": "beant_dasam_bani_33_svaiye_89.tsv",
+          "verseCount": 135,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                32843,
+                32977
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 90,
+          "name": "Khalsa Mehima",
+          "nameGurmukhi": "ਖਾਲਸਾ ਮਹਿਮਾ",
+          "tsv": "beant_dasam_bani_khalsa_mehima_90.tsv",
+          "verseCount": 18,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                32983,
+                33000
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 91,
+          "name": "Shastar Naam Mala Bhaugati Ustat",
+          "nameGurmukhi": "ਸਸਤ੍ਰ ਨਾਮ ਮਾਲਾ ਭਗਉਤੀ ਉਸਤਤ",
+          "tsv": "beant_dasam_bani_shastar_naam_mala_bhaugati_ustat_91.tsv",
+          "verseCount": 60,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                33001,
+                33060
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 92,
+          "name": "Zafarnama",
+          "nameGurmukhi": "ਜ਼ਫਰਨਾਮਾ",
+          "tsv": "beant_dasam_bani_zafarnama_92.tsv",
+          "verseCount": 226,
+          "segments": [
+            {
+              "kind": "dasam",
+              "range": [
+                67199,
+                67424
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Bhagat Bani",
+      "nameGurmukhi": "ਭਗਤ ਬਾਣੀ",
+      "slug": "bhagat_bani",
+      "banis": [
+        {
+          "sectionId": 93,
+          "name": "Raag Sri Raag",
+          "nameGurmukhi": "ਰਾਗੁ ਸਿਰੀ ਰਾਗੁ",
+          "tsv": "bhagat_bani_raag_sri_raag_93.tsv",
+          "verseCount": 75,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                3678,
+                3752
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 94,
+          "name": "Raag Gauri",
+          "nameGurmukhi": "ਰਾਗੁ ਗਉੜੀ",
+          "tsv": "bhagat_bani_raag_gauri_94.tsv",
+          "verseCount": 1127,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                14768,
+                15894
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 95,
+          "name": "Raag Asa",
+          "nameGurmukhi": "ਰਾਗੁ ਆਸਾ",
+          "tsv": "bhagat_bani_raag_asa_95.tsv",
+          "verseCount": 580,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                21509,
+                22088
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 96,
+          "name": "Raag Gujari",
+          "nameGurmukhi": "ਰਾਗੁ ਗੂਜਰੀ",
+          "tsv": "bhagat_bani_raag_gujari_96.tsv",
+          "verseCount": 99,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                23457,
+                23555
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 97,
+          "name": "Raag Sorath",
+          "nameGurmukhi": "ਰਾਗੁ ਸੋਰਠਿ",
+          "tsv": "bhagat_bani_raag_sorath_97.tsv",
+          "verseCount": 278,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                28398,
+                28675
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 98,
+          "name": "Raag Dhanasari",
+          "nameGurmukhi": "ਰਾਗੁ ਧਨਾਸਰੀ",
+          "tsv": "bhagat_bani_raag_dhanasari_98.tsv",
+          "verseCount": 173,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                29918,
+                30090
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 99,
+          "name": "Raag Jaitsari",
+          "nameGurmukhi": "ਰਾਗੁ ਜੈਤਸਰੀ",
+          "tsv": "bhagat_bani_raag_jaitsari_99.tsv",
+          "verseCount": 16,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                30665,
+                30680
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 100,
+          "name": "Raag Todi",
+          "nameGurmukhi": "ਰਾਗੁ ਟੋਡੀ",
+          "tsv": "bhagat_bani_raag_todi_100.tsv",
+          "verseCount": 23,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                30940,
+                30962
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 101,
+          "name": "Raag Tilang",
+          "nameGurmukhi": "ਰਾਗੁ ਤਿਲੰਗ",
+          "tsv": "bhagat_bani_raag_tilang_101.tsv",
+          "verseCount": 32,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                31257,
+                31288
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 102,
+          "name": "Raag Suhi",
+          "nameGurmukhi": "ਰਾਗੁ ਸੂਹੀ",
+          "tsv": "bhagat_bani_raag_suhi_102.tsv",
+          "verseCount": 132,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                33813,
+                33944
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 103,
+          "name": "Raag Bilaval",
+          "nameGurmukhi": "ਰਾਗੁ ਬਿਲਾਵਲ",
+          "tsv": "bhagat_bani_raag_bilaval_103.tsv",
+          "verseCount": 145,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                36412,
+                36556
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 104,
+          "name": "Raag Gaund",
+          "nameGurmukhi": "ਰਾਗੁ ਗੋਂਡ",
+          "tsv": "bhagat_bani_raag_gaund_104.tsv",
+          "verseCount": 319,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                37069,
+                37387
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 105,
+          "name": "Raag Ramkali",
+          "nameGurmukhi": "ਰਾਗੁ ਰਾਮਕਲੀ",
+          "tsv": "bhagat_bani_raag_ramkali_105.tsv",
+          "verseCount": 240,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                41613,
+                41852
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 106,
+          "name": "Raag Mali Gaura",
+          "nameGurmukhi": "ਰਾਗੁ ਮਾਲੀ ਗਉੜਾ",
+          "tsv": "bhagat_bani_raag_mali_gaura_106.tsv",
+          "verseCount": 23,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                42319,
+                42341
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 107,
+          "name": "Raag Maroo",
+          "nameGurmukhi": "ਰਾਗੁ ਮਾਰੂ",
+          "tsv": "bhagat_bani_raag_maroo_107.tsv",
+          "verseCount": 147,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                47376,
+                47522
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 108,
+          "name": "Raag Kedara",
+          "nameGurmukhi": "ਰਾਗੁ ਕੇਦਾਰਾ",
+          "tsv": "bhagat_bani_raag_kedara_108.tsv",
+          "verseCount": 65,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                48065,
+                48129
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 109,
+          "name": "Raag Bhairon",
+          "nameGurmukhi": "ਰਾਗੁ ਭੈਰੳ",
+          "tsv": "bhagat_bani_raag_bhairon_109.tsv",
+          "verseCount": 555,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                49708,
+                50262
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 110,
+          "name": "Raag Basant",
+          "nameGurmukhi": "ਰਾਗੁ ਬਸੰਤੁ",
+          "tsv": "bhagat_bani_raag_basant_110.tsv",
+          "verseCount": 174,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                51536,
+                51709
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 111,
+          "name": "Raag Sarang",
+          "nameGurmukhi": "ਰਾਗੁ ਸਾਰੰਗ",
+          "tsv": "bhagat_bani_raag_sarang_111.tsv",
+          "verseCount": 81,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                53832,
+                53912
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 112,
+          "name": "Raag Malar",
+          "nameGurmukhi": "ਰਾਗੁ ਮਲਾਰ",
+          "tsv": "bhagat_bani_raag_malar_112.tsv",
+          "verseCount": 67,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                55477,
+                55543
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 113,
+          "name": "Raag Kanara",
+          "nameGurmukhi": "ਰਾਗੁ ਕਾਨੜਾ",
+          "tsv": "bhagat_bani_raag_kanara_113.tsv",
+          "verseCount": 8,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                56440,
+                56447
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 114,
+          "name": "Raag Prabhati",
+          "nameGurmukhi": "ਰਾਗੁ ਪ੍ਰਭਾਤੀ",
+          "tsv": "bhagat_bani_raag_prabhati_114.tsv",
+          "verseCount": 114,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                57664,
+                57777
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 115,
+          "name": "Salok Bhagat Kabir Ji",
+          "nameGurmukhi": "ਸਲੋਕ ਭਗਤ ਕਬੀਰ ਜੀਉ ਕੇ",
+          "tsv": "bhagat_bani_salok_bhagat_kabir_ji_115.tsv",
+          "verseCount": 494,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                58251,
+                58744
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 116,
+          "name": "Salok Shaikh Farid Ji",
+          "nameGurmukhi": "ਸਲੋਕ ਸ਼ੇਖ ਫਰੀਦ ਕੇ",
+          "tsv": "bhagat_bani_salok_shaikh_farid_ji_116.tsv",
+          "verseCount": 297,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                58745,
+                59041
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Baee Vara",
+      "nameGurmukhi": "ਬਾਈ ਵਾਰਾਂ",
+      "slug": "baee_vara",
+      "banis": [
+        {
+          "sectionId": 117,
+          "name": "SriRaag Ki Vaar Mahalla 4",
+          "nameGurmukhi": "ਸਿਰੀਰਾਗ ਕੀ ਵਾਰ ਮਹਲਾ ੪",
+          "tsv": "baee_vara_sriraag_ki_vaar_mahalla_4_117.tsv",
+          "verseCount": 378,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                3300,
+                3677
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 118,
+          "name": "Vaar Majh Ki",
+          "nameGurmukhi": "ਵਾਰ ਮਾਝ ਕੀ",
+          "tsv": "baee_vara_vaar_majh_ki_118.tsv",
+          "verseCount": 652,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                5618,
+                6269
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 119,
+          "name": "Gauri Ki Vaar Mahalla 4",
+          "nameGurmukhi": "ਗਉੜੀ ਕੀ ਵਾਰ ਮਹਲਾ ੪",
+          "tsv": "baee_vara_gauri_ki_vaar_mahalla_4_119.tsv",
+          "verseCount": 671,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                13825,
+                14495
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 120,
+          "name": "Gauri Ki Vaar Mahalla 5",
+          "nameGurmukhi": "ਗਉੜੀ ਕੀ ਵਾਰ ਮਹਲਾ ੫",
+          "tsv": "baee_vara_gauri_ki_vaar_mahalla_5_120.tsv",
+          "verseCount": 272,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                14496,
+                14767
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 121,
+          "name": "Asa Di Vaar",
+          "nameGurmukhi": "ਆਸਾ ਦੀ ਵਾਰ",
+          "tsv": "baee_vara_asa_di_vaar_121.tsv",
+          "verseCount": 631,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                20878,
+                21508
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 122,
+          "name": "Gujri Ki Vaar Mahalla 3",
+          "nameGurmukhi": "ਗੂਜਰੀ ਕੀ ਵਾਰ ਮਹਲਾ ੩",
+          "tsv": "baee_vara_gujri_ki_vaar_mahalla_3_122.tsv",
+          "verseCount": 378,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                22745,
+                23122
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 123,
+          "name": "Raag Gujri Ki Vaar Mahalla 5",
+          "nameGurmukhi": "ਰਾਗੁ ਗੂਜਰੀ ਵਾਰ ਮਹਲਾ ੫",
+          "tsv": "baee_vara_raag_gujri_ki_vaar_mahalla_5_123.tsv",
+          "verseCount": 334,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                23123,
+                23456
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 124,
+          "name": "Bihagaray Ki Vaar Mahalla 4",
+          "nameGurmukhi": "ਬਿਹਾਗੜੇ ਕੀ ਵਾਰ ਮਹਲਾ ੪",
+          "tsv": "baee_vara_bihagaray_ki_vaar_mahalla_4_124.tsv",
+          "verseCount": 348,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                24262,
+                24609
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 125,
+          "name": "Vadhans Ki Vaar Mahalla 4",
+          "nameGurmukhi": "ਵਡਹੰਸ ਕੀ ਵਾਰ ਮਹਲਾ ੪",
+          "tsv": "baee_vara_vadhans_ki_vaar_mahalla_4_125.tsv",
+          "verseCount": 366,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                25668,
+                26033
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 126,
+          "name": "Raag Sorath Vaar Mahallay 4 Ki",
+          "nameGurmukhi": "ਰਾਗੁ ਸੋਰਠਿ ਵਾਰ ਮਹਲੇ ੪ ਕੀ",
+          "tsv": "baee_vara_raag_sorath_vaar_mahallay_4_ki_126.tsv",
+          "verseCount": 493,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                27905,
+                28397
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 127,
+          "name": "Jaitsari Ki Vaar",
+          "nameGurmukhi": "ਜੈਤਸਰੀ ਕੀ ਵਾਰ ਮਹਲਾ ੫",
+          "tsv": "baee_vara_jaitsari_ki_vaar_127.tsv",
+          "verseCount": 223,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                30442,
+                30664
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 128,
+          "name": "Vaar Soohi Ki",
+          "nameGurmukhi": "ਵਾਰ ਸੂਹੀ ਕੀ",
+          "tsv": "baee_vara_vaar_soohi_ki_128.tsv",
+          "verseCount": 329,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                33484,
+                33812
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 129,
+          "name": "Bilaval Ki Vaar Mahalla 4",
+          "nameGurmukhi": "ਬਿਲਾਵਲੁ ਕੀ ਵਾਰ ਮਹਲਾ ੪",
+          "tsv": "baee_vara_bilaval_ki_vaar_mahalla_4_129.tsv",
+          "verseCount": 237,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                36175,
+                36411
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 130,
+          "name": "Ramkali Ki Vaar Mahalla 3",
+          "nameGurmukhi": "ਰਾਮਕਲੀ ਕੀ ਵਾਰ ਮਹਲਾ ੩",
+          "tsv": "baee_vara_ramkali_ki_vaar_mahalla_3_130.tsv",
+          "verseCount": 493,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                40577,
+                41069
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 131,
+          "name": "Ramkali Ki Vaar Mahalla 5",
+          "nameGurmukhi": "ਰਾਮਕਲੀ ਕੀ ਵਾਰ ਮਹਲਾ ੫",
+          "tsv": "baee_vara_ramkali_ki_vaar_mahalla_5_131.tsv",
+          "verseCount": 453,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                41070,
+                41522
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 132,
+          "name": "Ramkali Ki Vaar Rai Balvand Tatha Sataa",
+          "nameGurmukhi": "ਰਾਮਕਲੀ ਕੀ ਵਾਰ ਰਾਇ ਬਲਵੰਡਿ ਤਥਾ ਸਤੈ",
+          "tsv": "baee_vara_ramkali_ki_vaar_rai_balvand_tatha_sataa_132.tsv",
+          "verseCount": 90,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                41523,
+                41612
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 133,
+          "name": "Maroo Vaar Mahalla 3",
+          "nameGurmukhi": "ਮਾਰੂ ਵਾਰ ਮਹਲਾ ੩",
+          "tsv": "baee_vara_maroo_vaar_mahalla_3_133.tsv",
+          "verseCount": 346,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                46613,
+                46958
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 134,
+          "name": "Maroo Ki Vaar Mahalla 5 Dakhanay",
+          "nameGurmukhi": "ਮਾਰੂ ਵਾਰ ਮਹਲਾ ੫ ਡਖਣੇ",
+          "tsv": "baee_vara_maroo_ki_vaar_mahalla_5_dakhanay_134.tsv",
+          "verseCount": 417,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                46959,
+                47375
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 135,
+          "name": "Basant Ki Vaar",
+          "nameGurmukhi": "ਬਸੰਤ ਕੀ ਵਾਰ",
+          "tsv": "baee_vara_basant_ki_vaar_135.tsv",
+          "verseCount": 17,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                51519,
+                51535
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 136,
+          "name": "Sarang Ki Vaar Mahalla 4",
+          "nameGurmukhi": "ਸਾਰੰਗ ਕੀ ਵਾਰ ਮਹਲਾ ੪",
+          "tsv": "baee_vara_sarang_ki_vaar_mahalla_4_136.tsv",
+          "verseCount": 671,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                53161,
+                53831
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 137,
+          "name": "Vaar Malaar Ki Mahalla 1",
+          "nameGurmukhi": "ਵਾਰ ਮਲਾਰ ਕੀ ਮਹਲਾ ੧",
+          "tsv": "baee_vara_vaar_malaar_ki_mahalla_1_137.tsv",
+          "verseCount": 605,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                54872,
+                55476
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 138,
+          "name": "Kanaray Ki Var Mahalla 4",
+          "nameGurmukhi": "ਕਾਨੜੇ ਕੀ ਵਾਰ ਮਹਲਾ ੪",
+          "tsv": "baee_vara_kanaray_ki_var_mahalla_4_138.tsv",
+          "verseCount": 233,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                56207,
+                56439
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Astotar",
+      "nameGurmukhi": "ਅਸਤੋਤ੍ਰ",
+      "slug": "astotar",
+      "banis": [
+        {
+          "sectionId": 139,
+          "name": "Waheguru Astotar",
+          "nameGurmukhi": "ਵਾਹਿਗੁਰੂ ਅਸਤੋਤ੍ਰ",
+          "tsv": "astotar_waheguru_astotar_139.tsv",
+          "verseCount": 131,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                22970,
+                23062
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36784,
+                36802
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36955,
+                36973
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 140,
+          "name": "Gur Astotar",
+          "nameGurmukhi": "ਗੁਰ ਅਸਤੋਤ੍ਰ",
+          "tsv": "astotar_gur_astotar_140.tsv",
+          "verseCount": 57,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                36727,
+                36783
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 141,
+          "name": "Bhaguati Astotar",
+          "nameGurmukhi": "ਭਗਉਤੀ ਅਸਤੋਤ੍ਰ",
+          "tsv": "astotar_bhaguati_astotar_141.tsv",
+          "verseCount": 0,
+          "segments": []
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Kavach",
+      "nameGurmukhi": "ਕਵਚ",
+      "slug": "kavach",
+      "banis": [
+        {
+          "sectionId": 142,
+          "name": "Ram Kavach",
+          "nameGurmukhi": "ਰਾਮ ਕਵਚ",
+          "tsv": "kavach_ram_kavach_142.tsv",
+          "verseCount": 19,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                36974,
+                36992
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 143,
+          "name": "Braham Kavach",
+          "nameGurmukhi": "ਬ੍ਰਹਮ ਕਵਚ",
+          "tsv": "kavach_braham_kavach_143.tsv",
+          "verseCount": 0,
+          "segments": []
+        },
+        {
+          "sectionId": 144,
+          "name": "Sarbloh Kavach",
+          "nameGurmukhi": "ਸਰਬਲੋਹ ਕਵਚ",
+          "tsv": "kavach_sarbloh_kavach_144.tsv",
+          "verseCount": 0,
+          "segments": []
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Ardas",
+      "nameGurmukhi": "ਅਰਦਾਸਿ",
+      "slug": "ardas",
+      "banis": [
+        {
+          "sectionId": 145,
+          "name": "Ardas",
+          "nameGurmukhi": "ਅਰਦਾਸਿ",
+          "tsv": "ardas_ardas_145.tsv",
+          "verseCount": 0,
+          "segments": []
+        },
+        {
+          "sectionId": 146,
+          "name": "Short Ardas",
+          "nameGurmukhi": "ਛੋਟੀ ਅਰਦਾਸਿ",
+          "tsv": "ardas_short_ardas_146.tsv",
+          "verseCount": 0,
+          "segments": []
+        },
+        {
+          "sectionId": 147,
+          "name": "Langar Chhakan to Pahila Di Ardas",
+          "nameGurmukhi": "ਲੰਗਰ ਛਕਨ ਤੋ ਪਹਿਲਾ ਦੀ ਅਰਦਾਸਿ",
+          "tsv": "ardas_langar_chhakan_to_pahila_di_ardas_147.tsv",
+          "verseCount": 0,
+          "segments": []
+        },
+        {
+          "sectionId": 148,
+          "name": "Langar Chhakan to Bach Di Ardas",
+          "nameGurmukhi": "ਲੰਗਰ ਛਕਨ ਤੋ ਬਾਅਦ ਦੀ ਅਰਦਾਸਿ",
+          "tsv": "ardas_langar_chhakan_to_bach_di_ardas_148.tsv",
+          "verseCount": 0,
+          "segments": []
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Gurbani Pothi",
+      "nameGurmukhi": "ਗੁਰਬਾਣੀ ਪੋਥੀ",
+      "slug": "gurbani_pothi",
+      "banis": [
+        {
+          "sectionId": 149,
+          "name": "Mahalla 9",
+          "nameGurmukhi": "ਮਹਲਾ ੯",
+          "tsv": "gurbani_pothi_mahalla_9_149.tsv",
+          "verseCount": 591,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                9436,
+                9503
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                18889,
+                18896
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                23878,
+                23899
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                23916,
+                23925
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27528,
+                27628
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                29650,
+                29678
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                30321,
+                30344
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                30932,
+                30939
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31233,
+                31256
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35374,
+                35397
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                38678,
+                38705
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                43105,
+                43126
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                51163,
+                51206
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                52935,
+                52963
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                57778,
+                57810
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                60422,
+                60538
+              ]
+            }
+          ]
+        },
+        {
+          "sectionId": 150,
+          "name": "Greebi Valey Sabad",
+          "nameGurmukhi": "ਗ੍ਰੀਬੀ ਵਾਲੇ ਸਬਦ",
+          "tsv": "gurbani_pothi_greebi_valey_sabad_150.tsv",
+          "verseCount": 920,
+          "segments": [
+            {
+              "kind": "sggs",
+              "range": [
+                11591,
+                11594
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11602,
+                11605
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11626,
+                11627
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11636,
+                11637
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11646,
+                11647
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11666,
+                11667
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11679,
+                11680
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11740,
+                11741
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11814,
+                11825
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11828,
+                11829
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11868,
+                11869
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11888,
+                11889
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11898,
+                11899
+              ]
+            },
+            {
+              "kind": "dasam",
+              "range": [
+                2783,
+                2790
+              ]
+            },
+            {
+              "kind": "dasam",
+              "range": [
+                2792,
+                2795
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11908,
+                11909
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11916,
+                11919
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11950,
+                11953
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11962,
+                11963
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11972,
+                11973
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12002,
+                12003
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12012,
+                12013
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12205,
+                12206
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12209,
+                12209
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12277,
+                12277
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11976,
+                11976
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12437,
+                12438
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12473,
+                12474
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12524,
+                12524
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12535,
+                12536
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12555,
+                12556
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12619,
+                12620
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12629,
+                12630
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12639,
+                12640
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12649,
+                12650
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12659,
+                12660
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12807,
+                12808
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12829,
+                12832
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12871,
+                12872
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                12987,
+                12988
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                10932,
+                10932
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                13201,
+                13202
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                13267,
+                13268
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                13361,
+                13362
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                13539,
+                13540
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                13567,
+                13568
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                10513,
+                10514
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3990,
+                3991
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                54282,
+                54291
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                531,
+                531
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                17366,
+                17367
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                534,
+                534
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                28650,
+                28651
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47782,
+                47783
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                7171,
+                7171
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                579,
+                579
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                709,
+                711
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                767,
+                768
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                1138,
+                1139
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                1271,
+                1272
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                1577,
+                1578
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                1680,
+                1681
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                2079,
+                2080
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                2088,
+                2089
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                2092,
+                2093
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                2723,
+                2725
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3227,
+                3228
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3337,
+                3338
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3567,
+                3568
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3745,
+                3748
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3929,
+                3930
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3938,
+                3939
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                3981,
+                3983
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                4237,
+                4239
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                4270,
+                4271
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                5471,
+                5471
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                5595,
+                5595
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                7040,
+                7042
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                7056,
+                7057
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                7160,
+                7161
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                7203,
+                7204
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                10141,
+                10142
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                10769,
+                10769
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                11181,
+                11184
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                13823,
+                13824
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                14198,
+                14200
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                14705,
+                14705
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                15852,
+                15853
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                15872,
+                15873
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                16136,
+                16137
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                16405,
+                16406
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                17321,
+                17322
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                17625,
+                17626
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                17765,
+                17766
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                18060,
+                18061
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                18079,
+                18080
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                19162,
+                19163
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                19385,
+                19386
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                33955,
+                33956
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34116,
+                34116
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34119,
+                34120
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34566,
+                34567
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34577,
+                34578
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34588,
+                34589
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34624,
+                34625
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34628,
+                34629
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34657,
+                34660
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34670,
+                34679
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34736,
+                34745
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35011,
+                35012
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35022,
+                35023
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                22437,
+                22438
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                22450,
+                22450
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                23109,
+                23110
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                23425,
+                23426
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35292,
+                35294
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35644,
+                35647
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35655,
+                35656
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35835,
+                35836
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36446,
+                36447
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36555,
+                36556
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36730,
+                36731
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36842,
+                36845
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                36856,
+                36857
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                37021,
+                37022
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                37621,
+                37622
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                37653,
+                37654
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                37927,
+                37928
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                37970,
+                37971
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                37974,
+                37975
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                38210,
+                38211
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                38335,
+                38336
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                38417,
+                38418
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                38461,
+                38462
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                38510,
+                38511
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                55698,
+                55698
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                38574,
+                38574
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                39173,
+                39174
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                39836,
+                39837
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                40995,
+                41001
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                41402,
+                41403
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                41414,
+                41415
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                41429,
+                41430
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42238,
+                42239
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42345,
+                42346
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42353,
+                42354
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42366,
+                42367
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42437,
+                42438
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42872,
+                42873
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                43872,
+                43872
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                44879,
+                44881
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35281,
+                35282
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                46246,
+                46251
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                46554,
+                46555
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                46889,
+                46890
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                22067,
+                22068
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                21193,
+                21194
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                46961,
+                46962
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47078,
+                47085
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47213,
+                47214
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47312,
+                47313
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47359,
+                47360
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47462,
+                47465
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47788,
+                47789
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                47897,
+                47898
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                49493,
+                49496
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                49908,
+                49909
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                50289,
+                50292
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                51154,
+                51155
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                51712,
+                51713
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                52193,
+                52193
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                52504,
+                52505
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                52634,
+                52635
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                52962,
+                52963
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                53176,
+                53177
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                53192,
+                53193
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                53996,
+                53997
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                54314,
+                54315
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                54325,
+                54326
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                55523,
+                55524
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                55532,
+                55533
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                55974,
+                55974
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                56101,
+                56104
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                56252,
+                56252
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                56688,
+                56690
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                56735,
+                56736
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                57311,
+                57312
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                57509,
+                57510
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                1823,
+                1828
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34525,
+                34526
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                23579,
+                23584
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                23869,
+                23870
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                24777,
+                24778
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                24793,
+                24794
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                24949,
+                24952
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26093,
+                26094
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26745,
+                26746
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27785,
+                27786
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27824,
+                27825
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                28528,
+                28531
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31022,
+                31025
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31038,
+                31039
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31049,
+                31050
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31132,
+                31133
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31175,
+                31176
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31211,
+                31212
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31300,
+                31300
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31311,
+                31312
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31374,
+                31375
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31401,
+                31402
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31413,
+                31414
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31419,
+                31419
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31527,
+                31528
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31676,
+                31677
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31688,
+                31689
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31707,
+                31708
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                31725,
+                31728
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                33592,
+                33593
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26844,
+                26845
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                48562,
+                48571
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                32052,
+                32061
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                30516,
+                30520
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                34547,
+                34556
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                35274,
+                35279
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                6995,
+                6997
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                29142,
+                29151
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27380,
+                27389
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                55735,
+                55739
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                16417,
+                16427
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                634,
+                636
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                32063,
+                32072
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42740,
+                42743
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                42745,
+                42749
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                43479,
+                43496
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                37370,
+                37387
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                15503,
+                15517
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                28768,
+                28778
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                38494,
+                38494
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                28780,
+                28785
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                17473,
+                17482
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                59091,
+                59096
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                59700,
+                59703
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                59899,
+                59902
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                60296,
+                60297
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                60350,
+                60351
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                60366,
+                60367
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                60448,
+                60457
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58325,
+                58332
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58295,
+                58296
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58373,
+                58374
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58377,
+                58378
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58657,
+                58658
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58375,
+                58376
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58379,
+                58380
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58309,
+                58310
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58904,
+                58905
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58908,
+                58909
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58823,
+                58824
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58994,
+                58995
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58807,
+                58808
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58882,
+                58883
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58917,
+                58918
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58789,
+                58790
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                58799,
+                58800
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                32718,
+                32730
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                6203,
+                6210
+              ]
+            },
+            {
+              "kind": "dasam",
+              "range": [
+                32989,
+                32992
+              ]
+            },
+            {
+              "kind": "dasam",
+              "range": [
+                32994,
+                32997
+              ]
+            },
+            {
+              "kind": "dasam",
+              "range": [
+                32846,
+                32849
+              ]
+            },
+            {
+              "kind": "dasam",
+              "range": [
+                1141,
+                1144
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                27612,
+                27619
+              ]
+            },
+            {
+              "kind": "sggs",
+              "range": [
+                26584,
+                26584
+              ]
+            },
+            {
+              "kind": "dasam",
+              "range": [
+                13416,
+                13416
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

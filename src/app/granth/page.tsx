@@ -120,12 +120,19 @@ type BaniDef = {
   segments: BaniSegment[];
 };
 
+type ExtraBaniCategory = {
+  id: number;
+  name: string;
+  nameGurmukhi: string;
+  banis: BaniDef[];
+};
+
 const BANI_LIST: BaniDef[] = [
   {
     id: "moolMantar",
     name: "Mool Mantar",
     subtitle: "Beginning of Sri Guru Granth Sahib Ji",
-    segments: [{ kind: "sggs", range: [1, 4] }],
+    segments: [{ kind: "sggs", range: [2, 5] }],
   },
   {
     id: "japji",
@@ -195,10 +202,10 @@ const BANI_LIST: BaniDef[] = [
     name: "Rakhia Day Shabad",
     subtitle: "Read after Sri Rehrass Sahib",
     segments: [
-      { kind: "sggs", range: [27244, 27254] },
-      { kind: "sggs", range: [34983, 34989] },
-      { kind: "sggs", range: [11272, 11274] },
-      { kind: "sggs", range: [23209, 23211] },
+      { kind: "sggs", range: [27245, 27255] },
+      { kind: "sggs", range: [34984, 34990] },
+      { kind: "sggs", range: [11273, 11275] },
+      { kind: "sggs", range: [23210, 23212] },
     ],
   },
   {
@@ -218,24 +225,24 @@ const BANI_LIST: BaniDef[] = [
     name: "Aarti",
     subtitle: "Compiled · selected verses",
     segments: [
-      { kind: "sggs", range: [28818, 28831] },
-      { kind: "sggs", range: [30034, 30043] },
-      { kind: "sggs", range: [30061, 30071] },
-      { kind: "sggs", range: [57712, 57720] },
-      { kind: "sggs", range: [30079, 30089] },
+      { kind: "sggs", range: [28819, 28832] },
+      { kind: "sggs", range: [30035, 30044] },
+      { kind: "sggs", range: [30062, 30072] },
+      { kind: "sggs", range: [57713, 57721] },
+      { kind: "sggs", range: [30080, 30090] },
     ],
   },
   {
     id: "ramkaliKiVaar",
     name: "Ramkali Ki Vaar",
     subtitle: "Rai Balvand & Satta · Ang 966-968",
-    segments: [{ kind: "sggs", range: [41522, 41611] }],
+    segments: [{ kind: "sggs", range: [41523, 41612] }],
   },
   {
     id: "basantKiVaar",
     name: "Basant Ki Vaar",
     subtitle: "M5 · Ang 1193",
-    segments: [{ kind: "sggs", range: [51518, 51534] }],
+    segments: [{ kind: "sggs", range: [51519, 51535] }],
   },
   {
     id: "shabadHazareP10",
@@ -321,6 +328,7 @@ function GranthReader() {
   const [angBhaiNandlal, setAngBhaiNandlal] = useState(1);
   const [bhaiGurdas, setBhaiGurdas] = useState<Line[] | null>(null);
   const [bhaiNandlal, setBhaiNandlal] = useState<Line[] | null>(null);
+  const [extraBaniCategories, setExtraBaniCategories] = useState<ExtraBaniCategory[]>([]);
   const [angInput, setAngInput] = useState("1");
 
   const [showArth, setShowArth] = useState(true);
@@ -415,6 +423,52 @@ function GranthReader() {
     };
   }, []);
 
+  // Load the 124 additional Amrit Banis (Beant Bani, Bhagat Bani, Baee Vara,
+  // Beant Dasam Bani, Panj Granthi, Das Granthi, Astotar, Kavach, Ardas,
+  // Gurbani Pothi) from `banis_manifest.json`. The manifest carries the
+  // precomputed row segments for the existing sggs.tsv / dasam.tsv so we
+  // don't need to fetch separate bani TSVs on the web.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/banis_manifest.json");
+        if (!res.ok) return;
+        const data: {
+          categories: Array<{
+            id: number;
+            name: string;
+            nameGurmukhi: string;
+            banis: Array<{
+              sectionId: number;
+              name: string;
+              nameGurmukhi: string;
+              segments: BaniSegment[];
+            }>;
+          }>;
+        } = await res.json();
+        if (cancelled) return;
+        const cats: ExtraBaniCategory[] = data.categories.map((c) => ({
+          id: c.id,
+          name: c.name,
+          nameGurmukhi: c.nameGurmukhi,
+          banis: c.banis.map((b) => ({
+            id: `mfst_${c.id}_${b.sectionId}`,
+            name: b.name,
+            subtitle: c.name,
+            segments: b.segments,
+          })),
+        }));
+        setExtraBaniCategories(cats);
+      } catch {
+        // Silently degrade: built-in banis still work.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
 
   const corpus =
     granth === "sggs" ? sggs :
@@ -481,9 +535,19 @@ function GranthReader() {
     } catch {}
   }, [fontScaleIdx]);
 
+  // Flat lookup that includes both the hand-curated Nitnem / Sundar Gutka
+  // banis and every bani loaded from `banis_manifest.json` so the reader can
+  // resolve any selected bani id regardless of where it came from.
+  const allBaniLookup = useMemo(() => {
+    const map = new Map<string, BaniDef>();
+    for (const b of BANI_LIST) map.set(b.id, b);
+    for (const cat of extraBaniCategories) for (const b of cat.banis) map.set(b.id, b);
+    return map;
+  }, [extraBaniCategories]);
+
   const selectedBani = useMemo(
-    () => (selectedBaniId ? BANI_LIST.find((b) => b.id === selectedBaniId) ?? null : null),
-    [selectedBaniId]
+    () => (selectedBaniId ? allBaniLookup.get(selectedBaniId) ?? null : null),
+    [selectedBaniId, allBaniLookup]
   );
 
   const baniLines = useMemo<Line[]>(() => {
@@ -912,6 +976,61 @@ function GranthReader() {
                   );
                 })}
               </ul>
+              {extraBaniCategories.length > 0 && (
+                <div className="mt-4 border-t border-amber-200 pt-3">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                    More Amrit Banis
+                  </p>
+                  <p className="mt-1 text-[11px] text-slate-500">
+                    Beant Bani, Bhagat Bani, Baee Vara, and more.
+                  </p>
+                  {extraBaniCategories.map((cat) => (
+                    <details key={cat.id} className="mt-2 rounded-lg border border-slate-200 bg-slate-50 px-2 py-1.5">
+                      <summary className="cursor-pointer list-none text-xs font-semibold text-slate-800 marker:hidden">
+                        <span className="inline-flex items-center justify-between gap-2 w-full">
+                          <span>{cat.name}</span>
+                          <span className="text-[10px] font-medium text-slate-500">
+                            {cat.banis.length} banis
+                          </span>
+                        </span>
+                      </summary>
+                      <ul className="mt-2 divide-y divide-slate-200">
+                        {cat.banis.map((bani) => {
+                          const isActive = selectedBani?.id === bani.id;
+                          return (
+                            <li key={bani.id}>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setSelectedBaniId(bani.id);
+                                  setHighlightLine(null);
+                                  if (typeof window !== "undefined") {
+                                    window.scrollTo({ top: 0, behavior: "smooth" });
+                                  }
+                                }}
+                                disabled={loading}
+                                className={`flex w-full items-center justify-between gap-2 py-1.5 text-left transition ${
+                                  isActive
+                                    ? "text-amber-900"
+                                    : "text-slate-700 hover:text-amber-700"
+                                } disabled:opacity-50`}
+                              >
+                                <span className="block text-xs font-medium">{bani.name}</span>
+                                <span
+                                  aria-hidden
+                                  className={isActive ? "text-amber-700" : "text-slate-400"}
+                                >
+                                  {isActive ? "●" : "→"}
+                                </span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </details>
+                  ))}
+                </div>
+              )}
               {selectedBani && (
                 <button
                   type="button"
