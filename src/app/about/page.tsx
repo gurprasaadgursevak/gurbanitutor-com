@@ -15,6 +15,7 @@ const CONTRIBUTORS = [
   "Bhai Jagneet Singh",
   "Bhai Gursevak Dot Com Singh",
   "Bhai Gurjot Singh",
+  "Bhai Irvanjit Singh",
 ];
 
 const DEDICATIONS = [
@@ -132,6 +133,58 @@ export default function AboutPage() {
             teachings of respected scholars and educators who dedicated their lives to
             preserving the purity of Gurbani.
           </p>
+        </section>
+
+        <hr className="my-12 border-slate-200" />
+
+        {/* What's New */}
+        <section>
+          <SectionTitle>What's New</SectionTitle>
+          <p className="mt-3 leading-7 text-slate-700">
+            Recent updates across iPhone and{" "}
+            <Link href="/granth" className="font-semibold text-amber-700 hover:underline">
+              Read Gurbani
+            </Link>:
+          </p>
+          <ul className="mt-4 space-y-3 text-slate-700">
+            <GoldDotItem>
+              <span className="font-semibold">Gurmukhi typeface picker.</span>{" "}
+              Switch between <span className="font-semibold">GuruGranthUni</span> (the new
+              default) and <span className="font-semibold">Noto Sans Gurmukhi</span> anytime.
+              On the web, find the toggle in the Read Gurbani toolbar. On iPhone, open
+              About Us → Gurbani Typeface. The other face is used as an automatic fallback
+              for any glyph the chosen font doesn't cover.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">More Amrit Banis.</span> 124 additional banis
+              across 10 categories — Beant Bani (Dukh Bhanjani Sahib, Karhalay, Pahray,
+              Salok Sahaskriti, Sukhmana Sahib, etc.), Bhagat Bani, the full 22 Vaaran
+              cycle, Beant Dasam Bani (Zafarnama, 33 Svaiye, Khalsa Mehima, Bara Maha),
+              Panj Granthi, Das Granthi, Ardas, Astotar, Kavach, and Gurbani Pothi.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Bhai Gurdas Sahib Ji Vaaran &amp; Bhai
+              Nandlal Sahib Ji.</span> Both auxiliary granths are bundled with the app
+              and live in the Read Gurbani granth picker on the website. Together
+              that's 13,525 more verses with English steeks.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Sri Dasam Granth English steeks.</span>{" "}
+              34,784 verses in Sri Guru Dasam Granth Sahib Ji now carry SSK English
+              translation, refreshed from the gursevakdb project.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Cross-Granth search.</span> The iPhone
+              search tab now indexes Sri Guru Granth Sahib Ji, Sri Guru Dasam Granth
+              Sahib Ji, Bhai Gurdas, and Bhai Nandlal in one place.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Sehaj Paath audio improvements.</span>{" "}
+              The Read Gurbani player now has a draggable scrubber with current/total
+              time, an improved Auto-advance toggle that resumes the next Ang cleanly,
+              and prev/next Ang movers at both the top and bottom of the page.
+            </GoldDotItem>
+          </ul>
         </section>
 
         <hr className="my-12 border-slate-200" />
