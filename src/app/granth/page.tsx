@@ -24,6 +24,7 @@ type Line = {
   ucharanTip?: string;
   extendedUcharanTip?: string;
   arth?: string;
+  romanized?: string;
 };
 
 const QUOTES = new Set(['"', "“", "”", "‘", "’", "'", "`"]);
@@ -90,6 +91,7 @@ function parseAuxiliary(text: string, startRow = 0): Line[] {
       extendedUcharanTip: strip(cols[3] || ""),
       steek1: strip(cols[4] || ""),
       steek2: strip(cols[5] || ""),
+      romanized: strip(cols[6] || ""),
       arth: strip(cols[7] || ""),
     });
   }
@@ -336,6 +338,7 @@ function GranthReader() {
   const [showSteek2, setShowSteek2] = useState(true);
   const [showUcharan, setShowUcharan] = useState(false);
   const [showExtendedUcharan, setShowExtendedUcharan] = useState(false);
+  const [showRomanized, setShowRomanized] = useState(true);
 
   const [highlightLine, setHighlightLine] = useState<string | null>(null);
   // Reader font scale (5 steps). 0 = smallest, 2 = default, 4 = largest.
@@ -570,6 +573,7 @@ function GranthReader() {
     extendedUcharan: lines.some((l) => (l.extendedUcharanTip || "").length > 0),
     steek1: lines.some((l) => (l.steek1 || "").length > 0),
     steek2: lines.some((l) => (l.steek2 || "").length > 0),
+    romanized: lines.some((l) => (l.romanized || "").length > 0),
   }), [lines]);
 
   const loading = sggs === null || dasam === null;
@@ -803,6 +807,13 @@ function GranthReader() {
               onToggle={() => setShowSteek2((v) => !v)}
             />
           )}
+          {linesHave.romanized && (
+            <ToggleChip
+              label="Romanized"
+              on={showRomanized}
+              onToggle={() => setShowRomanized((v) => !v)}
+            />
+          )}
           <span className="mx-1 h-5 w-px bg-slate-200" aria-hidden />
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
             Size
@@ -915,6 +926,17 @@ function GranthReader() {
                         English Steek 2
                       </span>{" "}
                       {l.steek2}
+                    </p>
+                  )}
+                  {showRomanized && l.romanized && (
+                    <p
+                      className="mt-1 italic text-slate-600"
+                      style={{ fontSize: `${13 * fontScale}px`, lineHeight: 1.7 }}
+                    >
+                      <span className="text-xs not-italic font-semibold uppercase tracking-wider text-amber-700">
+                        Romanized
+                      </span>{" "}
+                      {l.romanized}
                     </p>
                   )}
                 </li>
