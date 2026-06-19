@@ -16,6 +16,8 @@ const CONTRIBUTORS = [
   "Bhai Gursevak Dot Com Singh",
   "Bhai Gurjot Singh",
   "Bhai Irvanjit Singh",
+  "Bhai Yadevinder Singh (Surrey BC)",
+  "Bhai Jaiinder Singh (Surrey BC)",
 ];
 
 const DEDICATIONS = [
