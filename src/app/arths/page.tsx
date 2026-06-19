@@ -88,6 +88,7 @@ export default function ArthsPage() {
           if (!word) continue;
           const meaningEn = (cols[9] || "").trim();
           if (!meaningEn) continue;
+          if (meaningEn === "[source cell error]") continue;
           recs.push({
             rank: i,
             word,
