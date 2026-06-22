@@ -173,7 +173,7 @@ export default function SearchPage() {
   const [query, setQuery] = useState("");
   const [lang, setLang] = useState<Lang>("gurmukhi");
   const [scope, setScope] = useState<Scope>("all");
-  const [mode, setMode] = useState<Mode>("contains");
+  const [mode, setMode] = useState<Mode>("anywhere");
   const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   useEffect(() => {
