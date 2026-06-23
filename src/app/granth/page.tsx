@@ -480,21 +480,29 @@ function GranthReader() {
               name: string;
               nameGurmukhi: string;
               segments: BaniSegment[];
+              verseCount?: number;
             }>;
           }>;
         } = await res.json();
         if (cancelled) return;
-        const cats: ExtraBaniCategory[] = data.categories.map((c) => ({
-          id: c.id,
-          name: c.name,
-          nameGurmukhi: c.nameGurmukhi,
-          banis: c.banis.map((b) => ({
-            id: `mfst_${c.id}_${b.sectionId}`,
-            name: b.name,
-            subtitle: c.name,
-            segments: b.segments,
-          })),
-        }));
+        // Hide banis whose source DB isn't loaded yet (verseCount === 0)
+        // and drop any category that ends up empty, so the Next/Prev chain
+        // and bani lookups skip placeholders cleanly.
+        const cats: ExtraBaniCategory[] = data.categories
+          .map((c) => ({
+            id: c.id,
+            name: c.name,
+            nameGurmukhi: c.nameGurmukhi,
+            banis: c.banis
+              .filter((b) => (b.verseCount ?? 0) > 0)
+              .map((b) => ({
+                id: `mfst_${c.id}_${b.sectionId}`,
+                name: b.name,
+                subtitle: c.name,
+                segments: b.segments,
+              })),
+          }))
+          .filter((c) => c.banis.length > 0);
         setExtraBaniCategories(cats);
       } catch {
         // Silently degrade: built-in banis still work.
@@ -692,6 +700,18 @@ function GranthReader() {
     () => (selectedBaniId ? allBaniLookup.get(selectedBaniId) ?? null : null),
     [selectedBaniId, allBaniLookup]
   );
+
+  // When the selected bani changes (e.g. via Prev/Next Link), scroll back
+  // to the top. Next.js Link doesn't reliably scroll on same-route query
+  // changes, so without this Sangat clicking "Next: Sri Aarti" from the
+  // foot of Sukhmani would land at the bottom of Aarti.
+  useEffect(() => {
+    if (!selectedBaniId) return;
+    if (highlightLine) return; // /search deep-links handle their own scroll
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [selectedBaniId, highlightLine]);
 
   // Reading order across the directory: curated Nitnem + Sundar Gutka first,
   // then the manifest categories in their declared order. Used to compute

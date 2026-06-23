@@ -37,6 +37,7 @@ type ExtraBani = {
   sectionId: number;
   name: string;
   nameGurmukhi: string;
+  verseCount?: number;
 };
 
 type ExtraCategory = {
@@ -57,7 +58,18 @@ export default function BanisPage() {
         const res = await fetch("/banis_manifest.json");
         if (!res.ok) return;
         const data: { categories: ExtraCategory[] } = await res.json();
-        if (!cancelled) setExtra(data.categories);
+        if (cancelled) return;
+        // Filter out banis whose source DB isn't loaded yet (verseCount === 0)
+        // and drop any category that ends up empty after the filter. Those
+        // entries will reappear automatically once the manifest ships their
+        // verse data in a future deploy.
+        const trimmed = data.categories
+          .map((c) => ({
+            ...c,
+            banis: c.banis.filter((b) => (b.verseCount ?? 0) > 0),
+          }))
+          .filter((c) => c.banis.length > 0);
+        setExtra(trimmed);
       } catch {
         // Silently degrade: curated banis still work.
       }

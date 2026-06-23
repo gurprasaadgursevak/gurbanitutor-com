@@ -188,18 +188,41 @@ export default function AboutPage() {
             </GoldDotItem>
             <GoldDotItem>
               <span className="font-semibold">Multiple Punjabi steeks per line.</span>{" "}
-              The iPhone readers (SGGS, Sri Dasam Guru Granth Sahib Ji, and every
-              Nitnem bani) now offer two new toggles: <em>Punjabi Steek</em>{" "}
+              Both the iPhone readers (SGGS, Sri Dasam Guru Granth Sahib Ji, and
+              every Nitnem bani) and the website's{" "}
+              <Link href="/granth" className="font-semibold text-amber-700 hover:underline">
+                Read Gurbani
+              </Link>{" "}
+              page now offer two new toggles: <em>Punjabi Steek</em>{" "}
               (Prof Sahib Singh for SGGS-derived banis, Das Granthi for Dasam-derived
               banis) and <em>Classical Steek 1</em> (Faridkot Wala Teeka) for
               SGGS-derived banis. Each one renders inline beneath the Gurbani line
-              when a match exists. Coming to the website's Read Gurbani reader in
-              the next deploy.
+              when a match exists.
             </GoldDotItem>
             <GoldDotItem>
-              <span className="font-semibold">Notes + Favourites now sync via iCloud</span>,
-              and can be shared in bulk to Apple Notes, Mail, Messages, or Files
-              from the share button in each list.
+              <span className="font-semibold">iCloud sync for everything Sangat care about.</span>{" "}
+              Notes, Favourites, and now reader settings (dark mode, font sizes,
+              steek toggles, daily reminders, search defaults) all follow you to a
+              new device or survive a fresh install. Notes + Favourites also share
+              in bulk to Apple Notes, Mail, Messages, or Files from the share
+              button in each list.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Resume where you left off.</span> The
+              SGGS and Sri Dasam readers remember the line you were last reading,
+              so re-opening Sri Mukhvak drops you straight back to the same spot
+              instead of the top of the Ang. Synced across devices via iCloud.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Bani-to-bani flow on the web.</span>{" "}
+              The{" "}
+              <Link href="/banis" className="font-semibold text-amber-700 hover:underline">
+                Banis directory
+              </Link>{" "}
+              reader now has Prev / Next bani buttons at the top and bottom, a
+              Back-to-top button on long banis like Sri Sukhmani Sahib, and your
+              filter toggle choices persist across banis and reloads so you don't
+              have to set them again every time.
             </GoldDotItem>
             <GoldDotItem>
               <span className="font-semibold">Daily reminder toggle.</span> About Us →
@@ -220,6 +243,28 @@ export default function AboutPage() {
               search default match mode is now <em>Anywhere</em> across both the
               iPhone app and the website, so consonant-skeleton queries land lines
               starting from any word in the line.
+            </GoldDotItem>
+          </ul>
+        </section>
+
+        <hr className="my-12 border-slate-200" />
+
+        {/* What's Coming */}
+        <section>
+          <SectionTitle>What's Coming</SectionTitle>
+          <p className="mt-3 leading-7 text-slate-700">
+            Sangat-requested features being built next:
+          </p>
+          <ul className="mt-4 space-y-3 text-slate-700">
+            <GoldDotItem>
+              <span className="font-semibold">Storytelling.</span> A new section
+              for short AI-illustrated Sakhian and curated YouTube videos on
+              Gurmat history, drawn from trusted Sangat sources.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Games for kids.</span> Gamified
+              learning for Painti Akhari, Muharni, and Gurbani Vocabulary,
+              designed for children to play their way into reading Gurbani.
             </GoldDotItem>
           </ul>
         </section>
