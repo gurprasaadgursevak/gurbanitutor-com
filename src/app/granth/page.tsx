@@ -693,6 +693,23 @@ function GranthReader() {
     [selectedBaniId, allBaniLookup]
   );
 
+  // Reading order across the directory: curated Nitnem + Sundar Gutka first,
+  // then the manifest categories in their declared order. Used to compute
+  // the "Next Bani" target so Sangat can advance from Sri Japji Sahib to
+  // Sri Jaap Sahib (etc.) without returning to the directory in between.
+  const orderedBanis = useMemo<BaniDef[]>(() => {
+    const all: BaniDef[] = [...BANI_LIST];
+    for (const cat of extraBaniCategories) all.push(...cat.banis);
+    return all;
+  }, [extraBaniCategories]);
+
+  const nextBani = useMemo<BaniDef | null>(() => {
+    if (!selectedBani) return null;
+    const idx = orderedBanis.findIndex((b) => b.id === selectedBani.id);
+    if (idx < 0 || idx >= orderedBanis.length - 1) return null;
+    return orderedBanis[idx + 1];
+  }, [selectedBani, orderedBanis]);
+
   const baniLines = useMemo<Line[]>(() => {
     if (!selectedBani || !sggsRows || !dasamRows) return [];
     return buildBaniLines(selectedBani, sggsRows, dasamRows);
@@ -760,12 +777,22 @@ function GranthReader() {
               <p className="text-base font-semibold text-slate-900">{selectedBani.name}</p>
               <p className="text-xs text-slate-600">{selectedBani.subtitle}</p>
             </div>
-            <Link
-              href="/banis"
-              className="inline-flex min-h-[40px] items-center rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
-            >
-              ← All banis
-            </Link>
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href="/banis"
+                className="inline-flex min-h-[40px] items-center rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-amber-400"
+              >
+                ← All banis
+              </Link>
+              {nextBani && (
+                <Link
+                  href={`/granth?bani=${encodeURIComponent(nextBani.id)}`}
+                  className="inline-flex min-h-[40px] items-center rounded-full border border-amber-600 bg-amber-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-amber-700"
+                >
+                  Next: {nextBani.name} →
+                </Link>
+              )}
+            </div>
           </div>
         )}
 
@@ -1117,11 +1144,12 @@ function GranthReader() {
             </div>
             )}
 
-            {/* Back-to-top shortcut for bani reading mode. Banis like Sri
-                Sukhmani Sahib render thousands of lines on one page; this
-                spares Sangat the long scroll back to the toggles. */}
+            {/* Back-to-top + Next Bani shortcuts for bani reading mode.
+                Banis like Sri Sukhmani Sahib render thousands of lines on
+                one page; this spares Sangat the long scroll back, and the
+                paired Next link lets them flow through Nitnem in order. */}
             {selectedBani && lines.length > 0 && (
-              <div className="mt-10 flex justify-center">
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
                 <button
                   type="button"
                   onClick={() => {
@@ -1133,6 +1161,14 @@ function GranthReader() {
                 >
                   ↑ Back to top
                 </button>
+                {nextBani && (
+                  <Link
+                    href={`/granth?bani=${encodeURIComponent(nextBani.id)}`}
+                    className="rounded-full bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+                  >
+                    Next: {nextBani.name} →
+                  </Link>
+                )}
               </div>
             )}
           </>
