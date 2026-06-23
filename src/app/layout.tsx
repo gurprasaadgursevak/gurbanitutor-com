@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Gurmukhi } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import ServiceWorkerRegistration from "./ServiceWorkerRegistration";
 
@@ -78,6 +79,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {children}
         <ServiceWorkerRegistration />
+        {/* Vercel Web Analytics — cookieless, no PII collection. Shows
+            pageviews, top pages, and referrers in the Vercel dashboard. */}
+        <Analytics />
       </body>
     </html>
   );
