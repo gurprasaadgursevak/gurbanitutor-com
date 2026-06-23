@@ -186,6 +186,41 @@ export default function AboutPage() {
               time, an improved Auto-advance toggle that resumes the next Ang cleanly,
               and prev/next Ang movers at both the top and bottom of the page.
             </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Multiple Punjabi steeks per line.</span>{" "}
+              The iPhone readers (SGGS, Sri Dasam Guru Granth Sahib Ji, and every
+              Nitnem bani) now offer two new toggles: <em>Punjabi Steek</em>{" "}
+              (Prof Sahib Singh for SGGS-derived banis, Das Granthi for Dasam-derived
+              banis) and <em>Classical Steek 1</em> (Faridkot Wala Teeka) for
+              SGGS-derived banis. Each one renders inline beneath the Gurbani line
+              when a match exists. Coming to the website's Read Gurbani reader in
+              the next deploy.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Notes + Favourites now sync via iCloud</span>,
+              and can be shared in bulk to Apple Notes, Mail, Messages, or Files
+              from the share button in each list.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Daily reminder toggle.</span> About Us →
+              Daily Reminders flips the evening Nitnem reminder and the gentle
+              missed-day nudges on or off. On by default; off any time without
+              affecting your saved progress.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Quiz pools expanded.</span> Four
+              groupings: Daily Quiz (same 10 questions for Sangat worldwide),
+              Favourited Words, Nitnem Bani Quizzes (now strictly scoped to lines
+              within each bani — no leakage from shared Angs), and Random Shabads
+              from SGGS (fair-play random lines from anywhere in Sri Guru Granth
+              Sahib Ji).
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Search default updated.</span> The
+              search default match mode is now <em>Anywhere</em> across both the
+              iPhone app and the website, so consonant-skeleton queries land lines
+              starting from any word in the line.
+            </GoldDotItem>
           </ul>
         </section>
 
