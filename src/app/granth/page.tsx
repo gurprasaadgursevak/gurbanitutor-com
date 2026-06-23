@@ -571,6 +571,64 @@ function GranthReader() {
     } catch {}
   }, [fontScaleIdx]);
 
+  // Restore filter toggles on mount so a user's choices carry across banis
+  // and reader sessions. Mirrors the iOS @AppStorage behavior. Each toggle
+  // is read independently so a missing key falls back to its default.
+  useEffect(() => {
+    try {
+      const read = (key: string) => {
+        const v = localStorage.getItem(key);
+        return v === null ? null : v === "1";
+      };
+      const v1 = read("granth_show_translations");
+      if (v1 !== null) setShowTranslations(v1);
+      const v2 = read("granth_show_arth");
+      if (v2 !== null) setShowArth(v2);
+      const v3 = read("granth_show_steek1");
+      if (v3 !== null) setShowSteek1(v3);
+      const v4 = read("granth_show_steek2");
+      if (v4 !== null) setShowSteek2(v4);
+      const v5 = read("granth_show_ucharan");
+      if (v5 !== null) setShowUcharan(v5);
+      const v6 = read("granth_show_extended_ucharan");
+      if (v6 !== null) setShowExtendedUcharan(v6);
+      const v7 = read("granth_show_romanized");
+      if (v7 !== null) setShowRomanized(v7);
+      const v8 = read("granth_show_classical_steek_1");
+      if (v8 !== null) setShowClassicalSteek1(v8);
+      const v9 = read("granth_show_punjabi_steek");
+      if (v9 !== null) setShowPunjabiSteek(v9);
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_translations", showTranslations ? "1" : "0"); } catch {}
+  }, [showTranslations]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_arth", showArth ? "1" : "0"); } catch {}
+  }, [showArth]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_steek1", showSteek1 ? "1" : "0"); } catch {}
+  }, [showSteek1]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_steek2", showSteek2 ? "1" : "0"); } catch {}
+  }, [showSteek2]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_ucharan", showUcharan ? "1" : "0"); } catch {}
+  }, [showUcharan]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_extended_ucharan", showExtendedUcharan ? "1" : "0"); } catch {}
+  }, [showExtendedUcharan]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_romanized", showRomanized ? "1" : "0"); } catch {}
+  }, [showRomanized]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_classical_steek_1", showClassicalSteek1 ? "1" : "0"); } catch {}
+  }, [showClassicalSteek1]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_punjabi_steek", showPunjabiSteek ? "1" : "0"); } catch {}
+  }, [showPunjabiSteek]);
+
   // Lazy-load each steek source the first time a relevant toggle is flipped
   // on. `loadSteek` caches the parsed index so subsequent reader sessions
   // re-use the same data without re-fetching the TSVs (which are large).
@@ -1057,6 +1115,25 @@ function GranthReader() {
                 Next {GRANTH_META[granth].unit} →
               </button>
             </div>
+            )}
+
+            {/* Back-to-top shortcut for bani reading mode. Banis like Sri
+                Sukhmani Sahib render thousands of lines on one page; this
+                spares Sangat the long scroll back to the toggles. */}
+            {selectedBani && lines.length > 0 && (
+              <div className="mt-10 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
+                  className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-amber-400"
+                >
+                  ↑ Back to top
+                </button>
+              </div>
             )}
           </>
         )}
