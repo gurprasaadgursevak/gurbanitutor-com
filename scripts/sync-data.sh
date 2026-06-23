@@ -34,10 +34,13 @@ cp "$SRC/arths.tsv" "$DEST/arths.tsv"
 cp "$SRC/bhai_gurdas.tsv"  "$DEST/bhai_gurdas.tsv"
 cp "$SRC/bhai_nandlal.tsv" "$DEST/bhai_nandlal.tsv"
 
-# Punjabi Steek (Faridkot Wala Teeka, extracted from shabados/database).
-# Used by the SGGS reader to offer an alternate Punjabi arth view.
-# Symlinked into data/ from the larger shabados/ dir.
+# Steeks extracted from shabados/database. Used by the SGGS reader to
+# offer alternate Punjabi arth views ("Classical Steek 1" = Faridkot Wala
+# Teeka / NKFT, "Punjabi Steek" = Prof Sahib Singh / PSST). Files are
+# symlinked into data/ from the larger shabados/ dir.
 cp -L "$SRC/nkft.tsv" "$DEST/nkft.tsv"
+cp -L "$SRC/psst.tsv" "$DEST/psst.tsv"
+cp -L "$SRC/dgdg.tsv" "$DEST/dgdg.tsv"
 
 # Compiled banis (verses pre-selected across Granths, in reading order).
 cp "$SRC/aarti.tsv"            "$DEST/aarti.tsv"
