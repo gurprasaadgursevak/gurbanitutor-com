@@ -6,6 +6,12 @@ import { useSearchParams } from "next/navigation";
 import SocialLinks from "../SocialLinks";
 import SehajPaathPlayer from "./SehajPaathPlayer";
 import GurmukhiFontToggle from "./GurmukhiFontToggle";
+import { loadSteek, lookupSteek, type SteekSource } from "../lib/steekIndex";
+
+// In-memory steek indices. Built lazily when a toggle is enabled. The
+// promise is cached inside `loadSteek` so flipping the toggles off / on
+// repeatedly doesn't re-fetch the (large) TSVs.
+type SteekIndex = Awaited<ReturnType<typeof loadSteek>>;
 
 type Granth = "sggs" | "dasam" | "bhaiGurdas" | "bhaiNandlal";
 
@@ -344,12 +350,22 @@ function GranthReader() {
   const [extraBaniCategories, setExtraBaniCategories] = useState<ExtraBaniCategory[]>([]);
   const [angInput, setAngInput] = useState("1");
 
+  const [showTranslations, setShowTranslations] = useState(true);
   const [showArth, setShowArth] = useState(true);
   const [showSteek1, setShowSteek1] = useState(true);
   const [showSteek2, setShowSteek2] = useState(true);
   const [showUcharan, setShowUcharan] = useState(false);
   const [showExtendedUcharan, setShowExtendedUcharan] = useState(false);
   const [showRomanized, setShowRomanized] = useState(true);
+  // Punjabi steeks (mirrors the iOS reader toggles).
+  // `Classical Steek 1` = NKFT (Faridkot Wala Teeka), SGGS-only.
+  // `Punjabi Steek` = PSST for SGGS lines, DGDG for Dasam Granth lines.
+  const [showClassicalSteek1, setShowClassicalSteek1] = useState(false);
+  const [showPunjabiSteek, setShowPunjabiSteek] = useState(false);
+  const [nkftIndex, setNkftIndex] = useState<SteekIndex | null>(null);
+  const [psstIndex, setPsstIndex] = useState<SteekIndex | null>(null);
+  const [dgdgIndex, setDgdgIndex] = useState<SteekIndex | null>(null);
+  const [steekLoading, setSteekLoading] = useState<Set<SteekSource>>(new Set());
 
   const [highlightLine, setHighlightLine] = useState<string | null>(null);
   // Reader font scale (5 steps). 0 = smallest, 2 = default, 4 = largest.
@@ -555,6 +571,55 @@ function GranthReader() {
     } catch {}
   }, [fontScaleIdx]);
 
+  // Lazy-load each steek source the first time a relevant toggle is flipped
+  // on. `loadSteek` caches the parsed index so subsequent reader sessions
+  // re-use the same data without re-fetching the TSVs (which are large).
+  useEffect(() => {
+    if (showClassicalSteek1 && granth === "sggs" && !nkftIndex) {
+      setSteekLoading((s) => new Set(s).add("nkft"));
+      loadSteek("nkft")
+        .then((idx) => setNkftIndex(idx))
+        .catch((err) => console.error("Failed to load Classical Steek 1:", err))
+        .finally(() => {
+          setSteekLoading((s) => {
+            const next = new Set(s);
+            next.delete("nkft");
+            return next;
+          });
+        });
+    }
+  }, [showClassicalSteek1, granth, nkftIndex]);
+
+  useEffect(() => {
+    if (!showPunjabiSteek) return;
+    if (granth === "sggs" && !psstIndex) {
+      setSteekLoading((s) => new Set(s).add("psst"));
+      loadSteek("psst")
+        .then((idx) => setPsstIndex(idx))
+        .catch((err) => console.error("Failed to load Punjabi Steek (PSST):", err))
+        .finally(() => {
+          setSteekLoading((s) => {
+            const next = new Set(s);
+            next.delete("psst");
+            return next;
+          });
+        });
+    }
+    if (granth === "dasam" && !dgdgIndex) {
+      setSteekLoading((s) => new Set(s).add("dgdg"));
+      loadSteek("dgdg")
+        .then((idx) => setDgdgIndex(idx))
+        .catch((err) => console.error("Failed to load Punjabi Steek (DGDG):", err))
+        .finally(() => {
+          setSteekLoading((s) => {
+            const next = new Set(s);
+            next.delete("dgdg");
+            return next;
+          });
+        });
+    }
+  }, [showPunjabiSteek, granth, psstIndex, dgdgIndex]);
+
   // Flat lookup that includes both the hand-curated Nitnem / Sundar Gutka
   // banis and every bani loaded from `banis_manifest.json` so the reader can
   // resolve any selected bani id regardless of where it came from.
@@ -729,6 +794,15 @@ function GranthReader() {
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
             Show
           </span>
+          {/* Master switch for all translation/steek rows. Off = clean
+              Gurbani-only reading. Mirrors the iOS reader's "Show
+              Translations" toggle so per-translation choices persist
+              even when this is off. */}
+          <ToggleChip
+            label="Show Translations"
+            on={showTranslations}
+            onToggle={() => setShowTranslations((v) => !v)}
+          />
           {linesHave.arth && (
             <ToggleChip label="ਅਰਥ" on={showArth} onToggle={() => setShowArth((v) => !v)} />
           )}
@@ -758,6 +832,29 @@ function GranthReader() {
               label="English Steek 2"
               on={showSteek2}
               onToggle={() => setShowSteek2((v) => !v)}
+            />
+          )}
+          {/* Punjabi steeks — only surfaced when a steek source covers the
+              current granth. Classical Steek 1 (NKFT) is SGGS-only; Punjabi
+              Steek covers SGGS via PSST and Sri Dasam Guru Granth Sahib Ji
+              via DGDG. Bhai Gurdas + Bhai Nand Lal don't have a steek
+              source in the bundled dataset, so the toggles are hidden. */}
+          {granth === "sggs" && (
+            <ToggleChip
+              label={steekLoading.has("nkft") ? "Classical Steek 1 …" : "Classical Steek 1"}
+              on={showClassicalSteek1}
+              onToggle={() => setShowClassicalSteek1((v) => !v)}
+            />
+          )}
+          {(granth === "sggs" || granth === "dasam") && (
+            <ToggleChip
+              label={
+                steekLoading.has("psst") || steekLoading.has("dgdg")
+                  ? "Punjabi Steek …"
+                  : "Punjabi Steek"
+              }
+              on={showPunjabiSteek}
+              onToggle={() => setShowPunjabiSteek((v) => !v)}
             />
           )}
           {linesHave.romanized && (
@@ -848,7 +945,7 @@ function GranthReader() {
                       {l.extendedUcharanTip}
                     </p>
                   )}
-                  {showArth && l.arth && (
+                  {showTranslations && showArth && l.arth && (
                     <p
                       className="mt-2 text-slate-800"
                       style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
@@ -859,7 +956,7 @@ function GranthReader() {
                       {l.arth}
                     </p>
                   )}
-                  {showSteek1 && l.steek1 && (
+                  {showTranslations && showSteek1 && l.steek1 && (
                     <p
                       className="mt-1 text-slate-700"
                       style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
@@ -870,7 +967,7 @@ function GranthReader() {
                       {l.steek1}
                     </p>
                   )}
-                  {showSteek2 && l.steek2 && (
+                  {showTranslations && showSteek2 && l.steek2 && (
                     <p
                       className="mt-1 text-slate-700"
                       style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
@@ -881,6 +978,42 @@ function GranthReader() {
                       {l.steek2}
                     </p>
                   )}
+                  {showTranslations && showClassicalSteek1 && granth === "sggs" && nkftIndex && (() => {
+                    const steek = lookupSteek(nkftIndex, l.ang, l.gurmukhi);
+                    if (!steek) return null;
+                    return (
+                      <p
+                        className="mt-1 whitespace-pre-line text-slate-800"
+                        style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
+                      >
+                        <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                          Classical Steek 1
+                        </span>{" "}
+                        {steek.arth}
+                      </p>
+                    );
+                  })()}
+                  {showTranslations && showPunjabiSteek && (() => {
+                    // SGGS -> PSST, Sri Dasam Granth -> DGDG. Auxiliary
+                    // granths fall through (no source available).
+                    const idx =
+                      granth === "sggs" ? psstIndex :
+                      granth === "dasam" ? dgdgIndex : null;
+                    if (!idx) return null;
+                    const steek = lookupSteek(idx, l.ang, l.gurmukhi);
+                    if (!steek) return null;
+                    return (
+                      <p
+                        className="mt-1 whitespace-pre-line text-slate-800"
+                        style={{ fontSize: `${14 * fontScale}px`, lineHeight: 1.7 }}
+                      >
+                        <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                          Punjabi Steek
+                        </span>{" "}
+                        {steek.arth}
+                      </p>
+                    );
+                  })()}
                   {showRomanized && l.romanized && (
                     <p
                       className="mt-1 italic text-slate-600"
