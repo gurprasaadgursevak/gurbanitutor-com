@@ -710,6 +710,13 @@ function GranthReader() {
     return orderedBanis[idx + 1];
   }, [selectedBani, orderedBanis]);
 
+  const prevBani = useMemo<BaniDef | null>(() => {
+    if (!selectedBani) return null;
+    const idx = orderedBanis.findIndex((b) => b.id === selectedBani.id);
+    if (idx <= 0) return null;
+    return orderedBanis[idx - 1];
+  }, [selectedBani, orderedBanis]);
+
   const baniLines = useMemo<Line[]>(() => {
     if (!selectedBani || !sggsRows || !dasamRows) return [];
     return buildBaniLines(selectedBani, sggsRows, dasamRows);
@@ -784,6 +791,14 @@ function GranthReader() {
               >
                 ← All banis
               </Link>
+              {prevBani && (
+                <Link
+                  href={`/granth?bani=${encodeURIComponent(prevBani.id)}`}
+                  className="inline-flex min-h-[40px] items-center rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-amber-400"
+                >
+                  ← Prev: {prevBani.name}
+                </Link>
+              )}
               {nextBani && (
                 <Link
                   href={`/granth?bani=${encodeURIComponent(nextBani.id)}`}
@@ -1150,6 +1165,14 @@ function GranthReader() {
                 paired Next link lets them flow through Nitnem in order. */}
             {selectedBani && lines.length > 0 && (
               <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+                {prevBani && (
+                  <Link
+                    href={`/granth?bani=${encodeURIComponent(prevBani.id)}`}
+                    className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-amber-400"
+                  >
+                    ← Prev: {prevBani.name}
+                  </Link>
+                )}
                 <button
                   type="button"
                   onClick={() => {
