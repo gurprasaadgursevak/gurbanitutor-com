@@ -18,6 +18,8 @@ const CONTRIBUTORS = [
   "Bhai Irvanjit Singh",
   "Bhai Yadevinder Singh (Surrey BC)",
   "Bhai Jaiinder Singh (Surrey BC)",
+  "Bibi Satbir Kaur",
+  "Bhai Harloveleen Singh",
 ];
 
 const DEDICATIONS = [
