@@ -33,6 +33,18 @@ const MATRAS = new Set([
   "ੰ", "ਂ", "ਃ", "ੱ", "਼", "੍", "ੑ", "ੵ",
 ]);
 
+// Composed-vowel → bearer-letter normalization. The on-screen keyboard's
+// top row gives Sangat precomposed `ਉ ਊ ਓ ਆ ਐ ਔ ਇ ਈ ਏ` keys, but our
+// consonant-skeleton matcher works at the bearer level. Without this map a
+// query of `ਉਪਦੇਸ਼` wouldn't match a corpus line that contains `ੳ + ੁ +
+// ਪ + …` — the two visually identical strings have different first
+// codepoints. Normalizing both query and corpus to bearers fixes that.
+const COMPOSED_VOWEL_TO_BEARER: Record<string, string> = {
+  "ਉ": "ੳ", "ਊ": "ੳ", "ਓ": "ੳ",
+  "ਆ": "ਅ", "ਐ": "ਅ", "ਔ": "ਅ",
+  "ਇ": "ੲ", "ਈ": "ੲ", "ਏ": "ੲ",
+};
+
 const QUOTES = new Set(['"', "“", "”", "‘", "’", "'", "`"]);
 
 function strip(s: string): string {
@@ -48,7 +60,7 @@ function consonantSkeleton(text: string): string {
   for (const c of text) {
     if (MATRAS.has(c)) continue;
     if (/\s/.test(c)) continue;
-    out += c;
+    out += COMPOSED_VOWEL_TO_BEARER[c] ?? c;
   }
   return out;
 }
@@ -58,13 +70,18 @@ function firstLetterTokens(query: string): string[] {
   for (const c of query) {
     if (/\s/.test(c)) continue;
     if (MATRAS.has(c)) continue;
-    out.push(c);
+    out.push(COMPOSED_VOWEL_TO_BEARER[c] ?? c);
   }
   return out;
 }
 
 function firstConsonant(word: string): string | undefined {
-  return Array.from(word)[0];
+  // Normalize composed standalone vowels to their bearer letter so a
+  // search using either `ੳ` (bearer) or `ਉ` (precomposed) matches lines
+  // that begin with the other form.
+  const c = Array.from(word)[0];
+  if (c === undefined) return undefined;
+  return COMPOSED_VOWEL_TO_BEARER[c] ?? c;
 }
 
 // Parsers — column layouts match iOS SGGSReaderView / DasamReaderView.
@@ -175,6 +192,34 @@ export default function SearchPage() {
   const [scope, setScope] = useState<Scope>("all");
   const [mode, setMode] = useState<Mode>("anywhere");
   const [keyboardOpen, setKeyboardOpen] = useState(false);
+  // Persisted search history. Kept in localStorage under
+  // `recent_gurbani_searches` (distinct from the iOS keys so the two
+  // surfaces stay independent). Capped at 10 most recent entries.
+  const [recents, setRecents] = useState<string[]>([]);
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("recent_gurbani_searches");
+      if (raw) setRecents(JSON.parse(raw));
+    } catch {}
+  }, []);
+  const saveRecents = (next: string[]) => {
+    setRecents(next);
+    try {
+      localStorage.setItem("recent_gurbani_searches", JSON.stringify(next));
+    } catch {}
+  };
+  const recordRecent = (term: string) => {
+    const t = term.trim();
+    if (!t) return;
+    const lower = t.toLowerCase();
+    const filtered = recents.filter((r) => r.toLowerCase() !== lower);
+    const next = [t, ...filtered].slice(0, 10);
+    saveRecents(next);
+  };
+  const removeRecent = (term: string) => {
+    saveRecents(recents.filter((r) => r !== term));
+  };
+  const clearRecents = () => saveRecents([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -262,6 +307,21 @@ export default function SearchPage() {
     }
     return out;
   }, [loading, sggs, dasam, bhaiGurdas, bhaiNandlal, query, lang, scope, mode]);
+
+  // Record the query as a recent search ~1.2s after the user stops typing,
+  // but only if the search actually returned matches. Stops misspellings
+  // from cluttering the Recent list.
+  useEffect(() => {
+    const q = query.trim();
+    if (!q || results.length === 0) return;
+    const id = setTimeout(() => {
+      recordRecent(q);
+    }, 1200);
+    return () => clearTimeout(id);
+    // recordRecent intentionally not in deps — it closes over recents,
+    // and we don't want the timer to reset every time recents updates.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, results.length]);
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -393,6 +453,63 @@ export default function SearchPage() {
               )}
             </span>
           )}
+        </div>
+
+        {/* Recent searches: surfaced only when the search field is empty
+            so they don't compete with results. Tap a chip to re-run the
+            search; tap the × to drop just that term. */}
+        {!error && !loading && query.trim() === "" && recents.length > 0 && (
+          <div className="mt-5">
+            <div className="mb-2 flex items-center justify-between">
+              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-700">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                Recent
+              </span>
+              <button
+                type="button"
+                onClick={clearRecents}
+                className="text-xs font-semibold text-slate-500 hover:text-slate-700"
+              >
+                Clear
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {recents.map((term) => (
+                <span
+                  key={term}
+                  className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-900 transition hover:bg-amber-200"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setQuery(term)}
+                    className="max-w-[220px] truncate"
+                    aria-label={`Search again: ${term}`}
+                  >
+                    {term}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => removeRecent(term)}
+                    className="text-amber-700 hover:text-amber-900"
+                    aria-label={`Remove ${term}`}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </button>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-5 text-sm text-slate-500">
+          {/* Spacer to preserve the original structure below — keeps the
+              hint paragraph close-attached to its results status line. */}
           {!error && !loading && query.trim() !== "" && (
             <span>
               {results.length} match{results.length === 1 ? "" : "es"} shown
