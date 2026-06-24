@@ -42,11 +42,14 @@ type DiffWord = {
   chars: DiffChar[]; // character-level (matra-level) diff inside the word
 };
 
-// Split a shabad/attempt into "words" — runs of non-whitespace, non-dandi
-// characters. Whitespace and dandis (॥) are separators only; punctuation
-// like ; , . stays attached to its word so the strict mode can compare it.
-function tokenize(s: string): string[] {
-  return s.split(/[\s॥]+/u).filter((w) => w.length > 0);
+// Split a shabad/attempt into "words". In strict mode only whitespace and
+// dandis (॥) are separators, so attached punctuation (e.g. `ਏ;ਨਮਹ`) stays
+// part of the token and must match. In loose mode we also split on `;`, `,`,
+// `.`, `:`, `।`, `?`, `!` so the Gareebi Pothi source's attached semicolons
+// don't penalize learners who type the same words separated only by spaces.
+function tokenize(s: string, strict: boolean): string[] {
+  const sep = strict ? /[\s॥]+/u : /[\s॥।;,.:?!]+/u;
+  return s.split(sep).filter((w) => w.length > 0);
 }
 
 function diff(
@@ -54,8 +57,8 @@ function diff(
   attempt: string,
   strict: boolean
 ): { words: DiffWord[]; allCorrect: boolean; charsAlongside: DiffChar[] } {
-  const refWords = tokenize(reference);
-  const usrWords = tokenize(attempt);
+  const refWords = tokenize(reference, strict);
+  const usrWords = tokenize(attempt, strict);
   const max = Math.max(refWords.length, usrWords.length);
   const words: DiffWord[] = [];
   let allCorrect = refWords.length === usrWords.length;
