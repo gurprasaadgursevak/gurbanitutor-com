@@ -4,7 +4,7 @@
  * for pages so updates land quickly while the cached copy keeps offline alive.
  */
 
-const CACHE_VERSION = "v13";
+const CACHE_VERSION = "v14";
 const STATIC_CACHE = `gt-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `gt-pages-${CACHE_VERSION}`;
 
@@ -70,24 +70,29 @@ self.addEventListener("fetch", (event) => {
   // Skip Next.js HMR / RSC requests in dev — they should always be live.
   if (url.pathname.startsWith("/_next/")) return;
 
-  // Big TSV datasets: cache-first (rarely change, big download).
+  // Big TSV datasets: stale-while-revalidate. Serve the cached copy
+  // instantly (these files are 5+ MB), but always kick off a background
+  // fetch so the next visit picks up any updates (e.g. dictionary
+  // corrections in arths.tsv) without us bumping CACHE_VERSION.
   if (
     url.pathname === "/arths.tsv" ||
     url.pathname === "/sggs.tsv" ||
     url.pathname === "/dasam.tsv"
   ) {
     event.respondWith(
-      caches.match(request).then(
-        (cached) =>
-          cached ||
-          fetch(request).then((response) => {
+      (async () => {
+        const cache = await caches.open(STATIC_CACHE);
+        const cached = await cache.match(request);
+        const networkPromise = fetch(request)
+          .then((response) => {
             if (response && response.ok) {
-              const clone = response.clone();
-              caches.open(STATIC_CACHE).then((cache) => cache.put(request, clone));
+              cache.put(request, response.clone()).catch(() => {});
             }
             return response;
           })
-      )
+          .catch(() => null);
+        return cached || (await networkPromise) || Response.error();
+      })()
     );
     return;
   }
