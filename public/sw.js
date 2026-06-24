@@ -4,7 +4,7 @@
  * for pages so updates land quickly while the cached copy keeps offline alive.
  */
 
-const CACHE_VERSION = "v12";
+const CACHE_VERSION = "v13";
 const STATIC_CACHE = `gt-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `gt-pages-${CACHE_VERSION}`;
 
@@ -88,6 +88,29 @@ self.addEventListener("fetch", (event) => {
             return response;
           })
       )
+    );
+    return;
+  }
+
+  // Manifest JSON files: network-first so a bani being added or relabeled
+  // (e.g. Ardas getting verseCount + segments) lands instantly instead of
+  // waiting for the SW cache to evict. Falls back to cache when offline.
+  if (
+    url.pathname === "/banis_manifest.json" ||
+    url.pathname === "/manifest.webmanifest"
+  ) {
+    event.respondWith(
+      (async () => {
+        const cache = await caches.open(STATIC_CACHE);
+        try {
+          const response = await fetch(request);
+          if (response && response.ok) cache.put(request, response.clone());
+          return response;
+        } catch {
+          const cached = await cache.match(request);
+          return cached || Response.error();
+        }
+      })()
     );
     return;
   }
