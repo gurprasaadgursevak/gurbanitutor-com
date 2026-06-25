@@ -439,6 +439,7 @@ export default function SearchPage() {
               value={mode}
               onChange={(v) => setMode(v as Mode)}
               options={[
+                { value: "exactly", label: "Exactly" },
                 { value: "contains", label: "Contains" },
                 { value: "firstLetters", label: "First Letters" },
                 { value: "anywhere", label: "Anywhere" },
