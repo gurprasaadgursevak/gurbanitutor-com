@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import GurbaniSearchPin from "../GurbaniSearchPin";
 import { useSearchParams } from "next/navigation";
 import SocialLinks from "../SocialLinks";
 import { shabadHash } from "../lib/shabadHash";
@@ -107,6 +108,7 @@ function GareebiPothiReader() {
       </header>
 
       <main className="mx-auto max-w-5xl px-6 pb-16 pt-10">
+        <GurbaniSearchPin />
         {!selected && (
           <section>
             <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">

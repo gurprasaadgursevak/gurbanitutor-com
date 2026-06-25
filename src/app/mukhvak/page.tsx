@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import SocialLinks from "../SocialLinks";
+import GurbaniSearchPin from "../GurbaniSearchPin";
 
 type Verse = {
   verseId: number;
@@ -153,6 +154,7 @@ export default function MukhvakPage() {
       </section>
 
       <main className="mx-auto max-w-3xl px-6 pb-16">
+        <GurbaniSearchPin />
         {loading && (
           <p className="mt-6 text-center text-slate-600">Loading today&apos;s Mukhvak...</p>
         )}

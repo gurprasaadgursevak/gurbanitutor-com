@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import SocialLinks from "../SocialLinks";
+import GurbaniSearchPin from "../GurbaniSearchPin";
 
 // MARK: - Bani definitions
 //
@@ -736,6 +737,7 @@ export default function QuizPage() {
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-10">
+        <GurbaniSearchPin />
         {error && (
           <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
             {error}

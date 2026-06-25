@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import GurmukhiKeyboard from "../GurmukhiKeyboard";
+import GurbaniSearchPin from "../GurbaniSearchPin";
 import SocialLinks from "../SocialLinks";
 
 // Painti Akhari order, mirroring the iOS app's VocabStore.quickSearchAlphabets.
@@ -164,6 +165,7 @@ export default function ArthsPage() {
       </header>
 
       <main className="mx-auto max-w-7xl px-6 py-10">
+        <GurbaniSearchPin />
         <div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-600 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow-sm">
             Gurbani Vocabulary Builder

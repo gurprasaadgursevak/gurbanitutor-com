@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import GurmukhiKeyboard from "../GurmukhiKeyboard";
+import GurbaniSearchPin from "../GurbaniSearchPin";
 import SocialLinks from "../SocialLinks";
 
 type Shabad = {
@@ -310,6 +311,7 @@ export default function ShabadTestPage() {
       </header>
 
       <main className="mx-auto max-w-3xl px-6 pb-16 pt-10">
+        <GurbaniSearchPin />
         {phase === "select" && (
           <section>
             <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">

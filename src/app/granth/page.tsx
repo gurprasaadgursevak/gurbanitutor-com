@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import GurbaniSearchPin from "../GurbaniSearchPin";
 import { useSearchParams } from "next/navigation";
 import SocialLinks from "../SocialLinks";
 import SehajPaathPlayer from "./SehajPaathPlayer";
@@ -778,6 +779,7 @@ function GranthReader() {
       </header>
 
       <main className="mx-auto max-w-5xl px-6 pb-32 pt-10 sm:pb-28">
+        <GurbaniSearchPin />
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
             Sri Guru Granth Sahib Ji & Sri Dasam Guru Granth Sahib Ji

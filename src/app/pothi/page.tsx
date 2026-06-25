@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import SocialLinks from "../SocialLinks";
+import GurbaniSearchPin from "../GurbaniSearchPin";
 
 export const metadata: Metadata = {
   title: "Sri Pothi Sahib — Gurbani Tutor",
@@ -143,6 +144,7 @@ export default function PothiPage() {
       </section>
 
       <main className="mx-auto max-w-6xl px-6 pb-16">
+        <GurbaniSearchPin />
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {POTHIS.map((p) => (
             <li

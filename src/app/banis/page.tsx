@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import SocialLinks from "../SocialLinks";
 import { baniHasAudio } from "../baniAudio";
+import GurbaniSearchPin from "../GurbaniSearchPin";
 
 // Hand-curated Nitnem + Sundar Gutka banis. The id here must match the id used
 // in `granth/page.tsx`'s BANI_LIST so deep-links via `?bani=<id>` resolve.
@@ -112,6 +113,7 @@ export default function BanisPage() {
       </header>
 
       <main className="mx-auto max-w-5xl px-6 pb-20 pt-10">
+        <GurbaniSearchPin />
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
             Amrit Banis
