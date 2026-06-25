@@ -350,6 +350,25 @@ export default function AboutPage() {
 
         <hr className="my-12 border-slate-200" />
 
+        {/* Related project */}
+        <section>
+          <SectionTitle>Also Visit</SectionTitle>
+          <p className="mt-3 leading-7 text-slate-700">
+            Gursevak.com is a companion website by the same Sangat that records
+            the Nitnem audio you hear in the readers.
+          </p>
+          <a
+            href="https://gursevak.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-full border border-amber-600 px-5 py-2.5 text-sm font-semibold text-amber-700 transition hover:bg-amber-50"
+          >
+            <span aria-hidden>🌐</span> Gursevak.com
+          </a>
+        </section>
+
+        <hr className="my-12 border-slate-200" />
+
         {/* Follow Us */}
         <section>
           <SectionTitle>Follow Us</SectionTitle>

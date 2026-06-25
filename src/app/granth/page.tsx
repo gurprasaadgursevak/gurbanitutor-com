@@ -7,6 +7,7 @@ import SocialLinks from "../SocialLinks";
 import SehajPaathPlayer from "./SehajPaathPlayer";
 import GurmukhiFontToggle from "./GurmukhiFontToggle";
 import { loadSteek, lookupSteek, type SteekSource } from "../lib/steekIndex";
+import { baniAudioURL } from "../baniAudio";
 
 // In-memory steek indices. Built lazily when a toggle is enabled. The
 // promise is cached inside `loadSteek` so flipping the toggles off / on
@@ -828,6 +829,27 @@ function GranthReader() {
                 </Link>
               )}
             </div>
+          </div>
+        )}
+
+        {/* Bhagat Jaswant Singh Ji recording for this bani, streamed from
+            gursevak.com. Mirrors the iOS BaniAudioBar so Sangat get the
+            same player on both surfaces. Only renders when the bani has a
+            verified slug; otherwise no audio bar appears. */}
+        {selectedBani && baniAudioURL(selectedBani.id) && (
+          <div className="mt-3 rounded-2xl border border-amber-200 bg-white px-4 py-3 shadow-sm">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-amber-800">
+              Audio · {selectedBani.name}
+            </p>
+            <audio
+              key={selectedBani.id}
+              controls
+              preload="none"
+              className="w-full"
+              src={baniAudioURL(selectedBani.id) ?? undefined}
+            >
+              Your browser does not support the audio element.
+            </audio>
           </div>
         )}
 

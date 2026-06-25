@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import SocialLinks from "../SocialLinks";
+import { baniHasAudio } from "../baniAudio";
 
 // Hand-curated Nitnem + Sundar Gutka banis. The id here must match the id used
 // in `granth/page.tsx`'s BANI_LIST so deep-links via `?bani=<id>` resolve.
@@ -240,7 +241,19 @@ function BaniGrid({ banis }: { banis: CuratedBani[] }) {
             href={`/granth?bani=${encodeURIComponent(bani.id)}`}
             className="flex h-full min-h-[80px] flex-col justify-center rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-amber-400 hover:shadow-md"
           >
-            <span className="text-sm font-semibold text-slate-900">{bani.name}</span>
+            <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-900">
+              {bani.name}
+              {/* Mirrors the iOS Sundar Gutka list: a small speaker glyph
+                  flags the banis with a Bhagat Jaswant Singh Ji recording
+                  available in the reader. */}
+              {baniHasAudio(bani.id) && (
+                <span aria-label="Audio available" title="Audio available" className="text-amber-600">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                    <path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06A6.5 6.5 0 0 1 14 18.71v2.06A8.5 8.5 0 0 0 14 3.23z"/>
+                  </svg>
+                </span>
+              )}
+            </span>
             {bani.subtitle && (
               <span className="mt-1 text-xs text-slate-500">{bani.subtitle}</span>
             )}
