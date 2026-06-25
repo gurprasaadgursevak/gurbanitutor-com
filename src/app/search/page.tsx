@@ -7,7 +7,7 @@ import SocialLinks from "../SocialLinks";
 
 type Granth = "sggs" | "dasam" | "bhaiGurdas" | "bhaiNandlal";
 type Lang = "gurmukhi" | "english";
-type Mode = "contains" | "firstLetters" | "anywhere";
+type Mode = "exactly" | "contains" | "firstLetters" | "anywhere";
 type Scope = "all" | "sggs" | "dasam" | "bhaiGurdas" | "bhaiNandlal";
 
 const GRANTH_LABEL: Record<Granth, string> = {
@@ -141,7 +141,33 @@ function parseDasam(text: string): Line[] {
   return parseAuxiliary(text, "dasam", 0);
 }
 
+// Punctuation we strip from a token before comparing in "Exactly" mode so an
+// attached visram or dandi (`;`, `,`, `.`, `॥`) doesn't prevent an otherwise
+// exact word match.
+const EXACT_BOUNDARY_PUNCT = new Set([
+  ";", ",", ".", ":", "?", "!", "(", ")", "[", "]", "{", "}",
+  "\"", "'", "‘", "’", "“", "”",
+  "।", "॥",
+]);
+function stripBoundaryPunctuation(s: string): string {
+  return s
+    .trim()
+    .split("")
+    .filter((c) => !EXACT_BOUNDARY_PUNCT.has(c))
+    .join("");
+}
+
 function matchGurmukhi(line: string, query: string, mode: Mode): boolean {
+  if (mode === "exactly") {
+    // Match the query as a standalone word. e.g. ਨਾਮ matches the word ਨਾਮ
+    // but skips ਨਾਮੁ or ਨਾਮਾ.
+    const cleanedQuery = stripBoundaryPunctuation(query);
+    if (!cleanedQuery) return false;
+    for (const raw of line.split(" ")) {
+      if (stripBoundaryPunctuation(raw) === cleanedQuery) return true;
+    }
+    return false;
+  }
   if (mode === "contains") {
     if (line.includes(query)) return true;
     const lineSkel = consonantSkeleton(line);
