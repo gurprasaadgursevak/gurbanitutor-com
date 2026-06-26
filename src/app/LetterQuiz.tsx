@@ -41,6 +41,7 @@ export default function LetterQuiz() {
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
   const [feedback, setFeedback] = useState<Feedback>({ kind: "none" });
+  const [seen, setSeen] = useState<Set<number>>(() => new Set([round.correct.id]));
 
   useEffect(() => {
     try {
@@ -106,8 +107,20 @@ export default function LetterQuiz() {
   }
 
   function nextRound() {
+    let available = pentiAkhar.filter((c) => !seen.has(c.id));
+    let used = seen;
+    if (available.length === 0) {
+      available = pentiAkhar;
+      used = new Set();
+    }
+    const correct = available[Math.floor(Math.random() * available.length)];
+    const distractors = shuffle(pentiAkhar.filter((c) => c.id !== correct.id)).slice(0, 3);
+    const options = shuffle([...distractors, correct]);
+    const nextSeen = new Set(used);
+    nextSeen.add(correct.id);
+    setSeen(nextSeen);
     setFeedback({ kind: "none" });
-    setRound(makeRound());
+    setRound({ correct, options });
   }
 
   function borderFor(cell: PentiAkharCell): string {

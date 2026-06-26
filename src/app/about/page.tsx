@@ -251,6 +251,41 @@ export default function AboutPage() {
 
         <hr className="my-12 border-slate-200" />
 
+        {/* Games (now live) */}
+        <section>
+          <SectionTitle>Games</SectionTitle>
+          <p className="mt-3 leading-7 text-slate-700">
+            Games for kids and Sangat to make Brahamvidya learning fun and easy,
+            organized by skill level. Tap-to-hear sound boards, multiple-choice
+            quizzes, and a memory match game, all in the{" "}
+            <Link href="/games" className="font-semibold text-amber-700 hover:underline">
+              Games hub
+            </Link>
+            .
+          </p>
+          <ul className="mt-4 space-y-3 text-slate-700">
+            <GoldDotItem>
+              <span className="font-semibold">Beginner.</span> Gurmukhi Letters
+              sound board, Muharni sound board, Letter Quiz, and Name the
+              Letter.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Intermediate.</span> First Letter
+              Match, Memory Match (with a timer to beat), and Akhar Sound Race.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Advanced.</span> Tukh Completion
+              (fill in the blank, or pick the odd-one-out for Jaap Sahib lines)
+              and Bani Identifier.
+            </GoldDotItem>
+          </ul>
+          <p className="mt-4 text-sm text-slate-600">
+            Audio courtesy of Learn Shudh Gurbani by gursevak.com.
+          </p>
+        </section>
+
+        <hr className="my-12 border-slate-200" />
+
         {/* What's Coming */}
         <section>
           <SectionTitle>What's Coming</SectionTitle>
@@ -264,9 +299,9 @@ export default function AboutPage() {
               Gurmat history, drawn from trusted Sangat sources.
             </GoldDotItem>
             <GoldDotItem>
-              <span className="font-semibold">Games for kids.</span> Gamified
-              learning for Painti Akhari, Muharni, and Gurbani Vocabulary,
-              designed for children to play their way into reading Gurbani.
+              <span className="font-semibold">More games.</span> A Muharni Quiz
+              once lagaan-level audio is available from gursevak.com, plus a
+              Sangat-suggested Sakhi Quiz and Bani Order game.
             </GoldDotItem>
           </ul>
         </section>
