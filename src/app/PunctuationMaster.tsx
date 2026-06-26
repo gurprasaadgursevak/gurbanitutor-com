@@ -274,19 +274,19 @@ export default function PunctuationMaster() {
         <QuizScoreBar score={score} attempts={attempts} streak={streak} best={best} />
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-xs">
-        <button type="button" onClick={() => setShowSources((v) => !v)} className="rounded-full border border-amber-300 px-3 py-1 font-semibold text-amber-700 hover:bg-amber-100">
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-sm">
+        <button type="button" onClick={() => setShowSources((v) => !v)} className="rounded-full border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 hover:bg-amber-100">
           {findBani(selectedBaniID)?.label ?? `Sources: ${enabledSources.size === SOURCES.length ? "All" : `${enabledSources.size}/${SOURCES.length}`}`}
         </button>
-        <div className="flex items-center gap-1">
-          <span className="text-amber-900/70">Rounds:</span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-sm font-semibold text-amber-900">Rounds:</span>
           {[0, 5, 10, 20].map((n) => (
-            <button key={n} type="button" onClick={() => { setRoundCap(n); resetSession(); }} className={["rounded-full px-2 py-1 font-semibold transition", roundCap === n ? "bg-amber-600 text-white" : "bg-amber-50 text-amber-700 hover:bg-amber-100"].join(" ")}>
+            <button key={n} type="button" onClick={() => { setRoundCap(n); resetSession(); }} className={["min-w-[36px] rounded-full px-3 py-1.5 text-sm font-bold transition", roundCap === n ? "bg-amber-600 text-white" : "bg-amber-50 text-amber-700 hover:bg-amber-100"].join(" ")}>
               {n === 0 ? "∞" : n}
             </button>
           ))}
         </div>
-        {roundCap > 0 && (<span className="text-amber-900/70">{Math.min(roundsPlayed, roundCap)}/{roundCap}</span>)}
+        {roundCap > 0 && (<span className="text-sm font-semibold text-amber-900">{Math.min(roundsPlayed, roundCap)}/{roundCap}</span>)}
       </div>
 
       {showSources && (

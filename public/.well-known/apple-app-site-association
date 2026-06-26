@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["2RST733YQG.com.amar.Gurbani-Tutor"],
+        "components": [
+          {
+            "/": "/c/*",
+            "comment": "Challenge join links — open in the Gurbani Tutor app"
+          }
+        ]
+      }
+    ]
+  }
+}
