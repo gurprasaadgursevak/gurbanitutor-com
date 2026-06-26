@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { baniBank, SOURCES, sourceFor, type BaniItem, type Source } from "./gamesData";
 import QuizScoreBar from "./QuizScoreBar";
 import { useSGGSPool, poolLabel, type PoolLine } from "./sggsPool";
+import { BANI_FILTERS, BANI_CATEGORIES, findBani, inAngRange, type BaniFilter } from "./baniFilters";
 
 const BEST_KEY = "sentence_unscramble_best_streak";
 
@@ -75,12 +76,49 @@ function pickCurated(sources: Source[], difficulty: Difficulty, seen: Set<string
   return fromCurated(pick[Math.floor(Math.random() * pick.length)]);
 }
 
+function pickSGGSFiltered(pool: PoolLine[], range: [number, number], difficulty: Difficulty, seen: Set<string>): GameItem | null {
+  const scoped = pool.filter((l) => inAngRange(l.ang, range));
+  if (scoped.length === 0) return null;
+  for (let i = 0; i < 25; i++) {
+    const line = scoped[Math.floor(Math.random() * scoped.length)];
+    if (matchesDifficulty(line.tukh, difficulty) && !seen.has(line.tukh)) return fromPool(line);
+  }
+  for (let i = 0; i < 10; i++) {
+    const line = scoped[Math.floor(Math.random() * scoped.length)];
+    if (!seen.has(line.tukh)) return fromPool(line);
+  }
+  return fromPool(scoped[Math.floor(Math.random() * scoped.length)]);
+}
+
+function pickCuratedByBani(name: string, difficulty: Difficulty, seen: Set<string>): GameItem | null {
+  const items = CURATED.filter((b) => b.bani === name);
+  if (items.length === 0) return null;
+  const byDiff = items.filter((b) => matchesDifficulty(b.tukh, difficulty));
+  const arr = byDiff.length > 0 ? byDiff : items;
+  const unseen = arr.filter((b) => !seen.has(b.tukh));
+  const pick = unseen.length > 0 ? unseen : arr;
+  return fromCurated(pick[Math.floor(Math.random() * pick.length)]);
+}
+
 function pickNext(
   enabled: Set<Source>,
   pool: PoolLine[] | null,
+  bani: BaniFilter | null,
   difficulty: Difficulty,
   seen: Set<string>
 ): GameItem | null {
+  if (bani) {
+    if (bani.granth === "Sri Guru Granth Sahib Ji" && pool && bani.angRange) {
+      const item = pickSGGSFiltered(pool, bani.angRange, difficulty, seen);
+      if (item) return item;
+    }
+    if (bani.curatedBaniName) {
+      const item = pickCuratedByBani(bani.curatedBaniName, difficulty, seen);
+      if (item) return item;
+    }
+    return null;
+  }
+
   const sggsOn = enabled.has("Sri Guru Granth Sahib Ji") && pool !== null && pool.length > 0;
   const otherSources = SOURCES.filter((s) => s !== "Sri Guru Granth Sahib Ji" && enabled.has(s));
 
@@ -122,6 +160,7 @@ export default function SentenceUnscramble() {
   const [difficulty, setDifficulty] = useState<Difficulty>("medium");
   const [enabledSources, setEnabledSources] = useState<Set<Source>>(() => new Set(SOURCES));
   const [showSources, setShowSources] = useState(false);
+  const [selectedBaniID, setSelectedBaniID] = useState<string | null>(null);
   const [roundCap, setRoundCap] = useState(0);
   const [roundsPlayed, setRoundsPlayed] = useState(0);
   const [didInitFromPool, setDidInitFromPool] = useState(false);
@@ -143,7 +182,7 @@ export default function SentenceUnscramble() {
   useEffect(() => {
     if (!pool || didInitFromPool) return;
     if (score !== 0 || attempts !== 0 || roundsPlayed !== 0) return;
-    const next = pickNext(enabledSources, pool.unscramble, difficulty, new Set());
+    const next = pickNext(enabledSources, pool.unscramble, findBani(selectedBaniID), difficulty, new Set());
     if (next) {
       setItem(next);
       setTokenPool(shuffle(tokensFor(next.tukh)));
@@ -151,7 +190,7 @@ export default function SentenceUnscramble() {
       setSeen(new Set([next.tukh]));
     }
     setDidInitFromPool(true);
-  }, [pool, didInitFromPool, score, attempts, roundsPlayed, enabledSources, difficulty]);
+  }, [pool, didInitFromPool, score, attempts, roundsPlayed, enabledSources, difficulty, selectedBaniID]);
 
   function moveToAssembled(t: Token) {
     if (feedback !== "none") return;
@@ -196,7 +235,7 @@ export default function SentenceUnscramble() {
   }
 
   function applyNextRound(nextSeen: Set<string>, nextDifficulty: Difficulty = difficulty) {
-    const picked = pickNext(enabledSources, pool?.unscramble ?? null, nextDifficulty, nextSeen);
+    const picked = pickNext(enabledSources, pool?.unscramble ?? null, findBani(selectedBaniID), nextDifficulty, nextSeen);
     if (!picked) return;
     const trimmed = new Set(nextSeen);
     trimmed.add(picked.tukh);
@@ -261,7 +300,7 @@ export default function SentenceUnscramble() {
 
       <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-xs">
         <button type="button" onClick={() => setShowSources((v) => !v)} className="rounded-full border border-amber-300 px-3 py-1 font-semibold text-amber-700 hover:bg-amber-100">
-          Sources: {enabledSources.size === SOURCES.length ? "All" : `${enabledSources.size}/${SOURCES.length}`}
+          {findBani(selectedBaniID)?.label ?? `Sources: ${enabledSources.size === SOURCES.length ? "All" : `${enabledSources.size}/${SOURCES.length}`}`}
         </button>
         <div className="flex items-center gap-1">
           <span className="text-amber-900/70">Rounds:</span>
@@ -275,14 +314,56 @@ export default function SentenceUnscramble() {
       </div>
 
       {showSources && (
-        <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50/60 p-3">
-          {SOURCES.map((s) => (
-            <label key={s} className="flex cursor-pointer items-center gap-2 py-1">
-              <input type="checkbox" checked={enabledSources.has(s)} onChange={() => toggleSource(s)} className="h-4 w-4 accent-amber-600" />
-              <span className="flex-1 text-sm font-semibold text-amber-900">{s}</span>
-              <span className="text-xs text-amber-900/60">{countFor(s)}</span>
-            </label>
-          ))}
+        <div className="mt-3 space-y-3 rounded-2xl border border-amber-200 bg-amber-50/60 p-3">
+          <div>
+            <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-amber-900/60">Granth</p>
+            {SOURCES.map((s) => (
+              <label key={s} className={["flex items-center gap-2 py-1", selectedBaniID ? "cursor-not-allowed opacity-50" : "cursor-pointer"].join(" ")}>
+                <input
+                  type="checkbox"
+                  disabled={selectedBaniID !== null}
+                  checked={enabledSources.has(s)}
+                  onChange={() => toggleSource(s)}
+                  className="h-4 w-4 accent-amber-600"
+                />
+                <span className="flex-1 text-sm font-semibold text-amber-900">{s}</span>
+                <span className="text-xs text-amber-900/60">{countFor(s)}</span>
+              </label>
+            ))}
+            {selectedBaniID && (
+              <p className="mt-1 text-[10px] text-amber-900/60">Disabled while a specific bani is selected below.</p>
+            )}
+          </div>
+
+          <div>
+            <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-amber-900/60">Drill into one Bani</p>
+            <select
+              value={selectedBaniID ?? ""}
+              onChange={(e) => {
+                const v = e.target.value === "" ? null : e.target.value;
+                setSelectedBaniID(v);
+                const picked = pickNext(enabledSources, pool?.unscramble ?? null, findBani(v), difficulty, new Set());
+                if (picked) {
+                  setItem(picked);
+                  setTokenPool(shuffle(tokensFor(picked.tukh)));
+                  setAssembled([]);
+                  setSeen(new Set([picked.tukh]));
+                  setFeedback("none");
+                }
+              }}
+              className="w-full rounded border border-amber-300 bg-white px-2 py-1 text-sm font-semibold text-amber-900"
+            >
+              <option value="">All banis</option>
+              {BANI_CATEGORIES.map((cat) => (
+                <optgroup key={cat} label={cat}>
+                  {BANI_FILTERS.filter((b) => b.category === cat).map((b) => (
+                    <option key={b.id} value={b.id}>{b.label}</option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+            <p className="mt-1 text-[10px] text-amber-900/60">When set, the picker pulls lines only from this bani.</p>
+          </div>
         </div>
       )}
 

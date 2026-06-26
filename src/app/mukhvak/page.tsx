@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import SocialLinks from "../SocialLinks";
 import GurbaniSearchPin from "../GurbaniSearchPin";
+import LarivaarText from "../LarivaarText";
 
 type Verse = {
   verseId: number;
@@ -100,6 +101,16 @@ export default function MukhvakPage() {
   const [data, setData] = useState<Hukamnama | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showLarivaar, setShowLarivaar] = useState(false);
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem("granth_show_larivaar");
+      if (v !== null) setShowLarivaar(v === "1");
+    } catch {}
+  }, []);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_larivaar", showLarivaar ? "1" : "0"); } catch {}
+  }, [showLarivaar]);
 
   useEffect(() => {
     let cancelled = false;
@@ -200,14 +211,31 @@ export default function MukhvakPage() {
               </div>
             )}
 
+            <div className="mt-4 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowLarivaar((v) => !v)}
+                className={[
+                  "rounded-full px-3 py-1 text-xs font-semibold transition",
+                  showLarivaar
+                    ? "bg-amber-600 text-white hover:bg-amber-700"
+                    : "border border-amber-300 text-amber-700 hover:bg-amber-50",
+                ].join(" ")}
+              >
+                Larivaar {showLarivaar ? "on" : "off"}
+              </button>
+            </div>
+
             {/* Verses */}
-            <ol className="mt-6 space-y-5">
+            <ol className="mt-4 space-y-5">
               {data.verses.map((v) => (
                 <li
                   key={v.verseId}
                   className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
                 >
-                  <p className="text-xl leading-9 text-slate-900">{v.gurmukhi}</p>
+                  <p className="text-xl leading-9 text-slate-900">
+                    <LarivaarText text={v.gurmukhi} enabled={showLarivaar} />
+                  </p>
                   {v.translit && (
                     <p className="mt-2 text-sm italic text-slate-600">{v.translit}</p>
                   )}

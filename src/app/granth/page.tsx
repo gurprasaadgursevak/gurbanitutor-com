@@ -7,6 +7,8 @@ import { useSearchParams } from "next/navigation";
 import SocialLinks from "../SocialLinks";
 import SehajPaathPlayer from "./SehajPaathPlayer";
 import GurmukhiFontToggle from "./GurmukhiFontToggle";
+import LarivaarText from "../LarivaarText";
+import VishramExplainerModal from "../VishramExplainer";
 import { loadSteek, lookupSteek, type SteekSource } from "../lib/steekIndex";
 import { baniAudioURL } from "../baniAudio";
 import BaniAudioPlayer from "../BaniAudioPlayer";
@@ -360,6 +362,10 @@ function GranthReader() {
   const [showUcharan, setShowUcharan] = useState(false);
   const [showExtendedUcharan, setShowExtendedUcharan] = useState(false);
   const [showRomanized, setShowRomanized] = useState(true);
+  // Larivaar mode: removes spaces between words and paints the word before
+  // each pause mark (; long, , medium, . short) so Sangat can practise
+  // reading without the visual crutch of spaces.
+  const [showLarivaar, setShowLarivaar] = useState(false);
   // Punjabi steeks (mirrors the iOS reader toggles).
   // `Classical Steek 1` = NKFT (Faridkot Wala Teeka), SGGS-only.
   // `Punjabi Steek` = PSST for SGGS lines, DGDG for Dasam Granth lines.
@@ -609,6 +615,8 @@ function GranthReader() {
       if (v8 !== null) setShowClassicalSteek1(v8);
       const v9 = read("granth_show_punjabi_steek");
       if (v9 !== null) setShowPunjabiSteek(v9);
+      const v10 = read("granth_show_larivaar");
+      if (v10 !== null) setShowLarivaar(v10);
     } catch {}
   }, []);
 
@@ -639,6 +647,9 @@ function GranthReader() {
   useEffect(() => {
     try { localStorage.setItem("granth_show_punjabi_steek", showPunjabiSteek ? "1" : "0"); } catch {}
   }, [showPunjabiSteek]);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_larivaar", showLarivaar ? "1" : "0"); } catch {}
+  }, [showLarivaar]);
 
   // Lazy-load each steek source the first time a relevant toggle is flipped
   // on. `loadSteek` caches the parsed index so subsequent reader sessions
@@ -767,6 +778,7 @@ function GranthReader() {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <VishramExplainerModal />
       <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <Link
@@ -1000,6 +1012,11 @@ function GranthReader() {
               onToggle={() => setShowRomanized((v) => !v)}
             />
           )}
+          <ToggleChip
+            label="Larivaar"
+            on={showLarivaar}
+            onToggle={() => setShowLarivaar((v) => !v)}
+          />
           <span className="mx-1 h-5 w-px bg-slate-200" aria-hidden />
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
             Size
@@ -1071,7 +1088,7 @@ function GranthReader() {
                     className="text-slate-900"
                     style={{ fontSize: `${18 * fontScale}px`, lineHeight: 1.8 }}
                   >
-                    {l.gurmukhi}
+                    <LarivaarText text={l.gurmukhi} enabled={showLarivaar} />
                   </p>
                   {showExtendedUcharan && l.extendedUcharanTip && (
                     <p

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { shabadHash } from "./lib/shabadHash";
+import LarivaarText from "./LarivaarText";
 
 type Shabad = { id: string; marker: string; gurmukhi: string };
 
@@ -38,6 +39,13 @@ function parseTSV(text: string): Shabad[] {
 
 export default function TodayShabad() {
   const [shabad, setShabad] = useState<Shabad | null>(null);
+  const [showLarivaar, setShowLarivaar] = useState(false);
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem("granth_show_larivaar");
+      if (v !== null) setShowLarivaar(v === "1");
+    } catch {}
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -76,7 +84,7 @@ export default function TodayShabad() {
           lang="pa"
           className="mt-3 text-xl leading-relaxed text-slate-900 sm:text-2xl"
         >
-          {shabad.gurmukhi}
+          <LarivaarText text={shabad.gurmukhi} enabled={showLarivaar} />
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link

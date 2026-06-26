@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { baniBank, SOURCES, sourceFor, type BaniItem, type Source } from "./gamesData";
 import QuizScoreBar from "./QuizScoreBar";
 import { useSGGSPool, poolLabel, type PoolLine } from "./sggsPool";
+import { BANI_FILTERS, BANI_CATEGORIES, findBani, inAngRange, type BaniFilter } from "./baniFilters";
 
 const BEST_KEY = "punctuation_master_best_streak";
 
@@ -83,11 +84,47 @@ function pickCurated(sources: Source[], seen: Set<string>): GameItem | null {
   return fromCurated(arr[Math.floor(Math.random() * arr.length)]);
 }
 
+function pickSGGSFiltered(
+  pool: { punctuated: PoolLine[]; unpunctuated: PoolLine[] },
+  range: [number, number],
+  seen: Set<string>
+): GameItem | null {
+  const pickUnpunct = Math.random() < 0.25;
+  const primary = (pickUnpunct ? pool.unpunctuated : pool.punctuated).filter((l) => inAngRange(l.ang, range));
+  const fallback = (pickUnpunct ? pool.punctuated : pool.unpunctuated).filter((l) => inAngRange(l.ang, range));
+  const src = primary.length > 0 ? primary : fallback;
+  if (src.length === 0) return null;
+  const unseen = src.filter((l) => !seen.has(l.tukh));
+  const arr = unseen.length > 0 ? unseen : src;
+  return fromPool(arr[Math.floor(Math.random() * arr.length)]);
+}
+
+function pickCuratedByBani(name: string, seen: Set<string>): GameItem | null {
+  const items = CURATED.filter((b) => b.bani === name);
+  if (items.length === 0) return null;
+  const unseen = items.filter((b) => !seen.has(b.tukh));
+  const arr = unseen.length > 0 ? unseen : items;
+  return fromCurated(arr[Math.floor(Math.random() * arr.length)]);
+}
+
 function pickNext(
   enabled: Set<Source>,
   pool: { punctuated: PoolLine[]; unpunctuated: PoolLine[] } | null,
+  bani: BaniFilter | null,
   seen: Set<string>
 ): GameItem | null {
+  if (bani) {
+    if (bani.granth === "Sri Guru Granth Sahib Ji" && pool && bani.angRange) {
+      const item = pickSGGSFiltered(pool, bani.angRange, seen);
+      if (item) return item;
+    }
+    if (bani.curatedBaniName) {
+      const item = pickCuratedByBani(bani.curatedBaniName, seen);
+      if (item) return item;
+    }
+    return null;
+  }
+
   const sggsOn = enabled.has("Sri Guru Granth Sahib Ji") && pool !== null;
   const otherSources = SOURCES.filter((s) => s !== "Sri Guru Granth Sahib Ji" && enabled.has(s));
 
@@ -123,6 +160,7 @@ export default function PunctuationMaster() {
   const [seen, setSeen] = useState<Set<string>>(() => new Set([item.tukh]));
   const [enabledSources, setEnabledSources] = useState<Set<Source>>(() => new Set(SOURCES));
   const [showSources, setShowSources] = useState(false);
+  const [selectedBaniID, setSelectedBaniID] = useState<string | null>(null);
   const [roundCap, setRoundCap] = useState(0);
   const [roundsPlayed, setRoundsPlayed] = useState(0);
   const [didInitFromPool, setDidInitFromPool] = useState(false);
@@ -146,7 +184,7 @@ export default function PunctuationMaster() {
   useEffect(() => {
     if (!pool || didInitFromPool) return;
     if (score !== 0 || attempts !== 0 || roundsPlayed !== 0) return;
-    const next = pickNext(enabledSources, pool, new Set());
+    const next = pickNext(enabledSources, pool, findBani(selectedBaniID), new Set());
     if (next) {
       const { words: w, truth: t } = split(next.tukh);
       setItem(next);
@@ -156,7 +194,7 @@ export default function PunctuationMaster() {
       setSeen(new Set([next.tukh]));
     }
     setDidInitFromPool(true);
-  }, [pool, didInitFromPool, score, attempts, roundsPlayed, enabledSources]);
+  }, [pool, didInitFromPool, score, attempts, roundsPlayed, enabledSources, selectedBaniID]);
 
   function setMark(idx: number, mark: string | null) {
     if (feedback !== "none") return;
@@ -193,7 +231,7 @@ export default function PunctuationMaster() {
   }
 
   function applyNextRound(nextSeen: Set<string>) {
-    const picked = pickNext(enabledSources, pool, nextSeen);
+    const picked = pickNext(enabledSources, pool, findBani(selectedBaniID), nextSeen);
     if (!picked) return;
     const trimmed = new Set(nextSeen);
     trimmed.add(picked.tukh);
@@ -238,7 +276,7 @@ export default function PunctuationMaster() {
 
       <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-xs">
         <button type="button" onClick={() => setShowSources((v) => !v)} className="rounded-full border border-amber-300 px-3 py-1 font-semibold text-amber-700 hover:bg-amber-100">
-          Sources: {enabledSources.size === SOURCES.length ? "All" : `${enabledSources.size}/${SOURCES.length}`}
+          {findBani(selectedBaniID)?.label ?? `Sources: ${enabledSources.size === SOURCES.length ? "All" : `${enabledSources.size}/${SOURCES.length}`}`}
         </button>
         <div className="flex items-center gap-1">
           <span className="text-amber-900/70">Rounds:</span>
@@ -252,14 +290,59 @@ export default function PunctuationMaster() {
       </div>
 
       {showSources && (
-        <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50/60 p-3">
-          {SOURCES.map((s) => (
-            <label key={s} className="flex cursor-pointer items-center gap-2 py-1">
-              <input type="checkbox" checked={enabledSources.has(s)} onChange={() => toggleSource(s)} className="h-4 w-4 accent-amber-600" />
-              <span className="flex-1 text-sm font-semibold text-amber-900">{s}</span>
-              <span className="text-xs text-amber-900/60">{countFor(s)}</span>
-            </label>
-          ))}
+        <div className="mt-3 space-y-3 rounded-2xl border border-amber-200 bg-amber-50/60 p-3">
+          <div>
+            <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-amber-900/60">Granth</p>
+            {SOURCES.map((s) => (
+              <label key={s} className={["flex items-center gap-2 py-1", selectedBaniID ? "cursor-not-allowed opacity-50" : "cursor-pointer"].join(" ")}>
+                <input
+                  type="checkbox"
+                  disabled={selectedBaniID !== null}
+                  checked={enabledSources.has(s)}
+                  onChange={() => toggleSource(s)}
+                  className="h-4 w-4 accent-amber-600"
+                />
+                <span className="flex-1 text-sm font-semibold text-amber-900">{s}</span>
+                <span className="text-xs text-amber-900/60">{countFor(s)}</span>
+              </label>
+            ))}
+            {selectedBaniID && (
+              <p className="mt-1 text-[10px] text-amber-900/60">Disabled while a specific bani is selected below.</p>
+            )}
+          </div>
+
+          <div>
+            <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-amber-900/60">Drill into one Bani</p>
+            <select
+              value={selectedBaniID ?? ""}
+              onChange={(e) => {
+                const v = e.target.value === "" ? null : e.target.value;
+                setSelectedBaniID(v);
+                // Re-roll so the user sees a line from the new bani immediately.
+                const picked = pickNext(enabledSources, pool, findBani(v), new Set());
+                if (picked) {
+                  const { words: w, truth: t } = split(picked.tukh);
+                  setItem(picked);
+                  setWords(w);
+                  setTruth(t);
+                  setUserMarks(initialMarks(w.length));
+                  setSeen(new Set([picked.tukh]));
+                  setFeedback("none");
+                }
+              }}
+              className="w-full rounded border border-amber-300 bg-white px-2 py-1 text-sm font-semibold text-amber-900"
+            >
+              <option value="">All banis</option>
+              {BANI_CATEGORIES.map((cat) => (
+                <optgroup key={cat} label={cat}>
+                  {BANI_FILTERS.filter((b) => b.category === cat).map((b) => (
+                    <option key={b.id} value={b.id}>{b.label}</option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+            <p className="mt-1 text-[10px] text-amber-900/60">When set, the picker pulls lines only from this bani.</p>
+          </div>
         </div>
       )}
 
@@ -284,10 +367,10 @@ export default function PunctuationMaster() {
                   userMarks[i] ? "border-amber-500 text-amber-700" : "border-slate-300 text-slate-400",
                 ].join(" ")}
               >
-                <option value=""> </option>
-                <option value=",">,</option>
-                <option value=";">;</option>
-                <option value=".">.</option>
+                <option value="">Clear</option>
+                <option value=".">. short pause</option>
+                <option value=",">, medium pause</option>
+                <option value=";">; long pause</option>
               </select>
             )}
           </span>

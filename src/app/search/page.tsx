@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import GurmukhiKeyboard from "../GurmukhiKeyboard";
 import SocialLinks from "../SocialLinks";
+import LarivaarText from "../LarivaarText";
 
 type Granth = "sggs" | "dasam" | "bhaiGurdas" | "bhaiNandlal";
 type Lang = "gurmukhi" | "english";
@@ -215,6 +216,16 @@ export default function SearchPage() {
 
   const [query, setQuery] = useState("");
   const [lang, setLang] = useState<Lang>("gurmukhi");
+  const [showLarivaar, setShowLarivaar] = useState(false);
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem("granth_show_larivaar");
+      if (v !== null) setShowLarivaar(v === "1");
+    } catch {}
+  }, []);
+  useEffect(() => {
+    try { localStorage.setItem("granth_show_larivaar", showLarivaar ? "1" : "0"); } catch {}
+  }, [showLarivaar]);
   const [scope, setScope] = useState<Scope>("all");
   const [mode, setMode] = useState<Mode>("anywhere");
   const [keyboardOpen, setKeyboardOpen] = useState(false);
@@ -534,15 +545,25 @@ export default function SearchPage() {
           </div>
         )}
 
-        <div className="mt-5 text-sm text-slate-500">
-          {/* Spacer to preserve the original structure below — keeps the
-              hint paragraph close-attached to its results status line. */}
+        <div className="mt-5 flex items-center justify-between gap-2 text-sm text-slate-500">
           {!error && !loading && query.trim() !== "" && (
             <span>
               {results.length} match{results.length === 1 ? "" : "es"} shown
               {results.length === RESULT_CAP ? " (capped at 200)" : ""}.
             </span>
           )}
+          <button
+            type="button"
+            onClick={() => setShowLarivaar((v) => !v)}
+            className={[
+              "shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition",
+              showLarivaar
+                ? "bg-amber-600 text-white hover:bg-amber-700"
+                : "border border-amber-300 text-amber-700 hover:bg-amber-50",
+            ].join(" ")}
+          >
+            Larivaar {showLarivaar ? "on" : "off"}
+          </button>
         </div>
 
         {/* Results */}
@@ -558,7 +579,9 @@ export default function SearchPage() {
                   )}`}
                   className="group block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-amber-300 hover:shadow"
                 >
-                  <p className="text-lg leading-8 text-slate-900">{r.gurmukhi}</p>
+                  <p className="text-lg leading-8 text-slate-900">
+                    <LarivaarText text={r.gurmukhi} enabled={showLarivaar} />
+                  </p>
                   <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
                     <span className="rounded bg-amber-100 px-2 py-0.5 font-semibold text-amber-800">
                       Read {r.granth === "bhaiGurdas" ? "Pauri" : r.granth === "bhaiNandlal" ? "Section" : "Ang"} {r.ang} <span aria-hidden className="ml-0.5 transition group-hover:translate-x-0.5 inline-block">→</span>
