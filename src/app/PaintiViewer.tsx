@@ -1,7 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import {
+  pentiAkhar,
+  letterAudioURL,
+  DEFAULT_LETTER_CAP_SECONDS,
+} from "./gurmukhiData";
 
 const TOTAL = 35;
 const STORAGE_KEY = "paintee_last_index";
@@ -12,6 +17,29 @@ function pad(n: number): string {
 
 export default function PaintiViewer() {
   const [index, setIndex] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const stopTimerRef = useRef<number | null>(null);
+  const [playingId, setPlayingId] = useState<number | null>(null);
+
+  function playCurrent() {
+    const cell = pentiAkhar[index];
+    const el = audioRef.current;
+    if (!el || !cell) return;
+    if (stopTimerRef.current !== null) {
+      window.clearTimeout(stopTimerRef.current);
+      stopTimerRef.current = null;
+    }
+    el.src = letterAudioURL(cell);
+    el.currentTime = 0;
+    void el.play();
+    setPlayingId(cell.id);
+    const cap = (cell.playbackSeconds ?? DEFAULT_LETTER_CAP_SECONDS) * 1000;
+    stopTimerRef.current = window.setTimeout(() => {
+      el.pause();
+      el.currentTime = 0;
+      setPlayingId(null);
+    }, cap);
+  }
 
   useEffect(() => {
     try {
@@ -101,6 +129,29 @@ export default function PaintiViewer() {
           />
         ))}
       </div>
+
+      {/* Tap-to-hear button using gursevak.com CDN audio */}
+      <button
+        type="button"
+        onClick={playCurrent}
+        className="mt-5 flex w-full items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 transition hover:border-amber-300"
+      >
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-600 text-white">
+          {playingId === pentiAkhar[index]?.id ? "🔊" : "▶"}
+        </span>
+        <div className="text-left">
+          <p className="text-sm font-semibold text-slate-900">
+            Hear {pentiAkhar[index]?.letter}
+            {" · "}
+            {pentiAkhar[index]?.transliteration}
+          </p>
+          <p className="text-xs text-slate-600">
+            Tap to play the letter pronunciation
+          </p>
+        </div>
+      </button>
+
+      <audio ref={audioRef} preload="none" />
 
       {/* Video CTA */}
       <a

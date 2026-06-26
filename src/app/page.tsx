@@ -85,6 +85,13 @@ const TILES: Tile[] = [
     body: "A step-by-step journey: Painti Akhari, Muharni, Nitnem Santhiya, then Sri Guru Granth Sahib Ji Santhiya — taught by sevadars on YouTube.",
     icon: "letters",
   },
+  {
+    href: "/games",
+    eyebrow: "For kids",
+    title: "Games",
+    body: "Games for kids to make Brahamvidya learning fun and easy. Gurmukhi Letters sound board, Muharni sound board, and Letter Quiz.",
+    icon: "letters",
+  },
 ];
 
 // MARK: - Tile icons (inline SVG so they tint with currentColor)
