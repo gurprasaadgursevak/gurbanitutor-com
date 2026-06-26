@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import PaintiViewer from "../PaintiViewer";
+import LetterSoundBoard from "../LetterSoundBoard";
 import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
@@ -92,25 +93,12 @@ export default function MuharniPage() {
             <PaintiViewer />
           </div>
 
-          <Link
-            href="/games/letters"
-            className="mt-4 flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 transition hover:border-amber-300"
-          >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-600 text-white">
-              🔊
-            </span>
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-slate-900">
-                Practice Gurmukhi Letters
-              </p>
-              <p className="text-xs text-slate-600">
-                Tap a letter to hear the full pronunciation lesson
-              </p>
-            </div>
-            <span aria-hidden className="text-slate-500">
-              →
-            </span>
-          </Link>
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
+            <p className="px-2 text-xs font-semibold uppercase tracking-wider text-amber-700">
+              Practice Gurmukhi Letters
+            </p>
+            <LetterSoundBoard lessonMode />
+          </div>
         </section>
 
         {/* Step 2 — Muharni + Balupdesh */}
