@@ -91,6 +91,26 @@ export default function MuharniPage() {
           <div className="mt-5">
             <PaintiViewer />
           </div>
+
+          <Link
+            href="/games/letters"
+            className="mt-4 flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 transition hover:border-amber-300"
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-600 text-white">
+              🔊
+            </span>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-slate-900">
+                Practice Gurmukhi Letters
+              </p>
+              <p className="text-xs text-slate-600">
+                Tap a letter to hear the full pronunciation lesson
+              </p>
+            </div>
+            <span aria-hidden className="text-slate-500">
+              →
+            </span>
+          </Link>
         </section>
 
         {/* Step 2 — Muharni + Balupdesh */}
