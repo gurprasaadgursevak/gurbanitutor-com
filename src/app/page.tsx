@@ -15,22 +15,23 @@ type Tile = {
   body: string;
   icon: keyof typeof TILE_ICONS;
   badge?: TileBadge;
+  isNew?: boolean;
 };
 
 const TILES: Tile[] = [
   {
     href: "/arths",
-    eyebrow: "Gurbani Vocabulary Builder",
+    eyebrow: "Vocabulary Builder",
     title: "Arths Dictionary",
-    body: "A unique, hand-picked vocabulary of Gurbani words with Punjabi and English meanings. Browsable by Painti Akhari or Ang. The backbone of every quiz on this site.",
+    body: "Hand-picked Gurbani words with Punjabi and English meanings. Browse by Painti Akhari or Ang.",
     icon: "vocab",
     badge: "unique",
   },
   {
     href: "/quiz",
-    eyebrow: "Learn Gurmat by doing",
+    eyebrow: "Learn by doing",
     title: "Gurbani Quiz",
-    body: "Bani-by-bani quizzes drawn from the vocabulary. Sri Japji, Sri Jaap, Sri Sukhmani Sahib, and more. Daily quiz plus streak tracking, Sangat worldwide on the same set.",
+    body: "Bani-by-bani quizzes plus a daily quiz with streaks. Sangat worldwide on the same set.",
     icon: "quiz",
     badge: "learning",
   },
@@ -38,7 +39,7 @@ const TILES: Tile[] = [
     href: "/shabad-test",
     eyebrow: "Memorize, then test",
     title: "Shabad Test",
-    body: "Pick a shabad, study it, then type it from memory. Strict, character-exact grading shows every missed matra and nukta. The discipline that turns reading into recall.",
+    body: "Study a shabad, then type it from memory. Character-exact grading flags every missed matra.",
     icon: "pencil",
     badge: "learning",
   },
@@ -46,51 +47,51 @@ const TILES: Tile[] = [
     href: "/mukhvak",
     eyebrow: "Read daily",
     title: "Sri Mukhvak",
-    body: "Today's Hukamnama from Sri Darbar Sahib, in Gurmukhi with Punjabi and English arth.",
+    body: "Today's Hukamnama from Sri Darbar Sahib, with Punjabi and English arth.",
     icon: "sun",
   },
   {
     href: "/granth",
     eyebrow: "Read Ang by Ang",
-    title: "Read Sri Guru Granth Sahib Ji & Sri Dasam Guru Granth Sahib Ji",
-    body: "Full Gurbani text with optional ਅਰਥ, English Steeks, and ucharan tips. Pick any Nitnem bani from the side rail.",
+    title: "Sri Guru Granth Sahib Ji & Dasam Granth",
+    body: "Full Gurbani with optional ਅਰਥ, English Steeks, and ucharan tips.",
     icon: "book",
   },
   {
     href: "/search",
     eyebrow: "Find any line",
     title: "Gurbani Search",
-    body:
-      "Find any line in Sri Guru Granth Sahib Ji or Sri Dasam Guru Granth Sahib Ji. Gurmukhi or English, with first-letter and consonant-skeleton matching.",
+    body: "Search in Gurmukhi or English. First-letter and consonant-skeleton matching included.",
     icon: "search",
   },
   {
     href: "/gareebi-pothi",
     eyebrow: "Read with arth",
     title: "Gareebi Pothi",
-    body: "313 hand-picked Gurbani entries on Gareebi, the cornerstone of Sikh humility, with the full Punjabi vyakhya.",
+    body: "313 Gurbani entries on Gareebi, with the full Punjabi vyakhya.",
     icon: "book",
   },
   {
     href: "/pothi",
-    eyebrow: "Read online or download",
+    eyebrow: "Read or download",
     title: "Sri Pothi Sahib library",
-    body: "Ten Pothis for offline study. Sri Sukhmani Sahib Ji, SGGS History, Balupdesh, Bhagat Kabir Ji's Sloaks, and more.",
+    body: "Ten Pothis for offline study. Sukhmani Sahib, SGGS History, Balupdesh, and more.",
     icon: "library",
   },
   {
     href: "/muharni",
     eyebrow: "Learn from scratch",
     title: "Santhiya 101",
-    body: "A step-by-step journey: Painti Akhari, Muharni, Nitnem Santhiya, then Sri Guru Granth Sahib Ji Santhiya — taught by sevadars on YouTube.",
+    body: "Step-by-step: Painti Akhari, Muharni, Nitnem Santhiya, then SGGS Ji Santhiya.",
     icon: "letters",
   },
   {
     href: "/games",
     eyebrow: "For kids",
     title: "Games",
-    body: "Games for kids to make Brahamvidya learning fun and easy. Gurmukhi Letters sound board, Muharni sound board, and Letter Quiz.",
+    body: "Tap-to-hear Letters and Muharni boards, plus a Letter Quiz. Brahamvidya, fun and easy.",
     icon: "letters",
+    isNew: true,
   },
 ];
 
@@ -188,9 +189,8 @@ export default function Home() {
           A learning companion for Gurbani.
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-slate-600">
-          Read Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji, build your
-          Gurbani vocabulary, quiz yourself bani by bani, and learn Santhiya, all in one
-          calm Sangat space.
+          Read both Granths, build your vocabulary, quiz yourself bani by bani, and learn
+          Santhiya. A calm Sangat space, free for everyone.
         </p>
       </section>
 
@@ -404,6 +404,11 @@ function TileCard({ tile, featured = false }: { tile: Tile; featured?: boolean }
         >
           <span className="block h-6 w-6">{Icon}</span>
         </span>
+        {tile.isNew && (
+          <span className="rounded-full bg-rose-600 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+            New
+          </span>
+        )}
         {badgeLabel && (
           <span
             className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${badgeColor}`}

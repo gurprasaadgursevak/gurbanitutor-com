@@ -30,6 +30,15 @@ const TABS: NavTab[] = [
       { href: "/shabad-test", label: "Shabad Test" },
     ],
   },
+  {
+    kind: "group",
+    label: "Games",
+    items: [
+      { href: "/games/letters", label: "Gurmukhi Letters" },
+      { href: "/games/muharni", label: "Muharni" },
+      { href: "/games/quiz", label: "Letter Quiz" },
+    ],
+  },
   { kind: "link", label: "Search", href: "/search" },
   { kind: "link", label: "About", href: "/about" },
 ];
