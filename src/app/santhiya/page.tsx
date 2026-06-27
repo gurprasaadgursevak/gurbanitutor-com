@@ -38,6 +38,8 @@ const GOOGLE_MEET_URL = "https://meet.google.com/dmj-pyvq-qeg";
 const BABA_PHONE_DISPLAY = "+1 (705) 274-7027";
 const BABA_PHONE_TEL = "+17052747027";
 const MUHARNI_VIDEO_URL = "https://youtu.be/iCT-KqB-oSI";
+const SIGNUP_FORM_URL = "https://forms.gle/uAt9fqumZ7khEpXX8";
+const SIGNUP_FORM_EMBED_URL = `${SIGNUP_FORM_URL}?embedded=true`;
 
 export default function SanthiyaPage() {
   return (
@@ -236,6 +238,41 @@ export default function SanthiyaPage() {
             and get class updates. For one-on-one, Baba Ji can be reached directly on{" "}
             <span className="font-semibold">{BABA_PHONE_DISPLAY}</span>.
           </p>
+        </div>
+      </section>
+
+      {/* Signup form */}
+      <section className="mx-auto max-w-5xl px-6 pb-10">
+        <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
+            Signup form
+          </p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+            Or fill out the Santhiya signup form
+          </h2>
+          <p className="mt-2 text-sm leading-7 text-slate-700">
+            Share your details and Baba Ji or a sevadar will follow up to confirm your class.
+            Having trouble seeing the form?{" "}
+            <a
+              href={SIGNUP_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-emerald-700 hover:underline"
+            >
+              Open it in a new tab
+            </a>
+            .
+          </p>
+          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+            <iframe
+              src={SIGNUP_FORM_EMBED_URL}
+              title="Santhiya class signup form"
+              loading="lazy"
+              className="block h-[1100px] w-full"
+            >
+              Loading…
+            </iframe>
+          </div>
         </div>
       </section>
 
