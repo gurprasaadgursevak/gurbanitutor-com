@@ -33,7 +33,7 @@ function StepBadge({ n }: { n: number }) {
   );
 }
 
-function StepHeader({ n, title, kicker }: { n: number; title: string; kicker?: string }) {
+function StepHeader({ n, title, kicker, subtitle }: { n: number; title: string; kicker?: string; subtitle?: string }) {
   return (
     <div className="flex items-start gap-3">
       <StepBadge n={n} />
@@ -46,6 +46,9 @@ function StepHeader({ n, title, kicker }: { n: number; title: string; kicker?: s
         <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
           {title}
         </h2>
+        {subtitle && (
+          <p className="mt-1 text-base text-slate-600">{subtitle}</p>
+        )}
       </div>
     </div>
   );
@@ -99,17 +102,17 @@ export default function MuharniPage() {
         <PhaseHeader
           kicker="Phase 1 of 3"
           title="Foundations"
-          subtitle="Learn the 35 letters, then master Muharni and Balupdesh."
+          subtitle="Learn the 35 letters and Muharni."
         />
 
         {/* Step 1 — Painti Akhari */}
         <section className="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
-          <StepHeader n={1} kicker="Prerequisite · Painti Akhari" title="Learn the 35 letters" />
-          <p className="mt-3 text-sm leading-7 text-slate-700">
-            Swipe through each letter of Gurmukhi. Watch the &ldquo;Sounds of Letters&rdquo; video
-            from <span className="font-semibold">Gurprasaad Gursevak</span> on YouTube to practice
-            each ucharan.
-          </p>
+          <StepHeader
+            n={1}
+            kicker="Prerequisite · Painti Akhari"
+            title="Learn the 35 letters"
+            subtitle="Tap any letter to hear its ucharan."
+          />
           <div className="mt-5">
             <PaintiViewer />
           </div>
@@ -124,12 +127,12 @@ export default function MuharniPage() {
 
         {/* Step 2 — Muharni + Balupdesh */}
         <section className="mt-10 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
-          <StepHeader n={2} kicker="Prerequisite · Reading practice" title="Master Muharni, then read Balupdesh" />
-          <p className="mt-3 text-sm leading-7 text-slate-700">
-            Start with the Muharni primer and the Muharni video lesson. Once you&apos;re
-            comfortable, read <span className="font-semibold">Balupdesh</span> alongside the
-            full set of video lessons. These build the foundation for Santhiya.
-          </p>
+          <StepHeader
+            n={2}
+            kicker="Prerequisite · Reading practice"
+            title="Master Muharni, then read Balupdesh"
+            subtitle="The foundation of every Santhiya class."
+          />
 
           {/* Practice Muharni interactively */}
           <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
@@ -211,18 +214,18 @@ export default function MuharniPage() {
 
         <PhaseHeader
           kicker="Phase 2 of 3"
-          title="Practice with the Sangat"
-          subtitle="Follow along, one word behind, with Nitnem and then SGGS Ji Santhiya."
+          title="Practice with Bhagat Jaswant Singh Ji"
+          subtitle="Learn Shudh Ucharan."
         />
 
         {/* Step 3 — Nitnem Santhiya */}
         <section className="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
-          <StepHeader n={3} kicker="Practice" title="Nitnem Santhiya, one word behind" />
-          <p className="mt-3 text-sm leading-7 text-slate-700">
-            Follow this Nitnem playlist and recite each word{" "}
-            <span className="font-semibold">one word behind</span> the recording. This is the
-            traditional Santhiya method, and it lets ucharan settle in naturally.
-          </p>
+          <StepHeader
+            n={3}
+            kicker="Practice"
+            title="Nitnem Santhiya, one word behind"
+            subtitle="Recite one beat behind the sevadar. The classical method."
+          />
           <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="aspect-video w-full bg-slate-900">
               <iframe
@@ -256,11 +259,8 @@ export default function MuharniPage() {
             n={4}
             kicker="Advance"
             title="Sri Guru Granth Sahib Ji Santhiya"
+            subtitle="When ready, advance Ang by Ang."
           />
-          <p className="mt-3 text-sm leading-7 text-slate-700">
-            Ready to read Sri Guru Granth Sahib Ji? Follow this Santhiya playlist Ang by Ang,
-            again reciting one word behind the sevadar.
-          </p>
           <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="aspect-video w-full bg-slate-900">
               <iframe
@@ -298,7 +298,7 @@ export default function MuharniPage() {
         <PhaseHeader
           kicker="Phase 3 of 3"
           title="Beyond the app"
-          subtitle="Take classes one-on-one, then keep practising with games and quizzes."
+          subtitle="Classes and games."
         />
 
         {/* Step 5 — Join Santhiya class */}
@@ -314,13 +314,11 @@ export default function MuharniPage() {
               <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
                 Join Santhiya classes with Baba Jawahar Singh Ji
               </h2>
+              <p className="mt-1 text-base text-slate-600">
+                Current head of Bhagat Ji&apos;s organization, Gursevak. Daily group classes on Google Meet, or 1:1, open as Gurprasaad to Sangat worldwide.
+              </p>
             </div>
           </div>
-          <p className="mt-3 text-sm leading-7 text-slate-700">
-            When you are ready, sign up for one of Baba Ji&apos;s daily group classes on
-            Google Meet, or arrange one-on-one Santhiya around your schedule. Offered as
-            Gurprasaad, open to Sangat worldwide.
-          </p>
           <Link
             href="/santhiya"
             className="mt-5 inline-flex items-center justify-center rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
@@ -331,11 +329,12 @@ export default function MuharniPage() {
 
         {/* Step 6 — Test your knowledge */}
         <section className="mt-10 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
-          <StepHeader n={6} kicker="Keep improving" title="Test your knowledge with Games & Quizzes" />
-          <p className="mt-3 text-sm leading-7 text-slate-700">
-            Sharpen your ucharan, vocabulary and Gurbani recognition with bite-sized games
-            and quizzes. Daily practice keeps Santhiya progress alive between classes.
-          </p>
+          <StepHeader
+            n={6}
+            kicker="Keep improving"
+            title="Test your knowledge with Games & Quizzes"
+            subtitle="Daily practice keeps progress alive between classes."
+          />
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <Link
               href="/games"
