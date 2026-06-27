@@ -7,18 +7,15 @@ import MuharniPrimerSheet from "./MuharniPrimerSheet";
 
 /// Tap-to-play Muharni board. Mirrors the iOS MuharniSoundBoardView.
 ///
-/// - Tap a consonant → opens the per-letter primer (3×4 grid of 12 lag forms,
-///   each playing its own clip cut from the Muharni DVD).
-/// - Tap the `ੳ ਅ ੲ` tile → opens the combined vowels primer card.
-/// - Long-press → plays the full ~18s row chant (legacy CDN audio from
-///   gursevak.com).
+/// - Tap the tile → plays the full ~18s row chant (legacy gursevak.com CDN).
+/// - Tap the small "12 forms" chip in the corner → opens the per-letter primer
+///   (3×4 grid of lag forms, each tile playing a per-form clip from the DVD).
+/// - On the `ੳ ਅ ੲ` tile, the primer chip opens the combined vowels card.
 export default function MuharniSoundBoard() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [nowPlayingId, setNowPlayingId] = useState<number | null>(null);
   const [primerLetter, setPrimerLetter] = useState<MuharniLetter | null>(null);
   const [primerVowels, setPrimerVowels] = useState(false);
-  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const longPressTriggered = useRef(false);
 
   function stop() {
     const el = audioRef.current;
@@ -47,31 +44,6 @@ export default function MuharniSoundBoard() {
     if (letter) setPrimerLetter(letter);
   }
 
-  function handlePointerDown(row: MuharniRow) {
-    longPressTriggered.current = false;
-    longPressTimer.current = setTimeout(() => {
-      longPressTriggered.current = true;
-      playFullChant(row);
-    }, 500);
-  }
-
-  function handlePointerUp(row: MuharniRow) {
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current);
-      longPressTimer.current = null;
-    }
-    if (!longPressTriggered.current) {
-      openPrimer(row);
-    }
-  }
-
-  function handlePointerCancel() {
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current);
-      longPressTimer.current = null;
-    }
-  }
-
   useEffect(() => {
     return () => stop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,8 +53,9 @@ export default function MuharniSoundBoard() {
     <div className="mx-auto w-full max-w-3xl px-4 py-6">
       <h1 className="text-center text-2xl font-bold text-amber-800">Muharni</h1>
       <p className="mt-2 text-center text-sm text-amber-900/80">
-        Tap any letter to open its primer card and play each of the 12 lag forms.
-        Long-press to play the full ~18s muharni chant. Repeat each letter 25
+        Tap a letter to hear it chanted through all 12 lagaan (~18s). Tap the
+        small <span className="font-semibold">12 forms</span> chip to open the
+        primer card and play each lag form individually. Repeat each letter 25
         times before your first class.
       </p>
 
@@ -90,37 +63,46 @@ export default function MuharniSoundBoard() {
         {muharniRows.map((row) => {
           const playing = nowPlayingId === row.id;
           return (
-            <button
-              key={row.id}
-              type="button"
-              onPointerDown={() => handlePointerDown(row)}
-              onPointerUp={() => handlePointerUp(row)}
-              onPointerCancel={handlePointerCancel}
-              onPointerLeave={handlePointerCancel}
-              className={[
-                "flex aspect-square flex-col items-center justify-center rounded-xl border transition",
-                playing
-                  ? "border-amber-400 bg-amber-500 text-white shadow"
-                  : "border-amber-200 bg-amber-50 text-amber-900 hover:bg-amber-100",
-              ].join(" ")}
-            >
-              <span className="text-xl font-bold leading-none sm:text-2xl">
-                {row.consonant}
-              </span>
-              <span className="mt-1 text-[10px] leading-tight opacity-80 sm:text-xs">
-                {row.name}
-              </span>
-              <span className="text-[10px] font-medium opacity-70 sm:text-xs">
-                {row.transliteration}
-              </span>
-            </button>
+            <div key={row.id} className="relative">
+              <button
+                type="button"
+                onClick={() => playFullChant(row)}
+                className={[
+                  "flex aspect-square w-full flex-col items-center justify-center rounded-xl border transition",
+                  playing
+                    ? "border-amber-400 bg-amber-500 text-white shadow"
+                    : "border-amber-200 bg-amber-50 text-amber-900 hover:bg-amber-100",
+                ].join(" ")}
+              >
+                <span className="text-xl font-bold leading-none sm:text-2xl">
+                  {row.consonant}
+                </span>
+                <span className="mt-1 text-[10px] leading-tight opacity-80 sm:text-xs">
+                  {row.name}
+                </span>
+                <span className="text-[10px] font-medium opacity-70 sm:text-xs">
+                  {row.transliteration}
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openPrimer(row);
+                }}
+                aria-label={`Open ${row.transliteration} primer card`}
+                className="absolute bottom-1 right-1 rounded-md bg-white/90 px-1.5 py-0.5 text-[9px] font-semibold text-amber-700 shadow-sm ring-1 ring-amber-200 transition hover:bg-amber-100 sm:text-[10px]"
+              >
+                12 forms ›
+              </button>
+            </div>
           );
         })}
       </div>
 
       <p className="mt-4 text-center text-xs text-amber-900/60">
-        Per-letter audio cut from a Muharni DVD. Long-press chant audio
-        courtesy of Learn Shudh Gurbani by gursevak.com.
+        Chant audio courtesy of Learn Shudh Gurbani by gursevak.com. Per-form
+        primer audio cut from a Muharni DVD.
       </p>
 
       <audio ref={audioRef} preload="none" onEnded={() => stop()} />

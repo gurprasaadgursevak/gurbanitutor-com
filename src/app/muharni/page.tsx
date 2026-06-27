@@ -214,7 +214,7 @@ export default function MuharniPage() {
 
         <PhaseHeader
           kicker="Phase 2 of 3"
-          title="Practice with Bhagat Jaswant Singh Ji"
+          title="Santhiya with Bhagat Jaswant Singh Ji"
           subtitle="Learn Shudh Ucharan."
         />
 
