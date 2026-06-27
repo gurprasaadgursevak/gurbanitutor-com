@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import LetterSoundBoard from "../LetterSoundBoard";
+import MuharniSoundBoard from "../MuharniSoundBoard";
 
 export const metadata: Metadata = {
   title: "Games · Gurbani Tutor",
@@ -38,6 +40,20 @@ export default function GamesPage() {
         Games for kids and Sangat to make Brahamvidya learning fun and easy.
         Audio courtesy of Learn Shudh Gurbani by gursevak.com.
       </p>
+
+      <section className="mt-6 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
+        <p className="px-2 text-xs font-semibold uppercase tracking-wider text-amber-700">
+          Featured · 35 Letters
+        </p>
+        <LetterSoundBoard lessonMode />
+      </section>
+
+      <section className="mt-4 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
+        <p className="px-2 text-xs font-semibold uppercase tracking-wider text-amber-700">
+          Featured · Muharni
+        </p>
+        <MuharniSoundBoard />
+      </section>
 
       <SkillSection title="Beginner" subtitle="Best for kids and Sangat just starting Gurmukhi." games={BEGINNER} />
       <SkillSection title="Intermediate" subtitle="For Sangat building vocabulary and faster recognition." games={INTERMEDIATE} />

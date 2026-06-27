@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import PaintiViewer from "../PaintiViewer";
 import LetterSoundBoard from "../LetterSoundBoard";
+import MuharniSoundBoard from "../MuharniSoundBoard";
 import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
@@ -50,6 +51,20 @@ function StepHeader({ n, title, kicker }: { n: number; title: string; kicker?: s
   );
 }
 
+function PhaseHeader({ kicker, title, subtitle }: { kicker: string; title: string; subtitle: string }) {
+  return (
+    <div className="mt-16 first:mt-2 mb-6 text-center">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
+        {kicker}
+      </p>
+      <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+        {title}
+      </h3>
+      <p className="mx-auto mt-2 max-w-xl text-sm text-slate-600">{subtitle}</p>
+    </div>
+  );
+}
+
 export default function MuharniPage() {
   return (
     <div className="min-h-screen bg-slate-50">
@@ -81,6 +96,12 @@ export default function MuharniPage() {
       </section>
 
       <main className="mx-auto max-w-4xl px-6 pb-16 pt-4">
+        <PhaseHeader
+          kicker="Phase 1 of 3"
+          title="Foundations"
+          subtitle="Learn the 35 letters, then master Muharni and Balupdesh."
+        />
+
         {/* Step 1 — Painti Akhari */}
         <section className="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
           <StepHeader n={1} kicker="Prerequisite · Painti Akhari" title="Learn the 35 letters" />
@@ -102,7 +123,7 @@ export default function MuharniPage() {
         </section>
 
         {/* Step 2 — Muharni + Balupdesh */}
-        <section className="mt-8 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="mt-10 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
           <StepHeader n={2} kicker="Prerequisite · Reading practice" title="Master Muharni, then read Balupdesh" />
           <p className="mt-3 text-sm leading-7 text-slate-700">
             Start with the Muharni primer and the Muharni video lesson. Once you&apos;re
@@ -110,87 +131,53 @@ export default function MuharniPage() {
             full set of video lessons. These build the foundation for Santhiya.
           </p>
 
-          {/* Muharni PDF + Video */}
-          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-            <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-              Reference
+          {/* Practice Muharni interactively */}
+          <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
+            <p className="px-2 text-xs font-semibold uppercase tracking-wider text-amber-700">
+              Practice Muharni
             </p>
-            <h3 className="mt-1 text-lg font-semibold text-slate-900">Muharni Primer</h3>
-            <p className="mt-1 text-sm text-slate-700">
-              The full Muharni chart of consonants with each vowel, with a video walk-through
-              from Gurprasaad Gursevak.
-            </p>
-            <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
-              <iframe
-                src="/santhiya101/muharni.pdf#view=FitH&toolbar=0&navpanes=0"
-                title="Muharni Primer preview"
-                loading="lazy"
-                className="h-[60vh] w-full sm:h-[70vh]"
-              />
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <a
-                href="/santhiya101/muharni.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
-              >
-                Read Muharni PDF
-              </a>
-              <a
-                href="/santhiya101/muharni.pdf"
-                download
-                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
-              >
-                Download
-              </a>
-              <a
-                href="https://youtu.be/iCT-KqB-oSI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-red-300 bg-white px-4 py-2 text-sm font-semibold text-red-700 transition hover:border-red-400"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-                Video
-              </a>
-            </div>
+            <MuharniSoundBoard />
           </div>
 
-          {/* Balupdesh */}
-          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-            <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-              Reading
-            </p>
-            <h3 className="mt-1 text-lg font-semibold text-slate-900">
-              Balupdesh · Reading lessons for new students
-            </h3>
-            <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
-              <iframe
-                src="/pothi/balupdesh.pdf#view=FitH&toolbar=0&navpanes=0"
-                title="Balupdesh preview"
-                loading="lazy"
-                className="h-[60vh] w-full sm:h-[70vh]"
-              />
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <a
-                href="/pothi/balupdesh.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
-              >
-                Read Balupdesh
-              </a>
-              <a
-                href="/pothi/balupdesh.pdf"
-                download
-                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
-              >
-                Download
-              </a>
-            </div>
+          {/* Muharni PDF + Balupdesh + Video — links only, no inline preview */}
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <a
+              href="/santhiya101/muharni.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-amber-300 hover:bg-amber-50"
+            >
+              <span aria-hidden className="text-2xl">📖</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">Muharni Primer</p>
+                <p className="text-xs text-slate-600">Full chart of consonants × vowels (PDF)</p>
+              </div>
+            </a>
+            <a
+              href="/pothi/balupdesh.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-amber-300 hover:bg-amber-50"
+            >
+              <span aria-hidden className="text-2xl">📖</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">Balupdesh</p>
+                <p className="text-xs text-slate-600">Reading lessons for new students (PDF)</p>
+              </div>
+            </a>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <a
+              href="https://youtu.be/iCT-KqB-oSI"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-red-300 bg-white px-4 py-2 text-sm font-semibold text-red-700 transition hover:border-red-400"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Muharni walk-through video
+            </a>
           </div>
 
           {/* All Muharni & Painti Akhari videos */}
@@ -222,8 +209,14 @@ export default function MuharniPage() {
           </div>
         </section>
 
+        <PhaseHeader
+          kicker="Phase 2 of 3"
+          title="Practice with the Sangat"
+          subtitle="Follow along, one word behind, with Nitnem and then SGGS Ji Santhiya."
+        />
+
         {/* Step 3 — Nitnem Santhiya */}
-        <section className="mt-8 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
           <StepHeader n={3} kicker="Practice" title="Nitnem Santhiya, one word behind" />
           <p className="mt-3 text-sm leading-7 text-slate-700">
             Follow this Nitnem playlist and recite each word{" "}
@@ -258,7 +251,7 @@ export default function MuharniPage() {
         </section>
 
         {/* Step 4 — SGGS Santhiya */}
-        <section className="mt-8 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="mt-10 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
           <StepHeader
             n={4}
             kicker="Advance"
@@ -302,61 +295,17 @@ export default function MuharniPage() {
           </p>
         </section>
 
-        {/* Step 5 — Apps */}
-        <section className="mt-8 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
-          <StepHeader n={5} kicker="Practice daily" title="Get the apps for daily abhiyaas" />
-          <p className="mt-3 text-sm leading-7 text-slate-700">
-            Two free companion apps make daily practice easy. Use them together.
-          </p>
-          <div className="mt-5 grid gap-5 sm:grid-cols-2">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                Gurbani Tutor
-              </p>
-              <h3 className="mt-1 text-lg font-semibold text-slate-900">
-                The companion app to this site
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-700">
-                Painti Akhari, Muharni, dictionary, Pothi Sahib library, and Santhiya 101, all
-                offline on your iPhone.
-              </p>
-              <a
-                href="https://testflight.apple.com/join/8HEDEXYY"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
-              >
-                Get Gurbani Tutor on iPhone
-              </a>
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                Learn Shudh Gurbani
-              </p>
-              <h3 className="mt-1 text-lg font-semibold text-slate-900">
-                Stream Santhiya audio for every Ang
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-700">
-                From the Gursevak.com team. Sehaj Paath mode streams ucharan audio for each Ang,
-                perfect for practicing alongside.
-              </p>
-              <a
-                href="https://apps.apple.com/app/learn-shudh-gurbani/id1080522313"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
-              >
-                Get Learn Shudh Gurbani
-              </a>
-            </div>
-          </div>
-        </section>
+        <PhaseHeader
+          kicker="Phase 3 of 3"
+          title="Beyond the app"
+          subtitle="Take classes one-on-one, then keep practising with games and quizzes."
+        />
 
-        {/* Step 6 — Join Santhiya class */}
-        <section className="mt-8 rounded-3xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm sm:p-8">
+        {/* Step 5 — Join Santhiya class */}
+        <section className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm sm:p-8">
           <div className="flex items-start gap-3">
             <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white shadow-sm">
-              6
+              5
             </span>
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
@@ -378,6 +327,41 @@ export default function MuharniPage() {
           >
             Go to Santhiya Classes →
           </Link>
+        </section>
+
+        {/* Step 6 — Test your knowledge */}
+        <section className="mt-10 rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
+          <StepHeader n={6} kicker="Keep improving" title="Test your knowledge with Games & Quizzes" />
+          <p className="mt-3 text-sm leading-7 text-slate-700">
+            Sharpen your ucharan, vocabulary and Gurbani recognition with bite-sized games
+            and quizzes. Daily practice keeps Santhiya progress alive between classes.
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/games"
+              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-amber-300 hover:bg-amber-50"
+            >
+              <span aria-hidden className="text-2xl">🎮</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">Games</p>
+                <p className="text-xs text-slate-600">
+                  Beginner to Advanced — sound boards, quizzes, matching, scrambles.
+                </p>
+              </div>
+            </Link>
+            <Link
+              href="/games/quiz"
+              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-amber-300 hover:bg-amber-50"
+            >
+              <span aria-hidden className="text-2xl">❓</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">Letter Quiz</p>
+                <p className="text-xs text-slate-600">
+                  Hear a letter, pick the matching Gurmukhi. Build your streak.
+                </p>
+              </div>
+            </Link>
+          </div>
         </section>
 
         <p className="mt-12 text-center text-xs text-slate-500">

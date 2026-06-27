@@ -351,31 +351,49 @@ export default function PunctuationMaster() {
       </p>
       <p className="mt-1 text-center text-xs text-amber-900/60">{item.label}</p>
 
-      <div className="mt-3 flex flex-wrap gap-2 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-2xl font-bold text-amber-900">
+      <div className="mt-3 flex flex-wrap items-end gap-x-3 gap-y-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-2xl font-bold text-amber-900">
         {words.map((w, i) => (
-          <span key={i} className="inline-flex items-center gap-1">
+          <span key={i} className="inline-flex flex-col items-center gap-1">
             <span>{w}</span>
             {i === words.length - 1 ? (
               <span className="text-amber-900">॥</span>
             ) : (
-              <select
-                disabled={feedback !== "none"}
-                value={userMarks[i] ?? ""}
-                onChange={(e) => setMark(i, e.target.value === "" ? null : e.target.value)}
-                className={[
-                  "w-9 rounded border bg-white px-1 py-0.5 text-center text-lg",
-                  userMarks[i] ? "border-amber-500 text-amber-700" : "border-slate-300 text-slate-400",
-                ].join(" ")}
-              >
-                <option value="">Clear</option>
-                <option value=".">. short pause</option>
-                <option value=",">, medium pause</option>
-                <option value=";">; long pause</option>
-              </select>
+              <div className="flex gap-0.5">
+                {[
+                  { mark: ".", label: "Short pause" },
+                  { mark: ",", label: "Medium pause" },
+                  { mark: ";", label: "Long pause" },
+                ].map(({ mark, label }) => {
+                  const selected = userMarks[i] === mark;
+                  return (
+                    <button
+                      key={mark}
+                      type="button"
+                      disabled={feedback !== "none"}
+                      onClick={() => setMark(i, selected ? null : mark)}
+                      title={label}
+                      aria-label={label}
+                      aria-pressed={selected}
+                      className={[
+                        "h-7 w-7 rounded border text-base font-bold leading-none transition",
+                        selected
+                          ? "border-amber-600 bg-amber-500 text-white shadow-sm"
+                          : "border-slate-300 bg-white text-slate-400 hover:border-amber-400 hover:text-amber-700",
+                        feedback !== "none" ? "cursor-not-allowed opacity-70" : "",
+                      ].join(" ")}
+                    >
+                      {mark}
+                    </button>
+                  );
+                })}
+              </div>
             )}
           </span>
         ))}
       </div>
+      <p className="mt-2 text-center text-[11px] text-amber-900/60">
+        Tap a mark to set it (. short, , medium, ; long). Tap again to clear.
+      </p>
 
       {feedback !== "none" ? (
         <>
