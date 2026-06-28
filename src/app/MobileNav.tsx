@@ -11,6 +11,8 @@ type NavLink = {
 
 const LINKS: NavLink[] = [
   { href: "/search", label: "Gurbani Search" },
+  { href: "/games/letters", label: "Gurmukhi Letters" },
+  { href: "/games/muharni", label: "Muharni" },
   { href: "/arths", label: "Arths · Vocab", accent: "amber" },
   { href: "/quiz", label: "Gurbani Quiz" },
   { href: "/shabad-test", label: "Shabad Test" },
@@ -20,8 +22,6 @@ const LINKS: NavLink[] = [
   { href: "/gareebi-pothi", label: "Gareebi Pothi" },
   { href: "/pothi", label: "Pothi Sahib" },
   { href: "/games", label: "Games" },
-  { href: "/games/letters", label: "Gurmukhi Letters" },
-  { href: "/games/muharni", label: "Muharni" },
   { href: "/games/quiz", label: "Letter Quiz" },
   { href: "/games/name-the-letter", label: "Name the Letter" },
   { href: "/games/first-letter-match", label: "First Letter Match" },

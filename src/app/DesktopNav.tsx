@@ -25,6 +25,8 @@ const TABS: NavTab[] = [
     kind: "group",
     label: "Learn",
     items: [
+      { href: "/games/letters", label: "Gurmukhi Letters" },
+      { href: "/games/muharni", label: "Muharni" },
       { href: "/arths", label: "Arths · Vocab" },
       { href: "/quiz", label: "Gurbani Quiz" },
       { href: "/shabad-test", label: "Shabad Test" },
@@ -35,8 +37,6 @@ const TABS: NavTab[] = [
     label: "Games",
     items: [
       { href: "/games", label: "All games" },
-      { href: "/games/letters", label: "Gurmukhi Letters" },
-      { href: "/games/muharni", label: "Muharni" },
       { href: "/games/quiz", label: "Letter Quiz" },
       { href: "/games/name-the-letter", label: "Name the Letter" },
       { href: "/games/first-letter-match", label: "First Letter Match" },

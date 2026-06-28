@@ -129,10 +129,12 @@ export default function LetterSoundBoard({
       </h1>
       <p className="mt-2 text-center text-sm text-amber-900/80">{blurb}</p>
 
-      <p className="mt-3 rounded-lg bg-amber-100/60 px-3 py-2 text-center text-xs text-amber-900/80">
-        Each letter is spoken several times so it settles in. Repeat after the
-        sound to practise your ucharan.
-      </p>
+      {lessonMode && (
+        <p className="mt-3 rounded-lg bg-amber-100/60 px-3 py-2 text-center text-xs text-amber-900/80">
+          Each letter is spoken several times so it settles in. Repeat after the
+          sound to practise your ucharan.
+        </p>
+      )}
 
       <div className="mt-5 grid grid-cols-5 gap-2 sm:gap-3">
         {pentiAkhar.map((cell, idx) => {

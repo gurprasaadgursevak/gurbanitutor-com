@@ -1,7 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import LetterSoundBoard from "../LetterSoundBoard";
-import MuharniSoundBoard from "../MuharniSoundBoard";
 
 export const metadata: Metadata = {
   title: "Games · Gurbani Tutor",
@@ -12,8 +10,6 @@ export const metadata: Metadata = {
 type GameTile = { href: string; title: string; body: string };
 
 const BEGINNER: GameTile[] = [
-  { href: "/games/letters", title: "Gurmukhi Letters", body: "Tap any of the 35 letters to hear the pronunciation." },
-  { href: "/games/muharni", title: "Muharni Sound Board", body: "Tap a consonant to open its primer with all 12 lag forms, or switch to By Lag to drill one mark across every consonant." },
   { href: "/games/name-the-letter", title: "Name the Letter", body: "See a Gurmukhi letter, pick its English name from four options." },
   { href: "/games/quiz", title: "Letter Quiz", body: "Hear a letter, pick the matching Gurmukhi from four options." },
 ];
@@ -40,19 +36,17 @@ export default function GamesPage() {
         Games for kids and Sangat to make Brahamvidya learning fun and easy.
       </p>
 
-      <section className="mt-6 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
-        <p className="px-2 text-xs font-semibold uppercase tracking-wider text-amber-700">
-          Featured · 35 Letters
-        </p>
-        <LetterSoundBoard lessonMode />
-      </section>
-
-      <section className="mt-4 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
-        <p className="px-2 text-xs font-semibold uppercase tracking-wider text-amber-700">
-          Featured · Muharni
-        </p>
-        <MuharniSoundBoard />
-      </section>
+      <p className="mt-6 rounded-2xl border border-amber-200 bg-amber-50/40 px-5 py-4 text-sm text-amber-900/80">
+        Learning the alphabet? The{" "}
+        <Link href="/games/letters" className="font-semibold text-amber-700 hover:underline">
+          Gurmukhi Letters
+        </Link>{" "}
+        and{" "}
+        <Link href="/games/muharni" className="font-semibold text-amber-700 hover:underline">
+          Muharni
+        </Link>{" "}
+        sound boards now live under Learn.
+      </p>
 
       <SkillSection title="Beginner" subtitle="Best for kids and Sangat just starting Gurmukhi." games={BEGINNER} />
       <SkillSection title="Intermediate" subtitle="For Sangat building vocabulary and faster recognition." games={INTERMEDIATE} />

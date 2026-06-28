@@ -390,12 +390,20 @@ export default function AboutPage() {
           <SectionTitle>Games</SectionTitle>
           <p className="mt-3 leading-7 text-slate-700">
             Games for kids and Sangat to make Brahamvidya learning fun and easy,
-            organized by skill level. Tap-to-hear sound boards, multiple-choice
-            quizzes, and a memory match game, all in the{" "}
+            organized by skill level. Multiple-choice quizzes, a memory match game,
+            and more, all in the{" "}
             <Link href="/games" className="font-semibold text-amber-700 hover:underline">
               Games hub
             </Link>
-            .
+            . The tap-to-hear{" "}
+            <Link href="/games/letters" className="font-semibold text-amber-700 hover:underline">
+              Gurmukhi Letters
+            </Link>{" "}
+            and{" "}
+            <Link href="/games/muharni" className="font-semibold text-amber-700 hover:underline">
+              Muharni
+            </Link>{" "}
+            sound boards now live under Learn.
           </p>
           <ul className="mt-4 space-y-3 text-slate-700">
             <GoldDotItem>
@@ -406,8 +414,7 @@ export default function AboutPage() {
               appears as a small reward from Nitnem.
             </GoldDotItem>
             <GoldDotItem>
-              <span className="font-semibold">Beginner.</span> Gurmukhi Letters sound board,
-              Muharni sound board (with By Letter / By Lag toggle), Name the Letter, Letter
+              <span className="font-semibold">Beginner.</span> Name the Letter, Letter
               Quiz, and Muharni Quiz.
             </GoldDotItem>
             <GoldDotItem>
