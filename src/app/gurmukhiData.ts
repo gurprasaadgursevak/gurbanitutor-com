@@ -1,7 +1,6 @@
 // Shared data for the Painti Akhari and Muharni sound boards plus the
 // Letter Quiz game. Mirrors the iOS app's GurmukhiSoundBoard.swift and
-// MuharniSoundBoard.swift. Audio is streamed from the gursevak.com CDN
-// (Learn Shudh Gurbani by gursevak.com).
+// MuharniSoundBoard.swift.
 
 export type PentiAkharCell = {
   id: number;

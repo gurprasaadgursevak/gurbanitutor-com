@@ -279,9 +279,6 @@ export default function AboutPage() {
               and Bani Identifier.
             </GoldDotItem>
           </ul>
-          <p className="mt-4 text-sm text-slate-600">
-            Audio courtesy of Learn Shudh Gurbani by gursevak.com.
-          </p>
         </section>
 
         <hr className="my-12 border-slate-200" />

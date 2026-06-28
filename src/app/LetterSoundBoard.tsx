@@ -117,7 +117,7 @@ export default function LetterSoundBoard({
   }, []);
 
   const blurb = lessonMode
-    ? "Tap a letter to hear the full pronunciation lesson from Learn Shudh Gurbani."
+    ? "Tap a letter to hear the full pronunciation lesson."
     : "Tap any letter to hear the proper Gurmukhi pronunciation.";
 
   const active = playAllIndex !== null;
@@ -181,10 +181,6 @@ export default function LetterSoundBoard({
           <span aria-hidden>⏮</span>
         </button>
       </div>
-
-      <p className="mt-4 text-center text-xs text-amber-900/60">
-        Audio courtesy of Learn Shudh Gurbani by gursevak.com.
-      </p>
 
       <audio
         ref={audioRef}

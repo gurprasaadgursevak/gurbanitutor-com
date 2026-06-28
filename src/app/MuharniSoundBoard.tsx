@@ -373,8 +373,7 @@ export default function MuharniSoundBoard() {
       </div>
 
       <p className="mt-4 text-center text-xs text-amber-900/60">
-        Per-form primer audio cut from a Muharni DVD. Full-chant audio courtesy
-        of Learn Shudh Gurbani by gursevak.com.
+        Per-form primer audio cut from a Muharni DVD.
       </p>
 
       <audio

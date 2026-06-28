@@ -171,9 +171,6 @@ export default function AkharSoundRace() {
         </button>
       )}
 
-      <p className="mt-6 text-center text-xs text-amber-900/60">
-        Audio courtesy of Learn Shudh Gurbani by gursevak.com.
-      </p>
       <audio ref={audioRef} preload="none" />
     </div>
   );

@@ -38,7 +38,6 @@ export default function GamesPage() {
       <h1 className="text-center text-3xl font-bold text-amber-800">Games</h1>
       <p className="mt-2 text-center text-sm text-amber-900/80">
         Games for kids and Sangat to make Brahamvidya learning fun and easy.
-        Audio courtesy of Learn Shudh Gurbani by gursevak.com.
       </p>
 
       <section className="mt-6 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
