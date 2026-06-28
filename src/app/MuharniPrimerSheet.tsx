@@ -7,6 +7,7 @@ import {
   glyphFor,
   clipUrlFor,
   vowelForms,
+  type MuharniLagId,
   type MuharniLetter,
 } from "./muharniLetters";
 
@@ -14,7 +15,13 @@ import {
 /// in a 3×4 grid. Tapping a tile plays the individual lag clip. Greyed
 /// tiles are linguistically invalid for the carrier letters (ੳ ਅ ੲ).
 ///
-/// Mirrors iOS `MuharniPrimerSheet.swift`.
+/// Mirrors iOS `MuharniPrimerSheet.swift`, including the floating Play All
+/// + Restart controls and the manual-tap bookmark behaviour.
+
+export interface PlayAllControlState {
+  isActive: boolean;
+  label: string;
+}
 
 interface Props {
   letter: MuharniLetter | null;
@@ -22,9 +29,35 @@ interface Props {
   /// (10 standalone vowel forms across ੳ ਅ ੲ). Mutually exclusive with `letter`.
   vowels?: boolean;
   onClose: () => void;
+  /// When set, this overrides the sheet's internal `nowPlayingKey` highlight
+  /// so the parent Play All loop can drive which tile lights up. Encoded as
+  /// `${lagId}_${letterId}` to match the sheet's internal key format.
+  externalHighlightKey?: string | null;
+  /// Fires when the user taps a tile inside this sheet. Parent uses it to
+  /// pause Play All and bookmark the tapped tile as the resume point.
+  onTapTile?: (letterId: string, lagId: MuharniLagId) => void;
+  /// Floating bottom Play/Pause control. When omitted the button isn't shown.
+  playAllState?: PlayAllControlState | null;
+  onTogglePlayAll?: () => void;
+  /// Optional restart-from-beginning callback. When provided a small circular
+  /// restart button is rendered next to the Play/Pause capsule.
+  onRestartPlayAll?: () => void;
+  /// Fires when the user taps Done. Parent stops Play All so dismissing the
+  /// sheet doesn't leave autoplay hopping between unseen tiles.
+  onDone?: () => void;
 }
 
-export default function MuharniPrimerSheet({ letter, vowels, onClose }: Props) {
+export default function MuharniPrimerSheet({
+  letter,
+  vowels,
+  onClose,
+  externalHighlightKey = null,
+  onTapTile,
+  playAllState,
+  onTogglePlayAll,
+  onRestartPlayAll,
+  onDone,
+}: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [nowPlayingKey, setNowPlayingKey] = useState<string | null>(null);
 
@@ -37,13 +70,23 @@ export default function MuharniPrimerSheet({ letter, vowels, onClose }: Props) {
     setNowPlayingKey(null);
   }
 
-  function playClip(letterId: string, lagId: string) {
+  function playClip(letterId: string, lagId: MuharniLagId) {
     const el = audioRef.current;
     if (!el) return;
-    el.src = clipUrlFor(letterId, lagId as Parameters<typeof clipUrlFor>[1]);
+    el.src = clipUrlFor(letterId, lagId);
     el.currentTime = 0;
     void el.play();
     setNowPlayingKey(`${lagId}_${letterId}`);
+  }
+
+  function handleTileTap(letterId: string, lagId: MuharniLagId) {
+    onTapTile?.(letterId, lagId);
+    playClip(letterId, lagId);
+  }
+
+  function handleDone() {
+    onDone?.();
+    onClose();
   }
 
   useEffect(() => () => stop(), []);
@@ -51,67 +94,94 @@ export default function MuharniPrimerSheet({ letter, vowels, onClose }: Props) {
   const visible = vowels || letter !== null;
   if (!visible) return null;
 
+  const highlightKey = externalHighlightKey ?? nowPlayingKey;
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm sm:items-center sm:p-4"
-      onClick={onClose}
+      onClick={handleDone}
     >
       <div
-        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-white p-5 shadow-2xl sm:rounded-3xl"
+        className="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            {vowels ? (
-              <>
-                <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                  Vowels primer
-                </p>
-                <h2 className="mt-1 text-2xl font-semibold text-slate-900">
-                  ੳ ਅ ੲ · Standalone vowel forms
-                </h2>
-              </>
-            ) : (
-              <>
-                <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
-                  {letter?.transliteration}
-                </p>
-                <h2 className="mt-1 text-3xl font-semibold text-slate-900">
-                  <span className="font-bold text-amber-700">{letter?.baseGlyph}</span>{" "}
-                  <span className="text-base font-normal text-slate-600">{letter?.punjabiName}</span>
-                </h2>
-              </>
-            )}
+        <div className="flex-1 overflow-y-auto p-5">
+          {/* Header */}
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              {vowels ? (
+                <>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                    Vowels primer
+                  </p>
+                  <h2 className="mt-1 text-2xl font-semibold text-slate-900">
+                    ੳ ਅ ੲ · Standalone vowel forms
+                  </h2>
+                </>
+              ) : (
+                <>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                    {letter?.transliteration}
+                  </p>
+                  <h2 className="mt-1 text-3xl font-semibold text-slate-900">
+                    <span className="font-bold text-amber-700">{letter?.baseGlyph}</span>{" "}
+                    <span className="text-base font-normal text-slate-600">{letter?.punjabiName}</span>
+                  </h2>
+                </>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={handleDone}
+              className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-200"
+            >
+              Done
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-          >
-            Done
-          </button>
+
+          {/* Grid */}
+          {vowels ? (
+            <VowelsGrid
+              highlightKey={highlightKey}
+              onPlay={(letterId, lagId) => handleTileTap(letterId, lagId)}
+            />
+          ) : (
+            <LagGrid
+              letter={letter!}
+              highlightKey={highlightKey}
+              onPlay={(lagId) => handleTileTap(letter!.id, lagId)}
+            />
+          )}
+
+          <p className="mt-4 text-center text-xs text-slate-500">
+            Tap any tile to hear that sound. {vowels ? "" : "Greyed tiles aren't used for this letter."}
+          </p>
+
+          <audio ref={audioRef} preload="none" onEnded={() => stop()} />
         </div>
 
-        {/* Grid */}
-        {vowels ? (
-          <VowelsGrid
-            nowPlayingKey={nowPlayingKey}
-            onPlay={(letterId, lagId) => playClip(letterId, lagId)}
-          />
-        ) : (
-          <LagGrid
-            letter={letter!}
-            nowPlayingKey={nowPlayingKey}
-            onPlay={(lagId) => playClip(letter!.id, lagId)}
-          />
+        {playAllState && onTogglePlayAll && (
+          <div className="flex items-center justify-center gap-3 border-t border-slate-200 bg-white/95 px-5 py-3 backdrop-blur">
+            <button
+              type="button"
+              onClick={onTogglePlayAll}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+            >
+              <span aria-hidden>{playAllState.isActive ? "❚❚" : "▶"}</span>
+              {playAllState.label}
+            </button>
+            {onRestartPlayAll && (
+              <button
+                type="button"
+                onClick={onRestartPlayAll}
+                aria-label="Restart from the beginning"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition hover:bg-amber-100"
+              >
+                <span aria-hidden>⏮</span>
+              </button>
+            )}
+          </div>
         )}
-
-        <p className="mt-4 text-center text-xs text-slate-500">
-          Tap any tile to hear that sound. {vowels ? "" : "Greyed tiles aren't used for this letter."}
-        </p>
-
-        <audio ref={audioRef} preload="none" onEnded={() => stop()} />
       </div>
     </div>
   );
@@ -119,12 +189,12 @@ export default function MuharniPrimerSheet({ letter, vowels, onClose }: Props) {
 
 function LagGrid({
   letter,
-  nowPlayingKey,
+  highlightKey,
   onPlay,
 }: {
   letter: MuharniLetter;
-  nowPlayingKey: string | null;
-  onPlay: (lagId: string) => void;
+  highlightKey: string | null;
+  onPlay: (lagId: MuharniLagId) => void;
 }) {
   return (
     <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4">
@@ -132,7 +202,7 @@ function LagGrid({
         const isValid = isValidCombo(lag.id, letter.id);
         const glyph = glyphFor(letter.id, lag.id);
         const key = `${lag.id}_${letter.id}`;
-        const playing = nowPlayingKey === key;
+        const playing = highlightKey === key;
         const baseClasses = "flex flex-col items-center justify-center gap-1 rounded-2xl border p-3 transition";
         const stateClasses = !isValid
           ? "border-slate-200 bg-slate-50 opacity-50 cursor-not-allowed"
@@ -171,11 +241,11 @@ function LagGrid({
 }
 
 function VowelsGrid({
-  nowPlayingKey,
+  highlightKey,
   onPlay,
 }: {
-  nowPlayingKey: string | null;
-  onPlay: (carrierId: string, lagId: string) => void;
+  highlightKey: string | null;
+  onPlay: (carrierId: string, lagId: MuharniLagId) => void;
 }) {
   const groups = [
     { id: "oora", title: "ੳ Oora forms" },
@@ -192,7 +262,7 @@ function VowelsGrid({
             <div className="mt-2 grid grid-cols-3 gap-3 sm:grid-cols-4">
               {items.map((form) => {
                 const key = `${form.lag}_${form.carrierId}`;
-                const playing = nowPlayingKey === key;
+                const playing = highlightKey === key;
                 const glyph = glyphFor(form.carrierId, form.lag);
                 const lagName = muharniLags.find((l) => l.id === form.lag)?.englishName ?? "";
                 return (
