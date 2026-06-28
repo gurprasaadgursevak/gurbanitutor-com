@@ -115,6 +115,82 @@ export default function AboutPage() {
 
         <hr className="my-12 border-slate-200" />
 
+        {/* Bhagat Jaswant Singh Ji biography */}
+        <section>
+          <h2 className="text-xl font-semibold tracking-tight text-amber-700 sm:text-2xl">
+            Bhagat Jaswant Singh Ji (1936 to March 2025)
+          </h2>
+          <p className="mt-4 leading-7 text-slate-700">
+            Bhai Jaswant Singh Ji, known reverently as Bhagat Ji, was a Sikh scholar born in
+            1936 who devoted more than 60 years to the study, teaching, and preservation of
+            Gurbani. His life's focus was Shudh Ucharan, the correct pronunciation of
+            Gurbani, and Santhiya, the discipline through which that pronunciation is taught.
+            He completed his life journey in March 2025.
+          </p>
+
+          <h3 className="mt-8 text-lg font-semibold tracking-tight text-amber-700">
+            Spiritual Training
+          </h3>
+          <p className="mt-3 leading-7 text-slate-700">
+            Bhagat Ji joined the Damdami Taksal in 1961 and studied for over eight years
+            under Sant Baba Gurbachan Singh Ji Bhindranwale, the twelfth leader of the
+            institution. It was Sant Gurbachan Singh Ji who affectionately gave him the
+            name Bhagat, a title that stayed with him for the rest of his life. He later
+            lived with Sant Kartar Singh Ji Khalsa Bhindranwale and became one of the era's
+            principal Santhiya teachers.
+          </p>
+
+          <h3 className="mt-8 text-lg font-semibold tracking-tight text-amber-700">
+            Major Contributions
+          </h3>
+          <ul className="mt-3 space-y-3 text-slate-700">
+            <GoldDotItem>
+              <span className="font-semibold">Katha recordings.</span> Bhagat Ji took on the
+              difficult work of recording scriptural discourses, carrying heavy Grundig
+              recorders across regions that lacked reliable electricity, often at personal
+              risk, so that these teachings would be preserved.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">The Steek project.</span> In 1967, Sant
+              Gurbachan Singh Ji blessed a team of five scholars, Bhagat Ji among them, with
+              the mission of composing detailed meanings of Sri Guru Granth Sahib Ji. Bhagat
+              Ji was the last surviving member of that team and carried the work forward
+              until he completed his life journey. After his passing, Baba Jawahar Singh, a
+              long time companion and student of Bhagat Ji, is resuming the translation
+              seva, continuing the Steek project in his teacher's footsteps.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Manuscript correction.</span> More than three
+              decades ago, at the request of the SGPC, he was among the pioneering scholars
+              who corrected the mangals, the introductory headings of Sri Guru Granth Sahib
+              Ji, helping to preserve the authentic text.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Recordings and publications.</span> He
+              produced what is recognised as the first ever correct pronunciation recording
+              of Sri Guru Granth Sahib Ji, and authored ten texts, eight of which have
+              audiobooks and five of which have videobooks. His teachings reach seekers
+              today through an app, a website, YouTube, and Instagram.
+            </GoldDotItem>
+          </ul>
+
+          <h3 className="mt-8 text-lg font-semibold tracking-tight text-amber-700">
+            Legacy
+          </h3>
+          <p className="mt-3 leading-7 text-slate-700">
+            Many respected Sikh scholars and preachers were students of Bhagat Ji. His
+            lifelong service to Shudh Ucharan continues to guide seekers in pronouncing
+            Gurbani with care and accuracy rather than reading it as casual Punjabi. Having
+            completed his life journey in March 2025, Bhagat Ji leaves behind his
+            recordings, his writings, and his students to carry the tradition forward.
+            Among them, Baba Jawahar Singh, his long time companion and student, is taking
+            up the translation seva of the Steek project, ensuring that the mission
+            entrusted by Sant Gurbachan Singh Ji in 1967 lives on.
+          </p>
+        </section>
+
+        <hr className="my-12 border-slate-200" />
+
         {/* About Gurbani Tutor */}
         <section>
           <h2 className="text-2xl font-semibold tracking-tight text-amber-700 sm:text-3xl">
@@ -246,6 +322,48 @@ export default function AboutPage() {
               iPhone app and the website, so consonant-skeleton queries land lines
               starting from any word in the line.
             </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Hukamnama picker (iPhone).</span> Tap
+              Hukamnama on Home and pick Sri Guru Granth Sahib Ji or Sri Dasam
+              Granth Sahib Ji. The reader opens on a random ang in a temporary
+              session so it doesn't disturb the ang you were already studying.
+              First time? Start from the bottom shabad (or the first complete
+              shabad you come across as you scroll up), the same etiquette used
+              when receiving Hukam in person.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Extra Nitnem from the Amrit Bani
+              Gutka (iPhone).</span> Open the Nitnem checklist → Add Banis → Browse
+              Amrit Bani Gutka to pick from 124 banis across 10 categories. Added
+              banis show up on the Nitnem ring (so 7 + 1 reads as 8 of 8 today)
+              and contribute to your streak going forward, without retroactively
+              breaking past days.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Abhiyas inline Undo (iPhone).</span>{" "}
+              Every Abhiyas Log row has an inline Undo button so you can drop the
+              last count without opening the counter sheet. The Abhiyas Challenge
+              counter card adds an Undo Last button too, and Reset Progress /
+              Delete Challenge are tucked behind the ellipsis menu in the top-right
+              with confirmation prompts so they're hard to tap by accident.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Game stats system (iPhone).</span>{" "}
+              Every game now tracks your Best Score and a Daily Streak flame, with
+              an optional speed bonus. Hitting 100, 500, 1,000, or 5,000 lifetime
+              correct answers in any game brings up a Milestone Shabad card as a
+              small reward.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">More archival Literature (iPhone).</span>{" "}
+              Resources now points to additional treasured Gurmat reads from
+              archive.org: Sri Dasam Granth Sahib Ji (Braham Dev Ji and Mehron
+              steeks), Tarna Dal Nitnem Gutka, Dussehra Mahatam Pothi, Gurmukh
+              Darshan by Giani Kirpal Singh Ji, the Taksali Steek Pehli Pothi
+              (Sri Guru Granth Sahib Ji) by Sant Gurbachan Singh Ji Bhindranwale,
+              Gurmukh Parkash by Sant Gurbachan Singh Ji, and Sampooran Sarab Loh
+              Granth.
+            </GoldDotItem>
           </ul>
         </section>
 
@@ -265,18 +383,25 @@ export default function AboutPage() {
           </p>
           <ul className="mt-4 space-y-3 text-slate-700">
             <GoldDotItem>
-              <span className="font-semibold">Beginner.</span> Gurmukhi Letters
-              sound board, Muharni sound board, Letter Quiz, and Name the
-              Letter.
+              <span className="font-semibold">Best Score, Streaks, and Milestone Shabads.</span>{" "}
+              Every game now tracks your Best Score and a Daily Streak flame, with an optional
+              speed bonus you can toggle on or off when you want pure accuracy. Cross 100, 500,
+              1,000, or 5,000 lifetime correct answers in any game and a Milestone Shabad card
+              appears as a small reward from Nitnem.
             </GoldDotItem>
             <GoldDotItem>
-              <span className="font-semibold">Intermediate.</span> First Letter
-              Match, Memory Match (with a timer to beat), and Akhar Sound Race.
+              <span className="font-semibold">Beginner.</span> Gurmukhi Letters sound board,
+              Muharni sound board (with By Letter / By Lag toggle), Name the Letter, Letter
+              Quiz, and Muharni Quiz.
             </GoldDotItem>
             <GoldDotItem>
-              <span className="font-semibold">Advanced.</span> Tukh Completion
-              (fill in the blank, or pick the odd-one-out for Jaap Sahib lines)
-              and Bani Identifier.
+              <span className="font-semibold">Intermediate.</span> First Letter Match, Memory
+              Match (with a timer to beat), Akhar Sound Race, and Gurbani Scrabble.
+            </GoldDotItem>
+            <GoldDotItem>
+              <span className="font-semibold">Advanced.</span> Tukh Completion (fill in the
+              blank, or pick the odd-one-out for Jaap Sahib lines, with a per-bani source
+              drill-down), Bani Identifier, Sentence Unscramble, and Punctuation Master.
             </GoldDotItem>
           </ul>
         </section>

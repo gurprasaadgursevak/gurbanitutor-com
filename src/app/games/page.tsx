@@ -13,9 +13,9 @@ type GameTile = { href: string; title: string; body: string };
 
 const BEGINNER: GameTile[] = [
   { href: "/games/letters", title: "Gurmukhi Letters", body: "Tap any of the 35 letters to hear the pronunciation." },
-  { href: "/games/muharni", title: "Muharni Sound Board", body: "Tap a row to hear the full chant for that consonant." },
-  { href: "/games/quiz", title: "Letter Quiz", body: "Hear a letter, pick the matching Gurmukhi from four options." },
+  { href: "/games/muharni", title: "Muharni Sound Board", body: "Tap a consonant to open its primer with all 12 lag forms, or switch to By Lag to drill one mark across every consonant." },
   { href: "/games/name-the-letter", title: "Name the Letter", body: "See a Gurmukhi letter, pick its English name from four options." },
+  { href: "/games/quiz", title: "Letter Quiz", body: "Hear a letter, pick the matching Gurmukhi from four options." },
 ];
 
 const INTERMEDIATE: GameTile[] = [

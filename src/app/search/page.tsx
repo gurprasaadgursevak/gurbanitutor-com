@@ -386,7 +386,7 @@ export default function SearchPage() {
           <p className="mt-2 max-w-3xl text-slate-600">
             {loading
               ? "Loading the four Granths..."
-              : "Search by Gurmukhi (Contains, First Letters, Anywhere) or by English meaning across all four Granths."}
+              : "Search by Gurmukhi (Exactly, Contains, First Letters, Anywhere) or by English meaning across all four Granths."}
           </p>
         </div>
 
@@ -481,10 +481,12 @@ export default function SearchPage() {
             <span>
               {lang === "gurmukhi" ? (
                 <>
-                  <strong>Contains</strong> matches the exact text or consonants without
-                  vowels. <strong>First Letters</strong> matches first consonants of each word
-                  starting from the line's first word. <strong>Anywhere</strong> matches first
-                  consonants of a consecutive run of words from any position.
+                  <strong>Exactly</strong> matches the standalone word, ignoring trailing
+                  visrams and dandis. <strong>Contains</strong> matches the exact text or
+                  consonants without vowels. <strong>First Letters</strong> matches first
+                  consonants of each word starting from the line's first word.{" "}
+                  <strong>Anywhere</strong> matches first consonants of a consecutive run of
+                  words from any position.
                 </>
               ) : (
                 <>Searches across English Steek 1, English Steek 2, and ਅਰਥ.</>
