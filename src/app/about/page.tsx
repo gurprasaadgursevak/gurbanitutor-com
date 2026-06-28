@@ -117,12 +117,28 @@ export default function AboutPage() {
 
         {/* Bhagat Jaswant Singh Ji biography */}
         <section>
-          <h2 className="text-xl font-semibold tracking-tight text-amber-700 sm:text-2xl">
-            Bhagat Jaswant Singh Ji (1936 to March 2025)
+          <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
+              <Image
+                src="/bhagat-ji-baba-jawahar-singh.jpg"
+                alt="Bhagat Jaswant Singh Ji with Baba Jawahar Singh Ji"
+                fill
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover"
+                priority={false}
+              />
+            </div>
+            <figcaption className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-center text-sm text-slate-700">
+              Bhagat Jaswant Singh Ji (right) with Baba Jawahar Singh Ji (Chaminda).
+            </figcaption>
+          </figure>
+
+          <h2 className="mt-8 text-xl font-semibold tracking-tight text-amber-700 sm:text-2xl">
+            Bhagat Jaswant Singh Ji (June 1936 to March 2025)
           </h2>
           <p className="mt-4 leading-7 text-slate-700">
             Bhai Jaswant Singh Ji, known reverently as Bhagat Ji, was a Sikh scholar born in
-            1936 who devoted more than 60 years to the study, teaching, and preservation of
+            June 1936 who devoted more than 60 years to the study, teaching, and preservation of
             Gurbani. His life's focus was Shudh Ucharan, the correct pronunciation of
             Gurbani, and Santhiya, the discipline through which that pronunciation is taught.
             He completed his life journey in March 2025.
@@ -236,8 +252,8 @@ export default function AboutPage() {
               for any glyph the chosen font doesn't cover.
             </GoldDotItem>
             <GoldDotItem>
-              <span className="font-semibold">More Amrit Banis.</span> 124 additional banis
-              across 10 categories — Beant Bani (Dukh Bhanjani Sahib, Karhalay, Pahray,
+              <span className="font-semibold">More Amrit Banis.</span> 118 additional banis
+              across 10 categories: Beant Bani (Dukh Bhanjani Sahib, Karhalay, Pahray,
               Salok Sahaskriti, Sukhmana Sahib, etc.), Bhagat Bani, the full 22 Vaaran
               cycle, Beant Dasam Bani (Zafarnama, 33 Svaiye, Khalsa Mehima, Bara Maha),
               Panj Granthi, Das Granthi, Ardas, Astotar, Kavach, and Gurbani Pothi.
@@ -334,7 +350,7 @@ export default function AboutPage() {
             <GoldDotItem>
               <span className="font-semibold">Extra Nitnem from the Amrit Bani
               Gutka (iPhone).</span> Open the Nitnem checklist → Add Banis → Browse
-              Amrit Bani Gutka to pick from 124 banis across 10 categories. Added
+              Amrit Bani Gutka to pick from 118 banis across 10 categories. Added
               banis show up on the Nitnem ring (so 7 + 1 reads as 8 of 8 today)
               and contribute to your streak going forward, without retroactively
               breaking past days.
