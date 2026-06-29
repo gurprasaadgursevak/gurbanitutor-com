@@ -5,7 +5,7 @@ import SocialLinks from "../SocialLinks";
 import GurbaniSearchPin from "../GurbaniSearchPin";
 
 export const metadata: Metadata = {
-  title: "Sri Pothi Sahib — Gurbani Tutor",
+  title: "Sri Pothi Sahib · Gurbani Tutor",
   description:
     "Free Sangat resources from the Gurbani Tutor library. Read and download Sri Sukhmani Sahib Ji, Sri Guru Granth Sahib Ji History, Balupdesh, Gareebi Pothi, and more.",
 };

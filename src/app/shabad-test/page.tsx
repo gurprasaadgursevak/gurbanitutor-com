@@ -327,7 +327,7 @@ export default function ShabadTestPage() {
               <ol className="mt-3 list-decimal space-y-1.5 pl-5">
                 <li>
                   Sing the shabad with the sangat in Shudh Ucharan at least 101
-                  times — let your tongue learn the line before your mind does.
+                  times, letting your tongue learn the line before your mind does.
                 </li>
                 <li>
                   As you sing, pay attention to every lag, sihari, and bihari so
@@ -588,7 +588,7 @@ export default function ShabadTestPage() {
                   Close, but not yet. Look at the words below and try once more.
                 </p>
                 <p className="mt-1 text-sm text-amber-800">
-                  Bhul-chuk maaf — every gursikh stumbles before the words settle in
+                  Bhul-chuk maaf. Every gursikh stumbles before the words settle in
                   the heart. Studying daily and retrying is how it sticks. Take a
                   breath, re-read the shabad, and try again.
                 </p>
@@ -618,7 +618,7 @@ export default function ShabadTestPage() {
                             lang="pa"
                             className="text-lg font-semibold text-emerald-800"
                           >
-                            {w.expected || "(nothing — extra word typed)"}
+                            {w.expected || "(nothing, extra word typed)"}
                           </span>
                         </div>
                         <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
@@ -627,7 +627,7 @@ export default function ShabadTestPage() {
                             lang="pa"
                             className="text-lg font-semibold text-red-700"
                           >
-                            {w.actual || "(nothing — word missing)"}
+                            {w.actual || "(nothing, word missing)"}
                           </span>
                         </div>
                         {w.expected && w.actual && (

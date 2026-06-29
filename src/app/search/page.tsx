@@ -399,8 +399,8 @@ export default function SearchPage() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder={
                 lang === "gurmukhi"
-                  ? "Type in ਗੁਰਮੁਖੀ — try ਸਹਸ ਸਿਆਣਪਾ"
-                  : "Type an English word — try mercy"
+                  ? "Type in ਗੁਰਮੁਖੀ (try ਸਹਸ ਸਿਆਣਪਾ)"
+                  : "Type an English word (try mercy)"
               }
               className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base shadow-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
             />

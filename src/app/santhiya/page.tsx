@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
-  title: "Santhiya Classes — Gurbani Tutor",
+  title: "Santhiya Classes · Gurbani Tutor",
   description:
     "Learn Sri Guru Granth Sahib Ji Santhiya with Baba Jawahar Singh Ji. Two daily group classes online, plus one-on-one Santhiya. Open to Sangat worldwide.",
 };
@@ -123,11 +123,11 @@ export default function SanthiyaPage() {
               Class 1
             </p>
             <p className="mt-2 text-lg font-semibold text-slate-900">
-              7:00 PM – 8:00 PM
+              7:00 PM to 8:00 PM
             </p>
             <p className="text-sm text-slate-700">Toronto (EDT)</p>
             <p className="mt-3 text-base font-semibold text-slate-900">
-              4:30 AM – 5:30 AM
+              4:30 AM to 5:30 AM
             </p>
             <p className="text-sm text-slate-700">India (IST)</p>
           </div>
@@ -136,11 +136,11 @@ export default function SanthiyaPage() {
               Class 2
             </p>
             <p className="mt-2 text-lg font-semibold text-slate-900">
-              9:00 AM – 10:00 AM
+              9:00 AM to 10:00 AM
             </p>
             <p className="text-sm text-slate-700">Toronto (EDT)</p>
             <p className="mt-3 text-base font-semibold text-slate-900">
-              6:30 PM – 7:30 PM
+              6:30 PM to 7:30 PM
             </p>
             <p className="text-sm text-slate-700">India (IST)</p>
           </div>

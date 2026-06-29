@@ -84,10 +84,15 @@ export default function LetterSoundBoard({
   }
 
   function handleTileTap(idx: number, cell: PentiAkharCell) {
-    // A manual tap pauses Play All and bookmarks this tile as the resume
-    // point so the next Play press picks up here.
-    setPlayAllIndex(null);
-    setPlayAllResumeIndex(idx);
+    if (playAllIndex !== null) {
+      // Walk is running: jump it to this tile and keep walking from here, so
+      // the button stays "Pause" and can still stop the walk with one tap.
+      setPlayAllIndex(idx);
+    } else {
+      // Standalone tap: just play this one letter and bookmark it so the next
+      // Play press resumes from here.
+      setPlayAllResumeIndex(idx);
+    }
     play(cell);
   }
 
@@ -117,8 +122,8 @@ export default function LetterSoundBoard({
   }, []);
 
   const blurb = lessonMode
-    ? "Tap a letter to hear the full pronunciation lesson."
-    : "Tap any letter to hear the proper Gurmukhi pronunciation.";
+    ? "Tap any letter to hear its full pronunciation lesson. Or press Play to walk through them all."
+    : "Tap any letter to hear it. Or press Play to walk through all 35 in order.";
 
   const active = playAllIndex !== null;
 

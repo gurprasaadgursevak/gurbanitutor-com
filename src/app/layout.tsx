@@ -25,7 +25,7 @@ const notoGurmukhi = Noto_Sans_Gurmukhi({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gurbanitutor.com"),
-  title: "Gurbani Tutor — A learning companion for Gurbani",
+  title: "Gurbani Tutor · A learning companion for Gurbani",
   description:
     "Read Sri Guru Granth Sahib Ji and Sri Dasam Guru Granth Sahib Ji, track daily Nitnem, count Simran on a mala, take Gurbani Abhiyaas challenges, and study the Gurmukhi dictionary. Free on iPhone.",
   icons: {

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
-  title: "About Us — Gurbani Tutor",
+  title: "About Us · Gurbani Tutor",
   description:
     "Gurbani Tutor is an education app for Shudh Gurbani Santhiya, focused on learning, understanding, and connecting with Gurbani. Built by the Sangat, for the Sangat.",
 };
@@ -328,7 +328,7 @@ export default function AboutPage() {
               <span className="font-semibold">Quiz pools expanded.</span> Four
               groupings: Daily Quiz (same 10 questions for Sangat worldwide),
               Favourited Words, Nitnem Bani Quizzes (now strictly scoped to lines
-              within each bani — no leakage from shared Angs), and Random Shabads
+              within each bani, with no leakage from shared Angs), and Random Shabads
               from SGGS (fair-play random lines from anywhere in Sri Guru Granth
               Sahib Ji).
             </GoldDotItem>

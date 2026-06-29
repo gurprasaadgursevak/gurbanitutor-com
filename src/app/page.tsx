@@ -89,7 +89,7 @@ const TILES: Tile[] = [
     href: "/games",
     eyebrow: "For kids",
     title: "Games",
-    body: "Tap-to-hear Letters and Muharni boards, plus a Letter Quiz. Brahamvidya, fun and easy.",
+    body: "Letter quizzes, memory match, scrambles, and more. Brahamvidya, fun and easy.",
     icon: "letters",
     isNew: true,
   },
@@ -283,15 +283,17 @@ export default function Home() {
               body="Apple-Health-style rings for Nitnem, Simran, and Abhiyas, with daily streaks. Vaheguru's seva, visualized."
             />
             <FeatureCard
-              icon="✓"
-              title="Bani Quizzes with Streaks"
-              body="Same vocabulary, same Nitnem quizzes you see here, plus favourites and persistent best-streak tracking."
+              icon="🎯"
+              title="Games, Streaks & Milestones"
+              body="Learning games track your Best Score and a daily streak flame, with Milestone Shabad rewards at 100, 500, 1,000, and 5,000 correct."
             />
           </div>
           <p className="mt-8 text-center text-sm text-slate-700">
             The <Link href="/arths" className="font-semibold text-amber-700 hover:underline">Gurbani Vocabulary</Link>{" "}
             and the <Link href="/quiz" className="font-semibold text-amber-700 hover:underline">Quiz</Link> are the
-            same on iPhone and web. The iPhone app adds personal tracking on top.
+            same on iPhone and web. The iPhone app adds personal tracking on top, plus the Abhiyas
+            Challenge and Log, offline Sri Pothi Sahib downloads, and a daily Hukamnama from Sri
+            Guru Granth Sahib Ji or Sri Dasam Granth Sahib Ji.
           </p>
         </div>
       </section>

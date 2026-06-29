@@ -231,7 +231,7 @@ const BANI_LIST: BaniDef[] = [
   {
     id: "sukhmani",
     name: "Sri Sukhmani Sahib Ji",
-    subtitle: "Gauri · M5 · Ang 262–296",
+    subtitle: "Gauri · M5 · Ang 262 to 296",
     segments: [{ kind: "sggs", range: [11588, 13614] }],
   },
   {
@@ -468,7 +468,7 @@ function GranthReader() {
     };
   }, []);
 
-  // Load the 124 additional Amrit Banis (Beant Bani, Bhagat Bani, Baee Vara,
+  // Load the additional Amrit Banis (118 with content; Beant Bani, Bhagat Bani, Baee Vara,
   // Beant Dasam Bani, Panj Granthi, Das Granthi, Astotar, Kavach, Ardas,
   // Gurbani Pothi) from `banis_manifest.json`. The manifest carries the
   // precomputed row segments for the existing sggs.tsv / dasam.tsv so we
@@ -809,6 +809,36 @@ function GranthReader() {
             </Link>
             .
           </p>
+
+          <details className="mt-4 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50/60 px-4 py-3 text-sm text-slate-700">
+            <summary className="cursor-pointer font-semibold text-amber-800">
+              About this Saroop &amp; reading aids
+            </summary>
+            <div className="mt-3 space-y-3 leading-7">
+              <p>
+                The Sri Guru Granth Sahib Ji saroop here has been rigorously vetted
+                (ਸ਼ੁਧਾਈ) against several Puratan saroops by ਪਰਮਪੂਜੀਕ ਗੁਰਮੁਖਿ ਅਪਰਸ Sant
+                Baba Gurbachan Singh Ji Khalsa Ji&apos;s student, Bhagat Jaswant Singh Ji.
+                Learn more about Bhagat Ji on the{" "}
+                <Link href="/about" className="font-semibold text-amber-700 hover:underline">
+                  About page
+                </Link>
+                .
+              </p>
+              <p>
+                Use the toggles to read along with ucharan tips and extended ucharan tips,
+                ਅਰਥ (Punjabi meanings), English translations, transliteration, and the
+                Punjabi and Classical steeks.
+              </p>
+              <p>
+                Want to pin favourite lines and scribe notes on any verse? Those live in the{" "}
+                <Link href="/#about" className="font-semibold text-amber-700 hover:underline">
+                  iPhone app
+                </Link>
+                .
+              </p>
+            </div>
+          </details>
         </div>
 
         {selectedBani && (

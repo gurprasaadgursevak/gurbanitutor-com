@@ -6,7 +6,7 @@ import MuharniSoundBoard from "../MuharniSoundBoard";
 import SocialLinks from "../SocialLinks";
 
 export const metadata: Metadata = {
-  title: "Santhiya 101 · Your journey — Gurbani Tutor",
+  title: "Santhiya 101 · Your journey · Gurbani Tutor",
   description:
     "A step-by-step Santhiya journey: Painti Akhari, Balupdesh, Muharni, Nitnem Santhiya, Sri Guru Granth Sahib Ji Santhiya, and one-on-one classes.",
 };
@@ -344,7 +344,7 @@ export default function MuharniPage() {
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-slate-900">Games</p>
                 <p className="text-xs text-slate-600">
-                  Beginner to Advanced — sound boards, quizzes, matching, scrambles.
+                  Beginner to Advanced: sound boards, quizzes, matching, scrambles.
                 </p>
               </div>
             </Link>

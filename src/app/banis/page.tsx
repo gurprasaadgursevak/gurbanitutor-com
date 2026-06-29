@@ -27,7 +27,7 @@ const NITNEM: CuratedBani[] = [
 ];
 
 const SUNDAR_GUTKA: CuratedBani[] = [
-  { id: "sukhmani", name: "Sri Sukhmani Sahib Ji", subtitle: "Gauri · M5 · Ang 262–296" },
+  { id: "sukhmani", name: "Sri Sukhmani Sahib Ji", subtitle: "Gauri · M5 · Ang 262 to 296" },
   { id: "aarti", name: "Aarti", subtitle: "Compiled · selected verses" },
   { id: "ramkaliKiVaar", name: "Ramkali Ki Vaar", subtitle: "Rai Balvand & Satta · Ang 966-968" },
   { id: "basantKiVaar", name: "Basant Ki Vaar", subtitle: "M5 · Ang 1193" },
