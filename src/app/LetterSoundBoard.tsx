@@ -20,7 +20,12 @@ export default function LetterSoundBoard({
   lessonMode?: boolean;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const stopTimerRef = useRef<number | null>(null);
+  /// Seconds of *actual playback* after which a capped (game-mode) clip
+  /// stops. Null in lesson mode (play the whole recording) or when nothing
+  /// is capped. Enforced via the audio element's `timeupdate` so network
+  /// buffering latency never eats into the clip (the old wall-clock timer
+  /// could stop a slow-loading stream before it was even audible).
+  const capSecondsRef = useRef<number | null>(null);
   const [nowPlayingId, setNowPlayingId] = useState<number | null>(null);
   /// Index of the cell the auto-play loop is on. `null` when paused/stopped.
   const [playAllIndex, setPlayAllIndex] = useState<number | null>(null);
@@ -34,41 +39,30 @@ export default function LetterSoundBoard({
     playAllIndexRef.current = playAllIndex;
   }, [playAllIndex]);
 
-  function clearStopTimer() {
-    if (stopTimerRef.current !== null) {
-      window.clearTimeout(stopTimerRef.current);
-      stopTimerRef.current = null;
-    }
-  }
-
   function stopPlayback() {
     const el = audioRef.current;
     if (el) {
       el.pause();
       el.currentTime = 0;
     }
-    clearStopTimer();
+    capSecondsRef.current = null;
     setNowPlayingId(null);
   }
 
-  /// Play the given cell. Advances the autoplay loop automatically (the
-  /// onEnded handler reads `playAllIndexRef` and moves on) but otherwise
-  /// behaves like a one-shot.
+  /// Play the given cell. In game mode the clip is capped to a single
+  /// utterance via `capSecondsRef` + the `timeupdate` handler on the audio
+  /// element; in lesson mode the whole recording plays and `onEnded`
+  /// advances the loop.
   function play(cell: PentiAkharCell) {
     const el = audioRef.current;
     if (!el) return;
-    clearStopTimer();
+    capSecondsRef.current = lessonMode
+      ? null
+      : cell.playbackSeconds ?? DEFAULT_LETTER_CAP_SECONDS;
     el.src = letterAudioURL(cell);
     el.currentTime = 0;
     void el.play();
     setNowPlayingId(cell.id);
-    if (!lessonMode) {
-      const cap = (cell.playbackSeconds ?? DEFAULT_LETTER_CAP_SECONDS) * 1000;
-      stopTimerRef.current = window.setTimeout(() => {
-        stopPlayback();
-        advancePlayAll();
-      }, cap);
-    }
   }
 
   function advancePlayAll() {
@@ -192,6 +186,15 @@ export default function LetterSoundBoard({
       <audio
         ref={audioRef}
         preload="none"
+        onTimeUpdate={(e) => {
+          // Game-mode cap measured against real playback position, so a slow
+          // CDN stream is never cut off before it's audible.
+          const cap = capSecondsRef.current;
+          if (cap !== null && e.currentTarget.currentTime >= cap) {
+            stopPlayback();
+            advancePlayAll();
+          }
+        }}
         onEnded={() => {
           stopPlayback();
           advancePlayAll();

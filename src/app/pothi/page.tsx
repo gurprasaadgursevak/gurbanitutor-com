@@ -94,20 +94,6 @@ const POTHIS: Pothi[] = [
 export default function PothiPage() {
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900"
-          >
-            <span aria-hidden>←</span> Gurbani Tutor
-          </Link>
-          <div className="text-sm font-semibold text-amber-700">
-            Sri Pothi Sahib · Library
-          </div>
-        </div>
-      </header>
-
       <section className="bg-gradient-to-b from-amber-50 via-white to-white">
         <div className="mx-auto max-w-6xl px-6 py-14">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">

@@ -45,19 +45,6 @@ export default function SanthiyaPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900"
-          >
-            <span aria-hidden>←</span> Gurbani Tutor
-          </Link>
-          <div className="text-sm font-semibold text-emerald-700">
-            Santhiya Classes
-          </div>
-        </div>
-      </header>
 
       {/* Hero */}
       <section className="bg-gradient-to-b from-emerald-50 via-white to-white">

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Noto_Sans_Gurmukhi } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import ServiceWorkerRegistration from "./ServiceWorkerRegistration";
+import SiteHeader from "./SiteHeader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,6 +78,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <SiteHeader />
         {children}
         <ServiceWorkerRegistration />
         {/* Vercel Web Analytics — cookieless, no PII collection. Shows

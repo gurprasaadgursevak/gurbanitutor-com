@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import DesktopNav from "./DesktopNav";
 import InstallWebAppButton from "./InstallWebAppButton";
-import MobileNav from "./MobileNav";
 import SocialLinks from "./SocialLinks";
 import TodayShabad from "./TodayShabad";
 
@@ -155,21 +153,6 @@ const TILE_ICONS = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-white text-slate-900">
-      {/* Header — folder tabs sit flush with the bottom border so the active
-          tab visually merges with the page below. */}
-      <header className="border-b border-amber-200 bg-white/70 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-end justify-between gap-4 px-6 pb-0 pt-4">
-          <Link
-            href="/"
-            className="mb-3 font-semibold tracking-tight text-amber-700"
-          >
-            Gurbani Tutor
-          </Link>
-          <MobileNav />
-          <DesktopNav />
-        </div>
-      </header>
-
       {/* Hero */}
       <section className="mx-auto max-w-4xl px-6 pb-12 pt-20 text-center sm:pt-28">
         <div className="flex justify-center">
