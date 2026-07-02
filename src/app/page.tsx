@@ -3,6 +3,7 @@ import Link from "next/link";
 import InstallWebAppButton from "./InstallWebAppButton";
 import SocialLinks from "./SocialLinks";
 import TodayShabad from "./TodayShabad";
+import WhatsNewFlash from "./WhatsNewFlash";
 
 type TileBadge = "unique" | "learning";
 
@@ -176,6 +177,9 @@ export default function Home() {
           Santhiya. A calm Sangat space, free for everyone.
         </p>
       </section>
+
+      {/* What's New flash — dismissible highlight of the latest Santhiya 101 additions */}
+      <WhatsNewFlash />
 
       {/* Today's Shabad — featured at the top so daily visitors see it first */}
       <TodayShabad />
