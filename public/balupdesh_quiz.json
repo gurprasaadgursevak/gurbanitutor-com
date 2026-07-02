@@ -1,0 +1,432 @@
+{
+  "title": {
+    "pa": "ਗੁਰਮੁਖੀ ਬਾਲਉਪਦੇਸ਼ ਕੁਇਜ਼",
+    "en": "Gurmukhi Balupdesh Quiz"
+  },
+  "source": "Gurmukhi Balupdesh, Sri Damdami Taksal",
+  "streams": {
+    "beginner": {
+      "label": { "pa": "ਬੱਚੇ / ਸ਼ੁਰੂਆਤੀ", "en": "Children / Beginner" },
+      "questions": [
+        {
+          "id": "b1",
+          "type": "mcq",
+          "q": { "pa": "ਗੁਰਮੁਖੀ ਵਰਨਮਾਲਾ (ਪੈਂਤੀ) ਵਿੱਚ ਕਿੰਨੇ ਅੱਖਰ ਹਨ?", "en": "How many letters are in the Gurmukhi alphabet (Painti)?" },
+          "options": [
+            { "pa": "੨੫", "en": "25" },
+            { "pa": "੩੫", "en": "35" },
+            { "pa": "੪੦", "en": "40" },
+            { "pa": "੩੦", "en": "30" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "‘ਪੈਂਤੀ’ ਦਾ ਮਤਲਬ ਹੀ ੩੫ ਹੈ।", "en": "‘Painti’ literally means thirty-five." }
+        },
+        {
+          "id": "b2",
+          "type": "mcq",
+          "q": { "pa": "ਗੁਰਮੁਖੀ ਵਰਨਮਾਲਾ ਦਾ ਪਹਿਲਾ ਅੱਖਰ ਕਿਹੜਾ ਹੈ?", "en": "What is the first letter of the Gurmukhi alphabet?" },
+          "options": [
+            { "pa": "ਸ (ਸੱਸਾ)", "en": "ਸ (Sassa)" },
+            { "pa": "ੳ (ਊੜਾ)", "en": "ੳ (Ooda)" },
+            { "pa": "ਕ (ਕੱਕਾ)", "en": "ਕ (Kakka)" },
+            { "pa": "ਅ (ਐੜਾ)", "en": "ਅ (Aida)" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਊੜਾ ਗੁਰਮੁਖੀ ਲਿੱਪੀ ਦਾ ਪਹਿਲਾ ਅੱਖਰ ਹੈ।", "en": "Ooda (ੳ) is the first letter of the Gurmukhi script." }
+        },
+        {
+          "id": "b3",
+          "type": "tf",
+          "q": { "pa": "ਗੁਰਮੁਖੀ ਵਿੱਚ ਕੁੱਲ ੧੦ ਲਗਾਂ (ਮਾਤ੍ਰਾਂ) ਹਨ।", "en": "There are 10 laga (vowel signs / matras) in Gurmukhi." },
+          "answer": true,
+          "explain": { "pa": "ਮੁਕਤਾ, ਕੰਨਾ, ਸਿਹਾਰੀ, ਬਿਹਾਰੀ, ਔਂਕੜ, ਦੁਲੈਂਕੜ, ਲਾਂ, ਦੁਲਾਂ, ਹੋੜਾ, ਕਨੌੜਾ, ਕੁੱਲ ੧੦।", "en": "Mukta, Kanna, Sihari, Bihari, Aunkar, Dulainkar, Laan, Dulaan, Hora, Kanaura, 10 in total." }
+        },
+        {
+          "id": "b4",
+          "type": "mcq",
+          "q": { "pa": "ਗੁਰਮੁਖੀ ਵਿੱਚ ‘੫’ ਦਾ ਮਤਲਬ ਕੀ ਹੈ?", "en": "In Gurmukhi, what does ‘੫’ mean?" },
+          "options": [
+            { "pa": "ਤਿੰਨ", "en": "Three" },
+            { "pa": "ਪੰਜ", "en": "Five" },
+            { "pa": "ਸੱਤ", "en": "Seven" },
+            { "pa": "ਚਾਰ", "en": "Four" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "੫ = ਪੰਜ = five.", "en": "੫ = panj = five." }
+        },
+        {
+          "id": "b5",
+          "type": "mcq",
+          "q": { "pa": "‘ਕੰਨਾ’ ਲਗ ਦਾ ਨਿਸ਼ਾਨ ਕਿਹੜਾ ਹੈ?", "en": "Which sign represents the ‘Kanna’ vowel?" },
+          "options": [
+            { "pa": "ਿ", "en": "ਿ (Sihari)" },
+            { "pa": "ਾ", "en": "ਾ (Kanna)" },
+            { "pa": "ੁ", "en": "ੁ (Aunkar)" },
+            { "pa": "ੇ", "en": "ੇ (Laan)" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਕੰਨਾ ਦਾ ਨਿਸ਼ਾਨ ‘ਾ’ ਹੈ ਅਤੇ ਇਹ ਲੰਮੀ ਲਗ ਹੈ।", "en": "Kanna is written ‘ਾ’ and is a long (dheeragh) vowel." }
+        },
+        {
+          "id": "b6",
+          "type": "tf",
+          "q": { "pa": "ਊੜਾ (ੳ) ਅਤੇ ਈੜੀ (ੲ) ਮੁਕਤਾ ਨਹੀਂ ਬੋਲਦੇ।", "en": "Ooda (ੳ) and Eeri (ੲ) are never pronounced as mukta (bare)." },
+          "answer": true,
+          "explain": { "pa": "ਇਨ੍ਹਾਂ ਨਾਲ ਲਗ ਜ਼ਰੂਰ ਲੱਗਦੀ ਹੈ।", "en": "A vowel sign must always be attached to them." }
+        },
+        {
+          "id": "b7",
+          "type": "mcq",
+          "q": { "pa": "ਗੁਰਮੁਖੀ ਵਿੱਚ ਕੁੱਲ ਕਿੰਨੀਆਂ ਰੁੱਤਾਂ ਦੱਸੀਆਂ ਹਨ?", "en": "How many seasons (rutta) does the text describe?" },
+          "options": [
+            { "pa": "ਚਾਰ", "en": "Four" },
+            { "pa": "ਛੇ", "en": "Six" },
+            { "pa": "ਤਿੰਨ", "en": "Three" },
+            { "pa": "ਬਾਰਾਂ", "en": "Twelve" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਬਸੰਤ, ਗ੍ਰੀਖਮ, ਪਾਵਸ, ਸਰਦ, ਹਿਮ, ਸਿਸਰ, ਛੇ ਰੁੱਤਾਂ।", "en": "Basant, Grikham, Pavas, Sarad, Him, Sisar, six seasons." }
+        },
+        {
+          "id": "b8",
+          "type": "mcq",
+          "q": { "pa": "‘ਮੁਹਾਰਨੀ’ (ਮੁ + ਹਾਰਨੀ) ਦਾ ਭਾਵ ਹੈ, ਮੂੰਹ ਨੂੰ ਕੀ ਕਰਨਾ?", "en": "‘Muharni’ (Mu + Haarni) means to do what to the mouth?" },
+          "options": [
+            { "pa": "ਧੋਣਾ", "en": "Wash it" },
+            { "pa": "ਥਕਾਉਣਾ", "en": "Tire it" },
+            { "pa": "ਖੋਲ੍ਹਣਾ", "en": "Open it" },
+            { "pa": "ਬੰਦ ਕਰਨਾ", "en": "Close it" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਜਿਸ ਨੂੰ ਬੋਲਦਿਆਂ ਮੂੰਹ ਥੱਕ ਜਾਵੇ।", "en": "Reciting it until the mouth tires." }
+        },
+        {
+          "id": "b9",
+          "type": "tf",
+          "q": { "pa": "ਬਾਲਉਪਦੇਸ਼ ਅਨੁਸਾਰ ਠੰਢਾ ਦੁੱਧ ਅਤੇ ਆਈਸਕ੍ਰੀਮ ਖਾਣ ਯੋਗ ਨਹੀਂ।", "en": "According to Balupdesh, cold milk and ice cream are among foods to avoid." },
+          "answer": true,
+          "explain": { "pa": "ਦੁੱਧ ਉਬਾਲ ਕੇ ਪੀਣ ਦੀ ਸਿੱਖਿਆ ਦਿੱਤੀ ਹੈ।", "en": "The text advises drinking milk only after boiling it." }
+        },
+        {
+          "id": "b10",
+          "type": "mcq",
+          "q": { "pa": "‘ਸੱਸਾ’ (ਸ) ਦਾ ਉਚਾਰਨ ਸਥਾਨ ਕਿਹੜਾ ਹੈ?", "en": "From which part of the mouth is ‘Sassa’ (ਸ) pronounced?" },
+          "options": [
+            { "pa": "ਕੰਠ (ਗਲਾ)", "en": "Throat (kanth)" },
+            { "pa": "ਦੰਦ", "en": "Teeth (dand)" },
+            { "pa": "ਬੁੱਲ੍ਹ", "en": "Lips" },
+            { "pa": "ਨੱਕ", "en": "Nose" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਸੱਸਾ ਉਚਾਰਨ ਸਥਾਨ ਦੰਦ ਹਨ।", "en": "Sassa is a dental sound (teeth)." }
+        },
+        {
+          "id": "b11",
+          "type": "mcq",
+          "q": { "pa": "ਗੁਰਮੁਖੀ ਵਿੱਚ ‘੧੦’ ਦਾ ਮਤਲਬ ਕੀ ਹੈ?", "en": "In Gurmukhi, what does ‘੧੦’ mean?" },
+          "options": [
+            { "pa": "ਅੱਠ", "en": "Eight" },
+            { "pa": "ਦਸ", "en": "Ten" },
+            { "pa": "ਵੀਹ", "en": "Twenty" },
+            { "pa": "ਨੌਂ", "en": "Nine" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "੧੦ = ਦਸ = ten.", "en": "੧੦ = das = ten." }
+        },
+        {
+          "id": "b12",
+          "type": "tf",
+          "q": { "pa": "ਸਿੱਖ ਧਰਮ ਵਿੱਚ ਕੁੱਲ ਦਸ ਗੁਰੂ ਸਾਹਿਬਾਨ ਹੋਏ।", "en": "There were ten Guru Sahiban in the Sikh faith." },
+          "answer": true,
+          "explain": { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਸਾਹਿਬ ਜੀ ਤੋਂ ਸ੍ਰੀ ਗੁਰੂ ਗੋਬਿੰਦ ਸਿੰਘ ਸਾਹਿਬ ਜੀ ਤੱਕ ਦਸ ਗੁਰੂ।", "en": "From Sri Guru Nanak Dev Sahib Ji to Sri Guru Gobind Singh Sahib Ji, ten Gurus." }
+        }
+      ]
+    },
+    "intermediate": {
+      "label": { "pa": "ਕਿਸ਼ੋਰ / ਦਰਮਿਆਨੇ", "en": "Teens / Intermediate" },
+      "questions": [
+        {
+          "id": "i1",
+          "type": "mcq",
+          "q": { "pa": "੧੦ ਲਗਾਂ ’ਚੋਂ ਕਿਹੜੀਆਂ ਤਿੰਨ ‘ਲਘੂ’ (ਛੋਟੀਆਂ) ਹਨ?", "en": "Which three of the ten vowels are ‘laghu’ (short)?" },
+          "options": [
+            { "pa": "ਕੰਨਾ, ਬਿਹਾਰੀ, ਹੋੜਾ", "en": "Kanna, Bihari, Hora" },
+            { "pa": "ਮੁਕਤਾ, ਸਿਹਾਰੀ, ਔਂਕੜ", "en": "Mukta, Sihari, Aunkar" },
+            { "pa": "ਲਾਂ, ਦੁਲਾਂ, ਕਨੌੜਾ", "en": "Laan, Dulaan, Kanaura" },
+            { "pa": "ਬਿਹਾਰੀ, ਦੁਲੈਂਕੜ, ਕੰਨਾ", "en": "Bihari, Dulainkar, Kanna" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਮੁਕਤਾ, ਸਿਹਾਰੀ, ਔਂਕੜ ਲਘੂ (ਛੋਟੀਆਂ) ਹਨ; ਬਾਕੀ ੭ ਦੀਰਘ (ਲੰਮੀਆਂ)।", "en": "Mukta, Sihari and Aunkar are short; the other seven are long (dheeragh)." }
+        },
+        {
+          "id": "i2",
+          "type": "mcq",
+          "q": { "pa": "ਫ਼ਾਰਸੀ ਤੋਂ ਆਈਆਂ ਬਿੰਦੀ ਵਾਲੀਆਂ (ਸ਼ ਜ਼ ਖ਼ ਗ਼ ਫ਼ ਲ਼) ਧੁਨਾਂ ਕਿੰਨੀਆਂ ਹਨ?", "en": "How many Persian (dotted) sounds are there, ਸ਼ ਜ਼ ਖ਼ ਗ਼ ਫ਼ ਲ਼?" },
+          "options": [
+            { "pa": "ਚਾਰ", "en": "Four" },
+            { "pa": "ਪੰਜ", "en": "Five" },
+            { "pa": "ਛੇ", "en": "Six" },
+            { "pa": "ਸੱਤ", "en": "Seven" }
+          ],
+          "answer": 2,
+          "explain": { "pa": "ਪੈਂਤੀ ਤੋਂ ਬਾਅਦ ਛੇ ਪੈਰ-ਬਿੰਦੀ ਵਾਲੇ ਅੱਖਰ।", "en": "Six dotted letters added after the painti." }
+        },
+        {
+          "id": "i3",
+          "type": "mcq",
+          "q": { "pa": "‘ਬਸੰਤ’ ਰੁੱਤ ਦੇ ਮਹੀਨੇ ਕਿਹੜੇ ਹਨ?", "en": "Which months make up the ‘Basant’ (spring) season?" },
+          "options": [
+            { "pa": "ਜੇਠ, ਹਾੜ", "en": "Jeth, Harh" },
+            { "pa": "ਚੇਤਰ, ਵਿਸਾਖ", "en": "Chet, Vaisakh" },
+            { "pa": "ਸਾਵਣ, ਭਾਦੋਂ", "en": "Sawan, Bhadon" },
+            { "pa": "ਮਾਘ, ਫੱਗਣ", "en": "Magh, Phagan" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਬਸੰਤ = ਚੇਤਰ ਤੇ ਵਿਸਾਖ।", "en": "Basant = Chet and Vaisakh." }
+        },
+        {
+          "id": "i4",
+          "type": "tf",
+          "q": { "pa": "‘ਅੱਧਕ’ ( ੱ ) ਲੱਗਣ ਨਾਲ ਅਗਲੇ ਅੱਖਰ ਦੀ ਅਵਾਜ਼ ਦੂਣੀ ਬੋਲੀ ਜਾਂਦੀ ਹੈ।", "en": "The ‘adhak’ ( ੱ ) doubles the sound of the following letter." },
+          "answer": true,
+          "explain": { "pa": "ਜਿਸ ਅੱਖਰ ’ਤੇ ਅੱਧਕ ਹੋਵੇ, ਉਸ ਤੋਂ ਅਗਲੇ ਅੱਖਰ ਦੀ ਅਵਾਜ਼ ਦੂਣੀ।", "en": "The letter after an adhak is pronounced doubled." }
+        },
+        {
+          "id": "i5",
+          "type": "mcq",
+          "q": { "pa": "‘ਟਿੱਪੀ’ ( ੰ ) ਦਾ ਉਚਾਰਨ ਸਥਾਨ ਕਿਹੜਾ ਹੈ?", "en": "From where is the ‘tippi’ ( ੰ ) sound produced?" },
+          "options": [
+            { "pa": "ਦੰਦ", "en": "Teeth" },
+            { "pa": "ਨੱਕ", "en": "Nose" },
+            { "pa": "ਕੰਠ", "en": "Throat" },
+            { "pa": "ਬੁੱਲ੍ਹ", "en": "Lips" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਬਿੰਦੀ ਤੇ ਟਿੱਪੀ ਦਾ ਉਚਾਰਨ ਸਥਾਨ ਨੱਕ ਹੈ।", "en": "Both bindi and tippi are nasal sounds." }
+        },
+        {
+          "id": "i6",
+          "type": "mcq",
+          "q": { "pa": "ਕੰਠ (ਗਲੇ) ਤੋਂ ਬੋਲੇ ਜਾਣ ਵਾਲੇ ਅੱਖਰ ਹਨ: ਹ, ___, ਖ, ਗ, ਘ, ਖਾਲੀ ਥਾਂ ਲਈ ਸਹੀ ਅੱਖਰ?", "en": "The throat (kanth) letters are ਹ, ___, ਖ, ਗ, ਘ, which fills the blank?" },
+          "options": [
+            { "pa": "ਕ", "en": "ਕ (Kakka)" },
+            { "pa": "ਚ", "en": "ਚ (Chachcha)" },
+            { "pa": "ਟ", "en": "ਟ (Tainka)" },
+            { "pa": "ਤ", "en": "ਤ (Tatta)" }
+          ],
+          "answer": 0,
+          "explain": { "pa": "ਹ ਕ ਖ ਗ ਘ ਕੰਠ ਤੋਂ ਬੋਲੇ ਜਾਂਦੇ ਹਨ।", "en": "ਹ ਕ ਖ ਗ ਘ are all pronounced from the throat." }
+        },
+        {
+          "id": "i7",
+          "type": "mcq",
+          "q": { "pa": "ਬਾਲਉਪਦੇਸ਼ ਅਨੁਸਾਰ ਗੁਰਮੁਖੀ ਦੀ ਸਿਰਜਣਾ (ਪੈਂਤੀ) ਕਿਸ ਨੇ ਕੀਤੀ?", "en": "According to Balupdesh, who created the Gurmukhi painti?" },
+          "options": [
+            { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਅੰਗਦ ਦੇਵ ਸਾਹਿਬ ਜੀ", "en": "Sri Guru Angad Dev Sahib Ji" },
+            { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਸਾਹਿਬ ਜੀ", "en": "Sri Guru Nanak Dev Sahib Ji" },
+            { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਅਰਜਨ ਦੇਵ ਸਾਹਿਬ ਜੀ", "en": "Sri Guru Arjan Dev Sahib Ji" },
+            { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਗੋਬਿੰਦ ਸਿੰਘ ਸਾਹਿਬ ਜੀ", "en": "Sri Guru Gobind Singh Sahib Ji" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਪਾਠ ਅਨੁਸਾਰ ਗੁਰਮੁਖੀ ਪੈਂਤੀ ਸ੍ਰੀ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਸਾਹਿਬ ਜੀ ਨੇ ਸਾਜੀ।", "en": "The text states Sri Guru Nanak Dev Sahib Ji composed the Gurmukhi painti." }
+        },
+        {
+          "id": "i8",
+          "type": "tf",
+          "q": { "pa": "‘ਬਿਹਾਰੀ’ ( ੀ ) ਇੱਕ ਦੀਰਘ (ਲੰਮੀ) ਲਗ ਹੈ ਅਤੇ ਦੱਬ ਕੇ ਬੋਲਣੀ ਚਾਹੀਦੀ ਹੈ।", "en": "‘Bihari’ ( ੀ ) is a long vowel and should be pronounced firmly/long." },
+          "answer": true,
+          "explain": { "pa": "ਪੋਲੀ ਬੋਲਣ ਨਾਲ ਸਿਹਾਰੀ ਬਣ ਜਾਵੇਗੀ।", "en": "If softened, it wrongly becomes Sihari." }
+        },
+        {
+          "id": "i9",
+          "type": "mcq",
+          "q": { "pa": "ਦਸ ਦਿਸ਼ਾਂ ਵਿੱਚ ਚਾਰ ਮੁੱਖ ਦਿਸ਼ਾਂ ਅਤੇ ਚਾਰ ਕੋਣਾਂ ਤੋਂ ਇਲਾਵਾ ਬਾਕੀ ਦੋ ਕਿਹੜੀਆਂ ਹਨ?", "en": "Besides the 4 main directions and 4 corners, what are the last two of the ten directions?" },
+          "options": [
+            { "pa": "ਪੂਰਬ ਤੇ ਪੱਛਮ", "en": "East and West" },
+            { "pa": "ਜ਼ਮੀਨ ਤੇ ਅਸਮਾਨ", "en": "Ground and Sky" },
+            { "pa": "ਈਸ਼ਾਨ ਤੇ ਅਗਨਿ", "en": "Ishaan and Agni" },
+            { "pa": "ਦਿਨ ਤੇ ਰਾਤ", "en": "Day and Night" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "੪ ਦਿਸ਼ਾਂ + ੪ ਉਪਦਿਸ਼ਾਂ (ਕੋਣ) + ਜ਼ਮੀਨ ਤੇ ਅਸਮਾਨ = ੧੦।", "en": "4 directions + 4 corners + ground and sky = 10." }
+        },
+        {
+          "id": "i10",
+          "type": "mcq",
+          "q": { "pa": "‘ਹਿਮ’ (ਸਰਦੀ) ਰੁੱਤ ਦੇ ਮਹੀਨੇ ਮੱਘਰ ਅਤੇ ___ ਹਨ, ਖਾਲੀ ਥਾਂ ਲਈ ਸਹੀ ਮਹੀਨਾ?", "en": "The ‘Him’ (deep winter) season is Maghar and ___, which month fills the blank?" },
+          "options": [
+            { "pa": "ਮਾਘ", "en": "Magh" },
+            { "pa": "ਪੋਹ", "en": "Poh" },
+            { "pa": "ਕੱਤਕ", "en": "Katak" },
+            { "pa": "ਹਾੜ", "en": "Harh" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਹਿਮ = ਮੱਘਰ ਤੇ ਪੋਹ।", "en": "Him = Maghar and Poh." }
+        },
+        {
+          "id": "i11",
+          "type": "mcq",
+          "q": { "pa": "ਬੁੱਲ੍ਹਾਂ ਤੋਂ ਬੋਲੇ ਜਾਣ ਵਾਲੇ ਅੱਖਰ ਕਿਹੜੇ ਹਨ?", "en": "Which letters are pronounced with the lips (labial)?" },
+          "options": [
+            { "pa": "ਪ ਫ ਬ ਭ", "en": "ਪ ਫ ਬ ਭ" },
+            { "pa": "ਕ ਖ ਗ ਘ", "en": "ਕ ਖ ਗ ਘ" },
+            { "pa": "ਤ ਥ ਦ ਧ", "en": "ਤ ਥ ਦ ਧ" },
+            { "pa": "ਚ ਛ ਜ ਝ", "en": "ਚ ਛ ਜ ਝ" }
+          ],
+          "answer": 0,
+          "explain": { "pa": "ਪ ਫ ਬ ਭ ਬੁੱਲ੍ਹਾਂ ’ਤੇ ਬੋਲੇ ਜਾਂਦੇ ਹਨ।", "en": "ਪ ਫ ਬ ਭ are labial sounds (lips)." }
+        },
+        {
+          "id": "i12",
+          "type": "tf",
+          "q": { "pa": "ਇਹ ਬਾਲਉਪਦੇਸ਼ ਸ੍ਰੀ ਦਮਦਮੀ ਟਕਸਾਲ ਵੱਲੋਂ ਪ੍ਰਕਾਸ਼ਿਤ ਹੈ।", "en": "This Balupdesh is published by Sri Damdami Taksal." },
+          "answer": true,
+          "explain": { "pa": "ਮੁੱਢਲੇ ਪੰਨੇ ’ਤੇ ‘ਸ੍ਰੀ ਦਮਦਮੀ ਟਕਸਾਲ’ ਦਰਜ ਹੈ।", "en": "The opening page names Sri Damdami Taksal." }
+        }
+      ]
+    },
+    "advanced": {
+      "label": { "pa": "ਬਾਲਗ / ਉੱਚ ਪੱਧਰ", "en": "Adults / Advanced" },
+      "questions": [
+        {
+          "id": "a1",
+          "type": "mcq",
+          "q": { "pa": "ਦਸ ਗੁਰੂ ਸਾਹਿਬਾਨ ਦੀ ਤਰਤੀਬ ਵਿੱਚ ਸ੍ਰੀ ਗੁਰੂ ਰਾਮ ਦਾਸ ਸਾਹਿਬ ਜੀ ਤੋਂ ਅਗਲੇ (ਪੰਜਵੇਂ) ਗੁਰੂ ਕਿਹੜੇ ਹਨ?", "en": "In the order of the ten Gurus, who follows Sri Guru Ram Das Sahib Ji (the fifth Guru)?" },
+          "options": [
+            { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਹਰਿਗੋਬਿੰਦ ਸਾਹਿਬ ਜੀ", "en": "Sri Guru Hargobind Sahib Ji" },
+            { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਅਰਜਨ ਦੇਵ ਸਾਹਿਬ ਜੀ", "en": "Sri Guru Arjan Dev Sahib Ji" },
+            { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਅਮਰ ਦਾਸ ਸਾਹਿਬ ਜੀ", "en": "Sri Guru Amar Das Sahib Ji" },
+            { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਤੇਗ ਬਹਾਦਰ ਸਾਹਿਬ ਜੀ", "en": "Sri Guru Tegh Bahadur Sahib Ji" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਤਰਤੀਬ: ਸ੍ਰੀ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਸਾਹਿਬ ਜੀ, ਸ੍ਰੀ ਗੁਰੂ ਅੰਗਦ ਦੇਵ ਸਾਹਿਬ ਜੀ, ਸ੍ਰੀ ਗੁਰੂ ਅਮਰ ਦਾਸ ਸਾਹਿਬ ਜੀ, ਸ੍ਰੀ ਗੁਰੂ ਰਾਮ ਦਾਸ ਸਾਹਿਬ ਜੀ, ਸ੍ਰੀ ਗੁਰੂ ਅਰਜਨ ਦੇਵ ਸਾਹਿਬ ਜੀ…", "en": "Order: Sri Guru Nanak Dev Sahib Ji, Sri Guru Angad Dev Sahib Ji, Sri Guru Amar Das Sahib Ji, Sri Guru Ram Das Sahib Ji, Sri Guru Arjan Dev Sahib Ji…" }
+        },
+        {
+          "id": "a2",
+          "type": "tf",
+          "q": { "pa": "ਮੁੱਢਲੇ ਪੰਨੇ ’ਤੇ ‘ਉੱਬਲਦੀ ਦੇਗ਼’, ‘ਮੱਚਦੀ ਲੋਹ’ ਦਾ ਜ਼ਿਕਰ ਸ੍ਰੀ ਗੁਰੂ ਅਰਜਨ ਦੇਵ ਸਾਹਿਬ ਜੀ ਦੀ ਸ਼ਹੀਦੀ ਵੱਲ ਇਸ਼ਾਰਾ ਹੈ।", "en": "The opening reference to the ‘boiling cauldron’ and ‘hot plate’ alludes to the martyrdom of Sri Guru Arjan Dev Sahib Ji." },
+          "answer": true,
+          "explain": { "pa": "ਸ੍ਰੀ ਗੁਰੂ ਅਰਜਨ ਦੇਵ ਸਾਹਿਬ ਜੀ ਨੂੰ ਤੱਤੀ ਲੋਹ ’ਤੇ ਬਿਠਾਇਆ ਤੇ ਦੇਗ਼ ’ਚ ਉਬਾਲਿਆ ਗਿਆ।", "en": "Sri Guru Arjan Dev Sahib Ji was seated on a hot plate and subjected to a boiling cauldron during his martyrdom." }
+        },
+        {
+          "id": "a3",
+          "type": "mcq",
+          "q": { "pa": "‘ਹਲੰਤ’ (ਪੈਰ ’ਚ  ੑ ) ਲੱਗਣ ਨਾਲ ਅੱਖਰ ਕਿਵੇਂ ਬੋਲਦਾ ਹੈ?", "en": "What effect does the ‘halant’ ( ੑ under a letter) have on pronunciation?" },
+          "options": [
+            { "pa": "ਅੱਖਰ ਹੌਲਾ/ਪੋਲਾ ਬੋਲਦਾ ਹੈ", "en": "The letter is softened/lightened" },
+            { "pa": "ਅੱਖਰ ਭਾਰਾ ਬੋਲਦਾ ਹੈ", "en": "The letter is pronounced heavier (bhaara)" },
+            { "pa": "ਅੱਖਰ ਚੁੱਪ ਹੋ ਜਾਂਦਾ ਹੈ", "en": "The letter becomes silent" },
+            { "pa": "ਮਾਤ੍ਰਾ ਬਦਲ ਜਾਂਦੀ ਹੈ", "en": "The vowel length changes" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਹਲੰਤ ਨਾਲ ਅੱਖਰ ਭਾਰਾ ਬੋਲਦਾ ਹੈ; ਜਿਵੇਂ ‘ਪੜ੍ਹ’ (ਬ੍ਰਹਮਵਿੱਦਿਆ ਪੜ੍ਹ) ਬਨਾਮ ‘ਪੜ’ (ਡਿੱਗ)।", "en": "Halant makes the letter heavier, e.g. ‘paṛh’ (to read) vs ‘paṛ’ (to fall)." }
+        },
+        {
+          "id": "a4",
+          "type": "mcq",
+          "q": { "pa": "ਦੱਖਣ ਅਤੇ ਪੱਛਮ ਦੇ ਵਿਚਕਾਰ ਵਾਲੇ ਕੋਣ ਨੂੰ ਕਿਹੜਾ ਕੋਣ ਕਹਿੰਦੇ ਹਨ?", "en": "What is the corner between South and West called?" },
+          "options": [
+            { "pa": "ਈਸ਼ਾਨ ਕੋਣ", "en": "Ishaan (NE)" },
+            { "pa": "ਅਗਨਿ ਕੋਣ", "en": "Agni (SE)" },
+            { "pa": "ਨੈਰਿਤਿ ਕੋਣ", "en": "Nairit (SW)" },
+            { "pa": "ਵਾਯਵੀ ਕੋਣ", "en": "Vaayvi (NW)" }
+          ],
+          "answer": 2,
+          "explain": { "pa": "ਈਸ਼ਾਨ (ਉ.ਪੂ.), ਅਗਨਿ (ਪੂ.ਦੱ.), ਨੈਰਿਤਿ (ਦੱ.ਪੱ.), ਵਾਯਵੀ (ਪੱ.ਉ.)।", "en": "Ishaan (NE), Agni (SE), Nairit (SW), Vaayvi (NW)." }
+        },
+        {
+          "id": "a5",
+          "type": "mcq",
+          "q": { "pa": "‘ਦੱਦਾ’ (ਦ) ਦਾ ਸਹੀ ਉਚਾਰਨ ਸਥਾਨ ਕਿਹੜਾ ਹੈ?", "en": "What is the correct articulation point of ‘Dadda’ (ਦ)?" },
+          "options": [
+            { "pa": "ਬੁੱਲ੍ਹ", "en": "Lips" },
+            { "pa": "ਜੀਭ ਦੀ ਨੋਕ ਉੱਪਰਲੇ ਦੰਦਾਂ ਦੇ ਮੂਲ ’ਤੇ", "en": "Tongue tip at the base of the upper teeth" },
+            { "pa": "ਕੰਠ", "en": "Throat" },
+            { "pa": "ਮੂੰਹ ਦੀ ਛੱਤ", "en": "Roof of the mouth" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਦੱਦਾ, ਜੀਭ ਦੀ ਨੋਕ ਉੱਪਰਲੇ ਦੰਦਾਂ ਦੇ ਮੂਲ ਚ ਲਾ ਕੇ ਬੋਲੋ।", "en": "Dadda, pronounced with the tongue tip at the root of the upper teeth." }
+        },
+        {
+          "id": "a6",
+          "type": "tf",
+          "q": { "pa": "‘ਐੜਾ’ (ਅ) ਨੂੰ ਮੁਕਤਾ ਸਮੇਤ ਕੁੱਲ ਚਾਰ ਲਗਾਂ (ਾ ੈ ੌ) ਲੱਗਦੀਆਂ ਹਨ।", "en": "‘Aida’ (ਅ) takes four vowels including mukta ( ਾ ੈ ੌ )." },
+          "answer": true,
+          "explain": { "pa": "ਐੜੇ ਨੂੰ ਮੁਕਤਾ, ਕੰਨਾ, ਦੁਲਾਂ, ਕਨੌੜਾ, ਚਾਰ ਲਗਾਂ।", "en": "Aida takes mukta, kanna, dulaan and kanaura, four vowels." }
+        },
+        {
+          "id": "a7",
+          "type": "mcq",
+          "q": { "pa": "‘ਸਿਸਰ / ਪੱਤਝੜ’ ਰੁੱਤ ਦੇ ਮਹੀਨੇ ਕਿਹੜੇ ਹਨ?", "en": "Which months belong to the ‘Sisar / Patjhar’ (late winter) season?" },
+          "options": [
+            { "pa": "ਅੱਸੂ, ਕੱਤਕ", "en": "Assu, Katak" },
+            { "pa": "ਮਾਘ, ਫੱਗਣ", "en": "Magh, Phagan" },
+            { "pa": "ਸਾਵਣ, ਭਾਦੋਂ", "en": "Sawan, Bhadon" },
+            { "pa": "ਜੇਠ, ਹਾੜ", "en": "Jeth, Harh" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਸਿਸਰ/ਪੱਤਝੜ = ਮਾਘ ਤੇ ਫੱਗਣ।", "en": "Sisar/Patjhar = Magh and Phagan." }
+        },
+        {
+          "id": "a8",
+          "type": "mcq",
+          "q": { "pa": "ਪਾਠ ਅਨੁਸਾਰ ਸ਼ੁੱਧ ਉਚਾਰਨ ਪਕਾਉਣ ਲਈ ਮੁਹਾਰਨੀ ਘੱਟੋ-ਘੱਟ ਕਿੰਨੀ ਵਾਰੀ ਬੋਲਣ ਦੀ ਬੇਨਤੀ ਹੈ?", "en": "The text asks that the muharni be recited at least how many times to perfect pronunciation?" },
+          "options": [
+            { "pa": "੫੧", "en": "51" },
+            { "pa": "੧੦੧", "en": "101" },
+            { "pa": "੫੨", "en": "52" },
+            { "pa": "੧੦੦੦", "en": "1000" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਘੱਟ ਤੋਂ ਘੱਟ ੧੦੧ ਵਾਰੀ ਮੁਹਾਰਨੀ ਬੋਲ ਕੇ ਅਭਿਆਸ ਕਰੋ।", "en": "Recite the muharni at least 101 times for practice." }
+        },
+        {
+          "id": "a9",
+          "type": "mcq",
+          "q": { "pa": "‘ਊੜਾ’ (ੳ) ਨੂੰ ਕਿਹੜੀ ਲਗ ਨਹੀਂ ਲੱਗਦੀ?", "en": "Which of these does ‘Ooda’ (ੳ) NOT take?" },
+          "options": [
+            { "pa": "ਔਂਕੜ", "en": "Aunkar" },
+            { "pa": "ਹੋੜਾ", "en": "Hora" },
+            { "pa": "ਟਿੱਪੀ", "en": "Tippi" },
+            { "pa": "ਦੁਲੈਂਕੜ", "en": "Dulainkar" }
+          ],
+          "answer": 2,
+          "explain": { "pa": "ਊੜੇ ਨੂੰ ਟਿੱਪੀ ਨਹੀਂ, ਬਿੰਦੀ ਲੱਗਦੀ ਹੈ; ਲਗਾਂ ਸਿਰਫ਼ ਔਂਕੜ, ਦੁਲੈਂਕੜ, ਹੋੜਾ।", "en": "Ooda takes bindi (not tippi); its vowels are only aunkar, dulainkar and hora." }
+        },
+        {
+          "id": "a10",
+          "type": "tf",
+          "q": { "pa": "‘ਈੜੀ’ (ੲ) ਤੋਂ ਅੱਗੇ ੩੨ ਅੱਖਰਾਂ ਨੂੰ ਸਾਰੀਆਂ ਲਗਾਂ ਲੱਗਦੀਆਂ ਹਨ।", "en": "The 32 letters after ‘Eeri’ (ੲ) can take all the vowels." },
+          "answer": true,
+          "explain": { "pa": "ੳ ਅ ੲ ਸਵਰ-ਵਾਹਕ ਹਨ; ਇਨ੍ਹਾਂ ਤੋਂ ਅੱਗੇ ੩੨ ਵਿਅੰਜਨਾਂ ਨੂੰ ਸਾਰੀਆਂ ੧੦ ਲਗਾਂ।", "en": "ੳ ਅ ੲ are vowel-bearers; the remaining 32 consonants take all ten vowels." }
+        },
+        {
+          "id": "a11",
+          "type": "mcq",
+          "q": { "pa": "‘ਙ’ (ਙੰਙਾ) ਦਾ ਉਚਾਰਨ ਕਿੱਥੋਂ ਹੁੰਦਾ ਹੈ?", "en": "From where is ‘Nganga’ (ਙ) articulated?" },
+          "options": [
+            { "pa": "ਦੰਦ", "en": "Teeth" },
+            { "pa": "ਕੰਠ ਅਤੇ ਨੱਕ", "en": "Throat and nose" },
+            { "pa": "ਬੁੱਲ੍ਹ", "en": "Lips" },
+            { "pa": "ਤਾਲੂ", "en": "Palate" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਙੰਙਾ ਦਾ ਉਚਾਰਨ ਕੰਠ ਤੇ ਨੱਕ ਤੋਂ ਹੁੰਦਾ ਹੈ।", "en": "Nganga is a throat-nasal sound (kanth + nak)." }
+        },
+        {
+          "id": "a12",
+          "type": "mcq",
+          "q": { "pa": "ਪਾਠ ਵਿੱਚ ‘ਭੁਲਾਵੇਂ ਅੱਖਰ’ ਉਹ ਹਨ ਜੋ ਸ਼ਕਲ ਵਿੱਚ ਕਿਹੋ ਜਿਹੇ ਹੁੰਦੇ ਹਨ (ਜਿਵੇਂ ਗ-ਸ, ਭ-ਮ)?", "en": "‘Bhulaave akhar’ are letters whose shapes are how (e.g. ਗ-ਸ, ਭ-ਮ)?" },
+          "options": [
+            { "pa": "ਵੱਖਰੇ", "en": "Very different" },
+            { "pa": "ਰਲਦੇ-ਮਿਲਦੇ (ਇੱਕੋ ਜਿਹੇ)", "en": "Similar / confusing" },
+            { "pa": "ਵੱਡੇ", "en": "Large" },
+            { "pa": "ਸੋਹਣੇ", "en": "Decorative" }
+          ],
+          "answer": 1,
+          "explain": { "pa": "ਇੱਕੋ ਜਿਹੀ ਸ਼ਕਲ ਹੋਣ ਕਰਕੇ ਭੁਲੇਖਾ ਪੈਂਦਾ ਹੈ, ਇਸ ਲਈ ‘ਭੁਲਾਵੇਂ ਅੱਖਰ’।", "en": "Their similar shapes cause confusion, hence ‘confusing letters’." }
+        }
+      ]
+    }
+  }
+}

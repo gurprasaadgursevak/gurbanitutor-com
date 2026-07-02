@@ -1,0 +1,134 @@
+{
+  "title": {
+    "pa": "ਗੁਰਮੁਖੀ ਅੱਖਰ ਲਿਖਣ ਦਾ ਢੰਗ",
+    "en": "How to Write Gurmukhi Letters"
+  },
+  "source": "Gurmukhi Balupdesh, §5 «ਲਿਖਣ ਦਾ ਢੰਗ», Sri Damdami Taksal",
+  "intro": {
+    "pa": "ਹੇਠਾਂ ਅੱਖਰ ਲਿਖਣ ਦਾ ਢੰਗ ਦੱਸਿਆ ਗਿਆ ਹੈ — ਖ਼ਾਸ ਕਰਕੇ ਕਲਮ ਕਿਸ ਦਿਸ਼ਾ ਵਿੱਚ ਚਲਾਉਣੀ ਹੈ।",
+    "en": "This section explains how to form the letters — especially which direction the pen should move."
+  },
+  "steps": [
+    {
+      "id": "w1",
+      "icon": "➖",
+      "heading": { "pa": "ਪਹਿਲਾਂ ਸਿੱਧੀ ਲਕੀਰ", "en": "Start with straight lines" },
+      "body": {
+        "pa": "ਨਿੱਕੇ ਬੱਚੇ ਨੂੰ ਅੱਖਰ ਸਿਖਾਉਣ ਤੋਂ ਪਹਿਲਾਂ, ਲਕੀਰਾਂ ਵਾਲੀ ਕਾਪੀ ’ਤੇ ਖੱਬੇ ਤੋਂ ਸੱਜੇ ਨੂੰ ਸਿੱਧੀ ਲਕੀਰ ਖਿੱਚਣ ਦੀ ਮਿਹਨਤ ਕਰਵਾਉ।",
+        "en": "Before teaching letters, have the child practise drawing a straight line from left to right on a lined page until the hand is steady."
+      }
+    },
+    {
+      "id": "w2",
+      "icon": "⬆️",
+      "heading": { "pa": "ਉੱਪਰਲੀ ਲਕੀਰ — ਖੱਬਿਉਂ ਸੱਜੇ", "en": "The top line — left to right" },
+      "body": {
+        "pa": "ਹਰ ਅੱਖਰ ਦੇ ਆਰੰਭ ਦੀ ਲਕੀਰ ਖੱਬਿਉਂ ਸੱਜੇ ਨੂੰ ਬਿਲਕੁਲ ਸਿੱਧੀ ਖਿੱਚਣੀ ਹੈ — ਇਹੀ ਅੱਖਰ ਦੀ ਬੁਨਿਆਦ ਹੈ। ਜੇ ਇਹ ਲਕੀਰ ਵਿੰਗੀ ਹੋ ਗਈ ਤਾਂ ਅੱਖਰ ਸੁੰਦਰ ਨਹੀਂ ਬਣੇਗਾ।",
+        "en": "Each letter begins with its top line, drawn left to right and perfectly straight — this is the foundation of the letter. If this line is crooked, the letter will not look beautiful."
+      }
+    },
+    {
+      "id": "w3",
+      "icon": "⬇️",
+      "heading": { "pa": "ਹੇਠਾਂ ਨੂੰ ਸਿੱਧਾ, ੯੦° ਕੋਣ", "en": "Downward stroke at 90°" },
+      "body": {
+        "pa": "ਉੱਪਰਲੀ ਲਕੀਰ ਤੋਂ ਹੇਠਾਂ ਨੂੰ ਜਾਣ ਵਾਲੀ ਲਕੀਰ ਨੱਬੇ ਦਾ ਕੋਣ ਬਣਾ ਕੇ, ਭਾਵ ਬਿਲਕੁਲ ਸਿੱਧੀ ਖਿੱਚਣੀ।",
+        "en": "The downward stroke drops from the top line at a 90-degree angle — that is, perfectly vertical."
+      }
+    },
+    {
+      "id": "w4",
+      "icon": "🚫",
+      "heading": { "pa": "ਪੁੱਠੀ ਕਲਮ ਨਾ ਵਗਾਉ", "en": "Never write bottom-to-top" },
+      "body": {
+        "pa": "ਅਨਜਾਣ ਬੱਚੇ ਹੇਠਾਂ ਤੋਂ ਉੱਪਰ ਨੂੰ ਪੁੱਠੀ ਕਲਮ ਵਗਾਉਂਦੇ ਹਨ, ਜਿਸ ਕਰਕੇ ਕਲਮ ਕਾਗਜ਼ ਵਿੱਚ ਖੁੱਭ ਜਾਂਦੀ ਹੈ। ਕਲਮ ਹਮੇਸ਼ਾ ਸਹੀ ਦਿਸ਼ਾ ਵਿੱਚ (ਉੱਪਰੋਂ ਹੇਠਾਂ) ਚਲਾਉ।",
+        "en": "Beginners tend to move the pen upward (bottom-to-top), which makes the nib dig into the paper. Always move the pen in the correct direction — top to bottom."
+      }
+    },
+    {
+      "id": "w5",
+      "icon": "✍️",
+      "heading": { "pa": "ਬਿਲਕੁਲ ਅਨਜਾਣ ਲਈ — ਉਂਗਲ਼ ਫੜ ਕੇ", "en": "For total beginners — guide the finger" },
+      "body": {
+        "pa": "ਬਿਲਕੁਲ ਅਨਜਾਣ ਸ਼ਿਸ਼ ਲਈ ਧਰਤੀ ਜਾਂ ਧਾਤ ’ਤੇ ਅੱਖਰ ਉੱਕਰ ਦਿਉ। ਉਸ ਦੇ ਸੱਜੇ ਹੱਥ ਦੀ (ਅੰਗੂਠੇ ਨਾਲ ਦੀ) ਉਂਗਲ਼ੀ ਫੜ ਕੇ, ਉੱਕਰੇ ਅੱਖਰਾਂ ਵਿੱਚ ਉਸੇ ਤਰ੍ਹਾਂ ਫੇਰੋ ਜਿਵੇਂ ਅੱਖਰ ਸਿੱਧਾ ਲਿਖੀਦਾ ਹੈ।",
+        "en": "For an absolute beginner, carve the letters into earth or metal. Hold the child's right-hand index finger and trace it through the grooves in the same direction the letter is naturally written."
+      }
+    },
+    {
+      "id": "w6",
+      "icon": "🖨️",
+      "heading": { "pa": "ਛਾਪੇ ਅਨੁਸਾਰ ਲਿਖੋ", "en": "Match the printed form" },
+      "body": {
+        "pa": "ਅੱਖਰ ਛਾਪੇ (ਪ੍ਰਿੰਟ) ਦੇ ਅੱਖਰਾਂ ਅਨੁਸਾਰ ਲਿਖੋ। ਇਸ ਤਰ੍ਹਾਂ ਸਭ ਦੀ ਲਿਖਾਈ ਮਿਲਦੀ-ਜੁਲਦੀ ਤੇ ਸੁੰਦਰ ਹੋਵੇਗੀ।",
+        "en": "Form every letter to match the printed (standard) type. When everyone follows the print, all handwriting comes out consistent and beautiful."
+      }
+    },
+    {
+      "id": "w7",
+      "icon": "🚉",
+      "heading": { "pa": "ਸਮਾਨਅੰਤਰ ਤੇ ਸੁਤੰਤਰ ਅੱਖਰ", "en": "Parallel vs. free-form letters" },
+      "body": {
+        "pa": "ਕੁੱਝ ਅੱਖਰਾਂ ਦੀ ਹੇਠਲੀ ਲਕੀਰ ਉੱਪਰਲੀ ਲਕੀਰ ਦੇ ਸਮਾਨਅੰਤਰ (ਰੇਲ ਦੀ ਲਾਈਨ ਵਾਂਗ) ਹੁੰਦੀ ਹੈ — ਜਿਵੇਂ ਸ, ਜ, ਦ, ਚ। ਕੁੱਝ ਅੱਖਰ ਸੁਤੰਤਰ ਢੰਗ ਨਾਲ ਲਿਖੀਦੇ ਹਨ — ਜਿਵੇਂ ਲ, ਵ, ਘ।",
+        "en": "Some letters have a lower line running parallel to the top line, like railway tracks — e.g. ਸ, ਜ, ਦ, ਚ. Others are written more freely — e.g. ਲ, ਵ, ਘ."
+      }
+    },
+    {
+      "id": "w8",
+      "icon": "🔤",
+      "heading": { "pa": "ਕੁੱਝ ਅੱਖਰਾਂ ਦੀ ਖ਼ਾਸ ਬਣਤਰ", "en": "Shape notes for specific letters" },
+      "body": {
+        "pa": "• ੳ (ਊੜਾ): ਉੱਪਰਲੀ ਲਕੀਰ ਵੱਡੀ, ਹੇਠਲੀ ਛੋਟੀ; ਹੇਠਾਂ ਤੋਂ ਗੋਲ਼ ਕਰਕੇ ਖੱਬੇ ਨੂੰ ਉੱਪਰ ਲਿਜਾ ਕੇ ਗੋਲ਼ ਕਰੋ।\n• ਡ (ਡੱਡਾ): ਹੇਠਲੀ ਘੁੰਢੀ ਗੋਲ਼ ਨਹੀਂ ਹੁੰਦੀ — ਜਿਵੇਂ ਛਾਪੇ ਵਿੱਚ ਹੈ ਉਵੇਂ ਲਿਖੋ।\n• ਘ (ਘੱਘਾ): ਸੱਜਾ ਖਾਨਾ ਹੇਠਾਂ ਨੂੰ, ਖੱਬੇ ਨਾਲੋਂ ਥੋੜ੍ਹਾ ਵੱਡਾ।\n• ਅ ਸ ਚ ਜ ਢ ਦ ਮ: ਘੁੰਢੀਆਂ ਵਿੱਚ ਖਾਲੀ ਥਾਂ ਨਾ ਛੱਡੋ।\n• ਥ ਤੇ ਬ ਦਾ ਫ਼ਰਕ ਪਛਾਣੋ; ਨ, ਣ, ਙ, ਞ ਨਿਰਨੇ ਸਹਿਤ ਯਾਦ ਕਰੋ।",
+        "en": "• ੳ (Ooda): top line larger, the one below smaller; round it off from the bottom and curve it up to the left.\n• ਡ (Dadda): its lower hook is NOT rounded — write it exactly as printed.\n• ਘ (Ghagha): the right compartment sits lower and is slightly larger than the left.\n• ਅ ਸ ਚ ਜ ਢ ਦ ਮ: do not leave empty gaps inside their loops.\n• Learn ਥ vs ਬ apart (people often write ਬ like ਥ); memorise ਨ, ਣ, ਙ, ਞ distinctly."
+      }
+    },
+    {
+      "id": "w9",
+      "icon": "📷",
+      "heading": { "pa": "ਸੁੱਕੀ ਕਲਮ — ਦਿਮਾਗ਼ ਵਿੱਚ ਫੋਟੋ", "en": "Dry-pen tracing — a mental photo" },
+      "body": {
+        "pa": "ਛਾਪੇ ਦੇ ਅੱਖਰ ਨੂੰ ਗਹੁ ਨਾਲ ਤੱਕ ਕੇ, ਉਸ ਦੇ ਉੱਪਰ ਬਿਨਾ ਸਿਆਹੀ ਦੇ ਪੋਲੀ-ਪੋਲੀ ਕਲਮ ਫੇਰੋ, ਫਿਰ ਅੱਖਰ ਦੀ ਦਿਮਾਗ਼ ਵਿੱਚ ਫੋਟੋ ਖਿੱਚ ਲਉ।",
+        "en": "Study the printed letter closely, then trace over it with a dry (inkless) pen, lightly — then take a 'photo' of the letter in your mind before writing it."
+      }
+    },
+    {
+      "id": "w10",
+      "icon": "🔁",
+      "heading": { "pa": "ਵਾਰ-ਵਾਰ ਅਭਿਆਸ", "en": "Repeat, repeat, repeat" },
+      "body": {
+        "pa": "ਇੱਕੋ ਅੱਖਰ ਨੂੰ ਕਤਾਰਾਂ ਵਿੱਚ, ਇੱਕ ਸੇਧ ਵਿੱਚ, ਇੱਕੋ ਜਿਹਾ ਲਿਖੋ। ਪਹਿਲੇ ਅੱਖਰ ਨੂੰ ਦੇਖ ਕੇ ਦੂਜਾ, ਪਹਿਲੇ ਦੋ ਦੇਖ ਕੇ ਤੀਜਾ ਲਿਖੋ। ਪੱਚੀ, ਫਿਰ ਪੰਜਾਹ ਜਾਂ ਸੌ ਵਾਰੀ ਲਿਖੋ।",
+        "en": "Write the same letter in neat rows, all aligned and identical. Look at the first to write the second, at the first two to write the third. Write it 25 times, then 50 or 100 times."
+      }
+    },
+    {
+      "id": "w11",
+      "icon": "🧘",
+      "heading": { "pa": "ਸੁਆਸ ਤੇ ਆਸਣ", "en": "Breath and posture" },
+      "body": {
+        "pa": "ਜਿਵੇਂ ਨਿਸ਼ਾਨਾ ਲਾਉਣ ਵੇਲੇ ਸੁਆਸ ਰੋਕੀਦਾ ਹੈ, ਉਵੇਂ ਖ਼ੁਸ਼ਖ਼ਤ ਲਿਖਣ ਵੇਲੇ ਸੁਆਸ ਰੋਕ ਕੇ ਲਿਖੋ। ਖੱਬਾ ਗੋਡਾ ਧਰਤੀ ’ਤੇ, ਸੱਜਾ ਗੋਡਾ ਖੜ੍ਹਾ — ਬੀਰ ਆਸਣ ਵਿੱਚ ਬੈਠੋ; ਲਿਖਣ ਵਾਲੀ ਚੀਜ਼ ਸੱਜੇ ਗੋਡੇ ’ਤੇ ਰੱਖੋ। ਅੱਖਰ ਨੱਕ ਦੀ ਸੇਧ ਵਿੱਚ ਹੋਵੇ।",
+        "en": "As one holds the breath while aiming, hold your breath while writing beautifully. Sit in Bir Asan — left knee on the ground, right knee up; rest the writing surface on the right knee. Keep the letter in line with your nose."
+      }
+    },
+    {
+      "id": "w12",
+      "icon": "🧑‍🏫",
+      "heading": { "pa": "ਟੀਚਰ ਦਾ ਢੰਗ — ਟਿੱਕਣੇ", "en": "The teacher's method — dot guides" },
+      "body": {
+        "pa": "ਉਸਤਾਦ ਬਲੈਕਬੋਰਡ ’ਤੇ ਇੱਕ-ਇੱਕ ਅੱਖਰ ਛਾਪੇ ਅਨੁਸਾਰ ਲਿਖ ਕੇ, ਸਿੱਧੀ ਕਲਮ ਵਗਾਉਣ ਦਾ ਢੰਗ ਵਾਰ-ਵਾਰ ਦੱਸੇ। ਫਿਰ ਅੱਖਰ ਦੇ ਟਿੱਕਣੇ (ਬਿੰਦੀਆਂ) ਲਾ ਕੇ, ਬੱਚੇ ਤੋਂ ਟਿੱਕਣਿਆਂ ਉੱਪਰ ਲਿਖਾਵੇ।",
+        "en": "The teacher writes each letter on the board to match the print, showing the straight pen-movement again and again. Then place dot guides (tikkne) for the letter and have the child write over the dots."
+      }
+    },
+    {
+      "id": "w13",
+      "icon": "🙏",
+      "heading": { "pa": "ਸਤਿਕਾਰ ਤੇ ਸੰਭਾਲ", "en": "Respect and care" },
+      "body": {
+        "pa": "ਭੁੰਞੇ ਲਿਖੇ ਅੱਖਰ ਚੰਗੀ ਤਰ੍ਹਾਂ ਮੇਟੋ, ਉਨ੍ਹਾਂ ਉੱਤੋਂ ਦੁਬਾਰਾ ਨਾ ਲੰਘੋ। ਸਿਆਹੀ ਦੇ ਲਿਖੇ ਅੱਖਰਾਂ ’ਤੇ ਫੂਕ ਨਾ ਮਾਰੋ। ਗੁਰਬਾਣੀ ਦੇ ਅੱਖਰਾਂ ਉੱਪਰ ਪਿੰਨ/ਕਲਮ ਨਾ ਫੇਰੋ।",
+        "en": "Erase floor-written letters cleanly rather than writing over them. Do not blow on freshly inked letters. Never trace a pen over the sacred letters of Gurbani."
+      }
+    }
+  ],
+  "note": {
+    "pa": "ਧਿਆਨ: ਇਹ ਪਾਠ ਸ਼ਬਦਾਂ ਵਿੱਚ ਢੰਗ ਦੱਸਦਾ ਹੈ; ਮੂਲ ਪੋਥੀ ਵਿੱਚ ਤੀਰਾਂ ਵਾਲੇ ਸਟ੍ਰੋਕ-ਚਿੱਤਰ ਨਹੀਂ ਹਨ।",
+    "en": "Note: the text describes the method in words; the original book does not include arrow stroke-diagrams."
+  }
+}

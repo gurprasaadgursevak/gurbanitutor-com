@@ -107,7 +107,7 @@ export default function MuharniPage() {
 
           <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
             <p className="px-2 text-xs font-semibold uppercase tracking-wider text-amber-700">
-              Practice Gurmukhi Letters
+              1.1 · Practice Gurmukhi Letters
             </p>
             <LetterSoundBoard lessonMode />
           </div>
@@ -125,7 +125,7 @@ export default function MuharniPage() {
           {/* Practice Muharni interactively */}
           <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50/40 p-2 sm:p-4">
             <p className="px-2 text-xs font-semibold uppercase tracking-wider text-amber-700">
-              Practice Muharni
+              2.1 · Practice Muharni
             </p>
             <MuharniSoundBoard />
           </div>
@@ -140,7 +140,7 @@ export default function MuharniPage() {
             >
               <span aria-hidden className="text-2xl">📖</span>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-900">Muharni Primer</p>
+                <p className="text-sm font-semibold text-slate-900">2.2 Muharni Primer</p>
                 <p className="text-xs text-slate-600">Full chart of consonants × vowels (PDF)</p>
               </div>
             </a>
@@ -152,10 +152,44 @@ export default function MuharniPage() {
             >
               <span aria-hidden className="text-2xl">📖</span>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-900">Balupdesh</p>
+                <p className="text-sm font-semibold text-slate-900">2.3 Balupdesh</p>
                 <p className="text-xs text-slate-600">Reading lessons for new students (PDF)</p>
               </div>
             </a>
+          </div>
+
+          {/* New: writing guide, tracer, quiz (work on Android and any browser) */}
+          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/muharni/writing-guide"
+              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-amber-300 hover:bg-amber-50"
+            >
+              <span aria-hidden className="text-2xl">✍️</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">2.4 How to Write the Letters</p>
+                <p className="text-xs text-slate-600">The writing guide, read before you trace</p>
+              </div>
+            </Link>
+            <Link
+              href="/muharni/trace"
+              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-amber-300 hover:bg-amber-50"
+            >
+              <span aria-hidden className="text-2xl">🖊️</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">2.5 Gurmukhi Trace</p>
+                <p className="text-xs text-slate-600">Trace each letter with your finger</p>
+              </div>
+            </Link>
+            <Link
+              href="/muharni/balupdesh-quiz"
+              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-amber-300 hover:bg-amber-50"
+            >
+              <span aria-hidden className="text-2xl">🎓</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">2.6 Balupdesh Quiz</p>
+                <p className="text-xs text-slate-600">Three levels, Punjabi and English</p>
+              </div>
+            </Link>
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <a
